@@ -37,7 +37,7 @@ func spawn_enemy():
 	var enemy_instance = EnemyScene.instantiate()
 	enemy_instance.z_index = 2 
 	# Set random position
-	enemy_instance.position = Vector2(randf_range(-100, 100), randf_range(-360, -550))
+	enemy_instance.position = Vector2(randf_range(-100, 100), randf_range(-360, -500))
 	
 	print("New enemy Position:",enemy_instance.position)
 		# Add to enemy container
