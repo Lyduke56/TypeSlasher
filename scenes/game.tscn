@@ -81,7 +81,7 @@ tile_set = SubResource("TileSet_p57ef")
 
 [node name="Orc" parent="EnemyContainer" instance=ExtResource("13_kvuet")]
 z_index = 1
-position = Vector2(1, -356)
+position = Vector2(-1, -517)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

@@ -37,7 +37,7 @@ func spawn_enemy():
 	var enemy_instance = EnemyScene.instantiate()
 	enemy_instance.z_index = 2 
 	# Set random position
-	enemy_instance.position = Vector2(randf_range(-100, 100), randf_range(-360, -500))
+	enemy_instance.position = Vector2(randf_range(-200, 200), randf_range(-460, -500))
 	
 	print("New enemy Position:",enemy_instance.position)
 		# Add to enemy container
@@ -53,6 +53,7 @@ func find_new_active_enemy(typed_character: String):
 			print("Found new enemy that starts with ", typed_character)
 			active_enemy = enemy
 			current_letter_index = 1
+			active_enemy.set_next_character(current_letter_index)
 			break  # Exit loop once we find a match
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
@@ -70,6 +71,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					if key_typed == next_character:
 						print("Success! Typed:", key_typed, " Expected:", next_character)
 						current_letter_index += 1
+						active_enemy.set_next_character(current_letter_index)
 						
 						# Check if word is complete
 						if current_letter_index >= prompt.length():
