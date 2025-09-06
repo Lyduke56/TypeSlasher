@@ -1,6 +1,7 @@
-[gd_scene load_steps=38 format=3 uid="uid://ivgoec3n72vd"]
+[gd_scene load_steps=39 format=3 uid="uid://ivgoec3n72vd"]
 
 [ext_resource type="Texture2D" uid="uid://dh1uc0yyct2li" path="res://assets/sprites/Placeholders/placeholder_orc.png" id="1_6ckqv"]
+[ext_resource type="Script" uid="uid://m8m0o7d21tya" path="res://scripts/orc_enemy.gd" id="1_v8qg3"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_id7kl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_id7kl"]
@@ -218,7 +219,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_p77oo")
 }],
 "loop": true,
-"name": &"Idle animation",
+"name": &"Idle ",
 "speed": 10.0
 }, {
 "frames": [{
@@ -275,22 +276,25 @@ animations = [{
 }]
 
 [node name="Orc" type="Node2D"]
+position = Vector2(1, -3)
+script = ExtResource("1_v8qg3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3, -21)
+position = Vector2(0, -21)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_c1uly")
-animation = &"Idle animation"
-autoplay = "Idle animation"
-frame_progress = 0.00313852
+animation = &"Idle "
+autoplay = "Idle "
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -50.0
+[node name="Word" type="RichTextLabel" parent="."]
+offset_left = -136.0
 offset_top = 6.0
-offset_right = 52.0
-offset_bottom = 31.0
+offset_right = 136.0
+offset_bottom = 48.0
 theme_override_fonts/normal_font = ExtResource("2_id7kl")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = " Type This "
+text = " Type This \"arkel is gay and he is a femboy\""
+fit_content = true
+scroll_active = false
 horizontal_alignment = 1

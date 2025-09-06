@@ -18,7 +18,3 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	# Animations
-	if input_vector != Vector2.ZERO:
-		anim.play("walk")
-	else:
-		anim.play("idle")

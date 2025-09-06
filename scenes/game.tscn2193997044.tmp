@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://btrhod848g6q"]
+[gd_scene load_steps=9 format=4 uid="uid://btrhod848g6q"]
 
 [ext_resource type="Script" uid="uid://e3wfi17cwkqa" path="res://scripts/game.gd" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://b4lopj71ao0q8" path="res://assets/Map Tiles/Tileset/Extras/texture.png" id="5_ir15t"]
-[ext_resource type="Script" uid="uid://cbtgswhpnotg2" path="res://scripts/timer.gd" id="6_p57ef"]
 [ext_resource type="Texture2D" uid="uid://dgtu1g8ffnbv1" path="res://assets/Map Tiles/Tileset/Seasonal/spring.png" id="8_ssvqc"]
 [ext_resource type="PackedScene" uid="uid://ivgoec3n72vd" path="res://scenes/Orc_enemy.tscn" id="13_kvuet"]
 
@@ -65,7 +64,7 @@ position = Vector2(-8, 67)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, -173)
-zoom = Vector2(0.87, 0.87)
+zoom = Vector2(1.07, 1.07)
 
 [node name="TileMap" type="Node" parent="."]
 
@@ -82,8 +81,3 @@ tile_set = SubResource("TileSet_p57ef")
 [node name="Orc" parent="EnemyContainer" instance=ExtResource("13_kvuet")]
 z_index = 1
 position = Vector2(1, -356)
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-script = ExtResource("6_p57ef")
