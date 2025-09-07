@@ -29,7 +29,7 @@ func _ready() -> void:
 	print("Hard word: ", WordDatabase.get_random_word("hard"))
 	
 	# Connect timer signal and configure
-	spawn_timer.wait_time = 2.5  # Spawn every 2.5 seconds
+	spawn_timer.wait_time = 1.5  # Spawn every 2.5 seconds
 	spawn_timer.start()
 	spawn_timer.timeout.connect(spawn_enemy)
 	
@@ -188,7 +188,7 @@ func _on_enemy_reached(enemy):
 	print("Player reached enemy! Destroying enemy.")
 	
 	if enemy != null and is_instance_valid(enemy):
-		enemy.queue_free()
+		enemy.play_death_animation()
 
 func _process_single_character(key_typed: String):
 	"""Process one character at a time to handle high WPM"""

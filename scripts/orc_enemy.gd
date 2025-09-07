@@ -5,7 +5,7 @@ extends Node2D
 @export var red: Color = Color("#a65455")
 
 @export var speed: float = 50.0  # Movement speed towards target
-
+@onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
 @onready var prompt_text = prompt.text
@@ -79,23 +79,53 @@ func get_bbcode_end_color_tag() -> String:
 	return "[/color]"
 
 func set_targeted_state(targeted: bool):
-	"""Called when enemy becomes targeted - slows movement"""
+	"""Called when enemy becomes targeted - stops movement and plays idle"""
 	is_being_targeted = targeted
 	if targeted:
-		# Change color or add visual effect to show it's targeted
+		# Stop moving and play idle animation when targeted
+		if anim:
+			anim.play("idle")
 		modulate = Color.GRAY  # Darken the enemy
 	else:
 		modulate = Color.WHITE  # Reset color
 
+func play_death_animation():
+	"""Play death animation and remove enemy after animation completes"""
+	if anim:
+		anim.play("death")
+		# Wait for death animation to complete, then remove enemy
+		anim.animation_finished.connect(_on_death_animation_finished)
+
+func _on_death_animation_finished():
+	"""Called when death animation completes"""
+	if anim.animation == "death":
+		queue_free()  # Remove enemy from scene
+
 func _physics_process(delta: float) -> void:
-	if has_target and not is_being_targeted:
-		# Move towards target position only if not being targeted
+	# STOP ALL MOVEMENT if being targeted
+	if is_being_targeted:
+		if anim:
+			anim.play("idle")  # Ensure idle animation plays when frozen
+		return  # Exit function completely - no movement at all
+	
+	# Only move if NOT being targeted
+	if has_target:
+		# Move towards target position
 		var direction = (target_position - global_position).normalized()
+		
+		if anim:
+			anim.play("running")
+			anim.flip_h = direction.x < 0
+		
 		global_position += direction * speed * delta
 		
-		# Optional: Stop when close enough to target
+		# Stop when close enough to target
 		if global_position.distance_to(target_position) < 5.0:
-			has_target = false  # Stop moving when reached
-	elif not has_target and not is_being_targeted:
-		# Fallback: move downward like before if no target and not being targeted
+			has_target = false
+			if anim:
+				anim.play("idle")
+	else:
+		# Fallback: move downward if no specific target
+		if anim:
+			anim.play("idle")
 		global_position.y += speed * delta

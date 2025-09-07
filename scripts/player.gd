@@ -9,12 +9,17 @@ extends CharacterBody2D
 @export var min_distance: float = 100.0   # Distance at which min_dash_speed is used
 @export var max_distance: float = 800.0   # Distance at which max_dash_speed is used
 
+# Animation durations
+@export var attack_duration: float = 0.5  # How long the attack animation plays
+
 @onready var anim = $AnimatedSprite2D
 @onready var combo_timer: Timer = Timer.new()
+@onready var attack_timer: Timer = Timer.new()
 
 var center_position: Vector2
 var is_dashing: bool = false
 var is_returning: bool = false
+var is_attacking: bool = false
 var target_position: Vector2
 var combo_active: bool = false
 var target_enemy = null
@@ -32,6 +37,17 @@ func _ready() -> void:
 	combo_timer.wait_time = 3.0
 	combo_timer.one_shot = true
 	combo_timer.timeout.connect(_on_combo_timeout)
+	
+	# Setup attack timer (duration will be set dynamically in _finish_dash)
+	add_child(attack_timer)
+	attack_timer.one_shot = true
+	attack_timer.timeout.connect(_on_attack_finished)
+	
+	# Connect animation finished signal
+	anim.animation_finished.connect(_on_animation_finished)
+	
+	# Start with idle animation
+	anim.play("idle")
 
 func _physics_process(delta: float) -> void:
 	if is_dashing or is_returning:
@@ -40,6 +56,9 @@ func _physics_process(delta: float) -> void:
 func _handle_movement(delta: float) -> void:
 	var current_speed = current_dash_speed if is_dashing else return_speed
 	var direction = (target_position - global_position).normalized()
+	
+	# Update sprite direction and animation based on movement direction
+	_update_directional_animation(direction)
 	
 	# Check if we've reached the target
 	if global_position.distance_to(target_position) < 10.0:
@@ -54,6 +73,13 @@ func _handle_movement(delta: float) -> void:
 	# Move towards target
 	velocity = direction * current_speed
 	move_and_slide()
+
+func _update_directional_animation(direction: Vector2) -> void:
+	"""Update sprite direction and potentially change animation based on movement direction"""
+	
+	# Handle horizontal flipping (always do this)
+	if direction.x != 0:
+		anim.flip_h = direction.x < 0
 
 func calculate_dash_speed(distance: float) -> float:
 	"""Calculate dash speed based on distance to target"""
@@ -82,23 +108,48 @@ func dash_to_enemy(enemy_position: Vector2, enemy_ref = null) -> void:
 	
 	is_dashing = true
 	is_returning = false
+	is_attacking = false
+	
+	# Play dash animation
+	anim.play("walking")
 	
 	print("Player dashing to: ", enemy_position, " at speed: ", current_dash_speed)
 
 func _finish_dash() -> void:
 	is_dashing = false
+	is_attacking = true
 	combo_active = true
 	combo_timer.start()
 	
-	# Emit signal that we reached the enemy
+	# Play attack animation
+	anim.play("attack")
+	
+	print("Attack started - waiting for animation to finish...")
+	print("Combo window started - 3 seconds to next target!")
+
+func _on_animation_finished() -> void:
+	"""Called when any animation finishes"""
+	# Only handle attack animation finishing
+	if is_attacking and anim.animation == "attack":
+		_on_attack_finished()
+
+func _on_attack_finished() -> void:
+	"""Called when attack animation completes"""
+	is_attacking = false
+	
+	# NOW emit signal to destroy the enemy after attack animation finishes
 	if target_enemy != null:
+		print("Emitting enemy_reached signal for: ", target_enemy)
 		enemy_reached.emit(target_enemy)
 		target_enemy = null
 	
-	print("Combo window started - 3 seconds to next target!")
+	# Return to idle animation
+	anim.play("idle")
+	
+	print("Attack animation finished - returning to idle")
 
 func _on_combo_timeout() -> void:
-	if not is_dashing:  # Don't return if we're already dashing to another enemy
+	if not is_dashing and not is_attacking:  # Don't return if we're dashing or attacking
 		_return_to_center()
 	combo_active = false
 	print("Combo window expired - returning to center")
@@ -107,9 +158,17 @@ func _return_to_center() -> void:
 	target_position = center_position
 	is_returning = true
 	is_dashing = false
+	is_attacking = false
+	
+	# Play return/run animation (or use dash animation for returning)
+	anim.play("walking")  # or "dash" if you want to reuse the dash animation
 
 func _finish_return() -> void:
 	is_returning = false
+	
+	# Return to idle animation
+	anim.play("idle")
+	
 	print("Player returned to center")
 
 # Public function to check if player is in combo state
@@ -119,6 +178,9 @@ func is_in_combo() -> bool:
 # Function to reset combo (if needed)
 func reset_combo() -> void:
 	combo_timer.stop()
+	attack_timer.stop()
 	combo_active = false
+	is_attacking = false
+	
 	if not is_returning:
 		_return_to_center()
