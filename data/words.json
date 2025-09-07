@@ -1,0 +1,48 @@
+{
+  "easy": [
+	"cat", "dog", "run", "sun", "car", "big", "red", "hat", "box", "cup",
+	"pen", "map", "bug", "fun", "sky", "top", "bag", "web", "egg", "jam",
+	"ant", "bat", "cow", "day", "ear", "fox", "gun", "hip", "ice", "job",
+	"key", "leg", "mom", "net", "owl", "pig", "zoo", "rat", "sea", "toy",
+	"van", "win", "axe", "yes", "zip", "lid", "mud", "oak", "pit", "quit"
+  ],
+  "medium": [
+	"house", "water", "light", "music", "happy", "quick", "table", "phone", "books", "green",
+	"pizza", "smile", "ocean", "beach", "winter", "spring", "flower", "guitar", "coffee", "orange",
+	"apple", "bread", "chair", "dance", "eagle", "forest", "grasp", "honey", "image", "juice",
+	"knife", "lemon", "mouse", "novel", "olive", "peace", "quiet", "river", "storm", "tiger",
+	"under", "voice", "whale", "xenon", "young", "zebra", "basket", "cotton", "dollar", "energy"
+  ],
+  "hard": [
+	"computer", "keyboard", "challenge", "beautiful", "wonderful", "programming", "adventure", "fantastic", "development", "extraordinary",
+	"philosophy", "responsibility", "incomprehensible", "acknowledgment", "characteristic", "experimentation", "communication", "understanding", "investigation", "transformation",
+	"architecture", "butterfly", "catastrophe", "democracy", "encyclopedia", "fluorescent", "gymnasium", "hypothesis", "imagination", "juxtaposition",
+	"kaleidoscope", "laboratory", "magnificent", "neighborhood", "opportunity", "phenomenon", "quarterback", "rhinoceros", "sophisticated", "terminology",
+	"umbrella", "vocabulary", "watermelon", "xylophone", "yesterday", "zeppelin", "bibliography", "constellation", "diversification", "entrepreneurship"
+  ],
+  "typo": [
+	"recieve", "seperate", "definate", "occurence", "embarass", "accomodate", "existance", "maintanance", "begining", "neccessary",
+	"beleive", "acheive", "independant", "privelege", "arguement", "appearence", "dissapoint", "wierd", "freind", "buisness",
+	"adress", "cemetary", "commited", "dilemna", "excercise", "goverment", "higth", "intresting", "judgement", "knowlege",
+	"libary", "millenium", "noticable", "occured", "perseverence", "questionaire", "recomend", "supercede", "tommorow", "untill",
+	"vaccum", "wensday", "xtremely", "yeild", "zietgeist", "catagorize", "disapoint", "exagerate", "fourty", "guarentee"
+  ],
+  "sentence": [
+	"The cat sat on the mat.", "I love pizza and ice cream.", "The sun is shining today.", "She runs very fast.", "We are going to the park.",
+	"The dog barked at the moon.", "My phone is charging now.", "The flowers smell amazing.", "I need to buy some milk.", "The movie was really good.",
+	"It's raining outside today.", "The book is on the table.", "He plays guitar every night.", "The water is cold and clear.", "We had fun at the beach.",
+	"The car is red and shiny.", "I'm learning to code games.", "The music is too loud.", "She likes to draw pictures.", "The coffee tastes bitter.",
+	"Birds fly high in the sky.", "Cats love to chase mice.", "Dogs are loyal companions.", "Every flower has its beauty.", "Fish swim in the ocean.",
+	"Good friends are precious gifts.", "Happiness comes from within.", "Ice cream melts in summer.", "Just be yourself always.", "Kindness makes the world better.",
+	"Lions roar in the jungle.", "Mountains touch the clouds.", "Nature provides endless wonders.", "Oceans are vast and deep.", "People need love and care.",
+	"Quiet moments bring peace.", "Rainbows appear after storms.", "Stars shine in the darkness.", "Time heals all wounds.", "Understanding brings wisdom.",
+	"Valleys are green and lush.", "Wisdom comes with experience.", "Xylem carries water upward.", "Youth is full of dreams.", "Zebras have unique stripes."
+  ],
+  "casing": [
+	"wATeR", "hOuSe", "CoMpUtEr", "HaPpY", "MuSiC", "PhOnE", "tAbLe", "ChAiR", "BoOkS", "LiGhT",
+	"GrEeN", "FlOwEr", "SuNsHiNe", "WiNtEr", "SpRiNg", "OcEaN", "BeAcH", "MoUnTaIn", "RaInBoW", "BuTtErFlY",
+	"ApPlE", "BrEaD", "CaNdLe", "DrAgOn", "ElEpHaNt", "FiReFlY", "GaRdEn", "HaMmEr", "IcEcReAm", "JuMpInG",
+	"KiTtEn", "LaDdEr", "MoNkEy", "NeCkLaCe", "OrAnGe", "PeNcIl", "QuEeN", "RaBbIt", "ScIsSoRs", "TuRtLe",
+	"UnIcOrN", "VoLcAnO", "WaTeRfAlL", "XyLoPhOnE", "YeLlOw", "ZiGzAg", "BaSkEtBaLl", "ChOcOlAtE", "DiAmOnD", "ElEvAtOr"
+  ]
+}
