@@ -8,6 +8,8 @@ var current_letter_index: int = -1
 var EnemyScene = preload("res://scenes/Orc_enemy.tscn")
 var BuffScene = preload("res://scenes/Buff.tscn")
 var _toggle := false
+var pause_layer: CanvasLayer
+var pause_overlay: Control
 
 # Input processing state
 var is_processing_completion: bool = false
@@ -22,6 +24,7 @@ var cooldown_period: int = 10  # How many other words must appear before a word 
 var spawn_radius: float = 600.0  # Distance from center to spawn enemies
 
 func _ready() -> void:
+	_build_pause_overlay()
 	WordDatabase.load_word_database()
 
 	# Test the word database
@@ -242,13 +245,20 @@ func _process_single_character(key_typed: String):
 		current_letter_index = -1
 
 func _unhandled_input(event: InputEvent) -> void:
+	# ESC pauses. Resume only by clicking the overlay.
+	if event.is_action_pressed("ui_cancel"): # ESC is mapped to ui_cancel by default
+		if not get_tree().paused:
+			_pause_game()
+		return
+
+	if get_tree().paused:
+		return
+
 	if event is InputEventKey and event.pressed:
-		var typed_event = event as InputEventKey
+		var typed_event := event as InputEventKey
 		if typed_event.unicode != 0:
 			var key_typed = PackedByteArray([typed_event.unicode]).get_string_from_utf8().to_lower()
 			print("Key buffered:", key_typed)
-
-			# Add to buffer instead of processing immediately
 			input_buffer.append(key_typed)
 
 func spawn_buff() -> void:
@@ -277,3 +287,51 @@ func spawn_buff() -> void:
 	enemy_container.add_child(buff_instance)
 
 	print("Spawned buff at ", pos, " with word: ", w)
+
+
+func _build_pause_overlay() -> void:
+	pause_layer = CanvasLayer.new()
+	add_child(pause_layer)
+
+	# Make the layer and overlay process while paused
+	pause_layer.process_mode = Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED
+
+	pause_overlay = Control.new()
+	pause_overlay.name = "PauseOverlay"
+	pause_overlay.process_mode = Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED  # <— was pause_mode
+	pause_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	pause_overlay.anchor_left = 0.0
+	pause_overlay.anchor_top = 0.0
+	pause_overlay.anchor_right = 1.0
+	pause_overlay.anchor_bottom = 1.0
+	pause_overlay.visible = false
+	pause_layer.add_child(pause_overlay)
+
+	var dim := ColorRect.new()
+	dim.color = Color(0, 0, 0, 0.5)
+	dim.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	dim.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	pause_overlay.add_child(dim)
+
+	var label := Label.new()
+	label.text = "Paused — Click to continue"
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.anchor_left = 0.0
+	label.anchor_top = 0.0
+	label.anchor_right = 1.0
+	label.anchor_bottom = 1.0
+	pause_overlay.add_child(label)
+
+	pause_overlay.gui_input.connect(func(e):
+		if e is InputEventMouseButton and e.pressed:
+			_resume_game()
+	)
+
+func _pause_game() -> void:
+	get_tree().paused = true
+	pause_overlay.visible = true
+
+func _resume_game() -> void:
+	get_tree().paused = false
+	pause_overlay.visible = false
