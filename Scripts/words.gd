@@ -10,17 +10,17 @@ static func load_word_database():
 	if file == null:
 		print("Error: Could not open words.json")
 		return
-	
+
 	var json_string = file.get_as_text()
 	file.close()
-	
+
 	var json = JSON.new()
 	var parse_result = json.parse(json_string)
-	
+
 	if parse_result != OK:
 		print("Error parsing JSON: ", json.error_string)
 		return
-	
+
 	word_database = json.data
 	print("Word database loaded successfully!")
 

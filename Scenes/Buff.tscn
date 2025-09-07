@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bahxot8tqiqpq"]
+
+[ext_resource type="Script" uid="uid://bhwu4u2mifk8y" path="res://Scripts/Buff.gd" id="1_vwd27"]
+[ext_resource type="Texture2D" uid="uid://dlvbmx5066uev" path="res://Assets/Sprites/Tiny Swords (Free Pack)/Decorations/Rocks/Rock1.png" id="2_k30u3"]
+
+[node name="Buff" type="Node2D"]
+script = ExtResource("1_vwd27")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_k30u3")
+
+[node name="Word" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+text = "Buff"
+scroll_active = false

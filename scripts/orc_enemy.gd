@@ -19,8 +19,8 @@ var is_being_targeted: bool = false
 
 func _ready() -> void:
 	pass  # Word will be set by the game manager via set_prompt()
-	
-func _process(delta: float) -> void: 
+
+func _process(delta: float) -> void:
 	pass
 
 # --- Set word from spawner ---
@@ -41,13 +41,13 @@ func set_next_character(next_character_index: int):
 	# Don't update visual feedback if enemy is being targeted
 	if is_being_targeted:
 		return
-	
+
 	# Additional safety check
 	if not is_instance_valid(self):
 		return
-		
+
 	var full_text: String = get_prompt()
-	
+
 	# Bounds checking
 	if next_character_index < -1 or next_character_index > full_text.length():
 		print("Warning: Invalid character index: ", next_character_index)
@@ -56,7 +56,7 @@ func set_next_character(next_character_index: int):
 	var typed_part = ""
 	var next_char_part = ""
 	var remaining_part = ""
-	
+
 	# already typed → green
 	if next_character_index > 0:
 		typed_part = get_bbcode_color_tag(green) + full_text.substr(0, next_character_index) + get_bbcode_end_color_tag()
@@ -107,18 +107,18 @@ func _physics_process(delta: float) -> void:
 		if anim:
 			anim.play("idle")  # Ensure idle animation plays when frozen
 		return  # Exit function completely - no movement at all
-	
+
 	# Only move if NOT being targeted
 	if has_target:
 		# Move towards target position
 		var direction = (target_position - global_position).normalized()
-		
+
 		if anim:
 			anim.play("running")
 			anim.flip_h = direction.x < 0
-		
+
 		global_position += direction * speed * delta
-		
+
 		# Stop when close enough to target
 		if global_position.distance_to(target_position) < 5.0:
 			has_target = false
