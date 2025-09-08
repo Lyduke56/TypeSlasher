@@ -34,7 +34,7 @@ func _ready() -> void:
 	print("Hard word: ", WordDatabase.get_random_word("hard"))
 
 	# Connect timer signal and configure
-	spawn_timer.wait_time = 1.5  # Spawn every 2.5 seconds
+	spawn_timer.wait_time = 4  # Spawn every 2.5 seconds
 	spawn_timer.start()
 	spawn_timer.timeout.connect(spawn_enemy)
 

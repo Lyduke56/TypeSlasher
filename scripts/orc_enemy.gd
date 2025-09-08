@@ -90,24 +90,37 @@ func set_targeted_state(targeted: bool):
 		modulate = Color.WHITE  # Reset color
 
 func play_death_animation():
-	"""Play death animation and remove enemy after animation completes"""
+	"""Play damage animation followed by death animation"""
 	if not anim:
 		queue_free()  # Fallback if no animation
 		return
 	
-	# Prevent multiple death animations on the same enemy
-	if anim.animation == "death":
-		return  # Already playing death animation
+	# Prevent multiple animations on the same enemy
+	if anim.animation == "death" or anim.animation == "damaged":
+		return
 	
 	# Disconnect any existing connections to prevent duplicates
-	if anim.animation_finished.is_connected(_on_death_animation_finished):
-		anim.animation_finished.disconnect(_on_death_animation_finished)
+	if anim.animation_finished.is_connected(_on_damage_animation_finished):
+		anim.animation_finished.disconnect(_on_damage_animation_finished)
 	
-	# Connect the signal and play death animation
-	anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
-	anim.play("death")
+	# Connect the signal and play damage animation first
+	anim.animation_finished.connect(_on_damage_animation_finished, CONNECT_ONE_SHOT)
+	anim.play("damaged")
 	
-	print("Enemy death animation started")
+	print("Enemy damage animation started")
+
+func _on_damage_animation_finished():
+	"""Called when damage animation completes - plays death animation"""
+	if anim.animation == "damaged":
+		# Disconnect any existing connections to prevent duplicates
+		if anim.animation_finished.is_connected(_on_death_animation_finished):
+			anim.animation_finished.disconnect(_on_death_animation_finished)
+		
+		# Connect the signal and play death animation
+		anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
+		anim.play("death")
+		
+		print("Enemy death animation started")
 
 func _on_death_animation_finished():
 	"""Called when death animation completes"""
