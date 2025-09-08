@@ -40,6 +40,7 @@ func _ready() -> void:
 
 	# Connect player signal to handle enemy destruction
 	player.enemy_reached.connect(_on_enemy_reached)
+	player.slash_completed.connect(_on_player_slash_completed)
 
 func _process(_delta):
 	# Process input buffer one character per frame for high WPM handling
@@ -180,13 +181,17 @@ func _complete_word():
 	# Atomically update all state
 	completed_enemy.is_being_targeted = true
 	completed_enemy.set_targeted_state(true)
+	
+	# Store reference to this enemy for death after slash
+	# We'll trigger death when player finishes slash animation, not when reaching enemy
+	
 	active_enemy = null
 	current_letter_index = -1
 
 	# Clear input buffer of any remaining inputs
 	input_buffer.clear()
 
-	# Trigger dash
+	# Trigger dash and pass the enemy reference so player can kill it after slash
 	player.dash_to_enemy(enemy_position, completed_enemy)
 
 	# Reset processing flag after a small delay to ensure dash starts
@@ -194,9 +199,15 @@ func _complete_word():
 	is_processing_completion = false
 
 func _on_enemy_reached(enemy):
-	"""Called when player physically reaches an enemy"""
-	print("Player reached enemy! Destroying enemy.")
+	"""Called when player physically reaches an enemy - now just for slash animation"""
+	print("Player reached enemy! Starting slash animation.")
+	# Don't kill enemy here - let the player's slash animation handle it
 
+# NEW FUNCTION: Connect this to player's slash_completed signal
+func _on_player_slash_completed(enemy):
+	"""Called when player finishes slash animation on an enemy"""
+	print("Player slash completed! Now triggering enemy death.")
+	
 	if enemy != null and is_instance_valid(enemy):
 		enemy.play_death_animation()
 
@@ -239,10 +250,7 @@ func _process_single_character(key_typed: String):
 			_complete_word()
 	else:
 		print("Wrong character! Typed:", key_typed, " Expected:", next_character)
-		if active_enemy and is_instance_valid(active_enemy):
-			active_enemy.set_next_character(-1)
-		active_enemy = null
-		current_letter_index = -1
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	# ESC pauses. Resume only by clicking the overlay.

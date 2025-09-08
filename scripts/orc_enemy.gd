@@ -91,10 +91,23 @@ func set_targeted_state(targeted: bool):
 
 func play_death_animation():
 	"""Play death animation and remove enemy after animation completes"""
-	if anim:
-		anim.play("death")
-		# Wait for death animation to complete, then remove enemy
-		anim.animation_finished.connect(_on_death_animation_finished)
+	if not anim:
+		queue_free()  # Fallback if no animation
+		return
+	
+	# Prevent multiple death animations on the same enemy
+	if anim.animation == "death":
+		return  # Already playing death animation
+	
+	# Disconnect any existing connections to prevent duplicates
+	if anim.animation_finished.is_connected(_on_death_animation_finished):
+		anim.animation_finished.disconnect(_on_death_animation_finished)
+	
+	# Connect the signal and play death animation
+	anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
+	anim.play("death")
+	
+	print("Enemy death animation started")
 
 func _on_death_animation_finished():
 	"""Called when death animation completes"""
