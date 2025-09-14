@@ -1,8 +1,8 @@
-[gd_scene load_steps=39 format=3 uid="uid://ivgoec3n72vd"]
+[gd_scene load_steps=40 format=3 uid="uid://ivgoec3n72vd"]
 
-[ext_resource type="Texture2D" uid="uid://dh1uc0yyct2li" path="res://Assets/Sprites/Placeholders/placeholder_orc.png" id="1_6ckqv"]
-[ext_resource type="Script" uid="uid://m8m0o7d21tya" path="res://Scripts/orc_enemy.gd" id="1_v8qg3"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_id7kl"]
+[ext_resource type="Texture2D" uid="uid://dh1uc0yyct2li" path="res://assets/sprites/Placeholders/placeholder_orc.png" id="1_6ckqv"]
+[ext_resource type="Script" uid="uid://m8m0o7d21tya" path="res://scripts/orc_enemy.gd" id="1_v8qg3"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_id7kl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_id7kl"]
 atlas = ExtResource("1_6ckqv")
@@ -275,15 +275,19 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_v8qg3"]
+radius = 3.34996
+
 [node name="Orc" type="Node2D"]
 position = Vector2(1, -3)
 script = ExtResource("1_v8qg3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -21)
+position = Vector2(60, -96)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_c1uly")
 animation = &"death"
+offset = Vector2(-20, 25)
 
 [node name="Word" type="RichTextLabel" parent="."]
 offset_left = -136.0
@@ -297,3 +301,10 @@ text = " Type This \"arkel is gay and he is a femboy\""
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2, -15)
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_v8qg3")

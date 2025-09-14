@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b4wn0b58nkryr"
-path="res://.godot/imported/water - spring.png-bb9c42168efb25eac86fa43d2cef4ba8.ctex"
+path="res://.godot/imported/water - spring.png-e983bfc6fef5416c9a62440af95dbbbb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Map Tiles/Tileset/Water/water - spring.png"
-dest_files=["res://.godot/imported/water - spring.png-bb9c42168efb25eac86fa43d2cef4ba8.ctex"]
+source_file="res://assets/Map Tiles/Tileset/Water/water - spring.png"
+dest_files=["res://.godot/imported/water - spring.png-e983bfc6fef5416c9a62440af95dbbbb.ctex"]
 
 [params]
 
