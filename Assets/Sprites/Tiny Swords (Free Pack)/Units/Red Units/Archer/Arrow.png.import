@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c14th7hqfptx3"
-path="res://.godot/imported/Arrow.png-bc0be034ebf9a7ab6bfdca6e542d4644.ctex"
+path="res://.godot/imported/Arrow.png-48a41cc26f6e7cb431f1c68cd8a1c8bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Tiny Swords (Free Pack)/Units/Red Units/Archer/Arrow.png"
-dest_files=["res://.godot/imported/Arrow.png-bc0be034ebf9a7ab6bfdca6e542d4644.ctex"]
+source_file="res://Assets/Sprites/Tiny Swords (Free Pack)/Units/Red Units/Archer/Arrow.png"
+dest_files=["res://.godot/imported/Arrow.png-48a41cc26f6e7cb431f1c68cd8a1c8bf.ctex"]
 
 [params]
 
