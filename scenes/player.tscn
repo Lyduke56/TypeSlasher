@@ -350,7 +350,7 @@ script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(6, -23)
-scale = Vector2(3, 3)
+scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_smehm")
 animation = &"attack"
 autoplay = "idle"
