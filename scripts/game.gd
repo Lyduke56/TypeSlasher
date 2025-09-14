@@ -1,12 +1,15 @@
 extends Node2D
 @onready var enemy_container = $EnemyContainer
+@onready var target_container = $TargetContainer
 @onready var spawn_timer: Timer = $Timer
 @onready var player = $Player  # Add reference to player
+@onready var target = $TargetContainer
 
 var active_enemy = null
 var current_letter_index: int = -1
 var EnemyScene = preload("res://scenes/Orc_enemy.tscn")
 var BuffScene = preload("res://scenes/Buff.tscn")
+var TargetScene = preload("res://scenes/target.tscn")
 var _toggle := false
 var pause_layer: CanvasLayer
 var pause_overlay: Control
@@ -33,8 +36,11 @@ func _ready() -> void:
 	print("Medium word: ", WordDatabase.get_random_word("medium"))
 	print("Hard word: ", WordDatabase.get_random_word("hard"))
 
+	# Spawn the target at the start
+	spawn_target()
+
 	# Connect timer signal and configure
-	spawn_timer.wait_time = 4  # Spawn every 2.5 seconds
+	spawn_timer.wait_time = 2.5  # Spawn every 2.5 seconds
 	spawn_timer.start()
 	spawn_timer.timeout.connect(spawn_enemy)
 
@@ -116,17 +122,20 @@ func spawn_enemy():
 
 	# Create enemy instance
 	var enemy_instance = EnemyScene.instantiate()
-	enemy_instance.z_index = 2
+	enemy_instance.z_index = 3
 
 	# Set spawn position around circle
 	var spawn_position = get_spawn_position_around_circle()
 	enemy_instance.position = spawn_position
 
-	# Set target position (where player currently is)
-	var target_position = player.global_position
+	# Set target position (where the target is located)
+	var target_position = Vector2.ZERO
+	if target_container.get_child_count() > 0:
+		var target_instance = target_container.get_child(0)
+		target_position = target_instance.global_position
 
 	print("New enemy spawned at:", spawn_position)
-	print("Moving towards player at:", target_position)
+	print("Moving towards target at:", target_position)
 	print("Assigned word: ", selected_word)
 
 	# Add to enemy container
@@ -135,8 +144,14 @@ func spawn_enemy():
 	# Set the word/prompt for this enemy
 	enemy_instance.set_prompt(selected_word)
 
-	# Set enemy target (player position)
+	# Set enemy target (target position)
 	enemy_instance.set_target_position(target_position)
+
+func spawn_target():
+	var target_instance = TargetScene.instantiate()
+	target_container.add_child(target_instance)
+	target_instance.position = target_container.position
+	target_instance.z_index = 1
 
 # Function to change difficulty/category
 func set_word_category(category: String):

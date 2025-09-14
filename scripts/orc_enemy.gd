@@ -9,6 +9,7 @@ extends Node2D
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
 @onready var prompt_text = prompt.text
+@onready var area: Area2D = $Area2D
 
 # Target tracking
 var target_position: Vector2
@@ -17,7 +18,16 @@ var has_target: bool = false
 # Targeting state - prevents retyping once word is completed
 var is_being_targeted: bool = false
 
+# Collision state
+var has_reached_target: bool = false
+var hack_timer: Timer
+
 func _ready() -> void:
+	# Connect collision signal
+	area.body_entered.connect(_on_body_entered)
+	# Connect animation finished signal
+	if anim:
+		anim.animation_finished.connect(_on_animation_finished)
 	pass  # Word will be set by the game manager via set_prompt()
 
 func _process(delta: float) -> void:
@@ -84,7 +94,7 @@ func set_targeted_state(targeted: bool):
 	if targeted:
 		# Stop moving and play idle animation when targeted
 		if anim:
-			anim.play("idle")
+			anim.play("idle ")
 		modulate = Color.GRAY  # Darken the enemy
 	else:
 		modulate = Color.WHITE  # Reset color
@@ -127,14 +137,59 @@ func _on_death_animation_finished():
 	if anim.animation == "death":
 		queue_free()  # Remove enemy from scene
 
+func _on_body_entered(body: Node2D):
+	"""Called when enemy collides with something"""
+	# Check if collided with target (target has StaticBody2D)
+	if body is StaticBody2D and body.get_parent().name == "Target":
+		if not has_reached_target:
+			has_reached_target = true
+			has_target = false  # Stop normal movement
+			print("Enemy reached target! Starting hack timer and playing idle.")
+
+			# Play idle animation immediately
+			if anim:
+				anim.play("idle ")
+
+			# Create and start timer for 1.5 second intervals
+			hack_timer = Timer.new()
+			add_child(hack_timer)
+			hack_timer.wait_time = 1.5
+			hack_timer.one_shot = false  # Repeat indefinitely
+			hack_timer.timeout.connect(_on_hack_timer_timeout)
+			hack_timer.start()
+
+func _on_hack_timer_timeout():
+	"""Called every 1.5 seconds to play hack animation"""
+	if has_reached_target and not is_being_targeted and anim:
+		# Temporarily disable looping for hack animation so it plays once
+		anim.sprite_frames.set_animation_loop("Hack", false)
+		anim.play("Hack")
+		print("Enemy hacking the target!")
+
+func _on_animation_finished():
+	"""Called when any animation finishes"""
+	# Don't interfere with death/damage animations or when enemy is being targeted
+	if anim and (anim.animation == "death" or anim.animation == "damaged" or is_being_targeted):
+		return
+
+	if has_reached_target and anim and anim.animation == "Hack":
+		# Hack animation finished, go back to idle
+		anim.play("idle ")
+		print("Enemy finished hacking, back to idle.")
+
 func _physics_process(delta: float) -> void:
-	# STOP ALL MOVEMENT if being targeted
-	if is_being_targeted:
-		if anim:
-			anim.play("idle")  # Ensure idle animation plays when frozen
+	# STOP ALL MOVEMENT if being targeted or has reached target
+	if is_being_targeted or has_reached_target:
+		# Don't override death/damage animations
+		if anim and (anim.animation == "death" or anim.animation == "damaged"):
+			return  # Let death/damage animations play
+
+		# When reached target and not being targeted, play idle only if not currently hacking
+		if anim and has_reached_target and not is_being_targeted and anim.animation != "Hack":
+			anim.play("idle ")
 		return  # Exit function completely - no movement at all
 
-	# Only move if NOT being targeted
+	# Only move if NOT being targeted and hasn't reached target
 	if has_target:
 		# Move towards target position
 		var direction = (target_position - global_position).normalized()
@@ -149,9 +204,9 @@ func _physics_process(delta: float) -> void:
 		if global_position.distance_to(target_position) < 5.0:
 			has_target = false
 			if anim:
-				anim.play("idle")
+				anim.play("idle ")
 	else:
 		# Fallback: move downward if no specific target
 		if anim:
-			anim.play("idle")
+			anim.play("idle ")
 		global_position.y += speed * delta
