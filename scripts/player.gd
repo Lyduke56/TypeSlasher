@@ -101,15 +101,15 @@ func calculate_dash_speed(distance: float) -> float:
 func dash_to_enemy(enemy_position: Vector2, enemy_ref = null) -> void:
 	if is_returning:
 		combo_timer.stop()
-	
+
 	# If we're already attacking, speed up the current animation
 	if is_attacking:
 		print("Speeding up current slash animation")
 		anim.speed_scale = fast_animation_speed
-	
+
 	target_position = enemy_position
 	target_enemy = enemy_ref
-	
+
 	# Calculate dynamic dash speed based on distance
 	var distance_to_enemy = global_position.distance_to(enemy_position)
 	current_dash_speed = calculate_dash_speed(distance_to_enemy)
@@ -125,15 +125,15 @@ func _finish_dash() -> void:
 	is_attacking = true
 	combo_active = true
 	combo_timer.start()
-	
+
 	# Play attack animation
 	anim.play("attack")
-	
+
 	# Kill the enemy with a short delay (e.g., 0.3 seconds) regardless of animation
 	if target_enemy != null:
 		var enemy_to_kill = target_enemy
 		target_enemy = null  # Clear reference immediately
-		
+
 		# Create a short timer to kill the enemy
 		var kill_timer = Timer.new()
 		add_child(kill_timer)
@@ -145,7 +145,7 @@ func _finish_dash() -> void:
 			kill_timer.queue_free()  # Clean up the timer
 		)
 		kill_timer.start()
-	
+
 	print("Attack started - enemy will die in 0.3 seconds")
 	print("Combo window started - 3 seconds to next target!")
 
@@ -158,16 +158,16 @@ func _on_animation_finished() -> void:
 func _on_attack_finished() -> void:
 	"""Called when attack animation completes"""
 	is_attacking = false
-	
+
 	# Reset animation speed to normal
 	anim.speed_scale = base_animation_speed
-	
+
 	# Emit signal to destroy the enemy after attack animation finishes
 	if target_enemy != null:
 		print("Emitting slash_completed signal for: ", target_enemy)
 		slash_completed.emit(target_enemy)
 		target_enemy = null
-	
+
 	# Return to idle animation
 	anim.play("idle")
 	print("Attack animation finished - returning to idle")

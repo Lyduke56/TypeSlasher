@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=4 uid="uid://btrhod848g6q"]
+[gd_scene load_steps=11 format=4 uid="uid://btrhod848g6q"]
 
-[ext_resource type="Script" uid="uid://e3wfi17cwkqa" path="res://scripts/game.gd" id="1_iywne"]
-[ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://scenes/player.tscn" id="1_uwrxv"]
-[ext_resource type="Texture2D" uid="uid://b4lopj71ao0q8" path="res://assets/Map Tiles/Tileset/Extras/texture.png" id="5_ir15t"]
-[ext_resource type="PackedScene" path="res://scenes/tile_map_layer_2.tscn" id="5_p57ef"]
-[ext_resource type="Script" uid="uid://cbtgswhpnotg2" path="res://scripts/timer.gd" id="6_p57ef"]
-[ext_resource type="Texture2D" uid="uid://dgtu1g8ffnbv1" path="res://assets/Map Tiles/Tileset/Seasonal/spring.png" id="8_ssvqc"]
+[ext_resource type="Script" uid="uid://e3wfi17cwkqa" path="res://Scripts/game.gd" id="1_iywne"]
+[ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://Scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="Texture2D" uid="uid://b4lopj71ao0q8" path="res://Assets/Map Tiles/Tileset/Extras/texture.png" id="5_ir15t"]
+[ext_resource type="PackedScene" uid="uid://bphv0yr26jjg" path="res://scenes/tile_map_layer_2.tscn" id="5_p57ef"]
+[ext_resource type="Script" uid="uid://b5kpp21ay8abs" path="res://Scenes/current_score_label.gd" id="6_1l0tm"]
+[ext_resource type="Script" uid="uid://cbtgswhpnotg2" path="res://Scripts/timer.gd" id="6_p57ef"]
+[ext_resource type="Texture2D" uid="uid://dgtu1g8ffnbv1" path="res://Assets/Map Tiles/Tileset/Seasonal/spring.png" id="8_ssvqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("8_ssvqc")
@@ -74,6 +75,18 @@ tile_map_data = PackedByteArray("AAD7//v/AAABAAEAAAD8//v/AAABAAEAAAD9//v/AAABAAE
 tile_set = SubResource("TileSet_p57ef")
 
 [node name="TileMapLayer_2" parent="TileMap" instance=ExtResource("5_p57ef")]
+
+[node name="scoreLabels" type="StaticBody2D" parent="TileMap"]
+
+[node name="currentScoreLabel" type="RichTextLabel" parent="TileMap/scoreLabels"]
+offset_left = 267.0
+offset_top = -280.0
+offset_right = 380.0
+offset_bottom = -238.0
+text = "CURRENT SCORE:9999"
+scroll_active = false
+tab_size = 24
+script = ExtResource("6_1l0tm")
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 

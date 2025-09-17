@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bi5vw2pq0rlri"
-path="res://.godot/imported/Water_FlatGround_#4_(12frames).png-7131fff876cfacdfc084b92fb033dee3.ctex"
+path="res://.godot/imported/Water_FlatGround_#4_(12frames).png-02854ed2ce1fdfbc33829fdd05e019a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Tiny Swords (Free Pack)/Terrain/Water_FlatGround_#4_(12frames).png"
-dest_files=["res://.godot/imported/Water_FlatGround_#4_(12frames).png-7131fff876cfacdfc084b92fb033dee3.ctex"]
+source_file="res://Assets/Sprites/Tiny Swords (Free Pack)/Terrain/Water_FlatGround_#4_(12frames).png"
+dest_files=["res://.godot/imported/Water_FlatGround_#4_(12frames).png-02854ed2ce1fdfbc33829fdd05e019a9.ctex"]
 
 [params]
 

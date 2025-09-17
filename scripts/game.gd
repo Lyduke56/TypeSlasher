@@ -51,8 +51,15 @@ func _ready() -> void:
 func _process(_delta):
 	# Process input buffer one character per frame for high WPM handling
 	if not input_buffer.is_empty() and not is_processing_completion:
+		update_score() #new high score thing will replace if necessary
 		var key_typed = input_buffer.pop_front()
 		_process_single_character(key_typed)
+
+func update_score():
+	Global.previous_score = Global.current_score
+	if Global.current_score > Global.high_score:
+		Global.high_score = Global.current_score
+
 
 func get_unique_word() -> String:
 	"""Get a word that hasn't appeared in the last 10 words"""
@@ -196,10 +203,10 @@ func _complete_word():
 	# Atomically update all state
 	completed_enemy.is_being_targeted = true
 	completed_enemy.set_targeted_state(true)
-	
+
 	# Store reference to this enemy for death after slash
 	# We'll trigger death when player finishes slash animation, not when reaching enemy
-	
+
 	active_enemy = null
 	current_letter_index = -1
 
@@ -222,7 +229,7 @@ func _on_enemy_reached(enemy):
 func _on_player_slash_completed(enemy):
 	"""Called when player finishes slash animation on an enemy"""
 	print("Player slash completed! Now triggering enemy death.")
-	
+
 	if enemy != null and is_instance_valid(enemy):
 		enemy.play_death_animation()
 
