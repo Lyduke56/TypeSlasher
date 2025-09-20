@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwgp8w7d6qhwp"
-path="res://.godot/imported/Stone and Rock.png-be6dcaa8181968c2a9692140604e2486.ctex"
+path="res://.godot/imported/Stone and Rock.png-94afd6e48f020febcfc968417e9f481f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Map Tiles/Props/Stone and Rock.png"
-dest_files=["res://.godot/imported/Stone and Rock.png-be6dcaa8181968c2a9692140604e2486.ctex"]
+source_file="res://assets/Map Tiles/Props/Stone and Rock.png"
+dest_files=["res://.godot/imported/Stone and Rock.png-94afd6e48f020febcfc968417e9f481f.ctex"]
 
 [params]
 

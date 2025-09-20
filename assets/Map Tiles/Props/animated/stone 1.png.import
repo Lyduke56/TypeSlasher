@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpk6seelyl8uq"
-path="res://.godot/imported/stone 1.png-15d58bfc8b7d1946c7d95277afb333de.ctex"
+path="res://.godot/imported/stone 1.png-514607912042d6d6b2b68793b68b72ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Map Tiles/Props/animated/stone 1.png"
-dest_files=["res://.godot/imported/stone 1.png-15d58bfc8b7d1946c7d95277afb333de.ctex"]
+source_file="res://assets/Map Tiles/Props/animated/stone 1.png"
+dest_files=["res://.godot/imported/stone 1.png-514607912042d6d6b2b68793b68b72ed.ctex"]
 
 [params]
 
