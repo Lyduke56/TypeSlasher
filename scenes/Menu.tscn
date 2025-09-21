@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cnvh2feiwpswh"]
 
-[ext_resource type="Script" uid="uid://brobbfekike3n" path="res://Scripts/menu.gd" id="1_xdvgc"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_upctu"]
-[ext_resource type="Texture2D" uid="uid://bog7t5alywxqn" path="res://Assets/Background/Menu_background.png" id="3_11y2r"]
+[ext_resource type="Script" uid="uid://brobbfekike3n" path="res://scripts/menu.gd" id="1_xdvgc"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_upctu"]
+[ext_resource type="Texture2D" uid="uid://bog7t5alywxqn" path="res://assets/Background/Menu_background.png" id="3_11y2r"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_11y2r"]
 

@@ -41,6 +41,8 @@ func _ready() -> void:
 	combo_timer.one_shot = true
 	combo_timer.timeout.connect(_on_combo_timeout)
 
+
+	
 	# Setup attack timer (duration will be set dynamically in _finish_dash)
 	add_child(attack_timer)
 	attack_timer.one_shot = true

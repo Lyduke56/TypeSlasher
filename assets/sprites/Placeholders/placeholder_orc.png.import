@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dh1uc0yyct2li"
-path="res://.godot/imported/placeholder_orc.png-6f9e85d61ed5056c563c340b9fb09632.ctex"
+path="res://.godot/imported/placeholder_orc.png-8e00cb417db1ee25ddf447c9b60c1070.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Placeholders/placeholder_orc.png"
-dest_files=["res://.godot/imported/placeholder_orc.png-6f9e85d61ed5056c563c340b9fb09632.ctex"]
+source_file="res://assets/sprites/Placeholders/placeholder_orc.png"
+dest_files=["res://.godot/imported/placeholder_orc.png-8e00cb417db1ee25ddf447c9b60c1070.ctex"]
 
 [params]
 
