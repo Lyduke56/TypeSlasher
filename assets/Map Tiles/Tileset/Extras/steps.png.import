@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c0c13mksuiok1"
-path="res://.godot/imported/steps.png-d8ac9dca850467dc441ea3189fb2484f.ctex"
+path="res://.godot/imported/steps.png-cab060804757587c195debe6c876954b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Map Tiles/Tileset/Extras/steps.png"
-dest_files=["res://.godot/imported/steps.png-d8ac9dca850467dc441ea3189fb2484f.ctex"]
+source_file="res://Assets/Map Tiles/Tileset/Extras/steps.png"
+dest_files=["res://.godot/imported/steps.png-cab060804757587c195debe6c876954b.ctex"]
 
 [params]
 

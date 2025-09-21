@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhjfrrotr15ru"
-path="res://.godot/imported/Armored Skeleton-Idle.png-91bb95f49d21f29636ecd48a9ea93d50.ctex"
+path="res://.godot/imported/Armored Skeleton-Idle.png-1134e5c48251805af6b868b3a35a0c4e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Armored Skeleton/Armored Skeleton with shadows/Armored Skeleton-Idle.png"
-dest_files=["res://.godot/imported/Armored Skeleton-Idle.png-91bb95f49d21f29636ecd48a9ea93d50.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Skeleton/Armored Skeleton with shadows/Armored Skeleton-Idle.png"
+dest_files=["res://.godot/imported/Armored Skeleton-Idle.png-1134e5c48251805af6b868b3a35a0c4e.ctex"]
 
 [params]
 

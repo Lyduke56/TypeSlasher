@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ci33oeqh27bk"
-path="res://.godot/imported/knigh pixel background.png-95b9cfe1aba4446437fe71e11ea6358b.ctex"
+path="res://.godot/imported/knigh pixel background.png-5d356c199289e09640ea22d10fb41491.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/audio/knigh pixel background.png"
-dest_files=["res://.godot/imported/knigh pixel background.png-95b9cfe1aba4446437fe71e11ea6358b.ctex"]
+source_file="res://Assets/audio/knigh pixel background.png"
+dest_files=["res://.godot/imported/knigh pixel background.png-5d356c199289e09640ea22d10fb41491.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bk1dhlm6u2rjn"
-path="res://.godot/imported/Arrow01(32x32).png-a7da6a3285c6b2af8da5b57279a57695.ctex"
+path="res://.godot/imported/Arrow01(32x32).png-cec983e506fe854a4a37b719e3739cca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Soldier/Arrow(projectile)/Arrow01(32x32).png"
-dest_files=["res://.godot/imported/Arrow01(32x32).png-a7da6a3285c6b2af8da5b57279a57695.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Soldier/Arrow(projectile)/Arrow01(32x32).png"
+dest_files=["res://.godot/imported/Arrow01(32x32).png-cec983e506fe854a4a37b719e3739cca.ctex"]
 
 [params]
 

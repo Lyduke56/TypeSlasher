@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0m3ro82jjhj4"
-path="res://.godot/imported/water plant 1.png-43f459e0dd2ee1bfa6ca1115106184e8.ctex"
+path="res://.godot/imported/water plant 1.png-59cb370a6a7e67d2bef18872ce746526.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Map Tiles/Props/animated/water plant 1.png"
-dest_files=["res://.godot/imported/water plant 1.png-43f459e0dd2ee1bfa6ca1115106184e8.ctex"]
+source_file="res://Assets/Map Tiles/Props/animated/water plant 1.png"
+dest_files=["res://.godot/imported/water plant 1.png-59cb370a6a7e67d2bef18872ce746526.ctex"]
 
 [params]
 

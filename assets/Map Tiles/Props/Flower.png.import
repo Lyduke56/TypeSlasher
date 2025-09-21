@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bk6nwko1qnhy7"
-path="res://.godot/imported/Flower.png-4470f58c2eb258f0cb6751083f6c7215.ctex"
+path="res://.godot/imported/Flower.png-85586f10b771236d9c43817d0ad99e3f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Map Tiles/Props/Flower.png"
-dest_files=["res://.godot/imported/Flower.png-4470f58c2eb258f0cb6751083f6c7215.ctex"]
+source_file="res://Assets/Map Tiles/Props/Flower.png"
+dest_files=["res://.godot/imported/Flower.png-85586f10b771236d9c43817d0ad99e3f.ctex"]
 
 [params]
 

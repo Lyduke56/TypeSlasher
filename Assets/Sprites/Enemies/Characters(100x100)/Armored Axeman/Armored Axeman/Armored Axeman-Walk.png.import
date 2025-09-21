@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://joeivvnlhbm5"
-path="res://.godot/imported/Armored Axeman-Walk.png-906de4256db800220379e2bbbcbb7ac7.ctex"
+path="res://.godot/imported/Armored Axeman-Walk.png-432f345ce97af5c175f7dcb48b0796ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Armored Axeman/Armored Axeman/Armored Axeman-Walk.png"
-dest_files=["res://.godot/imported/Armored Axeman-Walk.png-906de4256db800220379e2bbbcbb7ac7.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Axeman/Armored Axeman/Armored Axeman-Walk.png"
+dest_files=["res://.godot/imported/Armored Axeman-Walk.png-432f345ce97af5c175f7dcb48b0796ed.ctex"]
 
 [params]
 
