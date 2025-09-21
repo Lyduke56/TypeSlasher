@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://drnf588xm8ck5"
-path="res://.godot/imported/Werebear-Idle.png-0110aa56afea09d0414e33a639991ba9.ctex"
+path="res://.godot/imported/Werebear-Idle.png-2365660f48d8b582c8a06c066246e28d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Werebear/Werebear with shadows/Werebear-Idle.png"
-dest_files=["res://.godot/imported/Werebear-Idle.png-0110aa56afea09d0414e33a639991ba9.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Werebear/Werebear with shadows/Werebear-Idle.png"
+dest_files=["res://.godot/imported/Werebear-Idle.png-2365660f48d8b582c8a06c066246e28d.ctex"]
 
 [params]
 

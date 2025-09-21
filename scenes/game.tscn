@@ -68,7 +68,22 @@ collision_mask = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = 5
-zoom = Vector2(0.83, 0.83)
+zoom = Vector2(0.67, 0.67)
+
+[node name="scoreLabels" type="StaticBody2D" parent="."]
+
+[node name="currentScoreLabel" type="RichTextLabel" parent="scoreLabels"]
+z_index = 10
+offset_left = 492.0
+offset_top = -483.0
+offset_right = 856.0
+offset_bottom = -365.0
+theme_override_fonts/normal_font = ExtResource("6_gee14")
+theme_override_font_sizes/normal_font_size = 32
+text = "CURRENT SCORE:9999"
+scroll_active = false
+tab_size = 24
+script = ExtResource("6_1l0tm")
 
 [node name="TileMap" type="Node" parent="."]
 
@@ -77,20 +92,6 @@ tile_map_data = PackedByteArray("AAD7//v/AAABAAEAAAD8//v/AAABAAEAAAD9//v/AAABAAE
 tile_set = SubResource("TileSet_p57ef")
 
 [node name="TileMapLayer_2" parent="TileMap" instance=ExtResource("5_p57ef")]
-
-[node name="scoreLabels" type="StaticBody2D" parent="TileMap"]
-
-[node name="currentScoreLabel" type="RichTextLabel" parent="TileMap/scoreLabels"]
-offset_left = 493.0
-offset_top = -380.0
-offset_right = 685.0
-offset_bottom = -309.0
-theme_override_fonts/normal_font = ExtResource("6_gee14")
-theme_override_font_sizes/normal_font_size = 32
-text = "CURRENT SCORE:9999"
-scroll_active = false
-tab_size = 24
-script = ExtResource("6_1l0tm")
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 

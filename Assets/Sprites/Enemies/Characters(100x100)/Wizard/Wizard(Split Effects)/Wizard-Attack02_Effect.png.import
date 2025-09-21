@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://lys8imf5x1jo"
-path="res://.godot/imported/Wizard-Attack02_Effect.png-9ab08b5133deefa0e8f469dd0328d58b.ctex"
+path="res://.godot/imported/Wizard-Attack02_Effect.png-4bfcb54caf042823094be022a5d83eed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Wizard/Wizard(Split Effects)/Wizard-Attack02_Effect.png"
-dest_files=["res://.godot/imported/Wizard-Attack02_Effect.png-9ab08b5133deefa0e8f469dd0328d58b.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Wizard/Wizard(Split Effects)/Wizard-Attack02_Effect.png"
+dest_files=["res://.godot/imported/Wizard-Attack02_Effect.png-4bfcb54caf042823094be022a5d83eed.ctex"]
 
 [params]
 

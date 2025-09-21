@@ -2,6 +2,7 @@ extends Node2D
 @onready var buff_container = $BuffContainer
 @onready var enemy_container = $EnemyContainer
 @onready var target_container = $TargetContainer
+@onready var buff_timer: Timer = $Buff_Timer
 @onready var spawn_timer: Timer = $Timer
 @onready var buff_timer: Timer = $Buff_Timer
 @onready var player = $Player  # Add reference to player
@@ -15,6 +16,13 @@ var TargetScene = preload("res://scenes/target.tscn")
 var _toggle := false
 var pause_layer: CanvasLayer
 var pause_overlay: Control
+
+# Total spawn limits
+var max_enemies = 5
+var total_enemies_spawned = 0
+
+var max_buffs = 1
+var total_buffs_spawned = 0
 
 # Input processing state
 var is_processing_completion: bool = false
@@ -47,6 +55,11 @@ func _ready() -> void:
 	spawn_timer.timeout.connect(spawn_enemy)
 	
 	# Connect timer signal and configure
+	buff_timer.wait_time = 10  # Spawn every 2.5 seconds
+	buff_timer.start()
+	buff_timer.timeout.connect(spawn_buff)
+
+# Connect timer signal and configure
 	buff_timer.wait_time = 10  # Spawn every 2.5 seconds
 	buff_timer.start()
 	buff_timer.timeout.connect(spawn_buff)
@@ -115,12 +128,16 @@ func get_spawn_position_around_circle() -> Vector2:
 	return spawn_pos
 
 func spawn_enemy():
+	# Check if we've reached the total enemy limit
+	if total_enemies_spawned >= max_enemies:
+		spawn_timer.stop()
+		return
+
 	# Check if the category has words available
 	var available_words = WordDatabase.get_category_words(current_category)
 	if available_words.is_empty():
 		print("No words available in category: ", current_category)
 		return
-
 
 	# Wait one frame to ensure the node is fully in the scene tree
 	await get_tree().process_frame
@@ -150,6 +167,7 @@ func spawn_enemy():
 
 	# Add to enemy container
 	enemy_container.add_child(enemy_instance)
+	total_enemies_spawned += 1
 
 	# Set the word/prompt for this enemy
 	enemy_instance.set_prompt(selected_word)
@@ -303,6 +321,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			input_buffer.append(key_typed)
 
 func spawn_buff() -> void:
+	# Check if we've reached the total buff limit
+	if total_buffs_spawned >= max_buffs:
+		buff_timer.stop()
+		return
+
 	# Wait a frame so scene tree is safe (mirrors your enemy spawn)
 	await get_tree().process_frame
 

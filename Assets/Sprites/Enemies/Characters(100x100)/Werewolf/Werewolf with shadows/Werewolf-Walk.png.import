@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://hh75ybv36r52"
-path="res://.godot/imported/Werewolf-Walk.png-e71e9354186e6db109c4d30a6d80dc77.ctex"
+path="res://.godot/imported/Werewolf-Walk.png-e2b3052fd8cf69ea0d193f7a73418bef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Werewolf/Werewolf with shadows/Werewolf-Walk.png"
-dest_files=["res://.godot/imported/Werewolf-Walk.png-e71e9354186e6db109c4d30a6d80dc77.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Werewolf/Werewolf with shadows/Werewolf-Walk.png"
+dest_files=["res://.godot/imported/Werewolf-Walk.png-e2b3052fd8cf69ea0d193f7a73418bef.ctex"]
 
 [params]
 
