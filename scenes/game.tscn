@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://btrhod848g6q"]
+[gd_scene load_steps=15 format=4 uid="uid://btrhod848g6q"]
 
 [ext_resource type="Script" uid="uid://e3wfi17cwkqa" path="res://scripts/game.gd" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -58,6 +58,66 @@ texture = ExtResource("5_ir15t")
 sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 sources/1 = SubResource("TileSetAtlasSource_iywne")
 
+[sub_resource type="Animation" id="Animation_gee14"]
+resource_name = "fade_in_to_game"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimationPlayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AnimationPlayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_0tnpc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimationPlayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AnimationPlayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vtaks"]
+_data = {
+&"RESET": SubResource("Animation_0tnpc"),
+&"fade_in_to_game": SubResource("Animation_gee14")
+}
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_iywne")
 
@@ -107,3 +167,17 @@ position = Vector2(3, 5)
 [node name="BuffContainer" type="Node2D" parent="."]
 
 [node name="Buff_Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Player")
+libraries = {
+&"": SubResource("AnimationLibrary_vtaks")
+}
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer"]
+z_index = 10
+offset_left = -861.0
+offset_top = -485.0
+offset_right = 859.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 1)

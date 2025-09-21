@@ -36,6 +36,7 @@ var cooldown_period: int = 10  # How many other words must appear before a word 
 var spawn_radius: float = 600.0  # Distance from center to spawn enemies
 
 func _ready() -> void:
+	$AnimationPlayer.play("fade_in_to_game")
 	_build_pause_overlay()
 	WordDatabase.load_word_database()
 
