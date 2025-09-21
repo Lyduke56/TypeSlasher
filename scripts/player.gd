@@ -42,7 +42,7 @@ func _ready() -> void:
 	combo_timer.timeout.connect(_on_combo_timeout)
 
 
-	
+
 	# Setup attack timer (duration will be set dynamically in _finish_dash)
 	add_child(attack_timer)
 	attack_timer.one_shot = true
@@ -132,7 +132,7 @@ func _finish_dash() -> void:
 	# Play random attack animation
 	var attack_num = randi() % 3 + 1
 	anim.play("attack_" + str(attack_num))
-	
+
 	# Kill the enemy with a short delay (e.g., 0.3 seconds) regardless of animation
 	if target_enemy != null:
 		var enemy_to_kill = target_enemy
