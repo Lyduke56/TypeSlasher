@@ -1,8 +1,8 @@
 [gd_scene load_steps=40 format=3 uid="uid://ivgoec3n72vd"]
 
-[ext_resource type="Texture2D" uid="uid://dh1uc0yyct2li" path="res://Assets/Sprites/Placeholders/placeholder_orc.png" id="1_6ckqv"]
-[ext_resource type="Script" uid="uid://m8m0o7d21tya" path="res://Scripts/orc_enemy.gd" id="1_v8qg3"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_id7kl"]
+[ext_resource type="Texture2D" uid="uid://dh1uc0yyct2li" path="res://assets/sprites/Placeholders/placeholder_orc.png" id="1_6ckqv"]
+[ext_resource type="Script" uid="uid://m8m0o7d21tya" path="res://scripts/orc_enemy.gd" id="1_v8qg3"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_id7kl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_prrqk"]
 atlas = ExtResource("1_6ckqv")
@@ -293,12 +293,13 @@ frame_progress = 1.0
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3
-offset_left = -136.0
-offset_top = 6.0
-offset_right = 136.0
-offset_bottom = 48.0
+offset_left = -226.0
+offset_top = 4.0
+offset_right = 1539.0
+offset_bottom = 314.0
+scale = Vector2(0.255, 0.255)
 theme_override_fonts/normal_font = ExtResource("2_id7kl")
-theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = " Type This \"arkel is gay and he is a femboy\""
 fit_content = true

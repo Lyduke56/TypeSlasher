@@ -1,6 +1,8 @@
 extends Node2D
+@onready var buff_container = $BuffContainer
 @onready var enemy_container = $EnemyContainer
 @onready var target_container = $TargetContainer
+@onready var buff_timer: Timer = $Buff_Timer
 @onready var spawn_timer: Timer = $Timer
 @onready var player = $Player  # Add reference to player
 @onready var target = $TargetContainer
@@ -13,6 +15,13 @@ var TargetScene = preload("res://scenes/target.tscn")
 var _toggle := false
 var pause_layer: CanvasLayer
 var pause_overlay: Control
+
+# Total spawn limits
+var max_enemies = 5
+var total_enemies_spawned = 0
+
+var max_buffs = 1
+var total_buffs_spawned = 0
 
 # Input processing state
 var is_processing_completion: bool = false
@@ -27,6 +36,7 @@ var cooldown_period: int = 10  # How many other words must appear before a word 
 var spawn_radius: float = 600.0  # Distance from center to spawn enemies
 
 func _ready() -> void:
+	$AnimationPlayer.play("fade_in_to_game")
 	_build_pause_overlay()
 	WordDatabase.load_word_database()
 
@@ -40,9 +50,14 @@ func _ready() -> void:
 	spawn_target()
 
 	# Connect timer signal and configure
-	spawn_timer.wait_time = 2.5  # Spawn every 2.5 seconds
+	spawn_timer.wait_time = 3  # Spawn every 3 seconds
 	spawn_timer.start()
 	spawn_timer.timeout.connect(spawn_enemy)
+
+	# Connect timer signal and configure
+	buff_timer.wait_time = 10  # Spawn every 10 seconds
+	buff_timer.start()
+	buff_timer.timeout.connect(spawn_buff)
 
 	# Connect player signal to handle enemy destruction
 	player.enemy_reached.connect(_on_enemy_reached)
@@ -108,15 +123,15 @@ func get_spawn_position_around_circle() -> Vector2:
 	return spawn_pos
 
 func spawn_enemy():
+	# Check if we've reached the total enemy limit
+	if total_enemies_spawned >= max_enemies:
+		spawn_timer.stop()
+		return
+
 	# Check if the category has words available
 	var available_words = WordDatabase.get_category_words(current_category)
 	if available_words.is_empty():
 		print("No words available in category: ", current_category)
-		return
-
-	_toggle = not _toggle
-	if _toggle:
-		spawn_buff()
 		return
 
 	# Wait one frame to ensure the node is fully in the scene tree
@@ -147,6 +162,7 @@ func spawn_enemy():
 
 	# Add to enemy container
 	enemy_container.add_child(enemy_instance)
+	total_enemies_spawned += 1
 
 	# Set the word/prompt for this enemy
 	enemy_instance.set_prompt(selected_word)
@@ -174,17 +190,21 @@ func find_new_active_enemy(typed_character: String):
 	if is_processing_completion:
 		return
 
-	for enemy in enemy_container.get_children():
-		# Skip enemies that are already being targeted or invalid
-		if not is_instance_valid(enemy) or enemy.is_being_targeted:
-			continue
+	# Check both enemy_container and buff_container for targetable entities
+	for container in [enemy_container, buff_container]:
+		for entity in container.get_children():
+			# Skip entities that are already being targeted or invalid
+			if not is_instance_valid(entity) or entity.is_being_targeted:
+				continue
 
-		var prompt = enemy.get_prompt()
-		if prompt.length() > 0 and prompt.substr(0, 1).to_lower() == typed_character:
-			print("Found new enemy that starts with ", typed_character)
-			active_enemy = enemy
-			current_letter_index = 1
-			active_enemy.set_next_character(current_letter_index)
+			var prompt = entity.get_prompt()
+			if prompt.length() > 0 and prompt.substr(0, 1).to_lower() == typed_character:
+				print("Found new entity that starts with ", typed_character)
+				active_enemy = entity
+				current_letter_index = 1
+				active_enemy.set_next_character(current_letter_index)
+				break
+		if active_enemy != null:
 			break
 
 func _complete_word():
@@ -195,17 +215,14 @@ func _complete_word():
 	# Set processing flag to block all other operations
 	is_processing_completion = true
 
-	var enemy_position = active_enemy.global_position
-	var completed_enemy = active_enemy
+	var entity_position = active_enemy.global_position
+	var completed_entity = active_enemy
 
-	print("Word completed! Player dashing to enemy at: ", enemy_position)
+	print("Word completed! Entity at: ", entity_position)
 
 	# Atomically update all state
-	completed_enemy.is_being_targeted = true
-	completed_enemy.set_targeted_state(true)
-
-	# Store reference to this enemy for death after slash
-	# We'll trigger death when player finishes slash animation, not when reaching enemy
+	completed_entity.is_being_targeted = true
+	completed_entity.set_targeted_state(true)
 
 	active_enemy = null
 	current_letter_index = -1
@@ -213,10 +230,17 @@ func _complete_word():
 	# Clear input buffer of any remaining inputs
 	input_buffer.clear()
 
-	# Trigger dash and pass the enemy reference so player can kill it after slash
-	player.dash_to_enemy(enemy_position, completed_enemy)
+	# Handle completion differently for buffs vs enemies
+	if completed_entity.get_parent() == buff_container:
+		# For buffs, just play death animation immediately (no dash needed)
+		print("Buff completed! Triggering buff collection.")
+		completed_entity.play_death_animation()
+	else:
+		# For enemies, trigger dash to enemy
+		print("Enemy completed! Player dashing to enemy.")
+		player.dash_to_enemy(entity_position, completed_entity)
 
-	# Reset processing flag after a small delay to ensure dash starts
+	# Reset processing flag after a small delay to ensure actions start
 	await get_tree().create_timer(0.1).timeout
 	is_processing_completion = false
 
@@ -292,6 +316,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			input_buffer.append(key_typed)
 
 func spawn_buff() -> void:
+	# Check if we've reached the total buff limit
+	if total_buffs_spawned >= max_buffs:
+		buff_timer.stop()
+		return
+
 	# Wait a frame so scene tree is safe (mirrors your enemy spawn)
 	await get_tree().process_frame
 
@@ -314,7 +343,8 @@ func spawn_buff() -> void:
 	buff_instance.set_prompt(w)
 
 	# Add to the SAME container so your input/selection loop can target it
-	enemy_container.add_child(buff_instance)
+	buff_container.add_child(buff_instance)
+	total_buffs_spawned += 1
 
 	print("Spawned buff at ", pos, " with word: ", w)
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dxobm5nj7f37p"
-path="res://.godot/imported/Greatsword Skeleton-shadow_death.png-c8ccad18f5b1c834db78fe5d2a29e592.ctex"
+path="res://.godot/imported/Greatsword Skeleton-shadow_death.png-2d1b98fca6237492b8f7f71e05e238f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Greatsword Skeleton/Greatsword Skeleton/Shadow sprites/Greatsword Skeleton-shadow_death.png"
-dest_files=["res://.godot/imported/Greatsword Skeleton-shadow_death.png-c8ccad18f5b1c834db78fe5d2a29e592.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Greatsword Skeleton/Greatsword Skeleton/Shadow sprites/Greatsword Skeleton-shadow_death.png"
+dest_files=["res://.godot/imported/Greatsword Skeleton-shadow_death.png-2d1b98fca6237492b8f7f71e05e238f1.ctex"]
 
 [params]
 

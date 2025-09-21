@@ -41,6 +41,8 @@ func _ready() -> void:
 	combo_timer.one_shot = true
 	combo_timer.timeout.connect(_on_combo_timeout)
 
+
+	
 	# Setup attack timer (duration will be set dynamically in _finish_dash)
 	add_child(attack_timer)
 	attack_timer.one_shot = true
@@ -118,7 +120,7 @@ func dash_to_enemy(enemy_position: Vector2, enemy_ref = null) -> void:
 	is_returning = false
 	is_attacking = false
 	# Play dash animation
-	anim.play("walking")
+	anim.play("run")
 	print("Player dashing to: ", enemy_position, " at speed: ", current_dash_speed)
 
 func _finish_dash() -> void:
@@ -127,8 +129,9 @@ func _finish_dash() -> void:
 	combo_active = true
 	combo_timer.start()
 
-	# Play attack animation
-	anim.play("attack_3")
+	# Play random attack animation
+	var attack_num = randi() % 3 + 1
+	anim.play("attack_" + str(attack_num))
 	
 	# Kill the enemy with a short delay (e.g., 0.3 seconds) regardless of animation
 	if target_enemy != null:
@@ -153,7 +156,7 @@ func _finish_dash() -> void:
 func _on_animation_finished() -> void:
 	"""Called when any animation finishes"""
 	# Only handle attack animation finishing
-	if is_attacking and anim.animation == "attack":
+	if is_attacking and anim.animation.begins_with("attack"):
 		_on_attack_finished()
 
 func _on_attack_finished() -> void:

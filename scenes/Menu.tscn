@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnvh2feiwpswh"]
+[gd_scene load_steps=13 format=3 uid="uid://cnvh2feiwpswh"]
 
-[ext_resource type="Script" uid="uid://brobbfekike3n" path="res://Scripts/menu.gd" id="1_xdvgc"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_upctu"]
-[ext_resource type="Texture2D" uid="uid://bog7t5alywxqn" path="res://Assets/Background/Menu_background.png" id="3_11y2r"]
+[ext_resource type="Script" uid="uid://brobbfekike3n" path="res://scripts/menu.gd" id="1_xdvgc"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_upctu"]
+[ext_resource type="Texture2D" uid="uid://bog7t5alywxqn" path="res://assets/Background/Menu_background.png" id="3_11y2r"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_11y2r"]
 
@@ -11,6 +11,89 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jmdev"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b6cxs"]
+
+[sub_resource type="Gradient" id="Gradient_11y2r"]
+offsets = PackedFloat32Array(0, 0.754967)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o0tnf"]
+gradient = SubResource("Gradient_11y2r")
+width = 195
+
+[sub_resource type="Animation" id="Animation_11y2r"]
+resource_name = "Fade_out_to_game"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimationPlayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0.913725, 0.913725, 0.913725, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AnimationPlayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_game"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_o0tnf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimationPlayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AnimationPlayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jmdev"]
+_data = {
+&"Fade_out_to_game": SubResource("Animation_11y2r"),
+&"RESET": SubResource("Animation_o0tnf")
+}
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -24,20 +107,13 @@ offset_bottom = -132.0
 grow_vertical = 0
 script = ExtResource("1_xdvgc")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -2
-layout_mode = 0
-offset_left = -19.0
-offset_top = -516.0
-offset_right = 1133.0
-offset_bottom = 129.0
-color = Color(0, 0, 0, 1)
-
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 z_index = 1
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 14.0
+offset_top = 29.0
+offset_right = 104.0
+offset_bottom = 105.0
 
 [node name="Start_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -45,12 +121,14 @@ focus_neighbor_top = NodePath("../Close_button")
 theme_override_fonts/font = ExtResource("2_upctu")
 theme_override_styles/normal = SubResource("StyleBoxTexture_11y2r")
 text = "Start"
+alignment = 0
 
 [node name="Option_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_upctu")
 theme_override_styles/normal = SubResource("StyleBoxTexture_o0tnf")
 text = "Option"
+alignment = 0
 
 [node name="Score_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -58,6 +136,7 @@ theme_override_fonts/font = ExtResource("2_upctu")
 theme_override_styles/normal = SubResource("StyleBoxTexture_jmdev")
 text = "View Score
 "
+alignment = 0
 
 [node name="Close_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -66,6 +145,7 @@ theme_override_fonts/font = ExtResource("2_upctu")
 theme_override_font_sizes/font_size = 0
 theme_override_styles/normal = SubResource("StyleBoxTexture_b6cxs")
 text = "Quit"
+alignment = 0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -1
@@ -76,6 +156,28 @@ offset_right = 1131.0
 offset_bottom = 129.0
 texture = ExtResource("3_11y2r")
 expand_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.717647)
+position = Vector2(556.5, -193.82)
+scale = Vector2(5.89231, 10.0681)
+texture = SubResource("GradientTexture2D_o0tnf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_jmdev")
+}
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer"]
+visible = false
+z_index = 4
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="VBoxContainer/Start_button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Option_button" to="." method="_on_option_button_pressed"]

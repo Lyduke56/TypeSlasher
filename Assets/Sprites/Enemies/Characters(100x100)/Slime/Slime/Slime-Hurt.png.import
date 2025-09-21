@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://jk7pe3p101bo"
-path="res://.godot/imported/Slime-Hurt.png-a6541d6117650475ae7e2930c8ec4c42.ctex"
+path="res://.godot/imported/Slime-Hurt.png-31ae40a579c72daf95b2640f537d69e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Slime/Slime/Slime-Hurt.png"
-dest_files=["res://.godot/imported/Slime-Hurt.png-a6541d6117650475ae7e2930c8ec4c42.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Slime/Slime/Slime-Hurt.png"
+dest_files=["res://.godot/imported/Slime-Hurt.png-31ae40a579c72daf95b2640f537d69e1.ctex"]
 
 [params]
 

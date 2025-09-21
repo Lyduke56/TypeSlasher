@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://Scenes/player.tscn" id="3_5cyy6"]
 [ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_ssj8n"]
 
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2icd"]
 texture = ExtResource("2_w2icd")
 0:0/0 = 0
