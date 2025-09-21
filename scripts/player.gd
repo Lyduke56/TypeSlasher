@@ -99,11 +99,12 @@ func calculate_dash_speed(distance: float) -> float:
 	return calculated_speed
 
 func dash_to_enemy(enemy_position: Vector2, enemy_ref = null) -> void:
+	anim.speed_scale = base_animation_speed
 	if is_returning:
 		combo_timer.stop()
 
 	# If we're already attacking, speed up the current animation
-	if is_attacking:
+	if is_attacking and anim.speed_scale == base_animation_speed:
 		print("Speeding up current slash animation")
 		anim.speed_scale = fast_animation_speed
 
@@ -127,8 +128,8 @@ func _finish_dash() -> void:
 	combo_timer.start()
 
 	# Play attack animation
-	anim.play("attack")
-
+	anim.play("attack_3")
+	
 	# Kill the enemy with a short delay (e.g., 0.3 seconds) regardless of animation
 	if target_enemy != null:
 		var enemy_to_kill = target_enemy
@@ -185,7 +186,7 @@ func _return_to_center() -> void:
 	is_attacking = false
 
 	# Play return/run animation (or use dash animation for returning)
-	anim.play("walking")  # or "dash" if you want to reuse the dash animation
+	anim.play("run")  # or "dash" if you want to reuse the dash animation
 
 func _finish_return() -> void:
 	is_returning = false
