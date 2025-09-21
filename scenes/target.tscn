@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://28xk36nmgyyr"]
 
-[ext_resource type="Script" uid="uid://br0gn5w4fyli0" path="res://scripts/target.gd" id="1_b5a2r"]
-[ext_resource type="Texture2D" uid="uid://c5dpq2y5noq0j" path="res://assets/sprites/Tiny Swords (Free Pack)/Buildings/Black Buildings/Tower.png" id="1_b37e2"]
+[ext_resource type="Script" uid="uid://br0gn5w4fyli0" path="res://Scripts/target.gd" id="1_b5a2r"]
+[ext_resource type="Texture2D" uid="uid://c5dpq2y5noq0j" path="res://Assets/Sprites/Tiny Swords (Free Pack)/Buildings/Black Buildings/Tower.png" id="1_b37e2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b5a2r"]
 animations = [{

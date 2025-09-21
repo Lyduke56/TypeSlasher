@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c12rqorndapat"]
+
+[ext_resource type="Texture2D" uid="uid://cd3i6n24q1tib" path="res://Assets/Sprites/Tiny Swords (Free Pack)/Terrain/Water_FlatGround_#2_(12frames).png" id="1_a4qki"]
+
+[node name="MapLine" type="Line2D"]
+texture_repeat = 2
+texture = ExtResource("1_a4qki")
+texture_mode = 1

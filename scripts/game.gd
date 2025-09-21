@@ -52,13 +52,15 @@ func _process(_delta):
 	# Process input buffer one character per frame for high WPM handling
 	if not input_buffer.is_empty() and not is_processing_completion:
 		update_score() #new high score thing will replace if necessary
+		if has_node("res://MapManager.gd"): # ->checking the score threshold thingy<-
+			get_node("res://MapManager.gd").check_progress()
 		var key_typed = input_buffer.pop_front()
 		_process_single_character(key_typed)
 
 func update_score():
 	Global.previous_score = Global.current_score
 	if Global.current_score > Global.high_score:
-		Global.high_score = Global.current_score
+		Global.high_score = Global.current_scorenovel
 
 
 func get_unique_word() -> String:
@@ -116,7 +118,7 @@ func spawn_enemy():
 
 	_toggle = not _toggle
 	if _toggle:
-		spawn_buff()
+		#spawn_buff()
 		return
 
 	# Wait one frame to ensure the node is fully in the scene tree
