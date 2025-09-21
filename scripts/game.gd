@@ -4,7 +4,6 @@ extends Node2D
 @onready var target_container = $TargetContainer
 @onready var buff_timer: Timer = $Buff_Timer
 @onready var spawn_timer: Timer = $Timer
-@onready var buff_timer: Timer = $Buff_Timer
 @onready var player = $Player  # Add reference to player
 @onready var target = $TargetContainer
 
@@ -50,17 +49,12 @@ func _ready() -> void:
 	spawn_target()
 
 	# Connect timer signal and configure
-	spawn_timer.wait_time = 4  # Spawn every 2.5 seconds
+	spawn_timer.wait_time = 3  # Spawn every 3 seconds
 	spawn_timer.start()
 	spawn_timer.timeout.connect(spawn_enemy)
-	
-	# Connect timer signal and configure
-	buff_timer.wait_time = 10  # Spawn every 2.5 seconds
-	buff_timer.start()
-	buff_timer.timeout.connect(spawn_buff)
 
-# Connect timer signal and configure
-	buff_timer.wait_time = 10  # Spawn every 2.5 seconds
+	# Connect timer signal and configure
+	buff_timer.wait_time = 10  # Spawn every 10 seconds
 	buff_timer.start()
 	buff_timer.timeout.connect(spawn_buff)
 
@@ -349,6 +343,7 @@ func spawn_buff() -> void:
 
 	# Add to the SAME container so your input/selection loop can target it
 	buff_container.add_child(buff_instance)
+	total_buffs_spawned += 1
 
 	print("Spawned buff at ", pos, " with word: ", w)
 
