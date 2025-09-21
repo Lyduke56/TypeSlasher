@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://haf6hysmkrc7"
-path="res://.godot/imported/Soldier-Attack01_Effect.png-f2ea94d9720facf47b92b7d6bfb68903.ctex"
+path="res://.godot/imported/Soldier-Attack01_Effect.png-62270470964d42b27a6a19dafb6ba9dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Soldier/Soldier(Split Effects)/Soldier-Attack01_Effect.png"
-dest_files=["res://.godot/imported/Soldier-Attack01_Effect.png-f2ea94d9720facf47b92b7d6bfb68903.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Soldier/Soldier(Split Effects)/Soldier-Attack01_Effect.png"
+dest_files=["res://.godot/imported/Soldier-Attack01_Effect.png-62270470964d42b27a6a19dafb6ba9dc.ctex"]
 
 [params]
 

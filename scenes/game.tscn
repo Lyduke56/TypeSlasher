@@ -1,13 +1,13 @@
 [gd_scene load_steps=15 format=4 uid="uid://btrhod848g6q"]
 
-[ext_resource type="Script" uid="uid://e3wfi17cwkqa" path="res://scripts/game.gd" id="1_iywne"]
-[ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://scenes/player.tscn" id="1_uwrxv"]
-[ext_resource type="Texture2D" uid="uid://b4lopj71ao0q8" path="res://assets/Map Tiles/Tileset/Extras/texture.png" id="5_ir15t"]
-[ext_resource type="PackedScene" uid="uid://bphv0yr26jjg" path="res://scenes/tile_map_layer_2.tscn" id="5_p57ef"]
-[ext_resource type="Script" uid="uid://b5kpp21ay8abs" path="res://scenes/current_score_label.gd" id="6_1l0tm"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="6_gee14"]
-[ext_resource type="Script" uid="uid://cbtgswhpnotg2" path="res://scripts/timer.gd" id="6_p57ef"]
-[ext_resource type="Texture2D" uid="uid://dgtu1g8ffnbv1" path="res://assets/Map Tiles/Tileset/Seasonal/spring.png" id="8_ssvqc"]
+[ext_resource type="Script" uid="uid://e3wfi17cwkqa" path="res://Scripts/game.gd" id="1_iywne"]
+[ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://Scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="Texture2D" uid="uid://b4lopj71ao0q8" path="res://Assets/Map Tiles/Tileset/Extras/texture.png" id="5_ir15t"]
+[ext_resource type="PackedScene" uid="uid://bphv0yr26jjg" path="res://Scenes/tile_map_layer_2.tscn" id="5_p57ef"]
+[ext_resource type="Script" uid="uid://b5kpp21ay8abs" path="res://Scenes/current_score_label.gd" id="6_1l0tm"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="6_gee14"]
+[ext_resource type="Script" uid="uid://cbtgswhpnotg2" path="res://Scripts/timer.gd" id="6_p57ef"]
+[ext_resource type="Texture2D" uid="uid://dgtu1g8ffnbv1" path="res://Assets/Map Tiles/Tileset/Seasonal/spring.png" id="8_ssvqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("8_ssvqc")
@@ -58,33 +58,6 @@ texture = ExtResource("5_ir15t")
 sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 sources/1 = SubResource("TileSetAtlasSource_iywne")
 
-[sub_resource type="Animation" id="Animation_gee14"]
-resource_name = "fade_in_to_game"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../AnimationPlayer/ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(-0.0333333, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../AnimationPlayer/ColorRect:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
 [sub_resource type="Animation" id="Animation_0tnpc"]
 length = 0.001
 tracks/0/type = "value"
@@ -110,6 +83,33 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gee14"]
+resource_name = "fade_in_to_game"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimationPlayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AnimationPlayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vtaks"]

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dy18nq6uxpwe4"
-path="res://.godot/imported/Slime-Shadow_walk.png-ffbe973fe75952e85890e180a5059157.ctex"
+path="res://.godot/imported/Slime-Shadow_walk.png-d869e7dc7f3cad481edda646ee928477.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Slime/Slime/Shadow sprites/Slime-Shadow_walk.png"
-dest_files=["res://.godot/imported/Slime-Shadow_walk.png-ffbe973fe75952e85890e180a5059157.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Slime/Slime/Shadow sprites/Slime-Shadow_walk.png"
+dest_files=["res://.godot/imported/Slime-Shadow_walk.png-d869e7dc7f3cad481edda646ee928477.ctex"]
 
 [params]
 

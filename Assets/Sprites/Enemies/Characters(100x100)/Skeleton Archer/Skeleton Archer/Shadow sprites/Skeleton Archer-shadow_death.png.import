@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://caf076l0b76in"
-path="res://.godot/imported/Skeleton Archer-shadow_death.png-e53a72f871618487a020be157123335a.ctex"
+path="res://.godot/imported/Skeleton Archer-shadow_death.png-7b189ef0ca0671ae6072f9a9944917dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer/Shadow sprites/Skeleton Archer-shadow_death.png"
-dest_files=["res://.godot/imported/Skeleton Archer-shadow_death.png-e53a72f871618487a020be157123335a.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer/Shadow sprites/Skeleton Archer-shadow_death.png"
+dest_files=["res://.godot/imported/Skeleton Archer-shadow_death.png-7b189ef0ca0671ae6072f9a9944917dc.ctex"]
 
 [params]
 

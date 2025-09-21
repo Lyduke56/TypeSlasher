@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dleci1sptix0g"
-path="res://.godot/imported/Elite Orc-Attack02.png-c5bbdb040ecdd0234800b4fa12c97dd3.ctex"
+path="res://.godot/imported/Elite Orc-Attack02.png-786d32fe4a3914c05ae3f5a2859b2285.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Elite Orc/Elite Orc with shadows/Elite Orc-Attack02.png"
-dest_files=["res://.godot/imported/Elite Orc-Attack02.png-c5bbdb040ecdd0234800b4fa12c97dd3.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Elite Orc/Elite Orc with shadows/Elite Orc-Attack02.png"
+dest_files=["res://.godot/imported/Elite Orc-Attack02.png-786d32fe4a3914c05ae3f5a2859b2285.ctex"]
 
 [params]
 
