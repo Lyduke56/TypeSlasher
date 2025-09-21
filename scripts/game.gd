@@ -2,6 +2,7 @@ extends Node2D
 @onready var buff_container = $BuffContainer
 @onready var enemy_container = $EnemyContainer
 @onready var target_container = $TargetContainer
+@onready var portal_container = $PortalContainer
 @onready var buff_timer: Timer = $Buff_Timer
 @onready var spawn_timer: Timer = $Timer
 @onready var player = $Player  # Add reference to player
@@ -12,6 +13,7 @@ var current_letter_index: int = -1
 var EnemyScene = preload("res://scenes/Orc_enemy.tscn")
 var BuffScene = preload("res://scenes/Buff.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
+var PortalScene = preload("res://scenes/GreenPortal.tscn")
 var _toggle := false
 var pause_layer: CanvasLayer
 var pause_overlay: Control
@@ -190,11 +192,14 @@ func find_new_active_enemy(typed_character: String):
 	if is_processing_completion:
 		return
 
-	# Check both enemy_container and buff_container for targetable entities
-	for container in [enemy_container, buff_container]:
+	# Check enemy_container, buff_container, and portal_container for targetable entities
+	for container in [enemy_container, buff_container, portal_container]:
 		for entity in container.get_children():
-			# Skip entities that are already being targeted or invalid
-			if not is_instance_valid(entity) or entity.is_being_targeted:
+			# Skip invalid entities or entities that don't have typing interface
+			if not is_instance_valid(entity) or not entity.has_method("get_prompt"):
+				continue
+			# Skip entities that are already being targeted
+			if entity.get("is_being_targeted") == true:
 				continue
 
 			var prompt = entity.get_prompt()
@@ -221,8 +226,9 @@ func _complete_word():
 	print("Word completed! Entity at: ", entity_position)
 
 	# Atomically update all state
-	completed_entity.is_being_targeted = true
-	completed_entity.set_targeted_state(true)
+	if completed_entity.has_method("set_targeted_state"):
+		completed_entity.set("is_being_targeted", true)
+		completed_entity.set_targeted_state(true)
 
 	active_enemy = null
 	current_letter_index = -1
@@ -230,11 +236,15 @@ func _complete_word():
 	# Clear input buffer of any remaining inputs
 	input_buffer.clear()
 
-	# Handle completion differently for buffs vs enemies
+	# Handle completion differently for buffs vs enemies vs portals
 	if completed_entity.get_parent() == buff_container:
 		# For buffs, just play death animation immediately (no dash needed)
 		print("Buff completed! Triggering buff collection.")
 		completed_entity.play_death_animation()
+	elif completed_entity.get_parent() == portal_container:
+		# For portals, dash to portal and change scene
+		print("Portal completed! Player dashing to portal and changing scene.")
+		player.dash_to_portal(entity_position, completed_entity)
 	else:
 		# For enemies, trigger dash to enemy
 		print("Enemy completed! Player dashing to enemy.")
@@ -257,6 +267,50 @@ func _on_player_slash_completed(enemy):
 	if enemy != null and is_instance_valid(enemy):
 		enemy.play_death_animation()
 
+	# Check for zone completion after enemy death
+	check_zone_completion()
+
+func check_zone_completion():
+	"""Check if all enemies are defeated and spawn portals"""
+	print("Checking zone completion: total_enemies_spawned=", total_enemies_spawned, " max_enemies=", max_enemies, " enemy_count=", enemy_container.get_child_count())
+	if total_enemies_spawned >= max_enemies and enemy_container.get_child_count() == 0:
+		print("Zone cleared! Spawning portals.")
+		spawn_portals()
+	else:
+		# If close to completion, check again after a delay
+		if total_enemies_spawned >= max_enemies and enemy_container.get_child_count() <= 1:
+			print("Almost cleared, checking again in 1 second.")
+			await get_tree().create_timer(1.0).timeout
+			check_zone_completion()
+
+func spawn_portals():
+	"""Spawn 3 portals at predefined positions for zone transition"""
+	await get_tree().create_timer(1.0).timeout
+	var portal_nodes = [$PortalContainer/Top, $PortalContainer/Left, $PortalContainer/Right]
+
+	for i in range(3):
+		var portal_instance = PortalScene.instantiate()
+		portal_instance.position = portal_nodes[i].position
+		portal_instance.z_index = 8
+		portal_instance.portal_index = i
+		portal_instance.portal_selected.connect(_on_portal_selected)
+		$PortalContainer.add_child(portal_instance)
+		portal_instance.play_appear_animation()
+		print("Spawned portal ", i + 1, " at position: ", portal_nodes[i].position)
+
+func _on_portal_selected(portal_index: int):
+	"""Handle portal selection for zone transition"""
+	print("Portal ", portal_index + 1, " selected! Transitioning to next zone.")
+	# For now, just clean up portals
+	cleanup_portals()
+
+func cleanup_portals():
+	"""Remove all portals from the scene"""
+	for portal in $PortalContainer.get_children():
+		if portal.has_method("play_disappear_animation"):
+			portal.play_disappear_animation()
+	# Wait a bit for animations, but since they queue_free, maybe not needed
+
 func _process_single_character(key_typed: String):
 	"""Process one character at a time to handle high WPM"""
 	if is_processing_completion:
@@ -267,7 +321,7 @@ func _process_single_character(key_typed: String):
 		return
 
 	# Validate current enemy
-	if not is_instance_valid(active_enemy) or active_enemy.is_being_targeted:
+	if not is_instance_valid(active_enemy) or not active_enemy.has_method("get_prompt") or active_enemy.get("is_being_targeted") == true:
 		active_enemy = null
 		current_letter_index = -1
 		find_new_active_enemy(key_typed)
@@ -288,7 +342,7 @@ func _process_single_character(key_typed: String):
 		current_letter_index += 1
 
 		# Update visual feedback
-		if is_instance_valid(active_enemy) and not active_enemy.is_being_targeted:
+		if is_instance_valid(active_enemy) and active_enemy.get("is_being_targeted") != true:
 			active_enemy.set_next_character(current_letter_index)
 
 		# Check completion

@@ -23,6 +23,7 @@ var is_attacking: bool = false
 var target_position: Vector2
 var combo_active: bool = false
 var target_enemy = null
+var target_portal = null
 var current_dash_speed: float = 600.0  # Will be calculated dynamically
 var base_animation_speed: float = 1.0
 var fast_animation_speed: float = 5.0  # 3x faster when typing quickly
@@ -34,6 +35,9 @@ func _ready() -> void:
 	# Set center position (you can adjust this based on your scene)
 	center_position = Vector2.ZERO
 	global_position = center_position
+
+	# Add to player group for portal detection
+	add_to_group("player")
 
 	# Setup combo timer
 	add_child(combo_timer)
@@ -112,6 +116,7 @@ func dash_to_enemy(enemy_position: Vector2, enemy_ref = null) -> void:
 
 	target_position = enemy_position
 	target_enemy = enemy_ref
+	target_portal = null  # Clear portal reference
 
 	# Calculate dynamic dash speed based on distance
 	var distance_to_enemy = global_position.distance_to(enemy_position)
@@ -123,8 +128,36 @@ func dash_to_enemy(enemy_position: Vector2, enemy_ref = null) -> void:
 	anim.play("run")
 	print("Player dashing to: ", enemy_position, " at speed: ", current_dash_speed)
 
+func dash_to_portal(portal_position: Vector2, portal_ref = null) -> void:
+	anim.speed_scale = base_animation_speed
+	if is_returning:
+		combo_timer.stop()
+
+	target_position = portal_position
+	target_portal = portal_ref
+	target_enemy = null  # Clear enemy reference
+
+	# Calculate dynamic dash speed based on distance
+	var distance_to_portal = global_position.distance_to(portal_position)
+	current_dash_speed = calculate_dash_speed(distance_to_portal)
+	is_dashing = true
+	is_returning = false
+	is_attacking = false
+	# Play dash animation
+	anim.play("run")
+	print("Player dashing to portal: ", portal_position, " at speed: ", current_dash_speed)
+
 func _finish_dash() -> void:
 	is_dashing = false
+
+	if target_portal != null:
+		# For portals, change scene immediately
+		print("Reached portal! Changing scene to Dungeon-1")
+		get_tree().change_scene_to_file("res://scenes/Rooms/Dungeon-1.tscn")
+		target_portal = null  # Clear reference
+		return
+
+	# For enemies, attack
 	is_attacking = true
 	combo_active = true
 	combo_timer.start()
@@ -132,7 +165,7 @@ func _finish_dash() -> void:
 	# Play random attack animation
 	var attack_num = randi() % 3 + 1
 	anim.play("attack_" + str(attack_num))
-	
+
 	# Kill the enemy with a short delay (e.g., 0.3 seconds) regardless of animation
 	if target_enemy != null:
 		var enemy_to_kill = target_enemy
@@ -175,6 +208,10 @@ func _on_attack_finished() -> void:
 	# Return to idle animation
 	anim.play("idle")
 	print("Attack animation finished - returning to idle")
+
+	# If combo has expired, return to center
+	if not combo_active:
+		_return_to_center()
 
 func _on_combo_timeout() -> void:
 	if not is_dashing and not is_attacking:  # Don't return if we're dashing or attacking
