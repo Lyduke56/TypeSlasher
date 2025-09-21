@@ -11,5 +11,14 @@ config_version=5
 [application]
 
 config/name="TypeSlasher"
+run/main_scene="uid://btrhod848g6q"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://global.gd"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=3

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://28xk36nmgyyr"]
+
+[ext_resource type="Script" uid="uid://br0gn5w4fyli0" path="res://scripts/target.gd" id="1_b5a2r"]
+[ext_resource type="Texture2D" uid="uid://c5dpq2y5noq0j" path="res://assets/sprites/Tiny Swords (Free Pack)/Buildings/Black Buildings/Tower.png" id="1_b37e2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b5a2r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_b37e2")
+}],
+"loop": false,
+"name": &"Tower",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlbrr"]
+size = Vector2(105, 180.5)
+
+[node name="Target" type="Node2D"]
+z_index = 1
+script = ExtResource("1_b5a2r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_b5a2r")
+animation = &"Tower"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 33)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -15.25)
+shape = SubResource("RectangleShape2D_nlbrr")
