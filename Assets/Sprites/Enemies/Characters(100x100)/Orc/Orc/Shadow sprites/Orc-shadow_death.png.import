@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dhf6d0v22rugd"
-path="res://.godot/imported/Orc-shadow_death.png-70c7e84e782ab624c68f1b1933394c63.ctex"
+path="res://.godot/imported/Orc-shadow_death.png-5dd971024baec76416e50d3daad81c29.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Orc/Orc/Shadow sprites/Orc-shadow_death.png"
-dest_files=["res://.godot/imported/Orc-shadow_death.png-70c7e84e782ab624c68f1b1933394c63.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Orc/Orc/Shadow sprites/Orc-shadow_death.png"
+dest_files=["res://.godot/imported/Orc-shadow_death.png-5dd971024baec76416e50d3daad81c29.ctex"]
 
 [params]
 
