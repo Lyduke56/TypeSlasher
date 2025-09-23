@@ -15,8 +15,7 @@ var BuffScene = preload("res://scenes/Buff.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
 var PortalScene = preload("res://scenes/GreenPortal.tscn")
 var _toggle := false
-var pause_layer: CanvasLayer
-var pause_overlay: Control
+var pause_ui: Control
 
 # Total spawn limits
 var max_enemies = 5
@@ -39,8 +38,22 @@ var spawn_radius: float = 600.0  # Distance from center to spawn enemies
 
 func _ready() -> void:
 	$AnimationPlayer.play("fade_in_to_game")
-	_build_pause_overlay()
+	# Use custom UI pause menu instead of simple overlay
+	var ui_scene: PackedScene = preload("res://Scenes/GUI/UI.tscn")
+	pause_ui = ui_scene.instantiate()
+	add_child(pause_ui)
+	# Ensure it and all children work while paused
+	_set_node_tree_process_mode(pause_ui, Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED)
+	# Bring UI to front
+	if pause_ui is CanvasItem:
+		(pause_ui as CanvasItem).z_index = 4096
+	pause_ui.visible = false
+	# Connect resume signal
+	if pause_ui.has_signal("request_resume_game"):
+		pause_ui.connect("request_resume_game", Callable(self, "_resume_game"))
 	WordDatabase.load_word_database()
+	# Reset WPM session at game start
+	Global.wpm_reset()
 
 	# Test the word database
 	print("Testing word database:")
@@ -339,6 +352,8 @@ func _process_single_character(key_typed: String):
 	var next_character = prompt.substr(current_letter_index, 1)
 	if key_typed == next_character:
 		print("Success! Typed:", key_typed, " Expected:", next_character)
+		# Count one correct character for WPM
+		Global.wpm_note_correct_characters(1)
 		current_letter_index += 1
 
 		# Update visual feedback
@@ -403,49 +418,23 @@ func spawn_buff() -> void:
 	print("Spawned buff at ", pos, " with word: ", w)
 
 
-func _build_pause_overlay() -> void:
-	pause_layer = CanvasLayer.new()
-	add_child(pause_layer)
-
-	# Make the layer and overlay process while paused
-	pause_layer.process_mode = Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED
-
-	pause_overlay = Control.new()
-	pause_overlay.name = "PauseOverlay"
-	pause_overlay.process_mode = Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED  # <— was pause_mode
-	pause_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
-	pause_overlay.anchor_left = 0.0
-	pause_overlay.anchor_top = 0.0
-	pause_overlay.anchor_right = 1.0
-	pause_overlay.anchor_bottom = 1.0
-	pause_overlay.visible = false
-	pause_layer.add_child(pause_overlay)
-
-	var dim := ColorRect.new()
-	dim.color = Color(0, 0, 0, 0.5)
-	dim.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	dim.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	pause_overlay.add_child(dim)
-
-	var label := Label.new()
-	label.text = "Paused — Click to continue"
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.anchor_left = 0.0
-	label.anchor_top = 0.0
-	label.anchor_right = 1.0
-	label.anchor_bottom = 1.0
-	pause_overlay.add_child(label)
-
-	pause_overlay.gui_input.connect(func(e):
-		if e is InputEventMouseButton and e.pressed:
-			_resume_game()
-	)
-
 func _pause_game() -> void:
 	get_tree().paused = true
-	pause_overlay.visible = true
+	if pause_ui:
+		pause_ui.visible = true
+		pause_ui.grab_focus()
+	# Inform WPM tracker
+	Global.wpm_on_pause()
 
 func _resume_game() -> void:
 	get_tree().paused = false
-	pause_overlay.visible = false
+	if pause_ui:
+		pause_ui.visible = false
+	# Inform WPM tracker
+	Global.wpm_on_resume()
+
+func _set_node_tree_process_mode(node: Node, mode: Node.ProcessMode) -> void:
+	# Recursively set process mode for a subtree so input works while paused
+	node.process_mode = mode
+	for child in node.get_children():
+		_set_node_tree_process_mode(child, mode)
