@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://62p58c3l650e"
-path="res://.godot/imported/Purple_Portal_Sprite_Sheet.png-8406c0d3807d88c716ce0bace74e4a5a.ctex"
+uid="uid://bxbciwx4rffsj"
+path="res://.godot/imported/Dungeon_Autotiles.png-2e95ecde1b3bf847fac3fc9c5ac112f0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Portals/Purple_Portal_Sprite_Sheet.png"
-dest_files=["res://.godot/imported/Purple_Portal_Sprite_Sheet.png-8406c0d3807d88c716ce0bace74e4a5a.ctex"]
+source_file="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_Autotiles.png"
+dest_files=["res://.godot/imported/Dungeon_Autotiles.png-2e95ecde1b3bf847fac3fc9c5ac112f0.ctex"]
 
 [params]
 

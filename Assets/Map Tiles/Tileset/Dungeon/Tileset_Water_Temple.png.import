@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://62p58c3l650e"
-path="res://.godot/imported/Purple_Portal_Sprite_Sheet.png-8406c0d3807d88c716ce0bace74e4a5a.ctex"
+uid="uid://nimcngt6erc0"
+path="res://.godot/imported/Tileset_Water_Temple.png-e137dcc8da4c6fbec6ecb29d3ff80b1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Portals/Purple_Portal_Sprite_Sheet.png"
-dest_files=["res://.godot/imported/Purple_Portal_Sprite_Sheet.png-8406c0d3807d88c716ce0bace74e4a5a.ctex"]
+source_file="res://Assets/Map Tiles/Tileset/Dungeon/Tileset_Water_Temple.png"
+dest_files=["res://.godot/imported/Tileset_Water_Temple.png-e137dcc8da4c6fbec6ecb29d3ff80b1b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://62p58c3l650e"
-path="res://.godot/imported/Purple_Portal_Sprite_Sheet.png-8406c0d3807d88c716ce0bace74e4a5a.ctex"
+uid="uid://c3ytj82ayrhso"
+path="res://.godot/imported/Dungeon_SandDecorationsC.png-68a79f2fb3c8b6366e490bed0c17c633.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Portals/Purple_Portal_Sprite_Sheet.png"
-dest_files=["res://.godot/imported/Purple_Portal_Sprite_Sheet.png-8406c0d3807d88c716ce0bace74e4a5a.ctex"]
+source_file="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_SandDecorationsC.png"
+dest_files=["res://.godot/imported/Dungeon_SandDecorationsC.png-68a79f2fb3c8b6366e490bed0c17c633.ctex"]
 
 [params]
 

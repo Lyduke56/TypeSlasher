@@ -31,7 +31,7 @@ var is_processing_completion: bool = false
 var input_buffer: Array[String] = []
 
 # Word categories for different difficulty levels
-var current_category = "medium"  # Can be: easy, medium, hard, typo, sentence, casing
+var current_category = "hard"  # Can be: easy, medium, hard, typo, sentence, casing
 
 # Word uniqueness system
 var word_history: Array[String] = []  # Track order of words used
