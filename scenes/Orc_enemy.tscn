@@ -1,9 +1,9 @@
 [gd_scene load_steps=41 format=3 uid="uid://ivgoec3n72vd"]
 
-[ext_resource type="Texture2D" uid="uid://dh1uc0yyct2li" path="res://Assets/Sprites/Placeholders/placeholder_orc.png" id="1_6ckqv"]
+[ext_resource type="Texture2D" uid="uid://dh1uc0yyct2li" path="res://assets/sprites/Placeholders/placeholder_orc.png" id="1_6ckqv"]
 [ext_resource type="Script" uid="uid://m8m0o7d21tya" path="res://Scripts/orc_enemy.gd" id="1_v8qg3"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_id7kl"]
-[ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://Assets/Themes/Outline.tres" id="3_8fdps"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_id7kl"]
+[ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://assets/Themes/Outline.tres" id="3_8fdps"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_prrqk"]
 atlas = ExtResource("1_6ckqv")

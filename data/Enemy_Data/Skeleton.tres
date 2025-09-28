@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyData" load_steps=10 format=3 uid="uid://cobaill6vere2"]
 
 [ext_resource type="Script" uid="uid://d1j7ls21xq45s" path="res://Scripts/EnemyData.gd" id="1_1toeg"]
-[ext_resource type="Texture2D" uid="uid://b6vdqjyluwn5j" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton-Idle.png" id="2_1toeg"]
+[ext_resource type="Texture2D" uid="uid://b6vdqjyluwn5j" path="res://assets/sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton-Idle.png" id="2_1toeg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1toeg"]
 atlas = ExtResource("2_1toeg")

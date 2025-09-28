@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyData" load_steps=10 format=3 uid="uid://diuqds3i6ubm7"]
 
 [ext_resource type="Script" uid="uid://d1j7ls21xq45s" path="res://Scripts/EnemyData.gd" id="1_i5ppa"]
-[ext_resource type="Texture2D" uid="uid://d10suksg1bio6" path="res://Assets/Sprites/Enemies/Characters(100x100)/Orc/Orc/Orc-Idle.png" id="2_twuna"]
+[ext_resource type="Texture2D" uid="uid://d10suksg1bio6" path="res://assets/sprites/Enemies/Characters(100x100)/Orc/Orc/Orc-Idle.png" id="2_twuna"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_afjf3"]
 atlas = ExtResource("2_twuna")
