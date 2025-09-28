@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dhnyerqf6qym8"
-path="res://.godot/imported/Lancer-Walk01.png-316d7336ba1c9aeef6516e6336395bcc.ctex"
+path="res://.godot/imported/Lancer-Walk01.png-1e41b68d5a44a52c5fd638495e23289b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Lancer/Lancer with shadows/Lancer-Walk01.png"
-dest_files=["res://.godot/imported/Lancer-Walk01.png-316d7336ba1c9aeef6516e6336395bcc.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Lancer/Lancer with shadows/Lancer-Walk01.png"
+dest_files=["res://.godot/imported/Lancer-Walk01.png-1e41b68d5a44a52c5fd638495e23289b.ctex"]
 
 [params]
 

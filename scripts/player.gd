@@ -64,14 +64,22 @@ func _physics_process(delta: float) -> void:
 
 func _handle_movement(delta: float) -> void:
 	var current_speed = current_dash_speed if is_dashing else return_speed
-	var direction = (target_position - global_position).normalized()
+
+	# Determine the actual target position (update if tracking an entity)
+	var target_pos = target_position
+	if target_enemy != null and is_instance_valid(target_enemy):
+		target_pos = target_enemy.global_position
+	elif target_portal != null and is_instance_valid(target_portal):
+		target_pos = target_portal.global_position
+
+	var direction = (target_pos - global_position).normalized()
 
 	# Update sprite direction and animation based on movement direction
 	_update_directional_animation(direction)
 
-	# Check if we've reached the target
-	if global_position.distance_to(target_position) < 10.0:
-		global_position = target_position
+	# Check if we've reached the target (use larger threshold to account for collision shapes)
+	if global_position.distance_to(target_pos) < 50.0:
+		global_position = target_pos
 
 		if is_dashing:
 			_finish_dash()

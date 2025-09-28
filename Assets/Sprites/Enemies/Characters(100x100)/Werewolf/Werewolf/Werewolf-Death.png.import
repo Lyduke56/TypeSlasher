@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ducv78teln2dv"
-path="res://.godot/imported/Werewolf-Death.png-67c45bd289ff2d5c416fb6a4e8241a28.ctex"
+path="res://.godot/imported/Werewolf-Death.png-0596e00b4cee64589fe3299d164ef46a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Werewolf/Werewolf/Werewolf-Death.png"
-dest_files=["res://.godot/imported/Werewolf-Death.png-67c45bd289ff2d5c416fb6a4e8241a28.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Werewolf/Werewolf/Werewolf-Death.png"
+dest_files=["res://.godot/imported/Werewolf-Death.png-0596e00b4cee64589fe3299d164ef46a.ctex"]
 
 [params]
 

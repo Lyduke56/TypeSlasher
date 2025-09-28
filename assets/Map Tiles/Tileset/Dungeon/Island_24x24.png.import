@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://xhy43jccxm0s"
-path="res://.godot/imported/Island_24x24.png-5a9f3db9d65776d5d0b1378c481fc6cd.ctex"
+path="res://.godot/imported/Island_24x24.png-be89dcd6d2704af84f55519356491978.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Map Tiles/Tileset/Dungeon/Island_24x24.png"
-dest_files=["res://.godot/imported/Island_24x24.png-5a9f3db9d65776d5d0b1378c481fc6cd.ctex"]
+source_file="res://assets/Map Tiles/Tileset/Dungeon/Island_24x24.png"
+dest_files=["res://.godot/imported/Island_24x24.png-be89dcd6d2704af84f55519356491978.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dxu308uprkr4w"
-path="res://.godot/imported/Knight-Attack03_Effect.png-4fca464ec09c7e7ed00a0838aac47c2d.ctex"
+path="res://.godot/imported/Knight-Attack03_Effect.png-ed3499715839a8f721f4d693bc38edbd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Knight/Knight(Split Effects)/Knight-Attack03_Effect.png"
-dest_files=["res://.godot/imported/Knight-Attack03_Effect.png-4fca464ec09c7e7ed00a0838aac47c2d.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Knight/Knight(Split Effects)/Knight-Attack03_Effect.png"
+dest_files=["res://.godot/imported/Knight-Attack03_Effect.png-ed3499715839a8f721f4d693bc38edbd.ctex"]
 
 [params]
 
