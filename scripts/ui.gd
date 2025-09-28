@@ -90,7 +90,15 @@ func set_description(data: EnemyData):
 		title_node.text = data.name
 	var icon_node = desc_panel.get_node("Icon")
 	if icon_node:
-		icon_node.texture = data.sprite
+		if icon_node is AnimatedSprite2D:
+			if data.sprite_frames:
+				icon_node.sprite_frames = data.sprite_frames
+				icon_node.animation = data.animation_name if data.animation_name else "idle "
+				icon_node.play()
+			else:
+				icon_node.stop()
+		elif icon_node is TextureRect:
+			icon_node.texture = data.static_sprite
 	var desc_node = desc_panel.get_node("Description")
 	if desc_node:
 		desc_node.text = data.description
