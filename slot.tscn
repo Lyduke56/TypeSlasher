@@ -14,6 +14,7 @@ layout_mode = 2
 texture = ExtResource("1_c24ra")
 
 [node name="ICON" type="TextureRect" parent="."]
+visible = false
 layout_mode = 2
 texture = ExtResource("3_hiqfk")
 expand_mode = 2

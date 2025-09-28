@@ -14,8 +14,10 @@ var EnemyScene = preload("res://scenes/Orc_enemy.tscn")
 var BuffScene = preload("res://scenes/Buff.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
 var PortalScene = preload("res://scenes/GreenPortal.tscn")
+var BuffSelectionScene = preload("res://BuffSelection.tscn")
 var _toggle := false
 var pause_ui: Control
+var buff_selection_ui: Control
 
 # Total spawn limits
 var max_enemies = 5
@@ -296,6 +298,28 @@ func check_zone_completion():
 			await get_tree().create_timer(1.0).timeout
 			check_zone_completion()
 
+func show_buff_selection():
+	"""Show the buff selection UI when level is completed"""
+	# Pause the game
+	get_tree().paused = true
+
+	# Create and show buff selection UI
+	buff_selection_ui = BuffSelectionScene.instantiate()
+	add_child(buff_selection_ui)
+
+	# Ensure it works while paused
+	_set_node_tree_process_mode(buff_selection_ui, Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED)
+
+	# Bring UI to front
+	if buff_selection_ui is CanvasItem:
+		(buff_selection_ui as CanvasItem).z_index = 4096
+
+	# Connect buff selection signal if it exists
+	if buff_selection_ui.has_signal("buff_selected"):
+		buff_selection_ui.connect("buff_selected", Callable(self, "_on_buff_selected"))
+
+	print("Buff selection UI shown!")
+
 func spawn_portals():
 	"""Spawn 3 portals at predefined positions for zone transition"""
 	await get_tree().create_timer(1.0).timeout
@@ -311,11 +335,49 @@ func spawn_portals():
 		portal_instance.play_appear_animation()
 		print("Spawned portal ", i + 1, " at position: ", portal_nodes[i].position)
 
+func _on_buff_selected(buff_index: int):
+	"""Handle buff selection (placeholder - just close UI for now)"""
+	print("Buff ", buff_index + 1, " selected! Closing buff selection.")
+
+	# Hide buff selection UI
+	if buff_selection_ui:
+		buff_selection_ui.queue_free()
+		buff_selection_ui = null
+
+	# Resume the game
+	get_tree().paused = false
+
 func _on_portal_selected(portal_index: int):
 	"""Handle portal selection for zone transition"""
 	print("Portal ", portal_index + 1, " selected! Transitioning to next zone.")
-	# For now, just clean up portals
+	# Clean up portals
 	cleanup_portals()
+
+func reset_level():
+	"""Reset the level for the next round"""
+	# Reset spawn counters
+	total_enemies_spawned = 0
+	total_buffs_spawned = 0
+
+	# Clear all containers
+	for child in enemy_container.get_children():
+		child.queue_free()
+	for child in buff_container.get_children():
+		child.queue_free()
+	for child in portal_container.get_children():
+		child.queue_free()
+
+	# Reset active enemy
+	active_enemy = null
+	current_letter_index = -1
+	input_buffer.clear()
+	is_processing_completion = false
+
+	# Restart timers
+	spawn_timer.start()
+	buff_timer.start()
+
+	print("Level reset for next round!")
 
 func cleanup_portals():
 	"""Remove all portals from the scene"""
