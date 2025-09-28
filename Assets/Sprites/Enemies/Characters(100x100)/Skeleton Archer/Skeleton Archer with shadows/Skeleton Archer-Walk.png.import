@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkxfv5lvnxyx3"
-path="res://.godot/imported/Skeleton Archer-Walk.png-6fc27eb85100037288ad20d9bf597e38.ctex"
+path="res://.godot/imported/Skeleton Archer-Walk.png-03fd1a3f0187bd9b0b2e054c079094ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer with shadows/Skeleton Archer-Walk.png"
-dest_files=["res://.godot/imported/Skeleton Archer-Walk.png-6fc27eb85100037288ad20d9bf597e38.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer with shadows/Skeleton Archer-Walk.png"
+dest_files=["res://.godot/imported/Skeleton Archer-Walk.png-03fd1a3f0187bd9b0b2e054c079094ef.ctex"]
 
 [params]
 

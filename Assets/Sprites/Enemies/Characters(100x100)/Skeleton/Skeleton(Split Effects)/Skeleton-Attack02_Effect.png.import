@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b62ulskohv7a0"
-path="res://.godot/imported/Skeleton-Attack02_Effect.png-ab124342775fe942b75b63426f6d040e.ctex"
+path="res://.godot/imported/Skeleton-Attack02_Effect.png-680cb5d53e990546c43de335753286fd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Skeleton/Skeleton(Split Effects)/Skeleton-Attack02_Effect.png"
-dest_files=["res://.godot/imported/Skeleton-Attack02_Effect.png-ab124342775fe942b75b63426f6d040e.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton/Skeleton(Split Effects)/Skeleton-Attack02_Effect.png"
+dest_files=["res://.godot/imported/Skeleton-Attack02_Effect.png-680cb5d53e990546c43de335753286fd.ctex"]
 
 [params]
 

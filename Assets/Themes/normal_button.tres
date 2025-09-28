@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://dx6raqafay30m"]
 
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="1_8rwmv"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="1_8rwmv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8rwmv"]
 content_margin_left = 4.0
