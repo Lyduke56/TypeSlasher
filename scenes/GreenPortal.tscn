@@ -1,8 +1,8 @@
 [gd_scene load_steps=28 format=3 uid="uid://b4o3t4arf1fch"]
 
-[ext_resource type="Texture2D" uid="uid://uc5o78l6li7g" path="res://assets/sprites/Portals/Green_Portal_Sprite_Sheet.png" id="1_fct30"]
-[ext_resource type="Script" uid="uid://dkoe3xk6t0r8a" path="res://scripts/green_portal.gd" id="1_v3wd8"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_18xy4"]
+[ext_resource type="Texture2D" uid="uid://uc5o78l6li7g" path="res://Assets/Sprites/Portals/Green_Portal_Sprite_Sheet.png" id="1_fct30"]
+[ext_resource type="Script" uid="uid://dkoe3xk6t0r8a" path="res://Scripts/green_portal.gd" id="1_v3wd8"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_18xy4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_18sqd"]
 atlas = ExtResource("1_fct30")
@@ -121,7 +121,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"appear",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -144,7 +144,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"dissappear",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -173,7 +173,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_50kok"]
@@ -188,7 +188,8 @@ script = ExtResource("1_v3wd8")
 position = Vector2(-0.999992, -1)
 scale = Vector2(2.51563, 2.79688)
 sprite_frames = SubResource("SpriteFrames_4fvjr")
-animation = &"dissappear"
+animation = &"idle"
+frame_progress = 0.172785
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
 

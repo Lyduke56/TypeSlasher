@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=4 uid="uid://cb5s8mxamhmv7"]
 
-[ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://Scenes/player.tscn" id="1_i0ilx"]
-[ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://Assets/Map Tiles/Tileset/Dungeon/decor.png" id="2_ft4qk"]
-[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_qrpcx"]
-[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_6wyqo"]
+[ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://scenes/player.tscn" id="1_i0ilx"]
+[ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://assets/Map Tiles/Tileset/Dungeon/decor.png" id="2_ft4qk"]
+[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_qrpcx"]
+[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_6wyqo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2icd"]
 texture = ExtResource("2_ft4qk")
@@ -1421,6 +1421,7 @@ sources/2 = SubResource("TileSetAtlasSource_qrpcx")
 
 [node name="Player" parent="." instance=ExtResource("1_i0ilx")]
 z_index = 10
+scale = Vector2(0.655, 0.655)
 
 [node name="Node" type="Node" parent="."]
 
