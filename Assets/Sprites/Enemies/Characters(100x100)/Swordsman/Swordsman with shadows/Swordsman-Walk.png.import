@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cvpxw020w5fpb"
-path="res://.godot/imported/Swordsman-Walk.png-b63a7538e7afe1babf80bbe4ae6d9bda.ctex"
+path="res://.godot/imported/Swordsman-Walk.png-9ae7787bd8496adbe5abee73d7f38250.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Swordsman/Swordsman with shadows/Swordsman-Walk.png"
-dest_files=["res://.godot/imported/Swordsman-Walk.png-b63a7538e7afe1babf80bbe4ae6d9bda.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Swordsman/Swordsman with shadows/Swordsman-Walk.png"
+dest_files=["res://.godot/imported/Swordsman-Walk.png-9ae7787bd8496adbe5abee73d7f38250.ctex"]
 
 [params]
 

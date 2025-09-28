@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://baruc4ma8usgu"
-path="res://.godot/imported/wood_panel.png-b6fd072cd339ec8c4e29a773be22654a.ctex"
+path="res://.godot/imported/wood_panel.png-bceb3dc7739454f5f71c565c57062f85.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/GUI/wood_panel.png"
-dest_files=["res://.godot/imported/wood_panel.png-b6fd072cd339ec8c4e29a773be22654a.ctex"]
+source_file="res://assets/sprites/GUI/wood_panel.png"
+dest_files=["res://.godot/imported/wood_panel.png-bceb3dc7739454f5f71c565c57062f85.ctex"]
 
 [params]
 

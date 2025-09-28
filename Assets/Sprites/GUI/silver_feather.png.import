@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dv0xhkid1l24b"
-path="res://.godot/imported/silver_feather.png-e01e267ae3633b190392dcb30c3d8d31.ctex"
+path="res://.godot/imported/silver_feather.png-391034d4862441a2171d5efab71bf290.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/GUI/silver_feather.png"
-dest_files=["res://.godot/imported/silver_feather.png-e01e267ae3633b190392dcb30c3d8d31.ctex"]
+source_file="res://assets/sprites/GUI/silver_feather.png"
+dest_files=["res://.godot/imported/silver_feather.png-391034d4862441a2171d5efab71bf290.ctex"]
 
 [params]
 

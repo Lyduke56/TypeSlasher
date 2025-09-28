@@ -7,6 +7,8 @@ extends Node2D
 @onready var spawn_timer: Timer = $Timer
 @onready var player = $Player  # Add reference to player
 @onready var target = $TargetContainer
+@onready var heart_container = $CanvasLayer/HeartContainer
+
 
 var active_enemy = null
 var current_letter_index: int = -1
@@ -31,7 +33,7 @@ var is_processing_completion: bool = false
 var input_buffer: Array[String] = []
 
 # Word categories for different difficulty levels
-var current_category = "sentence"  # Can be: easy, medium, hard, typo, sentence, casing
+var current_category = "medium"  # Can be: easy, medium, hard, typo, sentence, casing
 
 # Word uniqueness system
 var word_history: Array[String] = []  # Track order of words used
@@ -44,6 +46,8 @@ func _ready() -> void:
 	var ui_scene: PackedScene = preload("res://Scenes/GUI/UI.tscn")
 	pause_ui = ui_scene.instantiate()
 	add_child(pause_ui)
+	
+	heart_container.setMaxhearts(3)
 	# Ensure it and all children work while paused
 	_set_node_tree_process_mode(pause_ui, Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED)
 	# Bring UI to front

@@ -4,6 +4,7 @@ var high_score = 0
 var current_score: int
 var previous_score: int
 
+
 # --- WPM tracking ---
 # We measure characters typed correctly; 5 characters = 1 word (standard WPM)
 var wpm_session_started: bool = false
