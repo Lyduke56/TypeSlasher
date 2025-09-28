@@ -31,6 +31,13 @@ func _ready():
 	if settings_close_button:
 		settings_close_button.pressed.connect(_on_settings_close_pressed)
 
+	# Connect slots in information panel
+	var grid_container = get_node_or_null("Information/GridContainer")
+	if grid_container:
+		for slot in grid_container.get_children():
+			if slot.has_signal("slot_selected"):
+				slot.connect("slot_selected", Callable(self, "_on_slot_selected"))
+
 
 func _on_continue_pressed():
 	request_resume_game.emit()
@@ -71,7 +78,19 @@ func _on_settings_close_pressed():
 		settings_panel.visible = false
 		main_menu.visible = true
 
-func set_description(item):
-	description.find_child("Name").text = item.title
-	description.find_child("Icon").text = item.icon
-	description.find_child("Description").text = item.description
+func _on_slot_selected(data: EnemyData):
+	set_description(data)
+
+func set_description(data: EnemyData):
+	var desc_panel = $Information/Description
+	if not desc_panel or not data:
+		return
+	var title_node = desc_panel.get_node("Title")
+	if title_node:
+		title_node.text = data.name
+	var icon_node = desc_panel.get_node("Icon")
+	if icon_node:
+		icon_node.texture = data.sprite
+	var desc_node = desc_panel.get_node("Description")
+	if desc_node:
+		desc_node.text = data.description

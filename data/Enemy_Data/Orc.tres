@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://diuqds3i6ubm7"]
+
+[ext_resource type="Script" uid="uid://d1j7ls21xq45s" path="res://Scripts/EnemyData.gd" id="1_ja1ep"]
+[ext_resource type="Texture2D" uid="uid://d10suksg1bio6" path="res://Assets/Sprites/Enemies/Characters(100x100)/Orc/Orc/Orc-Idle.png" id="2_rdk51"]
+
+[resource]
+script = ExtResource("1_ja1ep")
+name = "Orc"
+description = "A fierce green-skinned warrior who attacks with deadly precision."
+sprite = ExtResource("2_rdk51")
+type = "Orc"
+metadata/_custom_type_script = "uid://d1j7ls21xq45s"

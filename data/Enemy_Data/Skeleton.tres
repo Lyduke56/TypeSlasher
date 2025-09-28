@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://cobaill6vere2"]
+
+[ext_resource type="Script" uid="uid://d1j7ls21xq45s" path="res://Scripts/EnemyData.gd" id="1_1toeg"]
+[ext_resource type="Texture2D" uid="uid://b6vdqjyluwn5j" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton-Idle.png" id="2_1toeg"]
+
+[resource]
+script = ExtResource("1_1toeg")
+name = " Skeleton"
+description = "A fierce green-skinned warrior who attacks with deadly precision."
+sprite = ExtResource("2_1toeg")
+type = "Orc"
+metadata/_custom_type_script = "uid://d1j7ls21xq45s"
