@@ -14,7 +14,7 @@ var EnemyScene = preload("res://scenes/Orc_enemy.tscn")
 var BuffScene = preload("res://scenes/Buff.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
 var PortalScene = preload("res://scenes/GreenPortal.tscn")
-var BuffSelectionScene = preload("res://BuffSelection.tscn")
+var BuffSelectionScene = preload("res://scenes/BuffSelection.tscn")
 var _toggle := false
 var pause_ui: Control
 var buff_selection_ui: Control

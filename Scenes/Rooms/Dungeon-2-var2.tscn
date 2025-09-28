@@ -1,14 +1,14 @@
 [gd_scene load_steps=32 format=4 uid="uid://cxkvtokj2gngc"]
 
-[ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://Scenes/player.tscn" id="1_tm2wx"]
-[ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://Assets/Map Tiles/Tileset/Dungeon/decor.png" id="2_cki2k"]
-[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_irawu"]
-[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_swqo4"]
-[ext_resource type="Texture2D" uid="uid://bxbciwx4rffsj" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_Autotiles.png" id="5_tgrmh"]
-[ext_resource type="Texture2D" uid="uid://b1nifvoxgl61n" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_DecorationsC.png" id="6_byfxs"]
-[ext_resource type="Texture2D" uid="uid://04bfptemmdc7" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsA2.png" id="7_lv7ho"]
-[ext_resource type="Texture2D" uid="uid://dcv7vre6w0q8" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsA5.png" id="8_1fl33"]
-[ext_resource type="Texture2D" uid="uid://bkotaa0wf2s22" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsSandA5.png" id="9_ibfoe"]
+[ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://scenes/player.tscn" id="1_tm2wx"]
+[ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://assets/Map Tiles/Tileset/Dungeon/decor.png" id="2_cki2k"]
+[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_irawu"]
+[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_swqo4"]
+[ext_resource type="Texture2D" uid="uid://bxbciwx4rffsj" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_Autotiles.png" id="5_tgrmh"]
+[ext_resource type="Texture2D" uid="uid://b1nifvoxgl61n" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_DecorationsC.png" id="6_byfxs"]
+[ext_resource type="Texture2D" uid="uid://04bfptemmdc7" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsA2.png" id="7_lv7ho"]
+[ext_resource type="Texture2D" uid="uid://dcv7vre6w0q8" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsA5.png" id="8_1fl33"]
+[ext_resource type="Texture2D" uid="uid://bkotaa0wf2s22" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsSandA5.png" id="9_ibfoe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2icd"]
 texture = ExtResource("2_cki2k")
@@ -2850,7 +2850,7 @@ sources/0 = SubResource("TileSetAtlasSource_7jbvn")
 sources/1 = SubResource("TileSetAtlasSource_go5eo")
 sources/3 = SubResource("TileSetAtlasSource_voa7c")
 
-[node name="Dungeon" type="Node2D"]
+[node name="Dungeon2" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_tm2wx")]
 z_index = 10

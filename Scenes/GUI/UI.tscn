@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://cpdry547l3818" path="res://assets/sprites/GUI/border 1.png" id="1_2rnfa"]
 [ext_resource type="Theme" uid="uid://dx6raqafay30m" path="res://assets/Themes/normal_button.tres" id="2_adret"]
 [ext_resource type="Texture2D" uid="uid://dkaiqkhlad2x" path="res://assets/sprites/GUI/silver_panel.png" id="3_adret"]
-[ext_resource type="PackedScene" uid="uid://f8uv6ymbn0ia" path="res://slot.tscn" id="4_vlwpb"]
+[ext_resource type="PackedScene" uid="uid://f8uv6ymbn0ia" path="res://scenes/slot.tscn" id="4_vlwpb"]
 [ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://assets/sprites/GUI/wood_panel.png" id="5_csd48"]
-[ext_resource type="Script" uid="uid://cwimcn47767jb" path="res://ui.gd" id="6_2k9qv"]
+[ext_resource type="Script" uid="uid://cwimcn47767jb" path="res://scripts/ui.gd" id="6_2k9qv"]
 [ext_resource type="Texture2D" uid="uid://b8douqlbc8tj8" path="res://assets/sprites/GUI/wood_checkbox_unchecked.png" id="7_6yr7l"]
 
 [node name="UI" type="Control"]

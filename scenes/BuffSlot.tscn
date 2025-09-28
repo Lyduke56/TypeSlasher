@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://b5k8r1ne8t1xv"]
 
-[ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://Assets/Sprites/GUI/wood_panel.png" id="1_akj64"]
-[ext_resource type="Script" uid="uid://dvja66cxl6y7a" path="res://buff_slot.gd" id="1_wnf47"]
-[ext_resource type="Texture2D" uid="uid://doxffh06abuao" path="res://Assets/Sprites/GUI/gold_castle.png" id="3_5l6pw"]
-[ext_resource type="Texture2D" uid="uid://dv0xhkid1l24b" path="res://Assets/Sprites/GUI/silver_feather.png" id="4_yjnon"]
-[ext_resource type="Texture2D" uid="uid://wtijxtf8tf3m" path="res://Assets/Sprites/GUI/wood_sword.png" id="5_83e28"]
+[ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://assets/sprites/GUI/wood_panel.png" id="1_akj64"]
+[ext_resource type="Script" uid="uid://dvja66cxl6y7a" path="res://scripts/buff_slot.gd" id="1_wnf47"]
+[ext_resource type="Texture2D" uid="uid://doxffh06abuao" path="res://assets/sprites/GUI/gold_castle.png" id="3_5l6pw"]
+[ext_resource type="Texture2D" uid="uid://dv0xhkid1l24b" path="res://assets/sprites/GUI/silver_feather.png" id="4_yjnon"]
+[ext_resource type="Texture2D" uid="uid://wtijxtf8tf3m" path="res://assets/sprites/GUI/wood_sword.png" id="5_83e28"]
 
 [sub_resource type="Animation" id="Animation_10xac"]
 length = 0.001

@@ -1,3 +1,14 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+*.import
+
+# Build / export folders (optional: ignore if you build locally only)
+export/
+android/
+ios/
+bin/
+
+# System files (just in case)
+.DS_Store
+Thumbs.db
