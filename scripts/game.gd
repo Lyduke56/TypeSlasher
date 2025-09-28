@@ -368,7 +368,7 @@ func _process_single_character(key_typed: String):
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	# ESC pauses. Resume only by clicking the overlay.
+	# ESC pauses the game (opens UI)
 	if event.is_action_pressed("ui_cancel"): # ESC is mapped to ui_cancel by default
 		if not get_tree().paused:
 			_pause_game()

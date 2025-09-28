@@ -16,6 +16,6 @@ texture = ExtResource("1_c24ra")
 [node name="ICON" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("3_hiqfk")
-expand_mode = 1
+expand_mode = 2
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

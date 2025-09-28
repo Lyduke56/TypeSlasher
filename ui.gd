@@ -1,82 +1,77 @@
 extends Control
 
-@onready var menu_panel: NinePatchRect = $Menu
-@onready var info_panel: NinePatchRect = $Information
-@onready var settings_panel: NinePatchRect = $Settings
-@onready var continue_button: Button = $Menu/VBoxContainer/Continue
-@onready var info_button: Button = $Menu/VBoxContainer/Information
-@onready var settings_button: Button = $Menu/VBoxContainer/Settings
-@onready var quit_button: Button = $Menu/VBoxContainer/Quit
-@onready var description_panel: NinePatchRect = $Information/Description
-@onready var close_button: Button = $Information/Close
-@onready var settings_close_button: Button = $Settings/Close
-
 signal request_resume_game
 
-func _ready() -> void:
-	visible = false
-	menu_panel.visible = true
-	info_panel.visible = false
-	if settings_panel:
-		settings_panel.visible = false
+@export var description: NinePatchRect
 
-	continue_button.pressed.connect(_on_continue_pressed)
-	info_button.pressed.connect(_on_information_pressed)
-	settings_button.pressed.connect(_on_settings_pressed)
-	quit_button.pressed.connect(_on_quit_pressed)
-	close_button.pressed.connect(_on_close_information_pressed)
+func _ready():
+	# Connect the main menu buttons
+	var continue_button = get_node_or_null("Menu/VBoxContainer/Continue")
+	if continue_button:
+		continue_button.pressed.connect(_on_continue_pressed)
+
+	var information_button = get_node_or_null("Menu/VBoxContainer/Information")
+	if information_button:
+		information_button.pressed.connect(_on_information_pressed)
+
+	var settings_button = get_node_or_null("Menu/VBoxContainer/Settings")
+	if settings_button:
+		settings_button.pressed.connect(_on_settings_pressed)
+
+	var quit_button = get_node_or_null("Menu/VBoxContainer/Quit")
+	if quit_button:
+		quit_button.pressed.connect(_on_quit_pressed)
+
+	# Connect the close buttons for panels
+	var info_close_button = get_node_or_null("Information/Close")
+	if info_close_button:
+		info_close_button.pressed.connect(_on_info_close_pressed)
+
+	var settings_close_button = get_node_or_null("Settings/Close")
 	if settings_close_button:
-		settings_close_button.pressed.connect(_on_close_settings_pressed)
+		settings_close_button.pressed.connect(_on_settings_close_pressed)
 
-	# Connect all slot instances to selection handler
-	var grid := $Information/GridContainer
-	for slot in grid.get_children():
-		if slot.has_signal("slot_selected"):
-			slot.slot_selected.connect(_on_slot_selected)
 
-func _on_continue_pressed() -> void:
-	emit_signal("request_resume_game")
+func _on_continue_pressed():
+	request_resume_game.emit()
 
-func _on_information_pressed() -> void:
-	menu_panel.visible = false
-	info_panel.visible = true
-	if settings_panel:
-		settings_panel.visible = false
+func _on_information_pressed():
+	# Hide main menu and show information panel
+	var main_menu = get_node_or_null("Menu")
+	var info_panel = get_node_or_null("Information")
+	if main_menu and info_panel:
+		main_menu.visible = false
+		info_panel.visible = true
 
-func _on_settings_pressed() -> void:
-	menu_panel.visible = false
-	info_panel.visible = false
-	if settings_panel:
+func _on_settings_pressed():
+	# Hide main menu and show settings panel
+	var main_menu = get_node_or_null("Menu")
+	var settings_panel = get_node_or_null("Settings")
+	if main_menu and settings_panel:
+		main_menu.visible = false
 		settings_panel.visible = true
 
-func _on_quit_pressed() -> void:
-	get_tree().quit()
+func _on_quit_pressed():
+	# Go to main menu scene instead of quitting
+	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")
 
-func _on_close_information_pressed() -> void:
-	# Close Information panel and re-open the main menu VBox
-	info_panel.visible = false
-	if settings_panel:
+func _on_info_close_pressed():
+	# Hide information panel and show main menu
+	var main_menu = get_node_or_null("Menu")
+	var info_panel = get_node_or_null("Information")
+	if main_menu and info_panel:
+		info_panel.visible = false
+		main_menu.visible = true
+
+func _on_settings_close_pressed():
+	# Hide settings panel and show main menu
+	var main_menu = get_node_or_null("Menu")
+	var settings_panel = get_node_or_null("Settings")
+	if main_menu and settings_panel:
 		settings_panel.visible = false
-	menu_panel.visible = true
+		main_menu.visible = true
 
-func _on_close_settings_pressed() -> void:
-	# Close Settings panel and re-open the main menu VBox
-	if settings_panel:
-		settings_panel.visible = false
-	info_panel.visible = false
-	menu_panel.visible = true
-
-func _on_slot_selected(slot) -> void:
-	# Update description panel from slot's data
-	var item: Dictionary = {}
-	if slot.has_method("get_item"):
-		item = slot.get_item()
-	var title_node := description_panel.get_node("Title")
-	var desc_node := description_panel.get_node("Description")
-	var icon_node := description_panel.get_node("Icon")
-	if title_node and item.has("title"):
-		title_node.text = String(item["title"])
-	if desc_node and item.has("description"):
-		desc_node.text = String(item["description"])
-	if icon_node and item.has("icon") and item["icon"] is Texture2D:
-		icon_node.texture = item["icon"]
+func set_description(item):
+	description.find_child("Name").text = item.title
+	description.find_child("Icon").text = item.icon
+	description.find_child("Description").text = item.description
