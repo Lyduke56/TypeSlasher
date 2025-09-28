@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dcv7vre6w0q8"
-path="res://.godot/imported/Dungeon_FloorsWallsA5.png-d9a395701c6bcf9f06e72c76b6d0b288.ctex"
+path="res://.godot/imported/Dungeon_FloorsWallsA5.png-d31f2763b72f40ab321182327e4156b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsA5.png"
-dest_files=["res://.godot/imported/Dungeon_FloorsWallsA5.png-d9a395701c6bcf9f06e72c76b6d0b288.ctex"]
+source_file="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsA5.png"
+dest_files=["res://.godot/imported/Dungeon_FloorsWallsA5.png-d31f2763b72f40ab321182327e4156b1.ctex"]
 
 [params]
 

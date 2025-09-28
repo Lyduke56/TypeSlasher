@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwc0he27ohgw3"
-path="res://.godot/imported/Armored Axeman-Attack03_Effect.png-57b6862e4c8d9adc54d416d4b04d75a3.ctex"
+path="res://.godot/imported/Armored Axeman-Attack03_Effect.png-206b0299e22d06fc12765e0645f8385d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Axeman/Armored Axeman(Split Effects)/Armored Axeman-Attack03_Effect.png"
-dest_files=["res://.godot/imported/Armored Axeman-Attack03_Effect.png-57b6862e4c8d9adc54d416d4b04d75a3.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Armored Axeman/Armored Axeman(Split Effects)/Armored Axeman-Attack03_Effect.png"
+dest_files=["res://.godot/imported/Armored Axeman-Attack03_Effect.png-206b0299e22d06fc12765e0645f8385d.ctex"]
 
 [params]
 

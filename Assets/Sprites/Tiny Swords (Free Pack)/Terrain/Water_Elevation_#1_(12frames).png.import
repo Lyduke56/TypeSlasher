@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ibtypvgroiaa"
-path="res://.godot/imported/Water_Elevation_#1_(12frames).png-4d8cf6d7191a701f1bf8f118f396709c.ctex"
+path="res://.godot/imported/Water_Elevation_#1_(12frames).png-7f3a834cf28b7004272a6d188e9e141d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Tiny Swords (Free Pack)/Terrain/Water_Elevation_#1_(12frames).png"
-dest_files=["res://.godot/imported/Water_Elevation_#1_(12frames).png-4d8cf6d7191a701f1bf8f118f396709c.ctex"]
+source_file="res://assets/sprites/Tiny Swords (Free Pack)/Terrain/Water_Elevation_#1_(12frames).png"
+dest_files=["res://.godot/imported/Water_Elevation_#1_(12frames).png-7f3a834cf28b7004272a6d188e9e141d.ctex"]
 
 [params]
 

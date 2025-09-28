@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bha6on65vscow"
-path="res://.godot/imported/Priest-Shadow.png-ce8f95f2da94b45ef1e79a39e2dbf96f.ctex"
+path="res://.godot/imported/Priest-Shadow.png-bca78d748d874f5cd4a3d27386ec464b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Priest/Priest/Shadow sprites/Priest-Shadow.png"
-dest_files=["res://.godot/imported/Priest-Shadow.png-ce8f95f2da94b45ef1e79a39e2dbf96f.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Priest/Priest/Shadow sprites/Priest-Shadow.png"
+dest_files=["res://.godot/imported/Priest-Shadow.png-bca78d748d874f5cd4a3d27386ec464b.ctex"]
 
 [params]
 

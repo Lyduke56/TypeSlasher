@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://du4jdnkiacar8"
-path="res://.godot/imported/Skeleton Archer-Attack_Effect.png-e9841ba3c1810b63bbc0db3cced2b479.ctex"
+path="res://.godot/imported/Skeleton Archer-Attack_Effect.png-d9f12ac0fc57e4127d1fbe3604dc5b53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer(Split Effects)/Skeleton Archer-Attack_Effect.png"
-dest_files=["res://.godot/imported/Skeleton Archer-Attack_Effect.png-e9841ba3c1810b63bbc0db3cced2b479.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer(Split Effects)/Skeleton Archer-Attack_Effect.png"
+dest_files=["res://.godot/imported/Skeleton Archer-Attack_Effect.png-d9f12ac0fc57e4127d1fbe3604dc5b53.ctex"]
 
 [params]
 

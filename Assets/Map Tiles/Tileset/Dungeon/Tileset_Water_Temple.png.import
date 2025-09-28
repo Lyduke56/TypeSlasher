@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://nimcngt6erc0"
-path="res://.godot/imported/Tileset_Water_Temple.png-e137dcc8da4c6fbec6ecb29d3ff80b1b.ctex"
+path="res://.godot/imported/Tileset_Water_Temple.png-c83ecf69ce87c0c04b0726ce65d52b9b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Map Tiles/Tileset/Dungeon/Tileset_Water_Temple.png"
-dest_files=["res://.godot/imported/Tileset_Water_Temple.png-e137dcc8da4c6fbec6ecb29d3ff80b1b.ctex"]
+source_file="res://assets/Map Tiles/Tileset/Dungeon/Tileset_Water_Temple.png"
+dest_files=["res://.godot/imported/Tileset_Water_Temple.png-c83ecf69ce87c0c04b0726ce65d52b9b.ctex"]
 
 [params]
 

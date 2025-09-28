@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c3ytj82ayrhso"
-path="res://.godot/imported/Dungeon_SandDecorationsC.png-68a79f2fb3c8b6366e490bed0c17c633.ctex"
+path="res://.godot/imported/Dungeon_SandDecorationsC.png-7cad45f2a4c45f6a0e747273c1095194.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_SandDecorationsC.png"
-dest_files=["res://.godot/imported/Dungeon_SandDecorationsC.png-68a79f2fb3c8b6366e490bed0c17c633.ctex"]
+source_file="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_SandDecorationsC.png"
+dest_files=["res://.godot/imported/Dungeon_SandDecorationsC.png-7cad45f2a4c45f6a0e747273c1095194.ctex"]
 
 [params]
 
