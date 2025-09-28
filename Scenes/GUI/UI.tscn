@@ -24,10 +24,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -174.5
-offset_top = -147.0
-offset_right = 174.5
-offset_bottom = 147.0
+offset_left = -174.0
+offset_top = -148.0
+offset_right = 175.0
+offset_bottom = 146.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_2rnfa")
@@ -46,29 +46,34 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -53.5
-offset_top = -57.0
-offset_right = 53.5
-offset_bottom = 57.0
+offset_left = -107.5
+offset_top = -75.0
+offset_right = 556.5
+offset_bottom = 397.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.33, 0.33)
 theme = ExtResource("2_adret")
 
 [node name="Continue" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_adret")
+theme_override_font_sizes/font_size = 106
 text = "CONTINUE"
 
 [node name="Information" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 106
 text = "INFORMATION"
 
 [node name="Settings" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 106
 text = "SETTINGS"
 
 [node name="Quit" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 106
 text = "QUIT"
 
 [node name="Information" type="NinePatchRect" parent="."]
