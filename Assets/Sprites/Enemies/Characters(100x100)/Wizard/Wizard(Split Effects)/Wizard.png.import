@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://djqjwgnv1pbgl"
-path="res://.godot/imported/Wizard.png-66b7b7df49eb691e7a7e2d39699d8f57.ctex"
+path="res://.godot/imported/Wizard.png-fd3a4d6dacc863fe61b088732a74f9f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Wizard/Wizard(Split Effects)/Wizard.png"
-dest_files=["res://.godot/imported/Wizard.png-66b7b7df49eb691e7a7e2d39699d8f57.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Wizard/Wizard(Split Effects)/Wizard.png"
+dest_files=["res://.godot/imported/Wizard.png-fd3a4d6dacc863fe61b088732a74f9f2.ctex"]
 
 [params]
 

@@ -21,6 +21,8 @@ var is_being_targeted: bool = false
 # Collision state
 var has_reached_target: bool = false
 var hack_timer: Timer
+# Reference to target node for taking damage
+var target_node: Node2D
 
 var points_for_kill = 100
 
@@ -146,6 +148,7 @@ func _on_body_entered(body: Node2D):
 	if body is StaticBody2D and body.get_parent().name == "Target":
 		if not has_reached_target:
 			has_reached_target = true
+			target_node = body.get_parent()  # Store reference to target for damage
 			has_target = false  # Stop normal movement
 			print("Enemy reached target! Starting hack timer and playing idle.")
 
@@ -176,9 +179,11 @@ func _on_animation_finished():
 		return
 
 	if has_reached_target and anim and anim.animation == "Hack":
-		# Hack animation finished, go back to idle
+		# Hack animation finished, go back to idle and take damage
 		anim.play("idle ")
 		print("Enemy finished hacking, back to idle.")
+		if target_node:
+			target_node.take_damage()
 
 func _physics_process(delta: float) -> void:
 	# STOP ALL MOVEMENT if being targeted or has reached target

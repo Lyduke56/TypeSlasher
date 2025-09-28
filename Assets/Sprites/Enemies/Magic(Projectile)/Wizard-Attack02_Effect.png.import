@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ca4w57kl8e8kq"
-path="res://.godot/imported/Wizard-Attack02_Effect.png-5d34e2f577f6dda9e84d161de9ac8db6.ctex"
+path="res://.godot/imported/Wizard-Attack02_Effect.png-762157a708c836d98b159468c560aad2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Magic(Projectile)/Wizard-Attack02_Effect.png"
-dest_files=["res://.godot/imported/Wizard-Attack02_Effect.png-5d34e2f577f6dda9e84d161de9ac8db6.ctex"]
+source_file="res://assets/sprites/Enemies/Magic(Projectile)/Wizard-Attack02_Effect.png"
+dest_files=["res://.godot/imported/Wizard-Attack02_Effect.png-762157a708c836d98b159468c560aad2.ctex"]
 
 [params]
 
