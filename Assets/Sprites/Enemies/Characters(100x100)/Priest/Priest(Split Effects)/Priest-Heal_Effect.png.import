@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://f1x0mxggk8wx"
-path="res://.godot/imported/Priest-Heal_Effect.png-d815903ad02cecbda98870336f48b1c9.ctex"
+path="res://.godot/imported/Priest-Heal_Effect.png-73b0529827fc25be6abc076b129f3482.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Priest/Priest(Split Effects)/Priest-Heal_Effect.png"
-dest_files=["res://.godot/imported/Priest-Heal_Effect.png-d815903ad02cecbda98870336f48b1c9.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Priest/Priest(Split Effects)/Priest-Heal_Effect.png"
+dest_files=["res://.godot/imported/Priest-Heal_Effect.png-73b0529827fc25be6abc076b129f3482.ctex"]
 
 [params]
 
