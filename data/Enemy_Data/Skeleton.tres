@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=10 format=3 uid="uid://cobaill6vere2"]
+
+[ext_resource type="Script" uid="uid://d1j7ls21xq45s" path="res://Scripts/EnemyData.gd" id="1_1toeg"]
+[ext_resource type="Texture2D" uid="uid://b6vdqjyluwn5j" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton-Idle.png" id="2_1toeg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1toeg"]
+atlas = ExtResource("2_1toeg")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uone"]
+atlas = ExtResource("2_1toeg")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjbc2"]
+atlas = ExtResource("2_1toeg")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2vx7"]
+atlas = ExtResource("2_1toeg")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmllp"]
+atlas = ExtResource("2_1toeg")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjlqc"]
+atlas = ExtResource("2_1toeg")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ait6t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1toeg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uone")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjbc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2vx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmllp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjlqc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_1toeg")
+name = " Skeleton"
+description = "A fierce green-skinned warrior who attacks with deadly precision."
+static_sprite = ExtResource("2_1toeg")
+sprite_frames = SubResource("SpriteFrames_ait6t")
+animation_name = ""
+type = "Orc"
+metadata/_custom_type_script = "uid://d1j7ls21xq45s"

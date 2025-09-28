@@ -1,24 +1,29 @@
 extends PanelContainer
 
-@export var title: String = ""
-@export var description: String = ""
-@export var icon: Texture2D
+@export var enemy_data: EnemyData
 
-signal slot_selected(slot)
+signal slot_selected(enemy_data: EnemyData)
 
 func _ready() -> void:
-	# Initialize icon if provided
+	# Initialize icon if enemy_data provided
 	var icon_node := get_node_or_null("ICON")
-	if icon_node and icon is Texture2D:
-		icon_node.texture = icon
+	if icon_node and enemy_data and enemy_data.static_sprite:
+		icon_node.texture = enemy_data.static_sprite
+		icon_node.visible = true
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		emit_signal("slot_selected", self)
+		if enemy_data:
+			emit_signal("slot_selected", enemy_data)
+
+func get_enemy_data() -> EnemyData:
+	return enemy_data
 
 func get_item() -> Dictionary:
-	return {
-		"title": title,
-		"description": description,
-		"icon": icon
-	}
+	if enemy_data:
+		return {
+			"name": enemy_data.name,
+			"description": enemy_data.description,
+			"static_sprite": enemy_data.static_sprite
+		}
+	return {}

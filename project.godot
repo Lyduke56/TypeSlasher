@@ -27,3 +27,4 @@ window/stretch/mode="viewport"
 
 textures/canvas_textures/default_texture_filter=3
 environment/defaults/default_clear_color=Color(0.20871, 0.20871, 0.20871, 1)
+2d/snap/snap_2d_transforms_to_pixel=true
