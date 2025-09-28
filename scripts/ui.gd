@@ -85,20 +85,52 @@ func set_description(data: EnemyData):
 	var desc_panel = $Information/Description
 	if not desc_panel or not data:
 		return
+	print("Description panel children: ", desc_panel.get_children().map(func(c): return str(c.name) + " (" + str(c.get_class()) + ")"))
 	var title_node = desc_panel.get_node("Title")
 	if title_node:
 		title_node.text = data.name
 	var icon_node = desc_panel.get_node("Icon")
+	print("Icon node: ", icon_node)
+	if icon_node and icon_node.get_children():
+		print("Icon children: ", icon_node.get_children().map(func(c): return str(c.name) + " (" + str(c.get_class()) + ")"))
 	if icon_node:
+		# Try to find AnimatedSprite2D directly under desc_panel or under Icon
+		var animated_sprite: AnimatedSprite2D = null
 		if icon_node is AnimatedSprite2D:
+			animated_sprite = icon_node
+		else:
+			# Look under Icon if it's a container
+			if icon_node.is_class("Control") or icon_node is TextureRect or icon_node is Node2D:
+				for child in icon_node.get_children():
+					if child is AnimatedSprite2D:
+						animated_sprite = child
+						print("Found AnimatedSprite2D child: ", child.name)
+						break
+		# Or look directly under desc_panel for AnimatedSprite2D
+		if not animated_sprite:
+			for child in desc_panel.get_children():
+				if child is AnimatedSprite2D and child.name != "Icon":  # exclude if Icon is not animated
+					animated_sprite = child
+					print("Found AnimatedSprite2D under desc_panel: ", child.name)
+					break
+		if animated_sprite:
 			if data.sprite_frames:
-				icon_node.sprite_frames = data.sprite_frames
-				icon_node.animation = data.animation_name if data.animation_name else "idle "
-				icon_node.play()
+				animated_sprite.sprite_frames = data.sprite_frames
+				print("Setting sprite_frames on AnimatedSprite2D: ", data.sprite_frames)
+				var anim_list = data.sprite_frames.get_animation_names()
+				print("Available animations: ", anim_list)
+				var anim_to_play = data.animation_name if data.animation_name != "" else (anim_list[0] if anim_list.size() > 0 else "")
+				if anim_to_play:
+					animated_sprite.animation = anim_to_play
+					print("Setting animation to: ", anim_to_play)
+					animated_sprite.play()
+					print("Is playing after play(): ", animated_sprite.is_playing())
 			else:
-				icon_node.stop()
+				animated_sprite.stop()
+		# Only set static texture if no animated sprite and Icon is TextureRect - but ideally animated should always have sprite_frames
 		elif icon_node is TextureRect:
 			icon_node.texture = data.static_sprite
+			print("Falling back to static texture on TextureRect")
 	var desc_node = desc_panel.get_node("Description")
 	if desc_node:
 		desc_node.text = data.description
