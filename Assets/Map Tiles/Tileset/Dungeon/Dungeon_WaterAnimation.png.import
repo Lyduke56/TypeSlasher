@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://crc5edqhths4q"
-path="res://.godot/imported/Dungeon_WaterAnimation.png-9535afef51e86f1bd776e43cefbd2ede.ctex"
+path="res://.godot/imported/Dungeon_WaterAnimation.png-a6ceaa1c7efb6d2dcca1258ea17acc74.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_WaterAnimation.png"
-dest_files=["res://.godot/imported/Dungeon_WaterAnimation.png-9535afef51e86f1bd776e43cefbd2ede.ctex"]
+source_file="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_WaterAnimation.png"
+dest_files=["res://.godot/imported/Dungeon_WaterAnimation.png-a6ceaa1c7efb6d2dcca1258ea17acc74.ctex"]
 
 [params]
 
