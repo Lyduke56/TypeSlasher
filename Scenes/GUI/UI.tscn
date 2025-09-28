@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ct4hgdk2e8v47"]
+[gd_scene load_steps=11 format=3 uid="uid://ct4hgdk2e8v47"]
 
 [ext_resource type="Texture2D" uid="uid://cpdry547l3818" path="res://assets/sprites/GUI/border 1.png" id="1_2rnfa"]
 [ext_resource type="Theme" uid="uid://dx6raqafay30m" path="res://assets/Themes/normal_button.tres" id="2_adret"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://diuqds3i6ubm7" path="res://data/Enemy_Data/Orc.tres" id="6_imv1v"]
 [ext_resource type="Texture2D" uid="uid://b8douqlbc8tj8" path="res://assets/sprites/GUI/wood_checkbox_unchecked.png" id="7_6yr7l"]
 [ext_resource type="Resource" uid="uid://cobaill6vere2" path="res://data/Enemy_Data/Skeleton.tres" id="7_olp6x"]
+[ext_resource type="FontFile" uid="uid://x5y3gace2sm1" path="res://assets/Fonts/Perfect DOS VGA 437.ttf" id="9_r2bq1"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -86,12 +87,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -294.0
-offset_top = -185.0
-offset_right = 279.0
-offset_bottom = 182.0
+offset_left = -374.0
+offset_top = -227.0
+offset_right = 199.0
+offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.38, 1.38)
 texture = ExtResource("3_adret")
 region_rect = Rect2(2.87454, 0, 45.1255, 48)
 patch_margin_top = 2
@@ -177,18 +179,24 @@ texture = ExtResource("5_csd48")
 
 [node name="Title" type="Label" parent="Information/Description"]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 10.0
-offset_right = 153.0
-offset_bottom = 42.0
+offset_left = 14.087
+offset_top = 14.5725
+offset_right = 1551.09
+offset_bottom = 388.572
+scale = Vector2(0.09, 0.09)
+theme_override_fonts/font = ExtResource("9_r2bq1")
+theme_override_font_sizes/font_size = 306
 text = "Title"
 
 [node name="Description" type="RichTextLabel" parent="Information/Description"]
 layout_mode = 0
-offset_left = 14.0
+offset_left = 18.0
 offset_top = 196.0
-offset_right = 255.0
-offset_bottom = 262.0
+offset_right = 2166.0
+offset_bottom = 776.0
+scale = Vector2(0.11, 0.11)
+theme_override_fonts/normal_font = ExtResource("9_r2bq1")
+theme_override_font_sizes/normal_font_size = 166
 text = "Description"
 
 [node name="Icon" type="TextureRect" parent="Information/Description"]

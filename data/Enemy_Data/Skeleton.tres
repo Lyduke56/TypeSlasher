@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=10 format=3 uid="uid://cobaill6vere2"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=11 format=3 uid="uid://cobaill6vere2"]
 
 [ext_resource type="Script" uid="uid://d1j7ls21xq45s" path="res://Scripts/EnemyData.gd" id="1_1toeg"]
 [ext_resource type="Texture2D" uid="uid://b6vdqjyluwn5j" path="res://assets/sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton-Idle.png" id="2_1toeg"]
@@ -53,11 +53,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ait6t"]
+atlas = ExtResource("2_1toeg")
+region = Rect2(41, 35.5, 31, 29)
+
 [resource]
 script = ExtResource("1_1toeg")
 name = " Skeleton"
 description = "A fierce green-skinned warrior who attacks with deadly precision."
-static_sprite = ExtResource("2_1toeg")
+static_sprite = SubResource("AtlasTexture_ait6t")
 sprite_frames = SubResource("SpriteFrames_ait6t")
 animation_name = ""
 type = "Orc"
