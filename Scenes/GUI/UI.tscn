@@ -1,0 +1,268 @@
+[gd_scene load_steps=8 format=3 uid="uid://ct4hgdk2e8v47"]
+
+[ext_resource type="Texture2D" uid="uid://cpdry547l3818" path="res://assets/sprites/GUI/border 1.png" id="1_2rnfa"]
+[ext_resource type="Theme" uid="uid://dx6raqafay30m" path="res://assets/Themes/normal_button.tres" id="2_adret"]
+[ext_resource type="Texture2D" uid="uid://dkaiqkhlad2x" path="res://assets/sprites/GUI/silver_panel.png" id="3_adret"]
+[ext_resource type="PackedScene" uid="uid://f8uv6ymbn0ia" path="res://slot.tscn" id="4_vlwpb"]
+[ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://assets/sprites/GUI/wood_panel.png" id="5_csd48"]
+[ext_resource type="Script" uid="uid://cwimcn47767jb" path="res://ui.gd" id="6_2k9qv"]
+[ext_resource type="Texture2D" uid="uid://b8douqlbc8tj8" path="res://assets/sprites/GUI/wood_checkbox_unchecked.png" id="7_6yr7l"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_2k9qv")
+
+[node name="Menu" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.5
+offset_top = -147.0
+offset_right = 174.5
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_2rnfa")
+region_rect = Rect2(-3.2001, -2.88215, 123.629, 65.0007)
+patch_margin_left = 17
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 13
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.5
+offset_top = -57.0
+offset_right = 53.5
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_adret")
+
+[node name="Continue" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_adret")
+text = "CONTINUE"
+
+[node name="Information" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+text = "INFORMATION"
+
+[node name="Settings" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="Quit" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+text = "QUIT"
+
+[node name="Information" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -294.0
+offset_top = -185.0
+offset_right = 279.0
+offset_bottom = 182.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_adret")
+region_rect = Rect2(2.87454, 0, 45.1255, 48)
+patch_margin_top = 2
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="GridContainer" type="GridContainer" parent="Information"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 38.0
+offset_top = -127.5
+offset_right = 289.0
+offset_bottom = 121.5
+grow_vertical = 2
+columns = 4
+
+[node name="Slot" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot2" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot3" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot4" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot5" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot6" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot7" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot8" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot9" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot10" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot11" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot12" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot13" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot14" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot15" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Slot16" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
+layout_mode = 2
+
+[node name="Description" type="NinePatchRect" parent="Information"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -311.0
+offset_top = -143.0
+offset_right = -41.0
+offset_bottom = 135.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("5_csd48")
+
+[node name="Title" type="Label" parent="Information/Description"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 10.0
+offset_right = 153.0
+offset_bottom = 42.0
+text = "Title"
+
+[node name="Description" type="RichTextLabel" parent="Information/Description"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 196.0
+offset_right = 204.0
+offset_bottom = 262.0
+text = "Description"
+
+[node name="Icon" type="TextureRect" parent="Information/Description"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.5
+offset_top = -69.0
+offset_right = 115.5
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Close" type="Button" parent="Information"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.0
+offset_top = 1.0
+offset_right = -7.92999
+offset_bottom = 25.0
+grow_horizontal = 0
+scale = Vector2(1.285, 1.285)
+icon = ExtResource("7_6yr7l")
+flat = true
+
+[node name="Settings" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_adret")
+patch_margin_top = 2
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Close" type="Button" parent="Settings"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_bottom = 56.0
+grow_horizontal = 0
+icon = ExtResource("5_csd48")
+
+[node name="Buff" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.0
+offset_top = -96.0
+offset_right = 316.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_adret")
+
+[node name="GridContainer" type="GridContainer" parent="Buff"]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -65.0
+offset_right = 620.0
+offset_bottom = 65.0
+grow_vertical = 2
+columns = 3

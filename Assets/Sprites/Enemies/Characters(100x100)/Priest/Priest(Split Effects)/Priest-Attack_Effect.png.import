@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cojmwwchu0syd"
-path="res://.godot/imported/Priest-Attack_Effect.png-56ca324b1467527bcddb85088c3a8d49.ctex"
+path="res://.godot/imported/Priest-Attack_Effect.png-0b2a5418129cb91bdca6fdd7c1d1bf53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Priest/Priest(Split Effects)/Priest-Attack_Effect.png"
-dest_files=["res://.godot/imported/Priest-Attack_Effect.png-56ca324b1467527bcddb85088c3a8d49.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Priest/Priest(Split Effects)/Priest-Attack_Effect.png"
+dest_files=["res://.godot/imported/Priest-Attack_Effect.png-0b2a5418129cb91bdca6fdd7c1d1bf53.ctex"]
 
 [params]
 

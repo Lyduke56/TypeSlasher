@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5k8r1ne8t1xv"]
+
+[ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://Assets/Sprites/GUI/wood_panel.png" id="1_akj64"]
+[ext_resource type="Script" uid="uid://dvja66cxl6y7a" path="res://buff_slot.gd" id="1_wnf47"]
+[ext_resource type="Texture2D" uid="uid://doxffh06abuao" path="res://Assets/Sprites/GUI/gold_castle.png" id="3_5l6pw"]
+[ext_resource type="Texture2D" uid="uid://dv0xhkid1l24b" path="res://Assets/Sprites/GUI/silver_feather.png" id="4_yjnon"]
+[ext_resource type="Texture2D" uid="uid://wtijxtf8tf3m" path="res://Assets/Sprites/GUI/wood_sword.png" id="5_83e28"]
+
+[sub_resource type="Animation" id="Animation_10xac"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_ojrr8"]
+resource_name = "Spin"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_5l6pw"), ExtResource("4_yjnon"), ExtResource("5_83e28")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ilt57"]
+_data = {
+&"RESET": SubResource("Animation_10xac"),
+&"Spin": SubResource("Animation_ojrr8")
+}
+
+[node name="BuffSlot" type="PanelContainer"]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 304.0
+offset_bottom = 268.0
+script = ExtResource("1_wnf47")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_akj64")
+
+[node name="ICON" type="TextureRect" parent="."]
+layout_mode = 2
+
+[node name="Spin" type="AnimationPlayer" parent="."]
+root_node = NodePath("../ICON")
+libraries = {
+&"": SubResource("AnimationLibrary_ilt57")
+}

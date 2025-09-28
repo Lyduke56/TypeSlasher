@@ -14088,6 +14088,7 @@ sources/30 = SubResource("TileSetAtlasSource_a5y06")
 sources/31 = SubResource("TileSetAtlasSource_amvvu")
 
 [node name="Dungeon" type="Node2D"]
+script = ExtResource("5_script")
 
 [node name="Player" parent="." instance=ExtResource("1_i0ilx")]
 z_index = 10
