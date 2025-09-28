@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bge3ik165tbxk"]
 
-[ext_resource type="Texture2D" uid="uid://dkaiqkhlad2x" path="res://Assets/Sprites/GUI/silver_panel.png" id="1_cgk38"]
-[ext_resource type="PackedScene" uid="uid://b5k8r1ne8t1xv" path="res://BuffSlot.tscn" id="2_h4hes"]
-[ext_resource type="Script" uid="uid://dvr23xbu73x6j" path="res://BuffSelection.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://dkaiqkhlad2x" path="res://assets/sprites/GUI/silver_panel.png" id="1_cgk38"]
+[ext_resource type="PackedScene" uid="uid://b5k8r1ne8t1xv" path="res://scenes/BuffSlot.tscn" id="2_h4hes"]
+[ext_resource type="Script" uid="uid://dvr23xbu73x6j" path="res://scripts/BuffSelection.gd" id="3_script"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
