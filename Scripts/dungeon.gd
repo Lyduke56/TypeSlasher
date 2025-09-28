@@ -1,6 +1,6 @@
 extends Node2D
 
-var BuffSelectionScene = preload("res://BuffSelection.tscn")
+var BuffSelectionScene = preload("res://scenes/BuffSelection.tscn")
 var buff_selection_ui: Control
 
 func _ready():
