@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b8douqlbc8tj8"
-path="res://.godot/imported/wood_checkbox_unchecked.png-a63cd73a52f25ad77f637265715fd231.ctex"
+path="res://.godot/imported/wood_checkbox_unchecked.png-ea0256c46308649afd11fd769c67a0bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/GUI/wood_checkbox_unchecked.png"
-dest_files=["res://.godot/imported/wood_checkbox_unchecked.png-a63cd73a52f25ad77f637265715fd231.ctex"]
+source_file="res://Assets/Sprites/GUI/wood_checkbox_unchecked.png"
+dest_files=["res://.godot/imported/wood_checkbox_unchecked.png-ea0256c46308649afd11fd769c67a0bf.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqkt1kensribr"
-path="res://.godot/imported/Armored Skeleton-Attack02_Effect.png-6b26bb2b58c53d9bb97481bafa58ba7e.ctex"
+path="res://.godot/imported/Armored Skeleton-Attack02_Effect.png-3032c904aa4f0795be022e2afceace27.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Armored Skeleton/Armored Skeleton(Split Effects)/Armored Skeleton-Attack02_Effect.png"
-dest_files=["res://.godot/imported/Armored Skeleton-Attack02_Effect.png-6b26bb2b58c53d9bb97481bafa58ba7e.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Skeleton/Armored Skeleton(Split Effects)/Armored Skeleton-Attack02_Effect.png"
+dest_files=["res://.godot/imported/Armored Skeleton-Attack02_Effect.png-3032c904aa4f0795be022e2afceace27.ctex"]
 
 [params]
 
