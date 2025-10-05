@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://k63voj4yp3r8"]
 
-[ext_resource type="Script" uid="uid://qpw1grslu1fi" path="res://scripts/hallway_entrance.gd" id="1_vrta3"]
+[ext_resource type="Script" uid="uid://qpw1grslu1fi" path="res://Scripts/hallway_entrance.gd" id="1_vrta3"]
 [ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://assets/Themes/Outline.tres" id="2_2qo5l"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_dy0v5"]
 
