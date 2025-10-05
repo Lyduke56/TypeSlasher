@@ -161,7 +161,7 @@ func _finish_dash() -> void:
 	if target_portal != null:
 		# For portals, change scene immediately
 		print("Reached portal! Changing scene to Dungeon-1-var1")
-		get_tree().change_scene_to_file("res://scenes/Rooms/Dungeon-1-var1.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Rooms/Area 1/Area-1-var1.tscn")
 		target_portal = null  # Clear reference
 		return
 

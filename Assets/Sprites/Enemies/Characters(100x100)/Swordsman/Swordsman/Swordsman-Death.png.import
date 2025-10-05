@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c88l705jomiro"
-path="res://.godot/imported/Swordsman-Death.png-af5e935da95b2bcfa4f60e81b5007245.ctex"
+path="res://.godot/imported/Swordsman-Death.png-e38e7526ba80d0a315aa44f33232479b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Swordsman/Swordsman/Swordsman-Death.png"
-dest_files=["res://.godot/imported/Swordsman-Death.png-af5e935da95b2bcfa4f60e81b5007245.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Swordsman/Swordsman/Swordsman-Death.png"
+dest_files=["res://.godot/imported/Swordsman-Death.png-e38e7526ba80d0a315aa44f33232479b.ctex"]
 
 [params]
 

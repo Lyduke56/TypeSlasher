@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cndpyjvqqqqmv"
-path="res://.godot/imported/Werebear.png-6440a129b77035b2251440f3258a6cde.ctex"
+path="res://.godot/imported/Werebear.png-0e5b34dea0275a4902b86f58b5b6f303.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Werebear/Werebear(Split Effects)/Werebear.png"
-dest_files=["res://.godot/imported/Werebear.png-6440a129b77035b2251440f3258a6cde.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Werebear/Werebear(Split Effects)/Werebear.png"
+dest_files=["res://.godot/imported/Werebear.png-0e5b34dea0275a4902b86f58b5b6f303.ctex"]
 
 [params]
 

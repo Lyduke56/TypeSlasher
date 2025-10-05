@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://rfcyl0nonckb"
-path="res://.godot/imported/Elite Orc-Attack03_Effect.png-0741565f058535d7031f8145c62a59ba.ctex"
+path="res://.godot/imported/Elite Orc-Attack03_Effect.png-8b7f680a63257141fd8cc390459467ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Elite Orc/Elite Orc(Split Effects)/Elite Orc-Attack03_Effect.png"
-dest_files=["res://.godot/imported/Elite Orc-Attack03_Effect.png-0741565f058535d7031f8145c62a59ba.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Elite Orc/Elite Orc(Split Effects)/Elite Orc-Attack03_Effect.png"
+dest_files=["res://.godot/imported/Elite Orc-Attack03_Effect.png-8b7f680a63257141fd8cc390459467ee.ctex"]
 
 [params]
 
