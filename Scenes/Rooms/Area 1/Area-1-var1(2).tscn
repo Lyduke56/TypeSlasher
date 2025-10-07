@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://Scenes/player.tscn" id="1_a7sey"]
 [ext_resource type="Script" uid="uid://cvhdl8355whhu" path="res://Scripts/Dungeons/Area_1_var_1/area_1_var_1.gd" id="1_xr6wl"]
-[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_qrpcx"]
-[ext_resource type="Script" uid="uid://bc0pa4v2utvx0" path="res://scripts/Dungeons/dungeon_manager.gd" id="3_xcvby"]
-[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_6wyqo"]
-[ext_resource type="Script" uid="uid://df11we6uako3s" path="res://scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="6_vaap1"]
-[ext_resource type="Script" uid="uid://gi3ma2tv7svj" path="res://scripts/Dungeons/Area_1_var_1/Rooms/room_a___medium.gd" id="7_v48uu"]
-[ext_resource type="Script" uid="uid://bf6yqy35jf53w" path="res://scripts/Dungeons/Area_1_var_1/Rooms/room_b___small.gd" id="8_xcaxr"]
-[ext_resource type="Script" uid="uid://cdrdygid30spt" path="res://scripts/Dungeons/Area_1_var_1/Rooms/room_c___medium.gd" id="9_6656w"]
-[ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="10_1f6aj"]
+[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_qrpcx"]
+[ext_resource type="Script" uid="uid://bc0pa4v2utvx0" path="res://Scripts/Dungeons/dungeon_manager.gd" id="3_xcvby"]
+[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_6wyqo"]
+[ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="6_vaap1"]
+[ext_resource type="Script" uid="uid://gi3ma2tv7svj" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_a___medium.gd" id="7_v48uu"]
+[ext_resource type="Script" uid="uid://bf6yqy35jf53w" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_b___small.gd" id="8_xcaxr"]
+[ext_resource type="Script" uid="uid://cdrdygid30spt" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_c___medium.gd" id="9_6656w"]
+[ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="10_1f6aj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xr6wl"]
 texture = ExtResource("3_qrpcx")

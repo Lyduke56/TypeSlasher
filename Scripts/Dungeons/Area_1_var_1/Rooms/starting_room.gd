@@ -55,10 +55,10 @@ func update_camera():
 		var size = shape.shape.extents*2
 		if size.y <view_size.y:
 			size.y = view_size.y
-		
+
 		if size.x < view_size.y:
 			size.x = view_size.y
-		
+
 		if shape is RectangleShape2D:
 			var rect = shape.get_rect()
 			var center = camera_area.global_position - rect.get_center()

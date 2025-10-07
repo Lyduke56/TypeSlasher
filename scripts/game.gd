@@ -46,7 +46,7 @@ func _ready() -> void:
 	var ui_scene: PackedScene = preload("res://Scenes/GUI/UI.tscn")
 	pause_ui = ui_scene.instantiate()
 	add_child(pause_ui)
-	
+
 	heart_container.setMaxhearts(3)
 	# Ensure it and all children work while paused
 	_set_node_tree_process_mode(pause_ui, Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED)

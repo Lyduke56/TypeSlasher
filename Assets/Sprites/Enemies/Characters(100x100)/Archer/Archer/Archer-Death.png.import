@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://da78fjbmlcwx5"
-path="res://.godot/imported/Archer-Death.png-82443a21580ba56db0b1b8bf593d3610.ctex"
+path="res://.godot/imported/Archer-Death.png-50010a574ca855b46188c02858241ed3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Archer/Archer/Archer-Death.png"
-dest_files=["res://.godot/imported/Archer-Death.png-82443a21580ba56db0b1b8bf593d3610.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Archer/Archer/Archer-Death.png"
+dest_files=["res://.godot/imported/Archer-Death.png-50010a574ca855b46188c02858241ed3.ctex"]
 
 [params]
 

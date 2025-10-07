@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://62p58c3l650e"
-path="res://.godot/imported/Purple_Portal_Sprite_Sheet.png-a49a6fa78ea0791442ee77c015dcbfd0.ctex"
+path="res://.godot/imported/Purple_Portal_Sprite_Sheet.png-8406c0d3807d88c716ce0bace74e4a5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Portals/Purple_Portal_Sprite_Sheet.png"
-dest_files=["res://.godot/imported/Purple_Portal_Sprite_Sheet.png-a49a6fa78ea0791442ee77c015dcbfd0.ctex"]
+source_file="res://Assets/Sprites/Portals/Purple_Portal_Sprite_Sheet.png"
+dest_files=["res://.godot/imported/Purple_Portal_Sprite_Sheet.png-8406c0d3807d88c716ce0bace74e4a5a.ctex"]
 
 [params]
 

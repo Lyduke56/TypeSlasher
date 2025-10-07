@@ -128,6 +128,10 @@ func transition_to_room(direction: String):
 	if not enter_marker:
 		enter_marker = next_room.global_position
 
+	# Check for TargetContainer in the new room
+	var center_marker = next_room.get_node_or_null("TargetContainer")
+	var final_position = center_marker.global_position if center_marker else (enter_marker.global_position if enter_marker is Marker2D else enter_marker)
+
 	self.is_transitioning = true
 
 	# Disable player input during tween
@@ -137,15 +141,14 @@ func transition_to_room(direction: String):
 	player.reset_combo()
 
 	tween.tween_property(player, "global_position", exit_marker.global_position, 0.8).set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property(player, "global_position", enter_marker.global_position, 0.8).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(player, "global_position", final_position, 0.8).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_callback(func():
 		current_room = next_room
 		next_room.start_room()
 		show_directions()
 		player.set_process_input(true)
 		self.is_transitioning = false
-		var enter_pos = enter_marker.global_position if enter_marker is Marker2D else enter_marker
-		player.center_position = enter_pos
+		player.center_position = final_position
 		print("Transition complete")
 	)
 

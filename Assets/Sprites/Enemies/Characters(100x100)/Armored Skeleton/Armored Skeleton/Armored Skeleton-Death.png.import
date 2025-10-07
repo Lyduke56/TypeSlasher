@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dr13ltyin4eqc"
-path="res://.godot/imported/Armored Skeleton-Death.png-391d3faaf12d42797662933140fca791.ctex"
+path="res://.godot/imported/Armored Skeleton-Death.png-a924f9408117221c26195ef46f8778ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Armored Skeleton/Armored Skeleton/Armored Skeleton-Death.png"
-dest_files=["res://.godot/imported/Armored Skeleton-Death.png-391d3faaf12d42797662933140fca791.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Skeleton/Armored Skeleton/Armored Skeleton-Death.png"
+dest_files=["res://.godot/imported/Armored Skeleton-Death.png-a924f9408117221c26195ef46f8778ad.ctex"]
 
 [params]
 

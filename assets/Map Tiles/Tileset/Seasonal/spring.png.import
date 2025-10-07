@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dgtu1g8ffnbv1"
-path="res://.godot/imported/spring.png-b87f07a884a5828875f1d30d9ef6ad4c.ctex"
+path="res://.godot/imported/spring.png-3e414a8c332a53724ae887d38c0b236b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Map Tiles/Tileset/Seasonal/spring.png"
-dest_files=["res://.godot/imported/spring.png-b87f07a884a5828875f1d30d9ef6ad4c.ctex"]
+source_file="res://Assets/Map Tiles/Tileset/Seasonal/spring.png"
+dest_files=["res://.godot/imported/spring.png-3e414a8c332a53724ae887d38c0b236b.ctex"]
 
 [params]
 
