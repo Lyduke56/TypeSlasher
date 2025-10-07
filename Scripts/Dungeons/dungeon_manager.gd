@@ -143,9 +143,50 @@ func transition_to_room(direction: String):
 	tween.tween_property(player, "global_position", exit_marker.global_position, 0.8).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property(player, "global_position", final_position, 0.8).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_callback(func():
+		# Disable previous room's camera
+		if current_room.has_node("Camera2D"):
+			current_room.get_node("Camera2D").current = false
+
+		# Switch to new room
 		current_room = next_room
-		next_room.start_room()
+		next_room.start_room()  # This should enable the new room's camera
 		show_directions()
+
+		# Adjust camera to room size based on CameraArea's CollisionShape2D by zooming to fit
+		var camera = get_viewport().get_camera_2d()
+		if camera:
+			var camera_area = current_room.get_node_or_null("CameraArea")
+			if camera_area:
+				var collision_shape = camera_area.get_node_or_null("CollisionShape2D")
+				if collision_shape and collision_shape.shape is RectangleShape2D:
+					var shape = collision_shape.shape as RectangleShape2D
+					var viewport_size = get_viewport().get_visible_rect().size
+					# Calculate zoom to fit the shape into the viewport
+					var zoom_x = viewport_size.x / shape.size.x
+					var zoom_y = viewport_size.y / shape.size.y
+					var zoom_level = min(zoom_x, zoom_y)  # Use min to fit entirely, or max to cover
+					# Actually, since we want to fit the area,zoom_level = max(shape.size.x / viewport_size.x, shape.size.y / viewport_size.y) if we want to zoom out to fit
+					# Yes, to ensure the whole shape is visible, zoom out if necessary
+					zoom_level = min(viewport_size.x / shape.size.x, viewport_size.y / shape.size.y)
+					var target_zoom = Vector2(zoom_level, zoom_level)
+					var target_pos = camera_area.global_position
+
+					# Animate camera zoom and position
+					if tween:
+						tween.kill()
+					tween = create_tween()
+					tween.set_trans(Tween.TRANS_SINE)
+					tween.set_ease(Tween.EASE_IN_OUT)
+					tween.tween_property(camera, "zoom", target_zoom, 0.5)
+					tween.tween_property(camera, "global_position", target_pos, 0.5)
+					await tween.finished  # Wait for camera animation
+
+					# Reset limits to allow zooming
+					camera.limit_left = -1000000
+					camera.limit_right = 1000000
+					camera.limit_top = -1000000
+					camera.limit_bottom = 1000000
+
 		player.set_process_input(true)
 		self.is_transitioning = false
 		player.center_position = final_position
