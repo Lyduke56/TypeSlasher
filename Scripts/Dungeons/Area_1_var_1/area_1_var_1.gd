@@ -1,5 +1,6 @@
 extends Node2D
 
-# Called when the node enters the scene tree for the first time.
+# Load WordDatabase at dungeon level so rooms can access it
 func _ready() -> void:
-	pass
+	WordDatabase.load_word_database()
+	print("WordDatabase loaded for dungeon Area 1 Var 1")

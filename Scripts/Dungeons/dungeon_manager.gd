@@ -4,14 +4,22 @@ var current_room: Node2D
 var rooms: Array[Node2D] = []
 var player: CharacterBody2D
 var is_transitioning: bool = false
+var block_all_input: bool = false  # Block all input during transitions
 
-@onready var direction_prompt: CanvasLayer = $DirectionPrompt
+@onready var direction_prompt: CanvasLayer = $"../DirectionPrompt"
 @onready var direction_label: RichTextLabel = $"../DirectionPrompt/Word"
 
 var tween: Tween
 
+# Typing mechanics variables (similar to game.gd)
+var active_enemy = null
+var current_letter_index: int = -1
+var is_processing_completion: bool = false
+var input_buffer: Array[String] = []
+
 func _ready() -> void:
 	set_process_input(true)
+	set_process_unhandled_input(true)
 
 	# Find all rooms in the scene
 	for child in get_parent().get_children():
@@ -23,6 +31,10 @@ func _ready() -> void:
 
 	# Find player
 	player = get_node("../Player")
+
+	# Connect player signals to handle enemy destruction
+	player.enemy_reached.connect(_on_enemy_reached)
+	player.slash_completed.connect(_on_player_slash_completed)
 
 	# Start in the starting room
 	current_room = get_node("../StartingRoom")
@@ -37,6 +49,12 @@ func _ready() -> void:
 	for room in rooms:
 		room.room_cleared.connect(_on_room_cleared)
 		room.room_started.connect(_on_room_started)
+
+func _process(_delta):
+	# Process input buffer one character per frame for high WPM handling
+	if not input_buffer.is_empty() and not is_processing_completion:
+		var key_typed = input_buffer.pop_front()
+		_process_single_character(key_typed)
 
 
 # ------------------------------------------------------------
@@ -76,22 +94,36 @@ func show_directions():
 
 
 # ------------------------------------------------------------
-# INPUT HANDLING (WASD for now)
+# INPUT HANDLING (Arrow Keys)
 # ------------------------------------------------------------
 func _input(event):
+	# Block ALL input during room transitions
+	if block_all_input:
+		return
+
+	# Block movement during enemy processing, word completion, or enemy spawning
+	# Skip blocking for starting room and portal room (they don't spawn enemies)
+	var skip_blocking = current_room.name == "StartingRoom" or current_room.name == "PortalRoom"
+	if not skip_blocking and (active_enemy != null or is_processing_completion or current_room.is_spawning_enemies):
+		return
+
 	if event is InputEventKey and event.pressed and not event.echo:
 		var direction = ""
 		match event.keycode:
-			KEY_W:
+			KEY_UP:
 				direction = "top"
-			KEY_S:
+			KEY_DOWN:
 				direction = "bottom"
-			KEY_A:
+			KEY_LEFT:
 				direction = "left"
-			KEY_D:
+			KEY_RIGHT:
 				direction = "right"
 
 		if direction != "" and current_room.exit_markers.has(direction) and not self.is_transitioning:
+			# Only allow transition if current room is cleared (skip check for starting/portal rooms)
+			if not skip_blocking and not current_room.is_cleared:
+				print("Cannot transition - current room is not cleared yet")
+				return
 			transition_to_room(direction)
 
 
@@ -105,6 +137,9 @@ func transition_to_room(direction: String):
 
 	print("Transitioning from %s to %s via %s" %
 		[current_room.name, next_room.name, direction])
+
+	# Block ALL input during transition
+	block_all_input = true
 
 	# Kill existing tween if any
 	if tween and tween.is_running():
@@ -143,6 +178,11 @@ func transition_to_room(direction: String):
 	tween.tween_property(player, "global_position", exit_marker.global_position, 0.8).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property(player, "global_position", final_position, 0.8).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_callback(func():
+		# Clear any buffered input from the transition
+		input_buffer.clear()
+		active_enemy = null
+		current_letter_index = -1
+
 		# Disable previous room's camera
 		if current_room.has_node("Camera2D"):
 			current_room.get_node("Camera2D").current = false
@@ -189,6 +229,7 @@ func transition_to_room(direction: String):
 
 		player.set_process_input(true)
 		self.is_transitioning = false
+		block_all_input = false  # Re-enable all input
 		player.center_position = final_position
 		print("Transition complete")
 	)
@@ -204,3 +245,127 @@ func _on_room_cleared(room):
 func _on_room_started(room):
 	if room == current_room:
 		pass
+
+# ------------------------------------------------------------
+# TYPING MECHANICS (similar to game.gd)
+# ------------------------------------------------------------
+func find_new_active_enemy(typed_character: String):
+	"""Find a new enemy that starts with the typed character"""
+	if is_processing_completion:
+		return
+
+	# Check the current room's enemy container for targetable enemies
+	if current_room and current_room.has_node("EnemyContainer"):
+		var enemy_container = current_room.get_node("EnemyContainer")
+		for entity in enemy_container.get_children():
+			# Skip invalid entities or entities that don't have typing interface
+			if not is_instance_valid(entity) or not entity.has_method("get_prompt"):
+				continue
+			# Skip entities that are already being targeted
+			if entity.get("is_being_targeted") == true:
+				continue
+
+			var prompt = entity.get_prompt()
+			if prompt.length() > 0 and prompt.substr(0, 1).to_lower() == typed_character:
+				print("Found new enemy that starts with ", typed_character)
+				active_enemy = entity
+				current_letter_index = 1
+				active_enemy.set_next_character(current_letter_index)
+				break
+
+func _complete_word():
+	"""Handle word completion with atomic operation"""
+	if is_processing_completion or active_enemy == null or not is_instance_valid(active_enemy):
+		return
+
+	# Set processing flag to block all other operations
+	is_processing_completion = true
+
+	var entity_position = active_enemy.global_position
+	var completed_entity = active_enemy
+
+	print("Word completed! Entity at: ", entity_position)
+
+	# Atomically update all state
+	if completed_entity.has_method("set_targeted_state"):
+		completed_entity.set("is_being_targeted", true)
+		completed_entity.set_targeted_state(true)
+
+	active_enemy = null
+	current_letter_index = -1
+
+	# Clear input buffer of any remaining inputs
+	input_buffer.clear()
+
+	# For dungeon enemies, trigger dash to enemy
+	print("Enemy completed! Player dashing to enemy.")
+	player.dash_to_enemy(entity_position, completed_entity)
+
+	# Reset processing flag after a small delay to ensure actions start
+	await get_tree().create_timer(0.1).timeout
+	is_processing_completion = false
+	# Clear any inputs that got buffered during completion
+	input_buffer.clear()
+
+func _on_enemy_reached(enemy):
+	"""Called when player physically reaches an enemy - now just for slash animation"""
+	print("Player reached enemy! Starting slash animation.")
+	# Don't kill enemy here - let the player's slash animation handle it
+
+func _on_player_slash_completed(enemy):
+	"""Called when player finishes slash animation on an enemy"""
+	print("Player slash completed! Now triggering enemy death.")
+
+	if enemy != null and is_instance_valid(enemy):
+		enemy.play_death_animation()
+
+	# Note: Room clearing is already handled in the room scripts via enemy death signals
+
+func _process_single_character(key_typed: String):
+	"""Process one character at a time to handle high WPM"""
+	if is_processing_completion:
+		return
+
+	if active_enemy == null:
+		find_new_active_enemy(key_typed)
+		return
+
+	# Validate current enemy
+	if not is_instance_valid(active_enemy) or not active_enemy.has_method("get_prompt") or active_enemy.get("is_being_targeted") == true:
+		active_enemy = null
+		current_letter_index = -1
+		find_new_active_enemy(key_typed)
+		return
+
+	var prompt = active_enemy.get_prompt().to_lower()
+
+	# Bounds check
+	if current_letter_index < 0 or current_letter_index >= prompt.length():
+		print("Index out of bounds, resetting")
+		active_enemy = null
+		current_letter_index = -1
+		return
+
+	var next_character = prompt.substr(current_letter_index, 1)
+	if key_typed == next_character:
+		print("Success! Typed:", key_typed, " Expected:", next_character)
+		current_letter_index += 1
+
+		# Update visual feedback
+		if is_instance_valid(active_enemy) and active_enemy.get("is_being_targeted") != true:
+			active_enemy.set_next_character(current_letter_index)
+
+		# Check completion
+		if current_letter_index >= prompt.length():
+			_complete_word()
+	else:
+		print("Wrong character! Typed:", key_typed, " Expected:", next_character)
+
+func _unhandled_input(event: InputEvent) -> void:
+	"""Handle keyboard input for typing"""
+	if event is InputEventKey and event.pressed and not is_processing_completion:
+		var typed_event := event as InputEventKey
+		if typed_event.unicode != 0:
+			var key_typed = PackedByteArray([typed_event.unicode]).get_string_from_utf8().to_lower()
+			print("Key buffered:", key_typed)
+			input_buffer.append(key_typed)

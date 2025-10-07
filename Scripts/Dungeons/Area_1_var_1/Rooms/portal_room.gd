@@ -22,9 +22,11 @@ func _ready() -> void:
 			exit_markers[child.name.to_lower()] = child
 
 	enter_marker = get_node_or_null("Enter")  # If exists
-	# Connect signals
-	camera_area.body_entered.connect(_on_camera_area_body_entered)
-	camera_area.body_exited.connect(_on_camera_area_body_exited)
+	# Connect signals (check if not already connected to avoid duplicates)
+	if not camera_area.body_entered.is_connected(_on_camera_area_body_entered):
+		camera_area.body_entered.connect(_on_camera_area_body_entered)
+	if not camera_area.body_exited.is_connected(_on_camera_area_body_exited):
+		camera_area.body_exited.connect(_on_camera_area_body_exited)
 
 	# Portal room is always cleared
 	is_cleared = true
@@ -36,12 +38,12 @@ func get_connected_room(direction: String) -> Node2D:
 	return connected_rooms.get(direction, null)
 
 func start_room():
-	room_started.emit()
+	room_started.emit(self)
 	print("Room " + name + " started")
 
 func clear_room():
 	is_cleared = true
-	room_cleared.emit()
+	room_cleared.emit(self)
 	print("Room " + name + " cleared")
 
 func update_camera():

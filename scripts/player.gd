@@ -242,8 +242,6 @@ func _finish_return() -> void:
 	# Return to idle animation
 	anim.play("idle")
 
-	print("Player returned to center")
-
 # Public function to check if player is in combo state
 func is_in_combo() -> bool:
 	return combo_active

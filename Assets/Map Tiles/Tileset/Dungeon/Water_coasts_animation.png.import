@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://casqns6bsbloo"
-path="res://.godot/imported/Water_coasts_animation.png-6dc0e0dd23fd5598d1ed6f5a06e71690.ctex"
+path="res://.godot/imported/Water_coasts_animation.png-e2f21a2981aa8221ea3e32601d37a12b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Map Tiles/Tileset/Dungeon/Water_coasts_animation.png"
-dest_files=["res://.godot/imported/Water_coasts_animation.png-6dc0e0dd23fd5598d1ed6f5a06e71690.ctex"]
+source_file="res://assets/Map Tiles/Tileset/Dungeon/Water_coasts_animation.png"
+dest_files=["res://.godot/imported/Water_coasts_animation.png-e2f21a2981aa8221ea3e32601d37a12b.ctex"]
 
 [params]
 

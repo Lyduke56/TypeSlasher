@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://derjq0uekm3ii"
-path="res://.godot/imported/Lancer-Shadow.png-2f48271e6fc5466ecc0886d44c406058.ctex"
+path="res://.godot/imported/Lancer-Shadow.png-bf71ee47461b83b6774d18e61987bce6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Lancer/Lancer/Shadow sprites/Lancer-Shadow.png"
-dest_files=["res://.godot/imported/Lancer-Shadow.png-2f48271e6fc5466ecc0886d44c406058.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Lancer/Lancer/Shadow sprites/Lancer-Shadow.png"
+dest_files=["res://.godot/imported/Lancer-Shadow.png-bf71ee47461b83b6774d18e61987bce6.ctex"]
 
 [params]
 
