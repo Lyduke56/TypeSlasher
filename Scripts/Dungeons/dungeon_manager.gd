@@ -9,6 +9,7 @@ var block_all_input: bool = false  # Block all input during transitions
 @onready var direction_prompt: CanvasLayer = $"../DirectionPrompt"
 @onready var direction_label: RichTextLabel = $"../DirectionPrompt/Word"
 
+	
 var tween: Tween
 
 # Typing mechanics variables (similar to game.gd)
@@ -172,16 +173,28 @@ func transition_to_room(direction: String):
 
 	self.is_transitioning = true
 
-	# Disable player input during tween
+	# Disable player input and physics during tween
 	player.set_process_input(false)
+	player.set_physics_process(false)
+
+	player.anim.play("run")
+	# Set initial direction for first tween
+	var initial_dir = (exit_marker.global_position - player.global_position).normalized()
+	if initial_dir.x != 0:
+		player.anim.flip_h = initial_dir.x < 0
 
 	tween = create_tween()
-	player.reset_combo()
 
 	tween.tween_property(player, "global_position", exit_marker.global_position, 0.8).set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property(player, "global_position", final_position, 0.8).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_callback(func():
-		# Clear any buffered input from the transition
+		# Update direction for second tween
+		var second_dir = (final_position - player.global_position).normalized()
+		if second_dir.x != 0:
+			player.anim.flip_h = second_dir.x < 0
+	)
+	tween.tween_property(player, "global_position", final_position, 1.5).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_callback(func():
+		player.anim.play("idle")
 		input_buffer.clear()
 		active_enemy = null
 		current_letter_index = -1
@@ -230,10 +243,12 @@ func transition_to_room(direction: String):
 					camera.limit_top = -1000000
 					camera.limit_bottom = 1000000
 
+		player.center_position = final_position
+		player.reset_combo()  # Reset combo with new center
+		player.set_physics_process(true)
 		player.set_process_input(true)
 		self.is_transitioning = false
 		block_all_input = false  # Re-enable all input
-		player.center_position = final_position
 		print("Transition complete")
 	)
 
