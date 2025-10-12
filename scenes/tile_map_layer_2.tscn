@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://bphv0yr26jjg"]
 
-[ext_resource type="Texture2D" uid="uid://dgtu1g8ffnbv1" path="res://assets/Map Tiles/Tileset/Seasonal/spring.png" id="1_r5d7f"]
-[ext_resource type="Texture2D" uid="uid://b4lopj71ao0q8" path="res://assets/Map Tiles/Tileset/Extras/texture.png" id="2_2ju65"]
+[ext_resource type="Texture2D" uid="uid://dgtu1g8ffnbv1" path="res://Assets/Map Tiles/Tileset/Seasonal/spring.png" id="1_r5d7f"]
+[ext_resource type="Texture2D" uid="uid://b4lopj71ao0q8" path="res://Assets/Map Tiles/Tileset/Extras/texture.png" id="2_2ju65"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("1_r5d7f")
