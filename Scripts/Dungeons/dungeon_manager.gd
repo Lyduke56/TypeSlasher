@@ -35,6 +35,7 @@ func _ready() -> void:
 	# Connect player signals to handle enemy destruction
 	player.enemy_reached.connect(_on_enemy_reached)
 	player.slash_completed.connect(_on_player_slash_completed)
+	player.player_returned.connect(_on_player_returned)
 
 	# Start in the starting room
 	current_room = get_node("../StartingRoom")
@@ -163,8 +164,10 @@ func transition_to_room(direction: String):
 	if not enter_marker:
 		enter_marker = next_room.global_position
 
-	# Check for TargetContainer in the new room
+	# Check for TargetContainer in the new room (or PortalContainer for portal rooms)
 	var center_marker = next_room.get_node_or_null("TargetContainer")
+	if center_marker == null:
+		center_marker = next_room.get_node_or_null("PortalContainer")
 	var final_position = center_marker.global_position if center_marker else (enter_marker.global_position if enter_marker is Marker2D else enter_marker)
 
 	self.is_transitioning = true
@@ -245,6 +248,11 @@ func _on_room_cleared(room):
 func _on_room_started(room):
 	if room == current_room:
 		pass
+
+func _on_player_returned():
+	"""Called when player finishes returning to center - check if room can be cleared"""
+	if current_room and current_room.is_ready_to_clear and not current_room.is_cleared:
+		current_room.clear_room()
 
 # ------------------------------------------------------------
 # TYPING MECHANICS (similar to game.gd)

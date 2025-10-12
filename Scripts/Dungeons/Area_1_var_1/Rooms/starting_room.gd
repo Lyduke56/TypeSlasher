@@ -4,6 +4,7 @@ enum RoomType { SMALL, MEDIUM, BOSS }
 
 @export var room_type: RoomType = RoomType.SMALL
 var is_cleared: bool = false
+var is_ready_to_clear: bool = false
 
 # Dictionary to store connected rooms: "direction" : room_node
 var connected_rooms: Dictionary = {}

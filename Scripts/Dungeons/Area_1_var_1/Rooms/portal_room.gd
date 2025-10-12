@@ -4,6 +4,7 @@ enum RoomType { SMALL, MEDIUM, BOSS }
 
 @export var room_type: RoomType = RoomType.BOSS
 var is_cleared: bool = false
+var is_ready_to_clear: bool = false
 
 # Dictionary to store connected rooms: "direction" : room_node
 var connected_rooms: Dictionary = {}
@@ -14,6 +15,8 @@ signal room_started
 signal room_cleared
 
 @onready var camera_area: Area2D = $CameraArea
+@onready var portal_container: Node2D = $PortalContainer
+var GreenPortalScene = preload("res://scenes/GreenPortal.tscn")
 
 func _ready() -> void:
 	# Find markers
@@ -64,7 +67,19 @@ func update_camera():
 func _on_camera_area_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		update_camera()
+		_spawn_portal()
 		print("Player entered room: " + name)
+
+func _spawn_portal():
+	"""Spawn the portal if not already spawned"""
+	if portal_container.get_child_count() > 0:
+		return  # Already has portal
+
+	var portal_instance = GreenPortalScene.instantiate()
+	portal_container.add_child(portal_instance)
+	portal_instance.position = Vector2.ZERO  # Position within container
+	portal_instance.play_appear_animation()  # Play appear animation
+	print("Spawned portal in portal room")
 
 func _on_camera_area_body_exited(body: Node2D) -> void:
 	if body.name == "Player":

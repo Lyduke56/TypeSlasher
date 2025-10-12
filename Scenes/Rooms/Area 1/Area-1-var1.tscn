@@ -877,7 +877,7 @@ position = Vector2(260, 8)
 
 [node name="TargetContainer" type="Node2D" parent="RoomC - Medium"]
 z_index = 2
-position = Vector2(1, 17)
+position = Vector2(1, 6)
 
 [node name="EnemyContainer" type="Node2D" parent="RoomC - Medium"]
 z_index = 2
@@ -906,12 +906,13 @@ shape = SubResource("RectangleShape2D_n6uaq")
 [node name="Top" type="Marker2D" parent="PortalRoom"]
 position = Vector2(-1, -159)
 
-[node name="PortalContianer" type="Node2D" parent="PortalRoom"]
+[node name="PortalContainer" type="Node2D" parent="PortalRoom"]
+z_index = 5
 position = Vector2(0, 70)
 
 [node name="TargetContainer" type="Node2D" parent="PortalRoom"]
 z_index = 2
-position = Vector2(0, 1)
+position = Vector2(-2, -54)
 
 [node name="DirectionPrompt" type="CanvasLayer" parent="."]
 

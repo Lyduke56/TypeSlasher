@@ -4,6 +4,7 @@ enum RoomType { SMALL, MEDIUM, BOSS }
 
 @export var room_type: RoomType = RoomType.MEDIUM
 var is_cleared: bool = false
+var is_ready_to_clear: bool = false
 
 # Dictionary to store connected rooms: "direction" : room_node
 var connected_rooms: Dictionary = {}
@@ -71,6 +72,16 @@ func start_room():
 
 func clear_room():
 	is_cleared = true
+
+	# Remove instantiated target after clearing
+	if target_container.get_child_count() > 0:
+		var target_instance = target_container.get_child(0)
+		target_container.remove_child(target_instance)
+		target_instance.queue_free()
+
+	# Stop enemy spawn timer to prevent additional enemies after room clears
+	if spawn_timer and spawn_timer.is_inside_tree():
+		spawn_timer.stop()
 
 	# Give camera back to player when room is cleared
 	_handle_camera_on_room_clear()
@@ -165,12 +176,16 @@ func _spawn_next_enemy():
 		spawn_timer.stop()
 		is_spawning_enemies = false
 		print("Enemy spawn sequence complete in room: " + name)
+		if enemies_remaining <= 0:
+			is_ready_to_clear = true
 		return
 
 	if available_spawn_points.is_empty():
 		spawn_timer.stop()
 		is_spawning_enemies = false
 		print("No available spawn points left in room: " + name)
+		if enemies_remaining <= 0:
+			is_ready_to_clear = true
 		return
 
 	# Pick a random spawn point
@@ -234,10 +249,10 @@ func _get_unique_word() -> String:
 	return available_words[randi() % available_words.size()]
 
 func _on_enemy_died():
-	"""Called when an enemy dies - check if room is cleared"""
+	"""Called when an enemy dies - check if room is ready to be cleared"""
 	enemies_remaining -= 1
-	if enemies_remaining <= 0:
-		clear_room()
+	if enemies_remaining <= 0 and not is_spawning_enemies:
+		is_ready_to_clear = true
 
 func _handle_camera_on_room_enter():
 	"""Move camera to this room if it's uncleared (combat room)"""

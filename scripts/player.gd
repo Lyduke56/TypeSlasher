@@ -30,6 +30,7 @@ var fast_animation_speed: float = 5.0  # 3x faster when typing quickly
 
 signal enemy_reached(enemy)
 signal slash_completed(target_enemy)
+signal player_returned
 
 func _ready() -> void:
 	# Set center position (you can adjust this based on your scene)
@@ -238,6 +239,9 @@ func _return_to_center() -> void:
 
 func _finish_return() -> void:
 	is_returning = false
+
+	# Signal that player has returned to center
+	emit_signal("player_returned")
 
 	# Return to idle animation
 	anim.play("idle")
