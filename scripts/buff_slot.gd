@@ -26,6 +26,18 @@ func _ready() -> void:
 	auto_timer.timeout.connect(_on_auto_timeout)
 	add_child(auto_timer)
 
+	# Ensure randomization is seeded - call randomize once per session if not done
+	if not get_node_or_null("/root/Global") or (get_node_or_null("/root/Global") and not get_node("/root/Global").random_seed_set):
+		randomize()
+		var global_node = get_node_or_null("/root/Global")
+		if global_node == null:
+			global_node = load("res://Scripts/global.gd").new()
+			get_tree().root.add_child(global_node)
+		global_node.random_seed_set = true
+
+	# Start with a random initial icon to ensure fairness
+	set_icon(randi() % buff_icons.size())
+
 	# Start auto-spinning immediately when the slot is created
 	start_auto_spin()
 

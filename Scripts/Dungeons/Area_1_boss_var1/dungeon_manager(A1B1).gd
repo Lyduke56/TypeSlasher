@@ -9,7 +9,7 @@ var block_all_input: bool = false  # Block all input during transitions
 @onready var direction_prompt: CanvasLayer = $"../DirectionPrompt"
 @onready var direction_label: RichTextLabel = $"../DirectionPrompt/Word"
 
-	
+
 var tween: Tween
 
 # Typing mechanics variables (similar to game.gd)
@@ -38,6 +38,9 @@ func _ready() -> void:
 	player.slash_completed.connect(_on_player_slash_completed)
 	player.player_returned.connect(_on_player_returned)
 
+	# Initialize heart container
+	setup_heart_container()
+
 	# Start in the starting room
 	current_room = get_node("../StartingRoom")
 	current_room.start_room()
@@ -51,6 +54,35 @@ func _ready() -> void:
 	for room in rooms:
 		room.room_cleared.connect(_on_room_cleared)
 		room.room_started.connect(_on_room_started)
+
+func setup_heart_container():
+	"""Create and setup the heart container for the level"""
+	# Create canvas layer
+	var canvas_layer = CanvasLayer.new()
+	canvas_layer.name = "CanvasLayer"
+	add_child(canvas_layer)
+
+	# Add heart container to the canvas layer
+	var heart_container = load("res://Scenes/GUI/heart_container.tscn").instantiate()
+	heart_container.name = "HeartContainer"
+	canvas_layer.add_child(heart_container)
+
+	# Force a visual refresh to ensure buff takes effect
+	call_deferred("_refresh_heart_display", heart_container)
+
+	print("Heart container initialized for boss dungeon!")
+
+func _refresh_heart_display(heart_container):
+	"""Refresh heart display after scene is fully loaded"""
+	# Initialize heart container with global health values
+	heart_container.setMaxhearts(Global.player_max_health)
+	heart_container.setHealth(Global.player_current_health)
+
+	# Check if health buff was applied and ensure it takes effect
+	if Global.health_buff_applied:
+		print("Health buff was applied --visual refresh with buffed max health: ", Global.player_max_health)
+		# Force a complete refresh of the heart container
+		heart_container.queue_redraw()
 
 func _process(_delta):
 	# Process input buffer one character per frame for high WPM handling

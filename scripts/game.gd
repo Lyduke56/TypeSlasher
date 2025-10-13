@@ -85,6 +85,9 @@ func _ready() -> void:
 	player.enemy_reached.connect(_on_enemy_reached)
 	player.slash_completed.connect(_on_player_slash_completed)
 
+	# Setup target health
+	$Target.health = Global.player_current_health
+
 func _process(_delta):
 	# Process input buffer one character per frame for high WPM handling
 	# Cached: Moved update_score to only when actual progress is made
@@ -197,6 +200,9 @@ func spawn_target():
 	target_container.add_child(target_instance)
 	target_instance.position = target_container.position
 	target_instance.z_index = 1
+
+	# Sync target health with global health
+	target_instance.health = Global.player_current_health
 
 # Function to change difficulty/category
 func set_word_category(category: String):

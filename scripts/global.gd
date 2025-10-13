@@ -3,11 +3,30 @@ extends Node
 var high_score = 0
 var current_score: int
 var previous_score: int
+var random_seed_set: bool = false  # Track if randomization has been seeded
+var health_buff_applied: bool = false  # Track if health buff was applied this session
 
 # Player health system
 var player_max_health: int = 3  # Default max health
 var player_current_health: int = 3  # Current health
 
+signal player_health_changed(new_health: int, max_health: int)
+
+func take_damage(amount: int = 1):
+	"""Reduce player health and emit signal for UI updates"""
+	player_current_health -= amount
+	if player_current_health < 0:
+		player_current_health = 0
+	player_health_changed.emit(player_current_health, player_max_health)
+	print("Player took ", amount, " damage! Health: ", player_current_health, "/", player_max_health)
+
+func heal_damage(amount: int = 1):
+	"""Increase player health and emit signal for UI updates"""
+	player_current_health += amount
+	if player_current_health > player_max_health:
+		player_current_health = player_max_health
+	player_health_changed.emit(player_current_health, player_max_health)
+	print("Player healed ", amount, " health! Health: ", player_current_health, "/", player_max_health)
 
 # --- WPM tracking ---
 # We measure characters typed correctly; 5 characters = 1 word (standard WPM)

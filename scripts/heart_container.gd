@@ -5,15 +5,35 @@ var max_hearts: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	# Connect to global health signal for real-time updates
+	Global.player_health_changed.connect(_on_player_health_changed)
+	initialize_hearts()
 
+func initialize_hearts():
+	"""Initialize hearts based on current global values"""
+	setMaxhearts(Global.player_max_health)
+	setHealth(Global.player_current_health)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_player_health_changed(new_health: int, max_health: int):
+	"""Update heart display when health changes"""
+	setHealth(new_health)
+	if max_health != max_hearts:
+		setMaxhearts(max_health)
+
+func take_damage(amount: int = 1):
+	"""Convenience function to take damage"""
+	Global.take_damage(amount)
+
+func heal_damage(amount: int = 1):
+	"""Convenience function to heal damage"""
+	Global.heal_damage(amount)
 
 func setMaxhearts(max: int):
 	max_hearts = max
+	# Clear existing hearts
+	for child in get_children():
+		child.queue_free()
+	# Create new hearts
 	for i in range(max):
 		var heart = HeartGuiClass.instantiate()
 		add_child(heart)

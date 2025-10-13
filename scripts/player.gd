@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+# Test edit: Checking if file edits trigger reload notification - ADDITIONAL TEST COMMENT
 # Base dash speeds
 @export var min_dash_speed: float = 600.0  # Minimum speed for close enemies
 @export var max_dash_speed: float = 1500.0  # Maximum speed for far enemies

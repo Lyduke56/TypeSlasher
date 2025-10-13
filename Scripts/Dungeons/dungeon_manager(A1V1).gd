@@ -9,7 +9,7 @@ var block_all_input: bool = false  # Block all input during transitions
 @onready var direction_prompt: CanvasLayer = $"../DirectionPrompt"
 @onready var direction_label: RichTextLabel = $"../DirectionPrompt/Word"
 
-	
+
 var tween: Tween
 
 # Typing mechanics variables (similar to game.gd)
@@ -37,6 +37,9 @@ func _ready() -> void:
 	player.enemy_reached.connect(_on_enemy_reached)
 	player.slash_completed.connect(_on_player_slash_completed)
 	player.player_returned.connect(_on_player_returned)
+
+	# Initialize heart container
+	setup_heart_container()
 
 	# Start in the starting room
 	current_room = get_node("../StartingRoom")
@@ -404,6 +407,24 @@ func _process_single_character(key_typed: String):
 		# Check completion
 		if current_letter_index >= prompt.length():
 			_complete_word()
+
+func setup_heart_container():
+	"""Create and setup the heart container for the dungeon"""
+	# Create canvas layer
+	var canvas_layer = CanvasLayer.new()
+	canvas_layer.name = "CanvasLayer"
+	add_child(canvas_layer)
+
+	# Add heart container to the canvas layer
+	var heart_container = load("res://Scenes/GUI/heart_container.tscn").instantiate()
+	heart_container.name = "HeartContainer"
+	canvas_layer.add_child(heart_container)
+
+	# Initialize heart container with global health values
+	heart_container.setMaxhearts(Global.player_max_health)
+	heart_container.setHealth(Global.player_current_health)
+
+	print("Heart container initialized for dungeon!")
 
 func _unhandled_input(event: InputEvent) -> void:
 	"""Handle keyboard input for typing"""

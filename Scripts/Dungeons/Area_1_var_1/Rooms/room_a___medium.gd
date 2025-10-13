@@ -67,7 +67,7 @@ func start_room():
 		return
 
 	# Determine enemy count based on room type
-	max_enemies_to_spawn = 10 if room_type == RoomType.MEDIUM else 5
+	max_enemies_to_spawn = 1 if room_type == RoomType.MEDIUM else 1
 
 	# Spawn enemies and target
 	_spawn_room_enemies(max_enemies_to_spawn)
