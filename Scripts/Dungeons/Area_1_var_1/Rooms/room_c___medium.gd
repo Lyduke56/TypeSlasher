@@ -28,6 +28,7 @@ var is_spawning_enemies = false  # True when enemies are still spawning
 @onready var camera_area: Area2D = $CameraArea
 @onready var enemy_container: Node2D = $EnemyContainer
 @onready var target_container: Node2D = $TargetContainer
+@onready var barrier: TileMapLayer = get_tree().get_root().get_node("Dungeon/Node/Barrier")
 
 func _ready() -> void:
 	# Find markers
@@ -51,6 +52,7 @@ func get_connected_room(direction: String) -> Node2D:
 func start_room():
 	room_started.emit(self)
 	print("Room " + name + " started")
+	barrier.visible = true
 
 	# Handle camera positioning when entering the room
 	_handle_camera_on_room_enter()
@@ -88,6 +90,7 @@ func clear_room():
 
 	room_cleared.emit(self)
 	print("Room " + name + " cleared")
+	barrier.visible = false
 
 func update_camera():
 	# Update camera based on room

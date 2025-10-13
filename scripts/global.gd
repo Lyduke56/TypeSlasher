@@ -4,6 +4,10 @@ var high_score = 0
 var current_score: int
 var previous_score: int
 
+# Player health system
+var player_max_health: int = 3  # Default max health
+var player_current_health: int = 3  # Current health
+
 
 # --- WPM tracking ---
 # We measure characters typed correctly; 5 characters = 1 word (standard WPM)

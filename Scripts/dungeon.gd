@@ -31,16 +31,27 @@ func show_buff_selection():
 	print("Buff selection UI shown in dungeon!")
 
 func _on_buff_selected(buff_index: int):
-	"""Handle buff selection (placeholder - just close UI for now)"""
-	print("Buff ", buff_index + 1, " selected! Closing buff selection.")
-	
+	"""Handle buff selection and transition to boss room"""
+	print("Buff ", buff_index + 1, " selected! Transitioning to boss room.")
+
+	# Apply buff effect based on index
+	if buff_index == 0:  # Assuming Buff_HealthPotion is the first buff (index 0)
+		# Find heart container in the current scene and increase max health
+		var heart_container = get_node("../CanvasLayer/HeartContainer")
+		if heart_container and heart_container.has_method("increaseMaxHealth"):
+			heart_container.increaseMaxHealth(1)
+			print("Health buff applied! Max health increased by 1.")
+		else:
+			print("Warning: Could not find HeartContainer to apply health buff")
+
 	# Hide buff selection UI
 	if buff_selection_ui:
 		buff_selection_ui.queue_free()
 		buff_selection_ui = null
-	
-	# Resume the game
-	get_tree().paused = false
+
+	# Do NOT resume the game (keep pause) and change to boss room
+	# Note: Scene change will unpause automatically
+	get_tree().change_scene_to_file("res://Scenes/Rooms/Area 1/Area-1-boss-var1.tscn")
 
 func _set_node_tree_process_mode(node: Node, mode: Node.ProcessMode) -> void:
 	# Recursively set process mode for a subtree so input works while paused

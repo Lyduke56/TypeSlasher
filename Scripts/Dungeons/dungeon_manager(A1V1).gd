@@ -343,7 +343,7 @@ func _complete_word():
 	# For dungeon enemies and portals, trigger dash to entity
 	print("Entity completed! Player dashing to entity.")
 	if completed_entity.has_method("play_disappear_animation"):
-		# Portal completion - dash to portal (which will handle scene transition)
+		# Portal completion - dash to portal and change scene
 		player.dash_to_portal(entity_position, completed_entity)
 	else:
 		# Regular enemy completion

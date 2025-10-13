@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bg3mm4pb45djf"
-path="res://.godot/imported/Greatsword Skeleton-Attack01.png-c5e14e06f69a3fefc039509647c99fea.ctex"
+path="res://.godot/imported/Greatsword Skeleton-Attack01.png-a27b30823e86238a3099bad82933e487.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Greatsword Skeleton/Greatsword Skeleton with shadows/Greatsword Skeleton-Attack01.png"
-dest_files=["res://.godot/imported/Greatsword Skeleton-Attack01.png-c5e14e06f69a3fefc039509647c99fea.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Greatsword Skeleton/Greatsword Skeleton with shadows/Greatsword Skeleton-Attack01.png"
+dest_files=["res://.godot/imported/Greatsword Skeleton-Attack01.png-a27b30823e86238a3099bad82933e487.ctex"]
 
 [params]
 

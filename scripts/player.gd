@@ -163,9 +163,11 @@ func _finish_dash() -> void:
 	is_dashing = false
 
 	if target_portal != null:
-		# For portals, change scene immediately
-		print("Reached portal! Changing scene to boss room.")
-		get_tree().change_scene_to_file("res://Scenes/Rooms/Area 1/Area-1-boss-var1.tscn")
+		# For portals, change scene but show buff selection after transition
+		print("Reached portal! Transitioning to buff selection scene.")
+		# Change to the buff selection scene, not directly to boss room
+		# The buff selection scene will handle transitioning to boss room after buff selection
+		get_tree().change_scene_to_file("res://Scenes/BuffSelection.tscn")
 		target_portal = null  # Clear reference
 		return
 

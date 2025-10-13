@@ -47,7 +47,8 @@ func _ready() -> void:
 	pause_ui = ui_scene.instantiate()
 	add_child(pause_ui)
 
-	heart_container.setMaxhearts(3)
+	heart_container.setMaxhearts(Global.player_max_health)
+	heart_container.setHealth(Global.player_current_health)
 	# Ensure it and all children work while paused
 	_set_node_tree_process_mode(pause_ui, Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED)
 	# Bring UI to front

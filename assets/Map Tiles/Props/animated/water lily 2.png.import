@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b832vc2muaqd7"
-path="res://.godot/imported/water lily 2.png-adc7620907182f42923cd596ae47bd75.ctex"
+path="res://.godot/imported/water lily 2.png-bcf563cfdb1b9b07b11c82f9d4589d11.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Map Tiles/Props/animated/water lily 2.png"
-dest_files=["res://.godot/imported/water lily 2.png-adc7620907182f42923cd596ae47bd75.ctex"]
+source_file="res://Assets/Map Tiles/Props/animated/water lily 2.png"
+dest_files=["res://.godot/imported/water lily 2.png-bcf563cfdb1b9b07b11c82f9d4589d11.ctex"]
 
 [params]
 
