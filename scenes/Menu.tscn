@@ -159,8 +159,8 @@ expand_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.717647)
-position = Vector2(556.5, -193.82)
-scale = Vector2(5.89231, 10.0681)
+position = Vector2(555.02, -193.82)
+scale = Vector2(5.90742, 10.0681)
 texture = SubResource("GradientTexture2D_o0tnf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

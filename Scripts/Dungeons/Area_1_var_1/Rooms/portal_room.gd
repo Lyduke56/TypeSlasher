@@ -78,6 +78,7 @@ func _spawn_portal():
 	var portal_instance = GreenPortalScene.instantiate()
 	portal_container.add_child(portal_instance)
 	portal_instance.position = Vector2.ZERO  # Position within container
+	portal_instance.set_prompt("Warp")  # Set typing prompt
 	portal_instance.play_appear_animation()  # Play appear animation
 	print("Spawned portal in portal room")
 

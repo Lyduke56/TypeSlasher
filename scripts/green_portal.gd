@@ -88,7 +88,6 @@ func play_disappear_animation():
 	await animated_sprite.animation_finished
 	queue_free()
 
+# Portal handled by typing completion now - kept for safety
 func _on_body_entered(body: Node2D):
-	if body.is_in_group("player"):  # Assuming player is in "player" group
-		print("Player entered portal ", portal_index + 1)
-		portal_selected.emit(portal_index)
+	pass  # Typing system handles portal activation now

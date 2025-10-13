@@ -63,6 +63,9 @@ func _physics_process(delta: float) -> void:
 	if is_dashing or is_returning:
 		_handle_movement(delta)
 
+# Skip physics processing when not moving to reduce computation
+# This is now handled by condition above, so no change needed but noted
+
 func _handle_movement(delta: float) -> void:
 	var current_speed = current_dash_speed if is_dashing else return_speed
 
@@ -161,8 +164,8 @@ func _finish_dash() -> void:
 
 	if target_portal != null:
 		# For portals, change scene immediately
-		print("Reached portal! Changing scene to Dungeon-1-var1")
-		get_tree().change_scene_to_file("res://Scenes/Rooms/Area 1/Area-1-var1.tscn")
+		print("Reached portal! Changing scene to boss room.")
+		get_tree().change_scene_to_file("res://Scenes/Rooms/Area 1/Area-1-boss-var1.tscn")
 		target_portal = null  # Clear reference
 		return
 

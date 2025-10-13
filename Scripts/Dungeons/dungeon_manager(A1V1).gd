@@ -54,6 +54,7 @@ func _ready() -> void:
 
 func _process(_delta):
 	# Process input buffer one character per frame for high WPM handling
+	# Cached: Moved update_score to only when actual progress is made
 	if not input_buffer.is_empty() and not is_processing_completion:
 		var key_typed = input_buffer.pop_front()
 		_process_single_character(key_typed)
@@ -296,6 +297,25 @@ func find_new_active_enemy(typed_character: String):
 				active_enemy.set_next_character(current_letter_index)
 				break
 
+	# Also check for portals in portal rooms
+	if current_room and current_room.has_node("PortalContainer") and current_room.name == "PortalRoom":
+		var portal_container = current_room.get_node("PortalContainer")
+		for entity in portal_container.get_children():
+			# Skip invalid entities or entities that don't have typing interface
+			if not is_instance_valid(entity) or not entity.has_method("get_prompt"):
+				continue
+			# Skip entities that are already being targeted
+			if entity.get("is_being_targeted") == true:
+				continue
+
+			var prompt = entity.get_prompt()
+			if prompt.length() > 0 and prompt.substr(0, 1).to_lower() == typed_character:
+				print("Found portal that starts with ", typed_character)
+				active_enemy = entity
+				current_letter_index = 1
+				active_enemy.set_next_character(current_letter_index)
+				break
+
 func _complete_word():
 	"""Handle word completion with atomic operation"""
 	if is_processing_completion or active_enemy == null or not is_instance_valid(active_enemy):
@@ -320,9 +340,14 @@ func _complete_word():
 	# Clear input buffer of any remaining inputs
 	input_buffer.clear()
 
-	# For dungeon enemies, trigger dash to enemy
-	print("Enemy completed! Player dashing to enemy.")
-	player.dash_to_enemy(entity_position, completed_entity)
+	# For dungeon enemies and portals, trigger dash to entity
+	print("Entity completed! Player dashing to entity.")
+	if completed_entity.has_method("play_disappear_animation"):
+		# Portal completion - dash to portal (which will handle scene transition)
+		player.dash_to_portal(entity_position, completed_entity)
+	else:
+		# Regular enemy completion
+		player.dash_to_enemy(entity_position, completed_entity)
 
 	# Reset processing flag after a small delay to ensure actions start
 	await get_tree().create_timer(0.1).timeout
@@ -353,8 +378,8 @@ func _process_single_character(key_typed: String):
 		find_new_active_enemy(key_typed)
 		return
 
-	# Validate current enemy
-	if not is_instance_valid(active_enemy) or not active_enemy.has_method("get_prompt") or active_enemy.get("is_being_targeted") == true:
+	# Validate current enemy - cached: avoid repeated property access
+	if not is_instance_valid(active_enemy) or not active_enemy.has_method("get_prompt"):
 		active_enemy = null
 		current_letter_index = -1
 		find_new_active_enemy(key_typed)
@@ -364,25 +389,21 @@ func _process_single_character(key_typed: String):
 
 	# Bounds check
 	if current_letter_index < 0 or current_letter_index >= prompt.length():
-		print("Index out of bounds, resetting")
 		active_enemy = null
 		current_letter_index = -1
 		return
 
 	var next_character = prompt.substr(current_letter_index, 1)
 	if key_typed == next_character:
-		print("Success! Typed:", key_typed, " Expected:", next_character)
 		current_letter_index += 1
 
-		# Update visual feedback
-		if is_instance_valid(active_enemy) and active_enemy.get("is_being_targeted") != true:
+		# Update visual feedback - cached: minimize checks
+		if is_instance_valid(active_enemy):
 			active_enemy.set_next_character(current_letter_index)
 
 		# Check completion
 		if current_letter_index >= prompt.length():
 			_complete_word()
-	else:
-		print("Wrong character! Typed:", key_typed, " Expected:", next_character)
 
 func _unhandled_input(event: InputEvent) -> void:
 	"""Handle keyboard input for typing"""

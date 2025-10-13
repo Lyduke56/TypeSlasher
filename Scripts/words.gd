@@ -3,9 +3,13 @@ extends RefCounted
 class_name WordDatabase
 
 static var word_database = {}
+static var loaded = false  # Cache: Track if already loaded
 
-# Load the JSON data
+# Load the JSON data - cached: only load once
 static func load_word_database():
+	if loaded:
+		return  # Already loaded
+
 	var file = FileAccess.open("res://data/words.json", FileAccess.READ)
 	if file == null:
 		print("Error: Could not open words.json")
@@ -22,6 +26,7 @@ static func load_word_database():
 		return
 
 	word_database = json.data
+	loaded = true
 	print("Word database loaded successfully!")
 
 # Get words from specific categories
