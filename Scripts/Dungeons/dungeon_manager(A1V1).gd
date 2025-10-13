@@ -6,8 +6,7 @@ var player: CharacterBody2D
 var is_transitioning: bool = false
 var block_all_input: bool = false  # Block all input during transitions
 
-@onready var direction_prompt: CanvasLayer = $"../DirectionPrompt"
-@onready var direction_label: RichTextLabel = $"../DirectionPrompt/Word"
+@onready var direction_label: RichTextLabel = $"root/Main/Hud/Direction"
 
 	
 var tween: Tween
@@ -30,8 +29,12 @@ func _ready() -> void:
 	# Set connections manually for now (can be exported later)
 	setup_room_connections()
 
-	# Find player
-	player = get_node("../Player")
+	# Find player (now in Main scene, not dungeon scene)
+	player = get_node("/root/Main/Player")
+
+	# Make player's camera current for UI rendering
+	if player.has_node("Camera2D"):
+		player.get_node("Camera2D").make_current()
 
 	# Connect player signals to handle enemy destruction
 	player.enemy_reached.connect(_on_enemy_reached)
@@ -88,12 +91,13 @@ func setup_room_connections():
 # DIRECTION PROMPT
 # ------------------------------------------------------------
 func show_directions():
-	if current_room.is_cleared:
-		var directions = current_room.exit_markers.keys()
-		direction_label.text = "Type direction: " + ", ".join(directions)
-		direction_label.visible = true
-	else:
-		direction_label.visible = false
+	if direction_label:
+		if current_room.is_cleared:
+			var directions = current_room.exit_markers.keys()
+			direction_label.text = "Type direction: " + ", ".join(directions)
+			direction_label.visible = true
+		else:
+			direction_label.visible = false
 
 
 # ------------------------------------------------------------
@@ -200,13 +204,9 @@ func transition_to_room(direction: String):
 		active_enemy = null
 		current_letter_index = -1
 
-		# Disable previous room's camera
-		if current_room.has_node("Camera2D"):
-			current_room.get_node("Camera2D").current = false
-
-		# Switch to new room
+			# Switch to new room (no camera management needed - handled by room start)
 		current_room = next_room
-		next_room.start_room()  # This should enable the new room's camera
+		next_room.start_room()
 		show_directions()
 
 		# Adjust camera to room size based on CameraArea's CollisionShape2D by zooming to fit
@@ -229,14 +229,12 @@ func transition_to_room(direction: String):
 					var target_pos = camera_area.global_position
 
 					# Animate camera zoom and position
-					if tween:
-						tween.kill()
-					tween = create_tween()
-					tween.set_trans(Tween.TRANS_SINE)
-					tween.set_ease(Tween.EASE_IN_OUT)
-					tween.tween_property(camera, "zoom", target_zoom, 0.5)
-					tween.tween_property(camera, "global_position", target_pos, 0.5)
-					await tween.finished  # Wait for camera animation
+					var new_tween = create_tween()
+					new_tween.set_trans(Tween.TRANS_SINE)
+					new_tween.set_ease(Tween.EASE_IN_OUT)
+					new_tween.tween_property(camera, "zoom", target_zoom, 0.5)
+					new_tween.tween_property(camera, "global_position", target_pos, 0.5)
+					await new_tween.finished  # Wait for camera animation
 
 					# Reset limits to allow zooming
 					camera.limit_left = -1000000
@@ -340,13 +338,18 @@ func _complete_word():
 	# Clear input buffer of any remaining inputs
 	input_buffer.clear()
 
-	# For dungeon enemies and portals, trigger dash to entity
-	print("Entity completed! Player dashing to entity.")
-	if completed_entity.has_method("play_disappear_animation"):
-		# Portal completion - dash to portal (which will handle scene transition)
-		player.dash_to_portal(entity_position, completed_entity)
+	# For dungeon enemies and portals, handle differently
+	if completed_entity.has_method("get_prompt") and completed_entity.get_prompt() == "Warp":
+		# This is a portal - switch dungeon immediately
+		print("Portal completed! Switching dungeon immediately.")
+		var main_manager = get_tree().root.get_node_or_null("Main/MainManager")
+		if main_manager:
+			main_manager.switch_to_boss_dungeon()
+		else:
+			print("ERROR: Could not find MainManager!")
 	else:
-		# Regular enemy completion
+		# This is an enemy - use dash_to_enemy
+		print("Enemy completed! Player dashing to enemy.")
 		player.dash_to_enemy(entity_position, completed_entity)
 
 	# Reset processing flag after a small delay to ensure actions start

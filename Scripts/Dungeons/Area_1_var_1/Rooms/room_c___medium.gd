@@ -15,7 +15,7 @@ signal room_started
 signal room_cleared
 
 # Enemy spawning
-var EnemyScene = preload("res://scenes/Orc_enemy.tscn")
+var EnemyScene = preload("res://Scenes/Enemies/Orc_enemy.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
 var current_category = "medium"  # Can be: easy, medium, hard, typo, sentence, casing
 var enemies_spawned = 0  # How many we've actually spawned
@@ -92,7 +92,7 @@ func clear_room():
 func update_camera():
 	# Update camera based on room
 	# Assuming Camera2D is attached to player
-	var player = get_node("../Player")
+	var player = get_node("/root/Main/Player")
 	if player and player.get_node("Camera2D"):
 		var camera = player.get_node("Camera2D")
 		var shape = camera_area.get_node("CollisionShape2D")
@@ -256,7 +256,7 @@ func _handle_camera_on_room_enter():
 		return
 
 	# Move camera from player to this room (center the camera on the room)
-	var player = get_node("../Player")
+	var player = get_node("/root/Main/Player")
 	if player and player.get_node("Camera2D"):
 		var camera = player.get_node("Camera2D")
 		player.remove_child(camera)
@@ -273,7 +273,7 @@ func _handle_camera_on_room_clear():
 	if not is_cleared:
 		return
 
-	var player = get_node("../Player")
+	var player = get_node("/root/Main/Player")
 	if player and get_node_or_null("Camera2D"):
 		var camera = get_node("Camera2D")
 		remove_child(camera)

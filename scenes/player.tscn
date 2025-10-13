@@ -362,6 +362,7 @@ animations = [{
 radius = 6.08276
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.655, 0.655)
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -377,6 +378,3 @@ frame_progress = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_ur7pv")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.635, 2.075)

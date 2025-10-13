@@ -7,12 +7,12 @@ extends Node2D
 @onready var spawn_timer: Timer = $Timer
 @onready var player = $Player  # Add reference to player
 @onready var target = $TargetContainer
-@onready var heart_container = $CanvasLayer/HeartContainer
+@onready var heart_container = $HUD/HeartContainer
 
 
 var active_enemy = null
 var current_letter_index: int = -1
-var EnemyScene = preload("res://scenes/Orc_enemy.tscn")
+var EnemyScene = preload("res://Scenes/Enemies/Orc_enemy.tscn")
 var BuffScene = preload("res://scenes/Buff.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
 var PortalScene = preload("res://scenes/GreenPortal.tscn")

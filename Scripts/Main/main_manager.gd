@@ -1,0 +1,65 @@
+extends Node2D
+
+# Current loaded dungeon scene
+var current_dungeon: Node2D = null
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	# Load the initial dungeon
+	load_dungeon("res://Scenes/Rooms/Area 1/Area-1-var1.tscn")
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func load_dungeon(dungeon_path: String) -> void:
+	# Clear current dungeon if exists
+	if current_dungeon:
+		current_dungeon.queue_free()
+		current_dungeon = null
+
+	# Load new dungeon scene
+	var dungeon_scene = load(dungeon_path)
+	if dungeon_scene:
+		current_dungeon = dungeon_scene.instantiate()
+		# Add as child and position it properly
+		add_child(current_dungeon)
+		print("Loaded dungeon: " + dungeon_path)
+
+		# Ensure player is positioned in the new dungeon's starting room center
+		call_deferred("_position_player_in_new_dungeon")
+	else:
+		print("Failed to load dungeon: " + dungeon_path)
+
+func _position_player_in_new_dungeon() -> void:
+	"""Position the player in the center of the new dungeon's starting room"""
+	if not current_dungeon:
+		return
+
+	# Find the player node
+	var player = get_node("/root/Main/Player")
+	if not player:
+		print("ERROR: Could not find player node")
+		return
+
+	# Find the starting room in the current dungeon
+	var starting_room = current_dungeon.get_node_or_null("StartingRoom")
+	if not starting_room:
+		print("ERROR: Could not find StartingRoom in new dungeon")
+		return
+
+	# Find the TargetContainer in the starting room (should be the center position)
+	var target_container = starting_room.get_node_or_null("TargetContainer")
+	if target_container:
+		player.global_position = target_container.global_position
+		player.center_position = target_container.global_position
+		print("Player positioned at StartingRoom center: ", target_container.global_position)
+	else:
+		# Fallback to room position
+		player.global_position = starting_room.global_position
+		player.center_position = starting_room.global_position
+		print("Player positioned at StartingRoom position (fallback): ", starting_room.global_position)
+
+func switch_to_boss_dungeon() -> void:
+	print("Switching to boss dungeon...")
+	load_dungeon("res://Scenes/Rooms/Area 1/Area-1-boss-var1.tscn")

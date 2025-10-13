@@ -50,7 +50,7 @@ func clear_room():
 func update_camera():
 	# Update camera based on room
 	# Assuming Camera2D is attached to player
-	var player = get_node("../Player")
+	var player = get_node("/root/Main/Player")
 	if player and player.get_node("Camera2D"):
 		var camera = player.get_node("Camera2D")
 		var shape = camera_area.get_node("CollisionShape2D")

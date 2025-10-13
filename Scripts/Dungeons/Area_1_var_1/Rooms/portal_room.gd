@@ -49,13 +49,22 @@ func clear_room():
 	room_cleared.emit(self)
 	print("Room " + name + " cleared")
 
+
 func update_camera():
 	# Update camera based on room
 	# Assuming Camera2D is attached to player
-	var player = get_node("../../Player")
+	var player = get_node("/root/Main/Player")
 	if player and player.get_node("Camera2D"):
 		var camera = player.get_node("Camera2D")
-		var shape = camera_area.get_node("CollisionShape2D").shape
+		var shape = camera_area.get_node("CollisionShape2D")
+		var view_size = get_viewport_rect().size
+		var size = shape.shape.extents*2
+		if size.y <view_size.y:
+			size.y = view_size.y
+
+		if size.x < view_size.y:
+			size.x = view_size.y
+
 		if shape is RectangleShape2D:
 			var rect = shape.get_rect()
 			var center = camera_area.global_position - rect.get_center()
@@ -80,7 +89,39 @@ func _spawn_portal():
 	portal_instance.position = Vector2.ZERO  # Position within container
 	portal_instance.set_prompt("Warp")  # Set typing prompt
 	portal_instance.play_appear_animation()  # Play appear animation
+
+	# Connect to portal activated signal
+	if not portal_instance.is_connected("portal_activated", _on_portal_activated):
+		portal_instance.connect("portal_activated", _on_portal_activated)
+
 	print("Spawned portal in portal room")
+
+	# Make the portal findable by the typing system
+	# The typing system looks for portals in the main Game scene
+	call_deferred("_register_portal_with_typing_system", portal_instance)
+
+func _register_portal_with_typing_system(portal):
+	"""Ensure the portal can be found by the typing system"""
+	# Find the main Game node that contains the typing system
+	var game = get_tree().root.get_node_or_null("Main/Game")
+	if game:
+		# Add portal to game's portal container for typing detection
+		game.get_node("PortalContainer").add_child(portal)
+		portal.position = self.global_position
+		print("Portal registered with typing system")
+	else:
+		print("WARNING: Could not find Game node for portal registration!")
+
+func _on_portal_activated():
+	"""Called when portal is activated - this replaces scene change"""
+	print("Portal activated! Switching to boss dungeon.")
+
+	# Get reference to MainManager and call dungeon switch immediately
+	var main_manager = get_tree().root.get_node_or_null("Main/MainManager")
+	if main_manager:
+		main_manager.switch_to_boss_dungeon()
+	else:
+		print("ERROR: Could not find MainManager!")
 
 func _on_camera_area_body_exited(body: Node2D) -> void:
 	if body.name == "Player":

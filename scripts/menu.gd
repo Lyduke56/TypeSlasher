@@ -26,4 +26,4 @@ func _on_score_button_pressed() -> void:
 	pass # Replace with function body.
 
 func start_game():
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Main.tscn")

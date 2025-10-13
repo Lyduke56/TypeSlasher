@@ -162,12 +162,7 @@ func dash_to_portal(portal_position: Vector2, portal_ref = null) -> void:
 func _finish_dash() -> void:
 	is_dashing = false
 
-	if target_portal != null:
-		# For portals, change scene immediately
-		print("Reached portal! Changing scene to boss room.")
-		get_tree().change_scene_to_file("res://Scenes/Rooms/Area 1/Area-1-boss-var1.tscn")
-		target_portal = null  # Clear reference
-		return
+	# Portals no longer require special handling here - they use signals
 
 	# For enemies, attack
 	is_attacking = true
