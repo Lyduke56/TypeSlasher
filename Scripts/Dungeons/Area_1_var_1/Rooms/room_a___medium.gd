@@ -14,6 +14,8 @@ var exit_markers: Dictionary = {}  # "direction" : marker_node
 signal room_started
 signal room_cleared
 
+
+
 # Enemy spawning
 var EnemyScene = preload("res://Scenes/Enemies/Orc_enemy.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
@@ -28,6 +30,7 @@ var is_spawning_enemies = false  # True when enemies are still spawning
 @onready var camera_area: Area2D = $CameraArea
 @onready var enemy_container: Node2D = $EnemyContainer
 @onready var target_container: Node2D = $TargetContainer
+@onready var barrier: TileMapLayer = get_node_or_null("../Node/Barrier")
 
 func _ready() -> void:
 	# Find markers
@@ -51,6 +54,7 @@ func get_connected_room(direction: String) -> Node2D:
 func start_room():
 	room_started.emit(self)
 	print("Room " + name + " started")
+	barrier.visible = true
 
 	# Handle camera positioning when entering the room
 	_handle_camera_on_room_enter()
@@ -58,7 +62,9 @@ func start_room():
 	# Only spawn if room is not cleared and not already in progress
 	if is_cleared:
 		print("Room " + name + " is already cleared, skipping spawning")
+		barrier.visible = false
 		return
+
 
 	if spawn_timer and spawn_timer.time_left > 0 and enemies_spawned > 0:
 		print("Room " + name + " is already in progress, skipping spawning")
@@ -72,6 +78,7 @@ func start_room():
 
 func clear_room():
 	is_cleared = true
+	barrier.visible = false
 
 	# Remove instantiated target after clearing
 	if target_container.get_child_count() > 0:
