@@ -18,6 +18,9 @@ var is_processing_completion: bool = false
 var input_buffer: Array[String] = []
 
 func _ready() -> void:
+	# Connect to health changes first, before any health modifications
+	Global.player_health_changed.connect(_on_health_changed)
+
 	# Health persists across dungeons - clamp current health to ensure it's within valid range
 	Global.player_current_health = clamp(Global.player_current_health, 0, Global.player_max_health)
 	Global.player_health_changed.emit(Global.player_current_health, Global.player_max_health)
@@ -438,8 +441,21 @@ func setup_heart_container():
 	heart_container.name = "HeartContainer"
 	canvas_layer.add_child(heart_container)
 
-	# Initialize heart container with global health values
+	# Initialize heart container with global health values - set health first
 	heart_container.setMaxhearts(Global.player_max_health)
 	heart_container.setHealth(Global.player_current_health)
 
-	print("Heart container initialized for dungeon!")
+	print("Heart container initialized for dungeon! Current health: ",
+		Global.player_current_health, "/", Global.player_max_health)
+
+func _on_health_changed(new_health: int, max_health: int):
+	"""Update heart container when health changes"""
+	var canvas_layer = get_node_or_null("CanvasLayer")
+	if canvas_layer:
+		var heart_container = canvas_layer.get_node_or_null("HeartContainer")
+		if heart_container:
+			# Update max hearts first, then health
+			if heart_container.max_hearts != max_health:
+				heart_container.setMaxhearts(max_health)
+			heart_container.setHealth(new_health)
+			print("Updated heart display! Current health: ", new_health, "/", max_health)

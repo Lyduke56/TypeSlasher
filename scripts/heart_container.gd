@@ -5,6 +5,7 @@ var max_hearts: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print("Heart container _ready called with global values: max_health=", Global.player_max_health, ", current_health=", Global.player_current_health)
 	# Connect to global health signal for real-time updates
 	Global.player_health_changed.connect(_on_player_health_changed)
 	initialize_hearts()
@@ -39,11 +40,14 @@ func setMaxhearts(max: int):
 		add_child(heart)
 
 func setHealth(hp: int):
+	print("Setting heart container health to: ", hp, "(current max_hearts:", max_hearts, ")")
 	for i in range(max_hearts):
 		if i < hp:
 			get_child(i).visible = true
+			print("Heart ", i, " visible: true")
 		else:
 			get_child(i).visible = false
+			print("Heart ", i, " visible: false")
 
 func increaseMaxHealth(amount: int = 1):
 	"""Increase the maximum health by the specified amount"""

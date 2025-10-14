@@ -14,6 +14,14 @@ var selected_buff_type: int = -1
 # Flag to track health buff application
 var health_buff_applied: bool = false
 
+# Shield buff system (for damage reduction)
+var shield_buff_stacks: int = 0  # How many Shield buffs selected (tiers)
+var shield_damage_reduction_chance: int = 0  # Calculated chance (15% per stack)
+
+# Sword buff system (for health restoration on kills)
+var sword_buff_stacks: int = 0  # How many Sword buffs selected (tiers)
+var sword_heal_chance: int = 0  # Calculated chance (15% per stack)
+
 # Player health system - persists across dungeons
 var player_max_health: int = 3  # Default max health, increases permanently
 var player_current_health: int = 3  # Current health, resets to max when entering dungeon
@@ -22,11 +30,26 @@ signal player_health_changed(new_health: int, max_health: int)
 
 func take_damage(amount: int = 1):
 	"""Reduce player health and emit signal for UI updates"""
-	player_current_health -= amount
+	# Check for Shield buff damage reduction
+	var actual_damage = amount
+	var shielded = false
+
+	if shield_damage_reduction_chance > 0:
+		var chance = randf() * 100  # Generate random number 0-100
+		if chance < shield_damage_reduction_chance:
+			actual_damage = 0
+			shielded = true
+			print("Shield buff activated! Damage completely blocked (", shield_damage_reduction_chance, "% chance)")
+
+	player_current_health -= actual_damage
 	if player_current_health < 0:
 		player_current_health = 0
 	player_health_changed.emit(player_current_health, player_max_health)
-	print("Player took ", amount, " damage! Health: ", player_current_health, "/", player_max_health)
+
+	if shielded:
+		print("Player shielded! No damage taken! Health: ", player_current_health, "/", player_max_health)
+	else:
+		print("Player took ", actual_damage, " damage! Health: ", player_current_health, "/", player_max_health)
 
 func heal_damage(amount: int = 1):
 	"""Increase player health and emit signal for UI updates"""
@@ -35,6 +58,18 @@ func heal_damage(amount: int = 1):
 		player_current_health = player_max_health
 	player_health_changed.emit(player_current_health, player_max_health)
 	print("Player healed ", amount, " health! Health: ", player_current_health, "/", player_max_health)
+
+func on_enemy_killed():
+	"""Called when any enemy is killed - check for Sword buff health restoration"""
+	if sword_buff_stacks > 0 and sword_heal_chance > 0:
+		var chance = randf() * 100  # Generate random number 0-100
+		if chance < sword_heal_chance:
+			if player_current_health < player_max_health:
+				player_current_health += 1  # Restore 1 health
+				player_health_changed.emit(player_current_health, player_max_health)
+				print("Sword buff activated! Restored 1 health! Health: ", player_current_health, "/", player_max_health)
+			else:
+				print("Sword buff activated but health already full! Health: ", player_current_health, "/", player_max_health)
 
 # --- WPM tracking ---
 # We measure characters typed correctly; 5 characters = 1 word (standard WPM)

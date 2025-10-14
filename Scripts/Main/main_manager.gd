@@ -11,10 +11,18 @@ func _ready() -> void:
 		# Print what buff was selected
 		print("Returning from buff selection - Slot:", Global.selected_buff_index, " Buff type:", Global.selected_buff_type)
 
-		# Apply health buff if Health Potion (index 0) was selected
-		if Global.selected_buff_type == 0:
+		# Apply buffs based on selected type
+		if Global.selected_buff_type == 0:  # Health Potion
 			Global.health_buff_applied = true
 			print("Health Potion buff will be applied to target!")
+		elif Global.selected_buff_type == 1:  # Shield
+			Global.shield_buff_stacks += 1
+			Global.shield_damage_reduction_chance = Global.shield_buff_stacks * 15  # 15% per stack
+			print("Shield buff applied! Now have ", Global.shield_buff_stacks, " stack(s) - ", Global.shield_damage_reduction_chance, "% damage reduction chance")
+		elif Global.selected_buff_type == 2:  # Sword
+			Global.sword_buff_stacks += 1
+			Global.sword_heal_chance = Global.sword_buff_stacks * 15  # 15% per stack
+			print("Sword buff applied! Now have ", Global.sword_buff_stacks, " stack(s) - ", Global.sword_heal_chance, "% chance to heal on enemy kills")
 
 		# Load the boss dungeon after buff selection
 		load_dungeon("res://Scenes/Rooms/Area 1/Area-1-boss-var1.tscn")

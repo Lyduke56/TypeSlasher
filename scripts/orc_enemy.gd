@@ -140,6 +140,8 @@ func _on_death_animation_finished():
 	"""Called when death animation completes"""
 	if anim.animation == "death":
 		Global.current_score += points_for_kill
+		# Check for Sword buff health restoration
+		Global.on_enemy_killed()
 		queue_free()  # Remove enemy from scene
 
 func _on_body_entered(body: Node2D):
