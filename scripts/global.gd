@@ -50,6 +50,17 @@ func take_damage(amount: int = 1):
 		print("Player shielded! No damage taken! Health: ", player_current_health, "/", player_max_health)
 	else:
 		print("Player took ", actual_damage, " damage! Health: ", player_current_health, "/", player_max_health)
+			# Check for game over
+	
+	if player_current_health <= 0:
+		print("Player died! Game Over!")
+		# Game over will be handled by a deferred call to allow the heart animation to show
+		call_deferred("_handle_game_over")
+
+func _handle_game_over():
+	"""Handle game over with a slight delay to show the last heart disappearing"""
+	await get_tree().create_timer(0.5).timeout
+	get_tree().quit()
 
 func heal_damage(amount: int = 1):
 	"""Increase player health and emit signal for UI updates"""
