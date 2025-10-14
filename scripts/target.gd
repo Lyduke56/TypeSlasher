@@ -1,16 +1,22 @@
 extends Node2D
-var health: int = 3
-@onready var heart_container: HBoxContainer = get_node_or_null("/root/Game/CanvasLayer/HeartContainer")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	# Health buffs are now applied in main_manager.gd
+	pass
 
-func take_damage():
-	health -= 1
-	if heart_container:
-		heart_container.setHealth(health)
-	if health <= 0:
+# Add extra health for Health Potion buff (index 0)
+func apply_health_buff():
+	"""Apply health potion buff - add +1 to both max health and current health"""
+	Global.player_max_health += 1
+	Global.player_current_health += 1
+	Global.player_health_changed.emit(Global.player_current_health, Global.player_max_health)
+	print("Health Potion buff applied! Max health increased to: ", Global.player_max_health, " and current health increased to: ", Global.player_current_health)
+
+func take_damage(amount: int = 1):
+	"""Take damage through global health system"""
+	Global.take_damage(amount)
+	if Global.player_current_health <= 0:
 		get_tree().quit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

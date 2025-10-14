@@ -5,9 +5,9 @@ extends PanelContainer
 
 # preload your buff icons
 var buff_icons = [
-	preload("res://Assets/Sprites/GUI/silver_feather.png"),
-	preload("res://Assets/Sprites/GUI/wood_sword.png"),
-	preload("res://Assets/Sprites/GUI/wood_sword.png")
+	preload("res://Assets/Sprites/GUI/Buff_HealthPotion.png"),
+	preload("res://Assets/Sprites/GUI/Buff_Shield.png"),
+	preload("res://Assets/Sprites/GUI/Buff_sword.png")
 ]
 
 var chosen_index = 0

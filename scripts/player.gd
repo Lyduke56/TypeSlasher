@@ -30,6 +30,7 @@ var fast_animation_speed: float = 5.0  # 3x faster when typing quickly
 
 signal enemy_reached(enemy)
 signal slash_completed(target_enemy)
+signal player_returned
 
 func _ready() -> void:
 	# Set center position (you can adjust this based on your scene)
@@ -61,6 +62,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_dashing or is_returning:
 		_handle_movement(delta)
+
+# Skip physics processing when not moving to reduce computation
+# This is now handled by condition above, so no change needed but noted
 
 func _handle_movement(delta: float) -> void:
 	var current_speed = current_dash_speed if is_dashing else return_speed
@@ -158,12 +162,7 @@ func dash_to_portal(portal_position: Vector2, portal_ref = null) -> void:
 func _finish_dash() -> void:
 	is_dashing = false
 
-	if target_portal != null:
-		# For portals, change scene immediately
-		print("Reached portal! Changing scene to Dungeon-1-var1")
-		get_tree().change_scene_to_file("res://scenes/Rooms/Dungeon-1-var1.tscn")
-		target_portal = null  # Clear reference
-		return
+	# Portals no longer require special handling here - they use signals
 
 	# For enemies, attack
 	is_attacking = true
@@ -239,10 +238,45 @@ func _return_to_center() -> void:
 func _finish_return() -> void:
 	is_returning = false
 
+	# Signal that player has returned to center
+	emit_signal("player_returned")
+
 	# Return to idle animation
 	anim.play("idle")
 
-	print("Player returned to center")
+# Health system (matches target.gd health)
+var health: int = 3
+
+func take_damage():
+	"""Take damage and update heart container"""
+	# Check for Shield buff damage reduction
+	var damage_blocked = false
+
+	if Global.shield_damage_reduction_chance > 0:
+		var chance = randf() * 100  # Generate random number 0-100
+		if chance < Global.shield_damage_reduction_chance:
+			damage_blocked = true
+			print("Shield buff activated! Damage completely blocked (", Global.shield_damage_reduction_chance, "% chance)")
+
+	if not damage_blocked:
+		health -= 1
+		print("Player took 1 damage! Health:", health)
+
+		# Update heart container UI only if damage was taken
+		var heart_container = get_node_or_null("/root/Main/HUD/HeartContainer")
+		if heart_container:
+			heart_container.setHealth(health)
+			print("Updated heart container to show", health, "hearts")
+
+		# ALSO call target.take_damage() to maintain compatibility
+		var target = get_node_or_null("/root/Main/Target")
+		if target and target != self and target.has_method("take_damage"):
+			target.take_damage()
+
+		if health <= 0:
+			get_tree().quit()
+	else:
+		print("Shield prevented damage! Health unchanged:", health)
 
 # Public function to check if player is in combo state
 func is_in_combo() -> bool:

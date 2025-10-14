@@ -1,6 +1,7 @@
 extends Node2D
 
 signal portal_selected(portal_index: int)
+signal portal_activated
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var area_2d = $AnimatedSprite2D/Area2D
@@ -86,9 +87,10 @@ func play_appear_animation():
 func play_disappear_animation():
 	animated_sprite.play("disappear")
 	await animated_sprite.animation_finished
+	portal_selected.emit(portal_index)  # Portal selected for navigation
+	portal_activated.emit()  # Emit activation signal before disappearing
 	queue_free()
 
+# Portal handled by typing completion now - kept for safety
 func _on_body_entered(body: Node2D):
-	if body.is_in_group("player"):  # Assuming player is in "player" group
-		print("Player entered portal ", portal_index + 1)
-		portal_selected.emit(portal_index)
+	pass  # Typing system handles portal activation now

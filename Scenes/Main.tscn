@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://8nbud2wu7ebp"]
+
+[ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://Scenes/player.tscn" id="1_rgh2o"]
+[ext_resource type="Script" uid="uid://b7u6emsb5wigv" path="res://Scripts/Main/main.gd" id="1_v1gob"]
+[ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://Assets/Themes/Outline.tres" id="2_pbw6q"]
+[ext_resource type="Script" uid="uid://c6d6lvm5hdar1" path="res://Scripts/Main/main_manager.gd" id="2_v1gob"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_v1gob"]
+[ext_resource type="Script" uid="uid://coopnli5wbrbj" path="res://Scripts/heart_container.gd" id="4_script"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_v1gob")
+
+[node name="Player" parent="." instance=ExtResource("1_rgh2o")]
+z_index = 7
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2.635, 2.075)
+
+[node name="MainManager" type="Node2D" parent="."]
+position = Vector2(1, 0)
+script = ExtResource("2_v1gob")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 7
+follow_viewport_enabled = true
+
+[node name="HeartContainer" type="HBoxContainer" parent="HUD"]
+visible = false
+offset_right = 90.0
+offset_bottom = 93.0
+theme_override_constants/separation = 0
+script = ExtResource("4_script")
+
+[node name="Direction" type="RichTextLabel" parent="HUD"]
+z_index = 3
+offset_left = -35.0
+offset_top = 4.0
+offset_right = 240.0
+offset_bottom = 161.0
+scale = Vector2(0.255, 0.255)
+theme = ExtResource("2_pbw6q")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_v1gob")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = " Type This "
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true

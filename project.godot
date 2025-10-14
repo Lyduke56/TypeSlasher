@@ -14,6 +14,12 @@ config/name="TypeSlasher"
 run/main_scene="uid://cnvh2feiwpswh"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+run/size/viewport_width=640
+run/size/viewport_height=360
+run/size/resizable=true
+run/stretch/aspect="expand"
+run/size/mode=0
+run/stretch/mode="viewport"
 
 [autoload]
 
@@ -22,6 +28,7 @@ Global="*res://Scripts/global.gd"
 [display]
 
 window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [rendering]
 

@@ -7,12 +7,11 @@ extends Node2D
 @onready var spawn_timer: Timer = $Timer
 @onready var player = $Player  # Add reference to player
 @onready var target = $TargetContainer
-@onready var heart_container = $CanvasLayer/HeartContainer
 
 
 var active_enemy = null
 var current_letter_index: int = -1
-var EnemyScene = preload("res://scenes/Orc_enemy.tscn")
+var EnemyScene = preload("res://Scenes/Enemies/Orc_enemy.tscn")
 var BuffScene = preload("res://scenes/Buff.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
 var PortalScene = preload("res://scenes/GreenPortal.tscn")
@@ -46,8 +45,7 @@ func _ready() -> void:
 	var ui_scene: PackedScene = preload("res://Scenes/GUI/UI.tscn")
 	pause_ui = ui_scene.instantiate()
 	add_child(pause_ui)
-	
-	heart_container.setMaxhearts(3)
+
 	# Ensure it and all children work while paused
 	_set_node_tree_process_mode(pause_ui, Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED)
 	# Bring UI to front
@@ -62,10 +60,10 @@ func _ready() -> void:
 	Global.wpm_reset()
 
 	# Test the word database
-	print("Testing word database:")
-	print("Easy word: ", WordDatabase.get_random_word("easy"))
-	print("Medium word: ", WordDatabase.get_random_word("medium"))
-	print("Hard word: ", WordDatabase.get_random_word("hard"))
+	push_warning("Testing word database:")
+	push_warning("Easy word: ", WordDatabase.get_random_word("easy"))
+	push_warning("Medium word: ", WordDatabase.get_random_word("medium"))
+	push_warning("Hard word: ", WordDatabase.get_random_word("hard"))
 
 	# Spawn the target at the start
 	spawn_target()
@@ -86,8 +84,8 @@ func _ready() -> void:
 
 func _process(_delta):
 	# Process input buffer one character per frame for high WPM handling
+	# Cached: Moved update_score to only when actual progress is made
 	if not input_buffer.is_empty() and not is_processing_completion:
-		update_score() #new high score thing will replace if necessary
 		var key_typed = input_buffer.pop_front()
 		_process_single_character(key_typed)
 
@@ -399,8 +397,8 @@ func _process_single_character(key_typed: String):
 		find_new_active_enemy(key_typed)
 		return
 
-	# Validate current enemy
-	if not is_instance_valid(active_enemy) or not active_enemy.has_method("get_prompt") or active_enemy.get("is_being_targeted") == true:
+	# Validate current enemy - cached: avoid repeated property access
+	if not is_instance_valid(active_enemy) or not active_enemy.has_method("get_prompt"):
 		active_enemy = null
 		current_letter_index = -1
 		find_new_active_enemy(key_typed)
@@ -410,27 +408,24 @@ func _process_single_character(key_typed: String):
 
 	# Bounds check
 	if current_letter_index < 0 or current_letter_index >= prompt.length():
-		print("Index out of bounds, resetting")
 		active_enemy = null
 		current_letter_index = -1
 		return
 
 	var next_character = prompt.substr(current_letter_index, 1)
 	if key_typed == next_character:
-		print("Success! Typed:", key_typed, " Expected:", next_character)
-		# Count one correct character for WPM
+		# Cached: Move update_score here where actual progress is made
+		update_score()
 		Global.wpm_note_correct_characters(1)
 		current_letter_index += 1
 
-		# Update visual feedback
-		if is_instance_valid(active_enemy) and active_enemy.get("is_being_targeted") != true:
+		# Update visual feedback - cached: minimize checks
+		if is_instance_valid(active_enemy):
 			active_enemy.set_next_character(current_letter_index)
 
 		# Check completion
 		if current_letter_index >= prompt.length():
 			_complete_word()
-	else:
-		print("Wrong character! Typed:", key_typed, " Expected:", next_character)
 
 
 func _unhandled_input(event: InputEvent) -> void:

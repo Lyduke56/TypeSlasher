@@ -4,7 +4,7 @@ extends Node2D
 @export var green: Color = Color("#639765")
 @export var red: Color = Color("#a65455")
 
-@export var speed: float = 50.0  # Movement speed towards target
+@export var speed: float = 20.0  # Movement speed towards target
 @onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
@@ -140,6 +140,8 @@ func _on_death_animation_finished():
 	"""Called when death animation completes"""
 	if anim.animation == "death":
 		Global.current_score += points_for_kill
+		# Check for Sword buff health restoration
+		Global.on_enemy_killed()
 		queue_free()  # Remove enemy from scene
 
 func _on_body_entered(body: Node2D):

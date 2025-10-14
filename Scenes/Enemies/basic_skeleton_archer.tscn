@@ -1,7 +1,7 @@
 [gd_scene load_steps=36 format=3 uid="uid://ds85cxxblat1n"]
 
-[ext_resource type="Texture2D" uid="uid://diiun1snohy83" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer/Skeleton Archer.png" id="1_xq2fd"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_kvtgg"]
+[ext_resource type="Texture2D" uid="uid://diiun1snohy83" path="res://assets/sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer/Skeleton Archer.png" id="1_xq2fd"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_kvtgg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2xdt"]
 atlas = ExtResource("1_xq2fd")
@@ -246,7 +246,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ey31"]
 radius = 7.0
 
-[node name="Basic - Slime" type="Node2D"]
+[node name="SkeletonArcher" type="Node2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
