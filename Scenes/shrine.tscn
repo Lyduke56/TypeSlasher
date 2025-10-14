@@ -1,0 +1,118 @@
+[gd_scene load_steps=16 format=3 uid="uid://pfqaqhpjnn02"]
+
+[ext_resource type="Texture2D" uid="uid://delqq3yax80ko" path="res://Assets/Sprites/Other Scenes/shrine-Sheet.png" id="1_sgxto"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uvmf"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(0, 0, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyfiy"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(64, 0, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_deah4"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(128, 0, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfndv"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(192, 0, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlfj8"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(0, 80, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5lai"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(64, 80, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_160ve"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(128, 80, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23h65"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(192, 80, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpqmu"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(0, 160, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hhcr"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(64, 160, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p4j0"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(128, 160, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c01ue"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(128, 160, 64, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0fvj"]
+atlas = ExtResource("1_sgxto")
+region = Rect2(0, 0, 64, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l4kqw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2uvmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fyfiy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_deah4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfndv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hlfj8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5lai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_160ve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23h65")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpqmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hhcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p4j0")
+}],
+"loop": true,
+"name": &"heal_activate",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c01ue")
+}],
+"loop": true,
+"name": &"idle_activated",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0fvj")
+}],
+"loop": true,
+"name": &"idle_active",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_l4kqw")
+animation = &"heal_activate"

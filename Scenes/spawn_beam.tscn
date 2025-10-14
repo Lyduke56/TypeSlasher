@@ -1,0 +1,117 @@
+[gd_scene load_steps=17 format=3 uid="uid://cfuwd7jbqjkmw"]
+
+[ext_resource type="Texture2D" uid="uid://fe4olaoggexw" path="res://Assets/Sprites/Other Scenes/spawnbeam-Sheet.png" id="1_5d84d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qbm7"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(0, 528, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4qqh"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(0, 0, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfqgx"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(64, 0, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_we0yp"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(128, 0, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7qqe"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(192, 0, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08gv1"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(0, 176, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a64nl"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(64, 176, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjmee"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(128, 176, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4po76"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(192, 176, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5cy1n"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(0, 352, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ug1u0"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(64, 352, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jimej"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(128, 352, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqbx4"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(192, 352, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a3bb"]
+atlas = ExtResource("1_5d84d")
+region = Rect2(64, 528, 64, 176)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1vnos"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qbm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4qqh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfqgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_we0yp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7qqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08gv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a64nl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjmee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4po76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5cy1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ug1u0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jimej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqbx4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6a3bb")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1vnos")
+animation = &"spawn"
+frame = 13
+frame_progress = 1.0
