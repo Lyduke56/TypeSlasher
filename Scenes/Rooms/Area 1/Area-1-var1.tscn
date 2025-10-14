@@ -1,16 +1,16 @@
 [gd_scene load_steps=26 format=4 uid="uid://cullg0ljl0ex6"]
 
-[ext_resource type="Script" uid="uid://cvhdl8355whhu" path="res://Scripts/Dungeons/Area_1_var_1/area_1_var_1.gd" id="1_80n20"]
-[ext_resource type="Script" uid="uid://bc0pa4v2utvx0" path="res://Scripts/Dungeons/dungeon_manager(A1V1).gd" id="3_f1pun"]
-[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_qrpcx"]
-[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_6wyqo"]
-[ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="6_wa0in"]
-[ext_resource type="PackedScene" uid="uid://b50h76ql65ea1" path="res://Scenes/RoomSpawns/small_room_spawn.tscn" id="8_mdnki"]
-[ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="32_52s0k"]
-[ext_resource type="Script" uid="uid://gi3ma2tv7svj" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_a___medium.gd" id="33_f1pun"]
-[ext_resource type="Script" uid="uid://bf6yqy35jf53w" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_b___small.gd" id="34_n6uaq"]
-[ext_resource type="Script" uid="uid://cdrdygid30spt" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_c___medium.gd" id="35_w3frq"]
-[ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="36_jf423"]
+[ext_resource type="Script" uid="uid://cvhdl8355whhu" path="res://Scripts/Dungeons/Area_1_var_1/area_1_var_1.gd" id="1_dwvem"]
+[ext_resource type="Script" uid="uid://bc0pa4v2utvx0" path="res://Scripts/Dungeons/dungeon_manager(A1V1).gd" id="2_wa0in"]
+[ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="3_mdnki"]
+[ext_resource type="Script" uid="uid://gi3ma2tv7svj" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_a___medium.gd" id="4_ibyc6"]
+[ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="5_0yvo1"]
+[ext_resource type="Script" uid="uid://bf6yqy35jf53w" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_b___small.gd" id="6_tonbw"]
+[ext_resource type="PackedScene" uid="uid://b50h76ql65ea1" path="res://Scenes/RoomSpawns/small_room_spawn.tscn" id="7_gkmiv"]
+[ext_resource type="Script" uid="uid://cdrdygid30spt" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_c___medium.gd" id="8_dulka"]
+[ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="9_303ub"]
+[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="10_315x1"]
+[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="11_c0y1h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ean82"]
 size = Vector2(315, 353)
@@ -28,7 +28,7 @@ size = Vector2(505, 527)
 size = Vector2(315, 327)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dwvem"]
-texture = ExtResource("3_qrpcx")
+texture = ExtResource("10_315x1")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -205,7 +205,7 @@ texture = ExtResource("3_qrpcx")
 sources/1 = SubResource("TileSetAtlasSource_dwvem")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mdnki"]
-texture = ExtResource("3_qrpcx")
+texture = ExtResource("10_315x1")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -379,7 +379,7 @@ texture = ExtResource("3_qrpcx")
 13:6/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ibyc6"]
-texture = ExtResource("3_qrpcx")
+texture = ExtResource("10_315x1")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -557,7 +557,7 @@ sources/1 = SubResource("TileSetAtlasSource_mdnki")
 sources/13 = SubResource("TileSetAtlasSource_ibyc6")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tonbw"]
-texture = ExtResource("4_6wyqo")
+texture = ExtResource("11_c0y1h")
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -752,7 +752,7 @@ texture = ExtResource("4_6wyqo")
 sources/2 = SubResource("TileSetAtlasSource_tonbw")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dulka"]
-texture = ExtResource("3_qrpcx")
+texture = ExtResource("10_315x1")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -929,16 +929,16 @@ texture = ExtResource("3_qrpcx")
 sources/0 = SubResource("TileSetAtlasSource_dulka")
 
 [node name="Dungeon" type="Node2D"]
-script = ExtResource("1_80n20")
+script = ExtResource("1_dwvem")
 
 [node name="DungeonManager" type="Node2D" parent="."]
-script = ExtResource("3_f1pun")
+script = ExtResource("2_wa0in")
 
 [node name="Timer" type="Timer" parent="."]
 
 [node name="StartingRoom" type="Node2D" parent="."]
 position = Vector2(-2, -7)
-script = ExtResource("32_52s0k")
+script = ExtResource("3_mdnki")
 
 [node name="CameraArea" type="Area2D" parent="StartingRoom"]
 visibility_layer = 3
@@ -961,7 +961,7 @@ position = Vector2(0, 1)
 
 [node name="RoomA - Medium" type="Node2D" parent="."]
 position = Vector2(784, -18)
-script = ExtResource("33_f1pun")
+script = ExtResource("4_ibyc6")
 
 [node name="CameraArea" type="Area2D" parent="RoomA - Medium"]
 visibility_layer = 3
@@ -985,7 +985,7 @@ position = Vector2(0, 1)
 z_index = 2
 position = Vector2(1, 0)
 
-[node name="MediumRoomSpawn" parent="RoomA - Medium" instance=ExtResource("6_wa0in")]
+[node name="MediumRoomSpawn" parent="RoomA - Medium" instance=ExtResource("5_0yvo1")]
 
 [node name="TileMapLayer" parent="RoomA - Medium/MediumRoomSpawn" index="0"]
 visible = false
@@ -995,7 +995,7 @@ position = Vector2(1, 2)
 
 [node name="RoomB - Small" type="Node2D" parent="."]
 position = Vector2(1, 804)
-script = ExtResource("34_n6uaq")
+script = ExtResource("6_tonbw")
 
 [node name="CameraArea" type="Area2D" parent="RoomB - Small"]
 visibility_layer = 3
@@ -1019,7 +1019,7 @@ position = Vector2(0, -2)
 z_index = 2
 position = Vector2(-3, 2)
 
-[node name="SmallRoomSpawn" parent="RoomB - Small" instance=ExtResource("8_mdnki")]
+[node name="SmallRoomSpawn" parent="RoomB - Small" instance=ExtResource("7_gkmiv")]
 
 [node name="TileMapLayer" parent="RoomB - Small/SmallRoomSpawn" index="0"]
 visible = false
@@ -1029,7 +1029,7 @@ position = Vector2(-1, -3)
 
 [node name="RoomC - Medium" type="Node2D" parent="."]
 position = Vector2(-898, 796)
-script = ExtResource("35_w3frq")
+script = ExtResource("8_dulka")
 
 [node name="CameraArea" type="Area2D" parent="RoomC - Medium"]
 visibility_layer = 3
@@ -1050,7 +1050,7 @@ position = Vector2(1, 6)
 z_index = 2
 position = Vector2(16, 5)
 
-[node name="MediumRoomSpawn" parent="RoomC - Medium" instance=ExtResource("6_wa0in")]
+[node name="MediumRoomSpawn" parent="RoomC - Medium" instance=ExtResource("5_0yvo1")]
 
 [node name="TileMapLayer" parent="RoomC - Medium/MediumRoomSpawn" index="0"]
 visible = false
@@ -1060,7 +1060,7 @@ position = Vector2(16, 7)
 
 [node name="PortalRoom" type="Node2D" parent="."]
 position = Vector2(785, 755)
-script = ExtResource("36_jf423")
+script = ExtResource("9_303ub")
 
 [node name="CameraArea" type="Area2D" parent="PortalRoom"]
 visibility_layer = 3

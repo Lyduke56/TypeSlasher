@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=4 uid="uid://t01l4hdcbjyy"]
 
-[ext_resource type="Texture2D" uid="uid://b5yieq4hjkd1h" path="res://Assets/Map Tiles/TX Props with Shadow.png" id="1_x2x08"]
+[ext_resource type="Texture2D" uid="uid://d0gysuhyykrtt" path="res://Assets/Map Tiles/TX Props with Shadow.png" id="1_x2x08"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aahgl"]
 texture = ExtResource("1_x2x08")
