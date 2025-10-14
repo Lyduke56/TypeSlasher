@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bt3jb65beko1l"
-path="res://.godot/imported/Knight-Attack02.png-fda7a3391ca71766984f1a645701673b.ctex"
+path="res://.godot/imported/Knight-Attack02.png-5ce618f903071b5ad3b0903c15afeb9d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Knight/Knight/Knight-Attack02.png"
-dest_files=["res://.godot/imported/Knight-Attack02.png-fda7a3391ca71766984f1a645701673b.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Knight/Knight/Knight-Attack02.png"
+dest_files=["res://.godot/imported/Knight-Attack02.png-5ce618f903071b5ad3b0903c15afeb9d.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://du4irer7c5teu"
-path="res://.godot/imported/Tilemap_color1.png-955788254e6ece88ed7b513a2dd9c3fd.ctex"
+path="res://.godot/imported/Tilemap_color1.png-d0c258b3cfe9f528d4b0eb619e4913e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Tiny Swords (Free Pack)/Terrain/Tilemap_color1.png"
-dest_files=["res://.godot/imported/Tilemap_color1.png-955788254e6ece88ed7b513a2dd9c3fd.ctex"]
+source_file="res://assets/sprites/Tiny Swords (Free Pack)/Terrain/Tilemap_color1.png"
+dest_files=["res://.godot/imported/Tilemap_color1.png-d0c258b3cfe9f528d4b0eb619e4913e0.ctex"]
 
 [params]
 

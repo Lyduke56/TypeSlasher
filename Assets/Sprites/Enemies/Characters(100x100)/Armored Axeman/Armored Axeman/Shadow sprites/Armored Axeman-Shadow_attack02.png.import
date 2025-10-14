@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c12mnpbrcix65"
-path="res://.godot/imported/Armored Axeman-Shadow_attack02.png-69b5e0413ad5cdc923b77beb184d546a.ctex"
+path="res://.godot/imported/Armored Axeman-Shadow_attack02.png-945a218b6f5ee7c94b42c1ef7609d807.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Axeman/Armored Axeman/Shadow sprites/Armored Axeman-Shadow_attack02.png"
-dest_files=["res://.godot/imported/Armored Axeman-Shadow_attack02.png-69b5e0413ad5cdc923b77beb184d546a.ctex"]
+source_file="res://assets/sprites/Enemies/Characters(100x100)/Armored Axeman/Armored Axeman/Shadow sprites/Armored Axeman-Shadow_attack02.png"
+dest_files=["res://.godot/imported/Armored Axeman-Shadow_attack02.png-945a218b6f5ee7c94b42c1ef7609d807.ctex"]
 
 [params]
 

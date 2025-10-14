@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0xsjseiqb7ho"
-path="res://.godot/imported/border 4.png-d98ac181f157d16a0e488343afe9c512.ctex"
+path="res://.godot/imported/border 4.png-0c4864371ae7453da4b0684b546f6ce6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/GUI/border 4.png"
-dest_files=["res://.godot/imported/border 4.png-d98ac181f157d16a0e488343afe9c512.ctex"]
+source_file="res://assets/sprites/GUI/border 4.png"
+dest_files=["res://.godot/imported/border 4.png-0c4864371ae7453da4b0684b546f6ce6.ctex"]
 
 [params]
 

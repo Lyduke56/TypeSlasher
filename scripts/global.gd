@@ -14,6 +14,27 @@ var selected_buff_type: int = -1
 # Flag to track health buff application
 var health_buff_applied: bool = false
 
+# Player health system - persists across dungeons
+var player_max_health: int = 3  # Default max health, increases permanently
+var player_current_health: int = 3  # Current health, resets to max when entering dungeon
+
+signal player_health_changed(new_health: int, max_health: int)
+
+func take_damage(amount: int = 1):
+	"""Reduce player health and emit signal for UI updates"""
+	player_current_health -= amount
+	if player_current_health < 0:
+		player_current_health = 0
+	player_health_changed.emit(player_current_health, player_max_health)
+	print("Player took ", amount, " damage! Health: ", player_current_health, "/", player_max_health)
+
+func heal_damage(amount: int = 1):
+	"""Increase player health and emit signal for UI updates"""
+	player_current_health += amount
+	if player_current_health > player_max_health:
+		player_current_health = player_max_health
+	player_health_changed.emit(player_current_health, player_max_health)
+	print("Player healed ", amount, " health! Health: ", player_current_health, "/", player_max_health)
 
 # --- WPM tracking ---
 # We measure characters typed correctly; 5 characters = 1 word (standard WPM)

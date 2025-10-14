@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cvhdl8355whhu" path="res://Scripts/Dungeons/Area_1_var_1/area_1_var_1.gd" id="1_80n20"]
 [ext_resource type="Script" uid="uid://bc0pa4v2utvx0" path="res://Scripts/Dungeons/dungeon_manager(A1V1).gd" id="3_f1pun"]
-[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_qrpcx"]
-[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_6wyqo"]
+[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_qrpcx"]
+[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_6wyqo"]
 [ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="6_wa0in"]
 [ext_resource type="PackedScene" uid="uid://b50h76ql65ea1" path="res://Scenes/RoomSpawns/small_room_spawn.tscn" id="8_mdnki"]
 [ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="32_52s0k"]
@@ -751,7 +751,7 @@ texture = ExtResource("4_6wyqo")
 [sub_resource type="TileSet" id="TileSet_gkmiv"]
 sources/2 = SubResource("TileSetAtlasSource_tonbw")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wa0in"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dulka"]
 texture = ExtResource("3_qrpcx")
 0:0/0 = 0
 1:0/0 = 0
@@ -925,8 +925,8 @@ texture = ExtResource("3_qrpcx")
 13:11/0 = 0
 14:11/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_mdnki"]
-sources/0 = SubResource("TileSetAtlasSource_wa0in")
+[sub_resource type="TileSet" id="TileSet_303ub"]
+sources/0 = SubResource("TileSetAtlasSource_dulka")
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_80n20")
@@ -1106,7 +1106,7 @@ tile_set = SubResource("TileSet_gkmiv")
 visible = false
 z_index = 10
 tile_map_data = PackedByteArray("AAAhAPr/AAAXAAEAAAAhAPv/AAAXAAIAAAAhAPz/AAAXAAEAAAAhAP3/AAAXAAIAAAAhAP7/AAAXAAEAAAAhAP//AAAXAAIAAAAhAAAAAAAXAAEAAAAhAAEAAAAXAAIAAAAhAAIAAAAXAAEAAAAhAAMAAAAXAAIAAAAsAA4AAAAXAAEAAAAsAA8AAAAXAAIAAAAtAA4AAAAXAAEAAAAtAA8AAAAXAAIAAAAuAA4AAAAXAAEAAAAuAA8AAAAXAAIAAAAvAA4AAAAXAAEAAAAvAA8AAAAXAAIAAAAwAA4AAAAXAAEAAAAwAA8AAAAXAAIAAAAxAA4AAAAXAAEAAAAxAA8AAAAXAAIAAAAyAA4AAAAXAAEAAAAyAA8AAAAXAAIAAAAzAA4AAAAXAAEAAAAzAA8AAAAXAAIAAAA0AA4AAAAXAAEAAAA0AA8AAAAXAAIAAAA1AA4AAAAXAAEAAAA1AA8AAAAXAAIAAAAsACQAAAAXAAEAAAAsACUAAAAXAAIAAAAtACQAAAAXAAEAAAAtACUAAAAXAAIAAAAuACQAAAAXAAEAAAAuACUAAAAXAAIAAAAvACQAAAAXAAEAAAAvACUAAAAXAAIAAAAwACQAAAAXAAEAAAAwACUAAAAXAAIAAAAxACQAAAAXAAEAAAAxACUAAAAXAAIAAAAyACQAAAAXAAEAAAAyACUAAAAXAAIAAAAzACQAAAAXAAEAAAAzACUAAAAXAAIAAAA0ACQAAAAXAAEAAAA0ACUAAAAXAAIAAAA1ACQAAAAXAAEAAAA1ACUAAAAXAAIAAAADAAgAAAAXAAEAAAADAAkAAAAXAAIAAAACAAgAAAAXAAEAAAACAAkAAAAXAAIAAAABAAgAAAAXAAEAAAABAAkAAAAXAAIAAAAAAAgAAAAXAAEAAAAAAAkAAAAXAAIAAAD//wgAAAAXAAEAAAD//wkAAAAXAAIAAAD+/wgAAAAXAAEAAAD+/wkAAAAXAAIAAAD9/wgAAAAXAAEAAAD9/wkAAAAXAAIAAAD8/wgAAAAXAAEAAAD8/wkAAAAXAAIAAAADACQAAAAXAAEAAAADACUAAAAXAAIAAAACACQAAAAXAAEAAAACACUAAAAXAAIAAAABACQAAAAXAAEAAAABACUAAAAXAAIAAAAAACQAAAAXAAEAAAAAACUAAAAXAAIAAAD//yQAAAAXAAEAAAD//yUAAAAXAAIAAAD+/yQAAAAXAAEAAAD+/yUAAAAXAAIAAAD9/yQAAAAXAAEAAAD9/yUAAAAXAAIAAAD8/yQAAAAXAAEAAAD8/yUAAAAXAAIAAADz/zUAAAAXAAEAAADz/zYAAAAXAAIAAADz/zMAAAAXAAEAAADz/zQAAAAXAAIAAADz/zEAAAAXAAEAAADz/zIAAAAXAAIAAADz/y8AAAAXAAEAAADz/zAAAAAXAAIAAADz/y0AAAAXAAEAAADz/y4AAAAXAAIAAADz/ysAAAAXAAEAAADz/ywAAAAXAAIAAAA=")
-tile_set = SubResource("TileSet_mdnki")
+tile_set = SubResource("TileSet_303ub")
 
 [connection signal="body_entered" from="StartingRoom/CameraArea" to="StartingRoom" method="_on_camera_area_body_entered"]
 [connection signal="body_exited" from="StartingRoom/CameraArea" to="StartingRoom" method="_on_camera_area_body_exited"]

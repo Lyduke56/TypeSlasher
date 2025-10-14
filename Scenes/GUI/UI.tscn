@@ -1,15 +1,15 @@
 [gd_scene load_steps=11 format=3 uid="uid://ct4hgdk2e8v47"]
 
-[ext_resource type="Texture2D" uid="uid://cpdry547l3818" path="res://Assets/Sprites/GUI/border 1.png" id="1_2rnfa"]
-[ext_resource type="Theme" uid="uid://dx6raqafay30m" path="res://Assets/Themes/normal_button.tres" id="2_adret"]
-[ext_resource type="Texture2D" uid="uid://dkaiqkhlad2x" path="res://Assets/Sprites/GUI/silver_panel.png" id="3_adret"]
+[ext_resource type="Texture2D" uid="uid://cpdry547l3818" path="res://assets/sprites/GUI/border 1.png" id="1_2rnfa"]
+[ext_resource type="Theme" uid="uid://dx6raqafay30m" path="res://assets/Themes/normal_button.tres" id="2_adret"]
+[ext_resource type="Texture2D" uid="uid://dkaiqkhlad2x" path="res://assets/sprites/GUI/silver_panel.png" id="3_adret"]
 [ext_resource type="PackedScene" uid="uid://f8uv6ymbn0ia" path="res://Scenes/slot.tscn" id="4_vlwpb"]
-[ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://Assets/Sprites/GUI/wood_panel.png" id="5_csd48"]
+[ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://assets/sprites/GUI/wood_panel.png" id="5_csd48"]
 [ext_resource type="Script" uid="uid://cwimcn47767jb" path="res://Scripts/ui.gd" id="6_2k9qv"]
 [ext_resource type="Resource" uid="uid://diuqds3i6ubm7" path="res://data/Enemy_Data/Orc.tres" id="6_imv1v"]
-[ext_resource type="Texture2D" uid="uid://b8douqlbc8tj8" path="res://Assets/Sprites/GUI/wood_checkbox_unchecked.png" id="7_6yr7l"]
+[ext_resource type="Texture2D" uid="uid://b8douqlbc8tj8" path="res://assets/sprites/GUI/wood_checkbox_unchecked.png" id="7_6yr7l"]
 [ext_resource type="Resource" uid="uid://cobaill6vere2" path="res://data/Enemy_Data/Skeleton.tres" id="7_olp6x"]
-[ext_resource type="FontFile" uid="uid://x5y3gace2sm1" path="res://Assets/Fonts/Perfect DOS VGA 437.ttf" id="9_r2bq1"]
+[ext_resource type="FontFile" uid="uid://x5y3gace2sm1" path="res://assets/Fonts/Perfect DOS VGA 437.ttf" id="9_r2bq1"]
 
 [node name="UI" type="Control"]
 layout_mode = 3

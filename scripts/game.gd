@@ -7,7 +7,6 @@ extends Node2D
 @onready var spawn_timer: Timer = $Timer
 @onready var player = $Player  # Add reference to player
 @onready var target = $TargetContainer
-@onready var heart_container = $HUD/HeartContainer
 
 
 var active_enemy = null
@@ -47,7 +46,6 @@ func _ready() -> void:
 	pause_ui = ui_scene.instantiate()
 	add_child(pause_ui)
 
-	heart_container.setMaxhearts(3)
 	# Ensure it and all children work while paused
 	_set_node_tree_process_mode(pause_ui, Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED)
 	# Bring UI to front

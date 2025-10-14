@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://datxj4qt71v6d"
-path="res://.godot/imported/pool water.png-9cdf438b76168baed75c785a610df3a5.ctex"
+path="res://.godot/imported/pool water.png-85f55c78bfb374d907464345f6f92971.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Map Tiles/Tileset/Dungeon/pool water.png"
-dest_files=["res://.godot/imported/pool water.png-9cdf438b76168baed75c785a610df3a5.ctex"]
+source_file="res://assets/Map Tiles/Tileset/Dungeon/pool water.png"
+dest_files=["res://.godot/imported/pool water.png-85f55c78bfb374d907464345f6f92971.ctex"]
 
 [params]
 
