@@ -13,8 +13,11 @@ func _ready() -> void:
 
 		# Apply buffs based on selected type
 		if Global.selected_buff_type == 0:  # Health Potion
-			Global.health_buff_applied = true
-			print("Health Potion buff will be applied to target!")
+			# Apply health buff immediately instead of relying on target.gd
+			Global.player_max_health += 1
+			Global.player_current_health += 1
+			Global.player_health_changed.emit(Global.player_current_health, Global.player_max_health)
+			print("Health Potion buff applied! Max health increased to: ", Global.player_max_health, " and current health increased to: ", Global.player_current_health)
 		elif Global.selected_buff_type == 1:  # Shield
 			Global.shield_buff_stacks += 1
 			Global.shield_damage_reduction_chance = Global.shield_buff_stacks * 15  # 15% per stack
@@ -26,12 +29,13 @@ func _ready() -> void:
 
 		# Load the boss dungeon after buff selection
 		load_dungeon("res://Scenes/Rooms/Area 1/Area-1-boss-var1.tscn")
+		# Update heart container in Main scene after health buff application
+		call_deferred("_update_main_heart_container")
 	else:
 		# Load the initial dungeon
 		load_dungeon("res://Scenes/Rooms/Area 1/Area-1-var1.tscn")
-
-	# Update heart container in Main scene after any buff application
-	call_deferred("_update_main_heart_container")
+		# Update heart container in Main scene
+		call_deferred("_update_main_heart_container")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

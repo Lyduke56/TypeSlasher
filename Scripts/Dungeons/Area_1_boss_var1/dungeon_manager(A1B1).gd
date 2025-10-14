@@ -19,7 +19,6 @@ var input_buffer: Array[String] = []
 
 func _ready() -> void:
 
-	setup_heart_container()
 	# Connect to health changes first, before any health modifications
 	Global.player_health_changed.connect(_on_health_changed)
 
@@ -27,7 +26,7 @@ func _ready() -> void:
 	Global.player_current_health = clamp(Global.player_current_health, 0, Global.player_max_health)
 
 	# Create heart container immediately
-
+	setup_heart_container()
 
 	# Wait for target to apply health buffs, then update heart container
 	await get_tree().process_frame
