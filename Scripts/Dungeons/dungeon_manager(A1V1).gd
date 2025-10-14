@@ -8,7 +8,7 @@ var block_all_input: bool = false  # Block all input during transitions
 
 @onready var direction_label: RichTextLabel = $"root/Main/Hud/Direction"
 
-	
+
 var tween: Tween
 
 # Typing mechanics variables (similar to game.gd)
@@ -353,7 +353,7 @@ func _complete_word():
 		player.dash_to_enemy(entity_position, completed_entity)
 
 	# Reset processing flag after a small delay to ensure actions start
-	await get_tree().create_timer(0.1).timeout
+	#await get_tree().create_timer(0.1).timeout
 	is_processing_completion = false
 	# Clear any inputs that got buffered during completion
 	input_buffer.clear()

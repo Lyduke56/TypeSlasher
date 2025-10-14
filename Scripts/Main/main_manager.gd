@@ -5,8 +5,22 @@ var current_dungeon: Node2D = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Load the initial dungeon
-	load_dungeon("res://Scenes/Rooms/Area 1/Area-1-var1.tscn")
+	# Check if we're coming back from buff selection
+	if Global.get("after_buff_selection") == true:
+		Global.after_buff_selection = false
+		# Print what buff was selected
+		print("Returning from buff selection - Slot:", Global.selected_buff_index, " Buff type:", Global.selected_buff_type)
+
+		# Apply health buff if Health Potion (index 0) was selected
+		if Global.selected_buff_type == 0:
+			Global.health_buff_applied = true
+			print("Health Potion buff will be applied to target!")
+
+		# Load the boss dungeon after buff selection
+		load_dungeon("res://Scenes/Rooms/Area 1/Area-1-boss-var1.tscn")
+	else:
+		# Load the initial dungeon
+		load_dungeon("res://Scenes/Rooms/Area 1/Area-1-var1.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -62,4 +76,5 @@ func _position_player_in_new_dungeon() -> void:
 
 func switch_to_boss_dungeon() -> void:
 	print("Switching to boss dungeon...")
-	load_dungeon("res://Scenes/Rooms/Area 1/Area-1-boss-var1.tscn")
+	# Change to buff selection scene
+	get_tree().change_scene_to_file("res://Scenes/BuffSelection.tscn")

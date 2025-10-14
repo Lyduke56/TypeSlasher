@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cqyy6bj8bw64f"
-path="res://.godot/imported/Orc rider-Block.png-3d0e471212a9ad0390d9813769d63546.ctex"
+path="res://.godot/imported/Orc rider-Block.png-84d4e1315e20a55559e26addef972d0b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Orc rider/Orc rider/Orc rider-Block.png"
-dest_files=["res://.godot/imported/Orc rider-Block.png-3d0e471212a9ad0390d9813769d63546.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Orc rider/Orc rider/Orc rider-Block.png"
+dest_files=["res://.godot/imported/Orc rider-Block.png-84d4e1315e20a55559e26addef972d0b.ctex"]
 
 [params]
 

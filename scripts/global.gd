@@ -4,6 +4,16 @@ var high_score = 0
 var current_score: int
 var previous_score: int
 
+# Flag to track if we're coming back from buff selection
+var after_buff_selection: bool = false
+
+# Store selected buff information
+var selected_buff_index: int = -1
+var selected_buff_type: int = -1
+
+# Flag to track health buff application
+var health_buff_applied: bool = false
+
 
 # --- WPM tracking ---
 # We measure characters typed correctly; 5 characters = 1 word (standard WPM)

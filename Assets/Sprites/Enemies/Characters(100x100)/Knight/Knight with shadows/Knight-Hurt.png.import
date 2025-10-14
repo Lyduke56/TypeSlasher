@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bcmgtpm16ialx"
-path="res://.godot/imported/Knight-Hurt.png-a0e579e75298a213b74a97f77a75f63f.ctex"
+path="res://.godot/imported/Knight-Hurt.png-65697875f39e889958227c65fa66a48a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Knight/Knight with shadows/Knight-Hurt.png"
-dest_files=["res://.godot/imported/Knight-Hurt.png-a0e579e75298a213b74a97f77a75f63f.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Knight/Knight with shadows/Knight-Hurt.png"
+dest_files=["res://.godot/imported/Knight-Hurt.png-65697875f39e889958227c65fa66a48a.ctex"]
 
 [params]
 

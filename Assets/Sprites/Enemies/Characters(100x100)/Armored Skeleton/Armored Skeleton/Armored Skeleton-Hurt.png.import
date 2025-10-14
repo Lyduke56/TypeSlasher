@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgn2wa24m20lo"
-path="res://.godot/imported/Armored Skeleton-Hurt.png-d4dca77f96d1892fd56ba4ebe34539f0.ctex"
+path="res://.godot/imported/Armored Skeleton-Hurt.png-f12770b2d97911db352a2721acb1d052.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Armored Skeleton/Armored Skeleton/Armored Skeleton-Hurt.png"
-dest_files=["res://.godot/imported/Armored Skeleton-Hurt.png-d4dca77f96d1892fd56ba4ebe34539f0.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Skeleton/Armored Skeleton/Armored Skeleton-Hurt.png"
+dest_files=["res://.godot/imported/Armored Skeleton-Hurt.png-f12770b2d97911db352a2721acb1d052.ctex"]
 
 [params]
 

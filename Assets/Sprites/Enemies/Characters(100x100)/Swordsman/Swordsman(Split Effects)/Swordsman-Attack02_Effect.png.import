@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cofblqmscvamp"
-path="res://.godot/imported/Swordsman-Attack02_Effect.png-cac36ea0deeb0ee2a2e9af27ae3d450d.ctex"
+path="res://.godot/imported/Swordsman-Attack02_Effect.png-2eb76d9d65b895ace0d14f116c51c5b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Swordsman/Swordsman(Split Effects)/Swordsman-Attack02_Effect.png"
-dest_files=["res://.godot/imported/Swordsman-Attack02_Effect.png-cac36ea0deeb0ee2a2e9af27ae3d450d.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Swordsman/Swordsman(Split Effects)/Swordsman-Attack02_Effect.png"
+dest_files=["res://.godot/imported/Swordsman-Attack02_Effect.png-2eb76d9d65b895ace0d14f116c51c5b1.ctex"]
 
 [params]
 

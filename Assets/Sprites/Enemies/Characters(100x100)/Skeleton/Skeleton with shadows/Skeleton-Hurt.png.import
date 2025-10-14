@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cnm8yqrubnk6u"
-path="res://.godot/imported/Skeleton-Hurt.png-73c5a7919e6a19a3154a2291ecc9a86c.ctex"
+path="res://.godot/imported/Skeleton-Hurt.png-af718eef13f023a3e46382a983bddd02.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Skeleton/Skeleton with shadows/Skeleton-Hurt.png"
-dest_files=["res://.godot/imported/Skeleton-Hurt.png-73c5a7919e6a19a3154a2291ecc9a86c.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton/Skeleton with shadows/Skeleton-Hurt.png"
+dest_files=["res://.godot/imported/Skeleton-Hurt.png-af718eef13f023a3e46382a983bddd02.ctex"]
 
 [params]
 

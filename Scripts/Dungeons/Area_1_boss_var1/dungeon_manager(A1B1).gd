@@ -8,7 +8,7 @@ var block_all_input: bool = false  # Block all input during transitions
 
 @onready var direction_label: RichTextLabel = $"../../HUD/Direction"
 
-	
+
 var tween: Tween
 
 # Typing mechanics variables (similar to game.gd)
