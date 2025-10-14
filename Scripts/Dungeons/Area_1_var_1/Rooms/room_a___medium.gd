@@ -61,7 +61,7 @@ func start_room():
 	if is_cleared:
 		print("Room " + name + " is already cleared, skipping spawning")
 		return
-
+ 
 	if spawn_timer and spawn_timer.time_left > 0 and enemies_spawned > 0:
 		print("Room " + name + " is already in progress, skipping spawning")
 		return
