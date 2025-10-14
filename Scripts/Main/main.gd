@@ -4,7 +4,10 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	# Initialize heart container with current global health values
+	if heart_container:
+		heart_container.initialize_hearts()
+		print("Main scene heart container initialized with health: ", Global.player_current_health, "/", Global.player_max_health)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

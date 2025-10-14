@@ -18,13 +18,20 @@ var is_processing_completion: bool = false
 var input_buffer: Array[String] = []
 
 func _ready() -> void:
+
+	setup_heart_container()
 	# Connect to health changes first, before any health modifications
 	Global.player_health_changed.connect(_on_health_changed)
 
 	# Health persists across dungeons - clamp current health to ensure it's within valid range
 	Global.player_current_health = clamp(Global.player_current_health, 0, Global.player_max_health)
+
+	# Create heart container immediately
+
+
+	# Wait for target to apply health buffs, then update heart container
+	await get_tree().process_frame
 	Global.player_health_changed.emit(Global.player_current_health, Global.player_max_health)
-	setup_heart_container()
 
 	set_process_input(true)
 	set_process_unhandled_input(true)
@@ -108,7 +115,7 @@ func setup_room_connections():
 # DIRECTION PROMPT
 # ------------------------------------------------------------
 func show_directions():
-	if direction_label:
+	if direction_label and current_room != null:
 		if current_room.is_cleared:
 			var directions = current_room.exit_markers.keys()
 			direction_label.text = "Type direction: " + ", ".join(directions)
@@ -127,8 +134,8 @@ func _input(event):
 
 	# Block movement during enemy processing, word completion, or enemy spawning
 	# Skip blocking for starting room and portal room (they don't spawn enemies)
-	var skip_blocking = current_room.name == "StartingRoom" or current_room.name == "PortalRoom"
-	if not skip_blocking and (active_enemy != null or is_processing_completion or current_room.is_spawning_enemies):
+	var skip_blocking = current_room != null and (current_room.name == "StartingRoom" or current_room.name == "PortalRoom")
+	if not skip_blocking and (active_enemy != null or is_processing_completion or (current_room != null and current_room.is_spawning_enemies)):
 		return
 
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -143,7 +150,7 @@ func _input(event):
 			KEY_RIGHT:
 				direction = "right"
 
-		if direction != "" and current_room.exit_markers.has(direction) and not self.is_transitioning:
+		if direction != "" and current_room != null and current_room.exit_markers.has(direction) and not self.is_transitioning:
 			# Only allow transition if current room is cleared (skip check for starting/portal rooms)
 			if not skip_blocking and not current_room.is_cleared:
 				print("Cannot transition - current room is not cleared yet")
@@ -155,6 +162,9 @@ func _input(event):
 # ROOM TRANSITIONS
 # ------------------------------------------------------------
 func transition_to_room(direction: String):
+	if current_room == null:
+		return
+
 	var next_room = current_room.get_connected_room(direction)
 	if not next_room:
 		return

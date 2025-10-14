@@ -30,6 +30,9 @@ func _ready() -> void:
 		# Load the initial dungeon
 		load_dungeon("res://Scenes/Rooms/Area 1/Area-1-var1.tscn")
 
+	# Update heart container in Main scene after any buff application
+	call_deferred("_update_main_heart_container")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -81,6 +84,15 @@ func _position_player_in_new_dungeon() -> void:
 		player.global_position = starting_room.global_position
 		player.center_position = starting_room.global_position
 		print("Player positioned at StartingRoom position (fallback): ", starting_room.global_position)
+
+func _update_main_heart_container() -> void:
+	"""Update the heart container in the Main scene"""
+	var main_scene = get_node("/root/Main")
+	if main_scene and main_scene.has_node("HUD/HeartContainer"):
+		var heart_container = main_scene.get_node("HUD/HeartContainer")
+		if heart_container.has_method("initialize_hearts"):
+			heart_container.initialize_hearts()
+			print("Updated Main scene heart container with health: ", Global.player_current_health, "/", Global.player_max_health)
 
 func switch_to_boss_dungeon() -> void:
 	print("Switching to boss dungeon...")
