@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bf2hynvwtpint"
-path="res://.godot/imported/water - summer.png-97ec616ae9422af3b21349997b0c3ef4.ctex"
+path="res://.godot/imported/water - summer.png-948009a1828672ab007d254681e99756.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Map Tiles/Tileset/Water/water - summer.png"
-dest_files=["res://.godot/imported/water - summer.png-97ec616ae9422af3b21349997b0c3ef4.ctex"]
+source_file="res://Assets/Map Tiles/Tileset/Water/water - summer.png"
+dest_files=["res://.godot/imported/water - summer.png-948009a1828672ab007d254681e99756.ctex"]
 
 [params]
 

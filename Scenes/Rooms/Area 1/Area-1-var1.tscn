@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cvhdl8355whhu" path="res://Scripts/Dungeons/Area_1_var_1/area_1_var_1.gd" id="1_80n20"]
 [ext_resource type="Script" uid="uid://bc0pa4v2utvx0" path="res://Scripts/Dungeons/dungeon_manager(A1V1).gd" id="3_f1pun"]
-[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_qrpcx"]
-[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_6wyqo"]
+[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_qrpcx"]
+[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_6wyqo"]
 [ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="6_wa0in"]
 [ext_resource type="PackedScene" uid="uid://b50h76ql65ea1" path="res://Scenes/RoomSpawns/small_room_spawn.tscn" id="8_mdnki"]
 [ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="32_52s0k"]

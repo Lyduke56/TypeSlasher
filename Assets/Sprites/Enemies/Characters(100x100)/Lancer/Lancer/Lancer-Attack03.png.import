@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://byo5eeyixmgkp"
-path="res://.godot/imported/Lancer-Attack03.png-2b81a5c3569fc69988494ee5307c1e56.ctex"
+path="res://.godot/imported/Lancer-Attack03.png-8ea967ddc922794f65acc9d4d6e18c8a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Enemies/Characters(100x100)/Lancer/Lancer/Lancer-Attack03.png"
-dest_files=["res://.godot/imported/Lancer-Attack03.png-2b81a5c3569fc69988494ee5307c1e56.ctex"]
+source_file="res://Assets/Sprites/Enemies/Characters(100x100)/Lancer/Lancer/Lancer-Attack03.png"
+dest_files=["res://.godot/imported/Lancer-Attack03.png-8ea967ddc922794f65acc9d4d6e18c8a.ctex"]
 
 [params]
 

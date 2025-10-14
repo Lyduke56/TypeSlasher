@@ -33,7 +33,7 @@ func _ready() -> void:
 
 	# Set connections manually for now (can be exported later)
 	setup_room_connections()
-	
+
 	# Find player (now in Main scene, not dungeon scene)
 	player = get_node("/root/Main/Player")
 
@@ -41,8 +41,8 @@ func _ready() -> void:
 	player.enemy_reached.connect(_on_enemy_reached)
 	player.slash_completed.connect(_on_player_slash_completed)
 	player.player_returned.connect(_on_player_returned)
-	
-	
+
+
 	# Start in the starting room
 	current_room = get_node("../StartingRoom")
 	current_room.start_room()

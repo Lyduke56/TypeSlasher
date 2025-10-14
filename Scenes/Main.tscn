@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://e4hlvob3t2uo"]
+[gd_scene load_steps=6 format=3 uid="uid://8nbud2wu7ebp"]
 
 [ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://Scenes/player.tscn" id="1_rgh2o"]
-[ext_resource type="Script" uid="uid://b7u6emsb5wigv" path="res://Scripts/Main/main.gd" id="1_v1gob"]
-[ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://assets/Themes/Outline.tres" id="2_pbw6q"]
+[ext_resource type="Script" path="res://Scripts/Main/main.gd" id="1_v1gob"]
+[ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://Assets/Themes/Outline.tres" id="2_pbw6q"]
 [ext_resource type="Script" uid="uid://c6d6lvm5hdar1" path="res://Scripts/Main/main_manager.gd" id="2_v1gob"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_v1gob"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_v1gob"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_v1gob")
