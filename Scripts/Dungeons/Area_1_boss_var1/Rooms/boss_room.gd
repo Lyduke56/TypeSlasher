@@ -18,7 +18,7 @@ signal room_cleared
 var EnemyScene = preload("res://Scenes/Enemies/Orc_enemy.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
 var MinotaurScene = preload("res://Scenes/Boss/Minotaur.tscn")
-var current_category = "hard"  # Can be: easy, medium, hard, typo, sentence, casing
+var current_category = "medium"  # Can be: easy, medium, hard, typo, sentence, casing
 var enemies_spawned = 0  # How many we've actually spawned
 var max_enemies_to_spawn = 0  # How many we plan to spawn
 var enemies_remaining = 0  # How many are still alive
@@ -67,14 +67,10 @@ func start_room():
 		return
 
 	# Determine enemy count based on room type
-	max_enemies_to_spawn = 1 if room_type == RoomType.MEDIUM else 1
+	max_enemies_to_spawn = 20 if room_type == RoomType.BOSS else 20
 
 	# Spawn enemies and target
 	_spawn_room_enemies(max_enemies_to_spawn)
-
-	# Check if boss should spawn (when ~50% of regular enemies have spawned)
-	if enemies_spawned >= max_enemies_to_spawn / 2 and not has_boss_spawned():
-		_spawn_minotaur_boss()
 
 func clear_room():
 	is_cleared = true
@@ -208,6 +204,10 @@ func _spawn_next_enemy():
 	_spawn_enemy_at_position(spawn_point.position)
 	enemies_spawned += 1
 	enemies_remaining += 1
+
+	# Check if boss should spawn after this enemy spawns
+	if enemies_spawned >= max_enemies_to_spawn / 2 and not has_boss_spawned():
+		_spawn_minotaur_boss()
 
 	print("Spawned enemy " + str(enemies_spawned) + "/" + str(max_enemies_to_spawn) + " in room: " + name)
 
