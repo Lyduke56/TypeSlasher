@@ -4,12 +4,14 @@ extends Node2D
 @export var green: Color = Color("#639765")
 @export var red: Color = Color("#a65455")
 
-@export var speed: float = 50.0  # Movement speed towards target
+@export var speed: float = 30.0  # Movement speed towards target
+@export var boss_health: int = 5  # Boss health, requires 5 hits to defeat
 @onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
 @onready var prompt_text = prompt.text
 @onready var area: Area2D = $Area2D
+@onready var heart_container = $"Node2D/HeartContainer"
 
 # Target tracking
 var target_position: Vector2
@@ -24,9 +26,19 @@ var hack_timer: Timer
 # Reference to target node for taking damage
 var target_node: Node2D
 
-var points_for_kill = 100
+var points_for_kill = 5000
+
+# Boss health system
+var max_boss_health: int = 5
+var is_knockbacked: bool = false
 
 func _ready() -> void:
+	# Initialize boss health
+	boss_health = max_boss_health
+
+	# Setup health UI
+	setup_boss_health_ui()
+
 	# Connect collision signal
 	area.body_entered.connect(_on_body_entered)
 	# Connect animation finished signal
@@ -94,14 +106,78 @@ func get_bbcode_end_color_tag() -> String:
 
 func set_targeted_state(targeted: bool):
 	"""Called when enemy becomes targeted - stops movement and plays idle"""
-	is_being_targeted = targeted
+	# Boss cannot be set to targeted state in the same way as regular enemies
+	# Boss remains targetable throughout the fight, only becomes "targeted visually" temporarily
 	if targeted:
-		# Stop moving and play idle animation when targeted
-		if anim:
-			anim.play("idle ")
-		modulate = Color.GRAY  # Darken the enemy
+		modulate = Color.GRAY  # Temporary visual feedback
+		# Don't actually set is_being_targeted = true for boss
 	else:
 		modulate = Color.WHITE  # Reset color
+		is_being_targeted = false  # Reset on completion
+
+func take_damage():
+	"""Boss takes damage from player, requires 5 hits to defeat"""
+	if boss_health <= 0 or is_knockbacked:
+		return
+
+	boss_health -= 1
+	update_boss_health_ui()
+
+	print("Minotaur boss damaged! Health: ", boss_health, "/", max_boss_health)
+
+	# Perform knockback
+	perform_knockback()
+
+	# Check if boss should die
+	if boss_health <= 0:
+		play_death_animation()
+	else:
+		# Play random damage animation for survival cases
+		play_random_damage_animation()
+
+func perform_knockback():
+	"""Knock the boss back from target temporarily"""
+	is_knockbacked = true
+
+	# Calculate knockback direction (away from target)
+	var knockback_direction = (global_position - target_position).normalized()
+	var knockback_distance = 150.0  # Distance to knock back
+
+	# Perform knockback using tween for smooth movement
+	var tween = create_tween()
+	tween.tween_property(self, "position", global_position + knockback_direction * knockback_distance, 0.5)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_BACK)
+
+	# Play the taunt animation after knockback completes
+	tween.finished.connect(func():
+		if anim:
+			anim.play("taunt")
+	)
+
+	# Reset target tracking temporarily
+	has_target = false
+	set_targeted_state(false)
+
+func play_random_attack_animation():
+	"""Play a random attack animation"""
+	if not anim or anim.animation == "death" or anim.animation == "damaged":
+		return
+
+	var attack_animations = ["attack_1", "attack_2", "attack_3", "attack_4"]
+	var random_attack = attack_animations[randi() % attack_animations.size()]
+	anim.play(random_attack)
+	print("Minotaur playing attack: ", random_attack)
+
+func play_random_damage_animation():
+	"""Play a random damage animation"""
+	if not anim or anim.animation == "death":
+		return
+
+	var damage_animations = ["damage_1", "damage_2"]
+	var random_damage = damage_animations[randi() % damage_animations.size()]
+	anim.play(random_damage)
+	print("Minotaur taking damage: ", random_damage)
 
 func play_death_animation():
 	"""Play damage animation followed by death animation"""
@@ -113,6 +189,11 @@ func play_death_animation():
 	if anim.animation == "death" or anim.animation == "damaged":
 		return
 
+	# Only play death if boss health is 0
+	if boss_health > 0:
+		print("Boss cannot die yet, health remaining: ", boss_health)
+		return
+
 	# Disconnect any existing connections to prevent duplicates
 	if anim.animation_finished.is_connected(_on_damage_animation_finished):
 		anim.animation_finished.disconnect(_on_damage_animation_finished)
@@ -121,7 +202,7 @@ func play_death_animation():
 	anim.animation_finished.connect(_on_damage_animation_finished, CONNECT_ONE_SHOT)
 	anim.play("damaged")
 
-	print("Enemy damage animation started")
+	print("Boss death sequence started!")
 
 func _on_damage_animation_finished():
 	"""Called when damage animation completes - plays death animation"""
@@ -156,7 +237,7 @@ func _on_body_entered(body: Node2D):
 
 			# Play idle animation immediately
 			if anim:
-				anim.play("idle ")
+				anim.play("idle")
 
 			# Create and start timer for 1.5 second intervals
 			hack_timer = Timer.new()
@@ -167,12 +248,10 @@ func _on_body_entered(body: Node2D):
 			hack_timer.start()
 
 func _on_hack_timer_timeout():
-	"""Called every 1.5 seconds to play hack animation"""
+	"""Called every 1.5 seconds to play random attack animation"""
 	if has_reached_target and not is_being_targeted and anim:
-		# Temporarily disable looping for hack animation so it plays once
-		anim.sprite_frames.set_animation_loop("Hack", false)
-		anim.play("Hack")
-		print("Enemy hacking the target!")
+		play_random_attack_animation()
+		print("Minotaur attacking the target!")
 
 func _on_animation_finished():
 	"""Called when any animation finishes"""
@@ -180,32 +259,72 @@ func _on_animation_finished():
 	if anim and (anim.animation == "death" or anim.animation == "damaged" or is_being_targeted):
 		return
 
-	if has_reached_target and anim and anim.animation == "Hack":
-		# Hack animation finished, go back to idle and take damage
-		anim.play("idle ")
-		print("Enemy finished hacking, back to idle.")
-		if target_node:
+	# Handle random attack animations (boss specific)
+	var attack_animations = ["attack_1", "attack_2", "attack_3", "attack_4", "taunt"]
+	if has_reached_target and anim and anim.animation in attack_animations:
+		# Attack animation finished, go back to idle and take damage
+		anim.play("idle")
+		print("Minotaur finished ", anim.animation, ", back to idle.")
+		if target_node and anim.animation != "taunt":  # Taunt doesn't damage
 			target_node.take_damage()
+		return
+
+	# Reset knockback state after taunt animation completes
+	if is_knockbacked and anim and anim.animation == "taunt":
+		is_knockbacked = false
+		set_targeted_state(false)  # Reset targeting visual
+		set_target_position(target_position)  # Resume attacking
+		print("Minotaur taunt complete, resuming attack.")
+
+func setup_boss_health_ui():
+	"""Setup the health UI for the boss"""
+	if heart_container:
+		# Clear any existing hearts
+		for child in heart_container.get_children():
+			if child is Panel:
+				child.queue_free()
+
+		# Add the correct number of hearts
+		for i in range(max_boss_health):
+			var heart_scene: PackedScene = preload("res://Scenes/GUI/HeartGUI.tscn")
+			var heart = heart_scene.instantiate()
+			if heart and heart is Panel:
+				heart_container.add_child(heart)
+				# Initially all hearts are visible (full health)
+				heart.visible = true
+
+func update_boss_health_ui():
+	"""Update the health UI to show remaining boss hearts"""
+	if heart_container:
+		var heart_count = heart_container.get_child_count()
+		for i in range(heart_count):
+			var heart = heart_container.get_child(i)
+			if heart and heart is Panel:
+				# Show heart if boss still has health remaining
+				heart.visible = (i < boss_health)
+		print("Boss health UI updated: ", boss_health, " hearts remaining")
 
 func _physics_process(delta: float) -> void:
-	# STOP ALL MOVEMENT if being targeted or has reached target
-	if is_being_targeted or has_reached_target:
+	# STOP ALL MOVEMENT if being targeted, has reached target, or is knockbacked
+	if is_being_targeted or has_reached_target or is_knockbacked:
 		# Don't override death/damage animations
 		if anim and (anim.animation == "death" or anim.animation == "damaged"):
 			return  # Let death/damage animations play
 
-		# When reached target and not being targeted, play idle only if not currently hacking
-		if anim and has_reached_target and not is_being_targeted and anim.animation != "Hack":
-			anim.play("idle ")
+		# When reached target and not being targeted, play idle only if not currently attacking
+		if anim and has_reached_target and not is_being_targeted and not is_knockbacked:
+			var attack_animations = ["attack_1", "attack_2", "attack_3", "attack_4"]
+			if anim.animation not in attack_animations:
+				anim.play("idle")
 		return  # Exit function completely - no movement at all
 
-	# Only move if NOT being targeted and hasn't reached target
+	# Only move if NOT being targeted and hasn't reached target and not knockbacked
 	if has_target:
 		# Move towards target position
 		var direction = (target_position - global_position).normalized()
 
 		if anim:
-			anim.play("running")
+			anim.play("run")
 			anim.flip_h = direction.x < 0
 
 		global_position += direction * speed * delta
@@ -214,9 +333,9 @@ func _physics_process(delta: float) -> void:
 		if global_position.distance_to(target_position) < 5.0:
 			has_target = false
 			if anim:
-				anim.play("idle ")
+				anim.play("idle")
 	else:
 		# Fallback: move downward if no specific target
 		if anim:
-			anim.play("idle ")
+			anim.play("idle")
 		global_position.y += speed * delta

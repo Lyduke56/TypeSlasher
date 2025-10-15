@@ -2,7 +2,7 @@ extends Node2D
 
 enum RoomType { SMALL, MEDIUM, BOSS }
 
-@export var room_type: RoomType = RoomType.MEDIUM
+@export var room_type: RoomType = RoomType.BOSS
 var is_cleared: bool = false
 var is_ready_to_clear: bool = false
 
@@ -17,12 +17,14 @@ signal room_cleared
 # Enemy spawning
 var EnemyScene = preload("res://Scenes/Enemies/Orc_enemy.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
-var current_category = "medium"  # Can be: easy, medium, hard, typo, sentence, casing
+var MinotaurScene = preload("res://Scenes/Boss/Minotaur.tscn")
+var current_category = "hard"  # Can be: easy, medium, hard, typo, sentence, casing
 var enemies_spawned = 0  # How many we've actually spawned
 var max_enemies_to_spawn = 0  # How many we plan to spawn
 var enemies_remaining = 0  # How many are still alive
 var available_spawn_points = []
 var is_spawning_enemies = false  # True when enemies are still spawning
+var boss_spawned = false  # Track if boss has been spawned
 @onready var spawn_timer: Timer = Timer.new()
 
 @onready var camera_area: Area2D = $CameraArea
@@ -65,10 +67,14 @@ func start_room():
 		return
 
 	# Determine enemy count based on room type
-	max_enemies_to_spawn = 10 if room_type == RoomType.MEDIUM else 5
+	max_enemies_to_spawn = 1 if room_type == RoomType.MEDIUM else 1
 
 	# Spawn enemies and target
 	_spawn_room_enemies(max_enemies_to_spawn)
+
+	# Check if boss should spawn (when ~50% of regular enemies have spawned)
+	if enemies_spawned >= max_enemies_to_spawn / 2 and not has_boss_spawned():
+		_spawn_minotaur_boss()
 
 func clear_room():
 	is_cleared = true
@@ -133,6 +139,8 @@ func _spawn_room_enemies(max_enemies: int):
 	if not spawn_locations:
 		spawn_locations = get_node_or_null("SmallRoomSpawn/SpawnLocations")
 	if not spawn_locations:
+		spawn_locations = get_node_or_null("BossRoomSpawn/SpawnLocations")
+	if not spawn_locations:
 		print("No spawn locations found in room: " + name)
 		is_spawning_enemies = false
 		return
@@ -140,8 +148,14 @@ func _spawn_room_enemies(max_enemies: int):
 	# Get all available spawn points
 	available_spawn_points = []
 	for child in spawn_locations.get_children():
-		if child.name.begins_with("SpawnPoint"):
+		# Add direct spawn points
+		if child.name.begins_with("SpawnPoint") or child.name.begins_with("Bottom") or child.name.begins_with("Top") or child.name.ends_with("Point"):
 			available_spawn_points.append(child)
+		# Add children from cardinal direction groups (North, South, East, West)
+		if child.name in ["North", "South", "East", "West"]:
+			for grandchild in child.get_children():
+				if grandchild.name.begins_with("SpawnPoint"):
+					available_spawn_points.append(grandchild)
 
 	if available_spawn_points.is_empty():
 		print("No spawn points found in room: " + name)
@@ -251,8 +265,24 @@ func _get_unique_word() -> String:
 func _on_enemy_died():
 	"""Called when an enemy dies - check if room is ready to be cleared"""
 	enemies_remaining -= 1
-	if enemies_remaining <= 0 and not is_spawning_enemies:
+
+	# Check if room is actually ready to clear:
+	# - All regular enemies must be dead (enemies_remaining <= 0)
+	# - Not currently spawning new enemies (is_spawning_enemies == false)
+	# - Either no boss was spawned or the boss is also dead
+	var boss_is_alive = boss_spawned and enemy_container.get_child_count() > 0
+	for child in enemy_container.get_children():
+		if child and child.has_method("get_prompt") and child.name.contains("Minotaur"):
+			boss_is_alive = true
+			break
+		else:
+			boss_is_alive = false
+
+	if enemies_remaining <= 0 and not is_spawning_enemies and not boss_is_alive:
 		is_ready_to_clear = true
+		print("Room ready to clear: All enemies defeated, including boss!")
+	else:
+		print("Room not yet ready to clear: enemies_remaining=", enemies_remaining, " is_spawning=", is_spawning_enemies, " boss_alive=", boss_is_alive)
 
 func _handle_camera_on_room_enter():
 	"""Move camera to this room if it's uncleared (combat room)"""
@@ -286,3 +316,72 @@ func _handle_camera_on_room_clear():
 		camera.position = Vector2.ZERO  # Reset camera position relative to player
 
 		print("Camera returned to player after clearing room: " + name)
+
+func has_boss_spawned() -> bool:
+	"""Check if the minotaur boss has been spawned"""
+	return boss_spawned
+
+func _spawn_minotaur_boss():
+	"""Spawn the Minotaur boss at a spawn location (separate from regular enemy count)"""
+	if boss_spawned:
+		return
+
+	await get_tree().create_timer(1.0).timeout  # Brief delay before boss spawn
+
+	# Find available spawn points (same as regular enemies)
+	var spawn_locations = get_node_or_null("BossRoomSpawn/SpawnLocations")
+	var available_spawn_points_for_boss = []
+
+	if spawn_locations:
+		for child in spawn_locations.get_children():
+			# Add direct spawn points
+			if child.name.begins_with("SpawnPoint") or child.name.begins_with("Bottom") or child.name.begins_with("Top") or child.name.ends_with("Point"):
+				available_spawn_points_for_boss.append(child)
+			# Add children from cardinal direction groups (North, South, East, West)
+			if child.name in ["North", "South", "East", "West"]:
+				for grandchild in child.get_children():
+					if grandchild.name.begins_with("SpawnPoint"):
+						available_spawn_points_for_boss.append(grandchild)
+
+	if available_spawn_points_for_boss.is_empty():
+		print("No spawn locations found for boss! Spawning at center.")
+		available_spawn_points_for_boss = [Node2D.new()]  # Fallback to center
+		available_spawn_points_for_boss[0].position = Vector2.ZERO
+
+	# Pick a random spawn point for the boss
+	var random_index = randi() % available_spawn_points_for_boss.size()
+	var spawn_point = available_spawn_points_for_boss[random_index]
+
+	# Create Minotaur instance
+	var boss_instance = MinotaurScene.instantiate()
+	boss_instance.z_index = 3
+
+	# Spawn at the selected spawn location
+	boss_instance.position = spawn_point.position
+
+	# Set target position (where the target is located)
+	var target_position = Vector2.ZERO  # Center, since target is at target_container.position
+	if target_container.get_child_count() > 0:
+		var target_instance = target_container.get_child(0)
+		target_position = target_instance.global_position
+
+	print("Summoning MINOTAUR BOSS at:", spawn_point.position, "(spawn point:", spawn_point.name if spawn_point.has_method("get") else "center", ")")
+	print("Moving towards target at:", target_position)
+
+	# Add to enemy container (so input selection works)
+	enemy_container.add_child(boss_instance)
+
+	# Set a boss-level word for the minotaur
+	var boss_word = _get_unique_word()
+	if boss_word == "":
+		boss_word = "MINOTAUR"  # Fallback boss word
+	boss_instance.set_prompt(boss_word)
+
+	# Set boss target position
+	boss_instance.set_target_position(target_position)
+
+	# Connect boss death signal to track room completion
+	boss_instance.tree_exited.connect(_on_enemy_died)
+
+	boss_spawned = true
+	print("MINOTAUR BOSS SPAWNED - Fight for your life!")

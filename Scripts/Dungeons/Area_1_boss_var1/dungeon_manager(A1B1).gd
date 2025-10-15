@@ -6,8 +6,7 @@ var player: CharacterBody2D
 var is_transitioning: bool = false
 var block_all_input: bool = false  # Block all input during transitions
 
-@onready var direction_label: RichTextLabel = $"../../HUD/Direction"
-
+@onready var direction_label: RichTextLabel = $"/root/Main/Hud/Direction"
 
 var tween: Tween
 
@@ -18,7 +17,6 @@ var is_processing_completion: bool = false
 var input_buffer: Array[String] = []
 
 func _ready() -> void:
-
 	# Connect to health changes first, before any health modifications
 	Global.player_health_changed.connect(_on_health_changed)
 
@@ -108,6 +106,7 @@ func setup_room_connections():
 	room_e.set_connected_room("right", room_b)
 
 	healing.set_connected_room("top", starting)
+	boss.set_connected_room("bottom",room_b)
 
 
 # ------------------------------------------------------------

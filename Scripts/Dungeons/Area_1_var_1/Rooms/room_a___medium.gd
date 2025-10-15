@@ -14,8 +14,6 @@ var exit_markers: Dictionary = {}  # "direction" : marker_node
 signal room_started
 signal room_cleared
 
-
-
 # Enemy spawning
 var EnemyScene = preload("res://Scenes/Enemies/Orc_enemy.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
