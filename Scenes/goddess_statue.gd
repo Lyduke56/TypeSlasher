@@ -1,8 +1,4 @@
-extends Node
-
-
-
-# ADD FUNCTION FOR HEALING 1-3 POINTS MAX OF HP (RANDOMIZED)
+extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.

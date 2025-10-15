@@ -81,7 +81,7 @@ func _on_camera_area_body_entered(body: Node2D) -> void:
 
 func _spawn_portal():
 	"""Spawn the portal if not already spawned"""
-	if portal_container.get_child_count() > 0:
+	if portal_container.get_child_count() > 0: 
 		return  # Already has portal
 
 	var portal_instance = GreenPortalScene.instantiate()

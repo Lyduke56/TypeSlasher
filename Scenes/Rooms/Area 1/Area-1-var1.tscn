@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://cullg0ljl0ex6"]
+[gd_scene load_steps=27 format=4 uid="uid://cullg0ljl0ex6"]
 
 [ext_resource type="Script" uid="uid://cvhdl8355whhu" path="res://Scripts/Dungeons/Area_1_var_1/area_1_var_1.gd" id="1_dwvem"]
 [ext_resource type="Script" uid="uid://bc0pa4v2utvx0" path="res://Scripts/Dungeons/dungeon_manager(A1V1).gd" id="2_wa0in"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="9_303ub"]
 [ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="10_315x1"]
 [ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="11_c0y1h"]
+[ext_resource type="PackedScene" uid="uid://dorcu8dqsw1r8" path="res://Scenes/goddess_statue.tscn" id="12_wa0in"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ean82"]
 size = Vector2(315, 353)
@@ -958,6 +959,10 @@ position = Vector2(2, 133)
 [node name="TargetContainer" type="Node2D" parent="StartingRoom"]
 z_index = 2
 position = Vector2(0, 1)
+
+[node name="goddess test" parent="StartingRoom" instance=ExtResource("12_wa0in")]
+z_index = 15
+position = Vector2(-66, -17)
 
 [node name="RoomA - Medium" type="Node2D" parent="."]
 position = Vector2(784, -18)
