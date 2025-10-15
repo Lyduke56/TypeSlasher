@@ -121,6 +121,10 @@ func _input(event):
 		return
 
 	# Block movement during enemy processing, word completion, or enemy spawning
+	# Block movement if player can't move (before spawn animation)
+	if Global.player_can_move == false:
+		return
+
 	# Skip blocking for starting room and portal room (they don't spawn enemies)
 	var skip_blocking = current_room != null and (current_room.name == "StartingRoom" or current_room.name == "PortalRoom")
 	if not skip_blocking and (active_enemy != null or is_processing_completion or (current_room != null and current_room.is_spawning_enemies)):

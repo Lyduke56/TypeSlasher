@@ -13,6 +13,7 @@ extends CharacterBody2D
 @export var attack_duration: float = 0.5  # How long the attack animation plays
 
 @onready var anim = $AnimatedSprite2D
+@onready var overlay_anim = $Overlay
 @onready var combo_timer: Timer = Timer.new()
 @onready var attack_timer: Timer = Timer.new()
 
@@ -56,8 +57,14 @@ func _ready() -> void:
 	# Connect animation finished signal
 	anim.animation_finished.connect(_on_animation_finished)
 
+	# Connect overlay spawn animation finished signal
+	overlay_anim.animation_finished.connect(_on_overlay_animation_finished)
+
 	# Start with idle animation
 	anim.play("idle")
+
+	# Hide overlay by default
+	overlay_anim.visible = false
 
 func _physics_process(delta: float) -> void:
 	if is_dashing or is_returning:
@@ -281,6 +288,35 @@ func take_damage():
 # Public function to check if player is in combo state
 func is_in_combo() -> bool:
 	return combo_active
+
+func _on_overlay_animation_finished() -> void:
+	"""Called when the overlay spawn animation finishes"""
+	if overlay_anim.animation == "spawn":
+		overlay_anim.visible = false
+		# Don't show player here anymore - just hide the overlay
+		print("Spawn animation finished, hiding overlay")
+
+func hide_during_spawn() -> void:
+	"""Hide the player's main sprite during spawn animation and schedule reveal after 1 second"""
+	anim.visible = false
+	print("Player hidden during spawn")
+
+	# Schedule the player to be revealed after 1 second from when spawn animation started
+	var reveal_timer = Timer.new()
+	reveal_timer.wait_time = 1.0
+	reveal_timer.one_shot = true
+	reveal_timer.timeout.connect(func():
+		show_after_spawn()
+		reveal_timer.queue_free()
+		print("Player revealed after 1 second from spawn animation start")
+	)
+	add_child(reveal_timer)
+	reveal_timer.start()
+
+func show_after_spawn() -> void:
+	"""Show the player's main sprite 1 second after spawn animation starts"""
+	anim.visible = true
+	print("Player now visible after 1 second")
 
 # Function to reset combo (if needed)
 func reset_combo() -> void:
