@@ -141,7 +141,7 @@ func perform_knockback():
 
 	# Calculate knockback direction (away from target)
 	var knockback_direction = (global_position - target_position).normalized()
-	var knockback_distance = 150.0  # Distance to knock back
+	var knockback_distance = 1.0  # Distance to knock back
 
 	# Perform knockback using tween for smooth movement
 	var tween = create_tween()

@@ -354,8 +354,14 @@ func _complete_word():
 
 	# Atomically update all state
 	if completed_entity.has_method("set_targeted_state"):
-		completed_entity.set("is_being_targeted", true)
-		completed_entity.set_targeted_state(true)
+		# Avoid targeting visual on bosses (prevents greying out/stuck state)
+		var is_boss = false
+		if completed_entity != null:
+			var boss_max = completed_entity.get("max_boss_health")
+			is_boss = boss_max != null
+		if not is_boss:
+			completed_entity.set("is_being_targeted", true)
+			completed_entity.set_targeted_state(true)
 
 	active_enemy = null
 	current_letter_index = -1
@@ -388,7 +394,13 @@ func _on_player_slash_completed(enemy):
 	print("Player slash completed! Now triggering enemy death.")
 
 	if enemy != null and is_instance_valid(enemy):
-		enemy.play_death_animation()
+		# If this is a boss, apply damage instead of killing outright
+		var boss_max = enemy.get("max_boss_health") if enemy != null else null
+		var is_boss = boss_max != null
+		if is_boss and enemy.has_method("take_damage"):
+			enemy.take_damage()
+		elif enemy.has_method("play_death_animation"):
+			enemy.play_death_animation()
 
 	# Note: Room clearing is already handled in the room scripts via enemy death signals
 
