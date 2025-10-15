@@ -34,6 +34,9 @@ var points_for_kill = 5000
 var max_boss_health: int = 5
 var is_knockbacked: bool = false
 var knockback_velocity: Vector2 = Vector2.ZERO
+var room_center: Vector2 = Vector2.ZERO
+var room_size: Vector2 = Vector2.ZERO
+var death_started: bool = false
 
 func _ready() -> void:
 	# Initialize boss health
@@ -45,6 +48,18 @@ func _ready() -> void:
 
 	# Setup health UI
 	setup_boss_health_ui()
+
+	# Cache room bounds from CameraArea if available (enemy is under EnemyContainer → parent is room)
+	var room: Node = null
+	if get_parent() != null and get_parent().get_parent() != null:
+		room = get_parent().get_parent()
+	if room != null and room.has_node("CameraArea"):
+		var camera_area: Area2D = room.get_node("CameraArea")
+		var cs: CollisionShape2D = camera_area.get_node_or_null("CollisionShape2D")
+		if cs and cs.shape is RectangleShape2D:
+			var shape: RectangleShape2D = cs.shape
+			room_size = shape.extents * 2.0
+			room_center = camera_area.global_position
 
 	# Collision Area2D removed; proximity detection handled in _physics_process
 	# Connect animation finished signal
@@ -123,7 +138,8 @@ func set_targeted_state(targeted: bool):
 
 func take_damage(attacker_global_position: Vector2 = global_position):
 	"""Boss takes damage from player, requires 5 hits to defeat"""
-	if boss_health <= 0 or is_knockbacked:
+	# Allow lethal damage even during knockback, but ignore if already dead
+	if boss_health <= 0:
 		return
 
 	boss_health -= 1
@@ -131,13 +147,13 @@ func take_damage(attacker_global_position: Vector2 = global_position):
 
 	print("Minotaur boss damaged! Health: ", boss_health, "/", max_boss_health)
 
-	# Refresh the boss's word on damage
-	_refresh_word()
-
 	# If dead now, play death immediately and skip knockback
 	if boss_health <= 0:
 		play_death_animation()
 		return
+
+	# Refresh the boss's word only on non-lethal hits
+	_refresh_word()
 
 	# Perform physics-based knockback away from attacker for non-lethal hit
 	perform_knockback(attacker_global_position)
@@ -208,7 +224,7 @@ func play_death_animation():
 		return
 
 	# Prevent multiple death plays
-	if anim.animation == "death":
+	if death_started or anim.animation == "death":
 		return
 
 	# Only play death if boss health is 0
@@ -216,10 +232,14 @@ func play_death_animation():
 		print("Boss cannot die yet, health remaining: ", boss_health)
 		return
 
+	death_started = true
+
 	# Ensure we only listen once for death end
 	if anim.animation_finished.is_connected(_on_death_animation_finished):
 		anim.animation_finished.disconnect(_on_death_animation_finished)
-	anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
+	if anim.animation_finished.is_connected(_on_damage_animation_finished):
+		anim.animation_finished.disconnect(_on_damage_animation_finished)
+	anim.animation_finished.connect(_on_death_animation_finished)
 	anim.play("death")
 	print("Boss death animation started")
 
@@ -351,10 +371,18 @@ func update_boss_health_ui():
 		print("Boss health UI updated: ", boss_health, " hearts remaining")
 
 func _physics_process(delta: float) -> void:
+	# Hard guard: if death started, force death animation and no movement
+	if death_started:
+		velocity = Vector2.ZERO
+		if anim and anim.animation != "death":
+			anim.play("death")
+		return
 	# Handle knockback motion using velocity and deceleration
 	if is_knockbacked:
 		velocity = knockback_velocity
 		move_and_slide()
+		# Clamp within room bounds if configured
+		_clamp_within_room_bounds()
 
 		# Decelerate knockback
 		var current_speed = knockback_velocity.length()
@@ -377,6 +405,7 @@ func _physics_process(delta: float) -> void:
 				anim.play("idle")
 		velocity = Vector2.ZERO
 		move_and_slide()
+		_clamp_within_room_bounds()
 		return
 
 	# Only move if NOT being targeted and hasn't reached target
@@ -390,6 +419,7 @@ func _physics_process(delta: float) -> void:
 			anim.flip_h = direction.x < 0
 
 		move_and_slide()
+		_clamp_within_room_bounds()
 
 		# Stop when close enough to target
 		if global_position.distance_to(target_position) < 5.0:
@@ -402,6 +432,21 @@ func _physics_process(delta: float) -> void:
 			anim.play("idle")
 		velocity = Vector2.ZERO
 		move_and_slide()
+		_clamp_within_room_bounds()
 
 	# After moving (or idling), check proximity to target to trigger reach logic
 	_attempt_reach_target_via_proximity()
+
+func _clamp_within_room_bounds():
+	if room_size == Vector2.ZERO:
+		return
+	var half = room_size * 0.5
+	var min_x = room_center.x - half.x
+	var max_x = room_center.x + half.x
+	var min_y = room_center.y - half.y
+	var max_y = room_center.y + half.y
+	var p = global_position
+	p.x = clamp(p.x, min_x, max_x)
+	p.y = clamp(p.y, min_y, max_y)
+	if p != global_position:
+		global_position = p
