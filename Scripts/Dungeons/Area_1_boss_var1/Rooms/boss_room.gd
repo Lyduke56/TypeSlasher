@@ -181,7 +181,6 @@ func _spawn_target():
 	var target_instance = TargetScene.instantiate()
 	target_container.add_child(target_instance)
 	target_instance.position = Vector2.ZERO  # Position within container
-	target_instance.z_index = 1
 	print("Spawned target in room: " + name)
 
 func _spawn_next_enemy():

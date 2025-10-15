@@ -14507,7 +14507,6 @@ shape = SubResource("RectangleShape2D_qaakt")
 position = Vector2(4, 374)
 
 [node name="TargetContainer" type="Node2D" parent="BossRoom"]
-z_index = 2
 position = Vector2(1, -42)
 
 [node name="PortalContainer" type="Node2D" parent="BossRoom"]
@@ -14516,7 +14515,7 @@ position = Vector2(3, -344)
 
 [node name="EnemyContainer" type="Node2D" parent="BossRoom"]
 z_index = 2
-position = Vector2(1, 0)
+position = Vector2(3, -42)
 
 [node name="BossRoomSpawn" parent="BossRoom" instance=ExtResource("7_vsrqs")]
 position = Vector2(2, -42)
