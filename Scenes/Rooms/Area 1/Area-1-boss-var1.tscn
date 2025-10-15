@@ -14507,7 +14507,6 @@ shape = SubResource("RectangleShape2D_qaakt")
 position = Vector2(4, 374)
 
 [node name="TargetContainer" type="Node2D" parent="BossRoom"]
-z_index = 2
 position = Vector2(1, -42)
 
 [node name="PortalContainer" type="Node2D" parent="BossRoom"]
@@ -14516,12 +14515,12 @@ position = Vector2(3, -344)
 
 [node name="EnemyContainer" type="Node2D" parent="BossRoom"]
 z_index = 2
-position = Vector2(1, 0)
+position = Vector2(3, -42)
 
-[node name="MediumRoomSpawn" parent="BossRoom" instance=ExtResource("7_vsrqs")]
+[node name="BossRoomSpawn" parent="BossRoom" instance=ExtResource("7_vsrqs")]
 position = Vector2(2, -42)
 
-[node name="TileMapLayer" parent="BossRoom/MediumRoomSpawn" index="0"]
+[node name="TileMapLayer" parent="BossRoom/BossRoomSpawn" index="0"]
 visible = false
 
 [node name="HealingRoom" type="Node2D" parent="."]
@@ -14594,4 +14593,4 @@ tile_set = SubResource("TileSet_u7e4d")
 [editable path="RoomC - Medium/MediumRoomSpawn"]
 [editable path="RoomD - Medium/MediumRoomSpawn"]
 [editable path="RoomE - Medium/MediumRoomSpawn"]
-[editable path="BossRoom/MediumRoomSpawn"]
+[editable path="BossRoom/BossRoomSpawn"]
