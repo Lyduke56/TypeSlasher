@@ -22,6 +22,9 @@ var shield_damage_reduction_chance: int = 0  # Calculated chance (15% per stack)
 var sword_buff_stacks: int = 0  # How many Sword buffs selected (tiers)
 var sword_heal_chance: int = 0  # Calculated chance (15% per stack)
 
+# Player movement control
+var player_can_move: bool = false  # Only allow arrow key movement after spawn animation
+
 # Player health system - persists across dungeons
 var player_max_health: int = 3  # Default max health, increases permanently
 var player_current_health: int = 3  # Current health, resets to max when entering dungeon

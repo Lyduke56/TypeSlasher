@@ -103,13 +103,20 @@ func _update_main_heart_container() -> void:
 			print("Updated Main scene heart container with health: ", Global.player_current_health, "/", Global.player_max_health)
 
 func _play_player_spawn_animation(player) -> void:
-	"""Play the spawn animation on the player's overlay AnimatedSprite2D"""
+	"""Play the spawn animation on the player's overlay AnimatedSprite2D and enable movement when it finishes"""
 	if player.has_node("Overlay"):
 		var overlay = player.get_node("Overlay")
 		if overlay is AnimatedSprite2D:
 			overlay.visible = true
 			overlay.play("spawn")
 			print("Playing player spawn animation")
+
+			# Connect to animation finished signal to enable movement when spawn ends
+			overlay.animation_finished.connect(func():
+				player.show_after_spawn()
+				Global.player_can_move = true
+				print("Player movement enabled after spawn animation finished")
+			)
 		else:
 			print("ERROR: Overlay is not an AnimatedSprite2D")
 	else:
