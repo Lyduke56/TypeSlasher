@@ -1,7 +1,8 @@
-[gd_scene load_steps=51 format=3 uid="uid://d1rhn5n4v0ppc"]
+[gd_scene load_steps=65 format=3 uid="uid://d1rhn5n4v0ppc"]
 
 [ext_resource type="Script" uid="uid://d2yuxrpjgdnyq" path="res://Scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cytjwetlg8otd" path="res://Assets/Sprites/Enemies/Characters(100x100)/Knight/Knight/Knight.png" id="2_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://jokbixxql13y" path="res://Assets/Sprites/Other Scenes/spawnbeam-sheet.png" id="3_6t5aa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
 atlas = ExtResource("2_cvnsp")
@@ -358,6 +359,98 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5x828"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(0, 0, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1k8q"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(64, 0, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6mvm"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(128, 0, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57lvd"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(192, 0, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ie7r7"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(0, 176, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq3lt"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(64, 176, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pukcj"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(128, 176, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1htnp"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(192, 176, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m376e"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(0, 352, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6b312"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(64, 352, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lisdf"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(128, 352, 64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1x1j"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(192, 352, 64, 176)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c8b32"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5x828")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1k8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6mvm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57lvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ie7r7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq3lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pukcj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1htnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m376e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6b312")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lisdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1x1j")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ur7pv"]
 radius = 6.08276
 
@@ -373,6 +466,14 @@ scale = Vector2(1.905, 1.905)
 sprite_frames = SubResource("SpriteFrames_5x828")
 animation = &"attack_1"
 frame = 6
+frame_progress = 1.0
+
+[node name="Overlay" type="AnimatedSprite2D" parent="."]
+position = Vector2(-6.10687, -85.4962)
+scale = Vector2(1.6813, 1.09577)
+sprite_frames = SubResource("SpriteFrames_c8b32")
+animation = &"spawn"
+frame = 11
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -89,6 +89,10 @@ func _position_player_in_new_dungeon() -> void:
 		player.center_position = starting_room.global_position
 		print("Player positioned at StartingRoom position (fallback): ", starting_room.global_position)
 
+	# Hide player and play spawn animation after positioning
+	player.hide_during_spawn()
+	_play_player_spawn_animation(player)
+
 func _update_main_heart_container() -> void:
 	"""Update the heart container in the Main scene"""
 	var main_scene = get_node("/root/Main")
@@ -97,6 +101,19 @@ func _update_main_heart_container() -> void:
 		if heart_container.has_method("initialize_hearts"):
 			heart_container.initialize_hearts()
 			print("Updated Main scene heart container with health: ", Global.player_current_health, "/", Global.player_max_health)
+
+func _play_player_spawn_animation(player) -> void:
+	"""Play the spawn animation on the player's overlay AnimatedSprite2D"""
+	if player.has_node("Overlay"):
+		var overlay = player.get_node("Overlay")
+		if overlay is AnimatedSprite2D:
+			overlay.visible = true
+			overlay.play("spawn")
+			print("Playing player spawn animation")
+		else:
+			print("ERROR: Overlay is not an AnimatedSprite2D")
+	else:
+		print("ERROR: Player doesn't have Overlay node")
 
 func switch_to_boss_dungeon() -> void:
 	print("Switching to boss dungeon...")
