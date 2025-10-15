@@ -396,7 +396,7 @@ func _on_player_slash_completed(enemy):
 		var boss_max = enemy.get("max_boss_health") if enemy != null else null
 		var is_boss = boss_max != null
 		if is_boss and enemy.has_method("take_damage"):
-			enemy.take_damage()
+			enemy.take_damage(player.global_position)
 		elif enemy.has_method("play_death_animation"):
 			enemy.play_death_animation()
 

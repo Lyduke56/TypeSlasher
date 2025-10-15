@@ -472,9 +472,9 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v8qg3"]
-radius = 8.0
+radius = 11.0454
 
-[node name="Minotaur" type="Node2D"]
+[node name="Minotaur" type="CharacterBody2D"]
 z_index = 3
 script = ExtResource("1_yaltd")
 
@@ -482,6 +482,10 @@ script = ExtResource("1_yaltd")
 position = Vector2(-2, -7)
 sprite_frames = SubResource("SpriteFrames_rpga6")
 animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, -7)
+shape = SubResource("CircleShape2D_v8qg3")
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3
@@ -499,14 +503,6 @@ text = " Type This "
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-4, -7)
-shape = SubResource("CircleShape2D_v8qg3")
 
 [node name="Node2D" type="Node2D" parent="."]
 scale = Vector2(0.655, 0.655)
