@@ -160,7 +160,7 @@ func _spawn_room_enemies(max_enemies: int):
 
 	# Set up timer for spawning enemies one by one every 3 seconds
 	add_child(spawn_timer)
-	spawn_timer.wait_time = 3.0
+	spawn_timer.wait_time = 2.0
 	spawn_timer.one_shot = false
 	spawn_timer.timeout.connect(_spawn_next_enemy)
 	spawn_timer.start()
