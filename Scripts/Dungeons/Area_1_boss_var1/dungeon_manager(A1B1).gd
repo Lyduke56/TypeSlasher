@@ -131,9 +131,9 @@ func _input(event):
 		return
 
 	# Block movement during enemy processing, word completion, or enemy spawning
-	# Skip blocking for starting room and portal room (they don't spawn enemies)
-	var skip_blocking = current_room != null and (current_room.name == "StartingRoom" or current_room.name == "PortalRoom")
-	if not skip_blocking and (active_enemy != null or is_processing_completion or (current_room != null and current_room.is_spawning_enemies)):
+	# Skip blocking for starting room, portal room, and healing room (they don't spawn enemies)
+	var skip_blocking = current_room != null and (current_room.name == "StartingRoom" or current_room.name == "PortalRoom" or current_room.name == "HealingRoom")
+	if not skip_blocking and (active_enemy != null or is_processing_completion or (current_room != null and current_room.has_method("get") and current_room.get("is_spawning_enemies") == true)):
 		return
 
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -339,6 +339,25 @@ func find_new_active_enemy(typed_character: String):
 				active_enemy.set_next_character(current_letter_index)
 				break
 
+	# Also check for goddess statue in healing rooms
+	if current_room and current_room.has_node("HealingContainer") and current_room.name == "HealingRoom":
+		var healing_container = current_room.get_node("HealingContainer")
+		for entity in healing_container.get_children():
+			# Skip invalid entities or entities that don't have typing interface
+			if not is_instance_valid(entity) or not entity.has_method("get_prompt"):
+				continue
+			# Skip entities that are already being targeted
+			if entity.get("is_being_targeted") == true:
+				continue
+
+			var prompt = entity.get_prompt()
+			if prompt.length() > 0 and prompt.substr(0, 1).to_lower() == typed_character:
+				print("Found goddess statue that starts with ", typed_character)
+				active_enemy = entity
+				current_letter_index = 1
+				active_enemy.set_next_character(current_letter_index)
+				break
+
 func _complete_word():
 	"""Handle word completion with atomic operation"""
 	if is_processing_completion or active_enemy == null or not is_instance_valid(active_enemy):
@@ -369,13 +388,22 @@ func _complete_word():
 	# Clear input buffer of any remaining inputs
 	input_buffer.clear()
 
-	# For dungeon enemies and portals, trigger dash to entity
-	print("Entity completed! Player dashing to entity.")
+	# Handle different entity types after completion
 	if completed_entity.has_method("play_disappear_animation"):
 		# Portal completion - do NOT dash to portal, just play disappear animation
+		print("Portal completed! Playing disappear animation.")
 		completed_entity.play_disappear_animation()
+	elif completed_entity.has_method("play_heal_animation"):
+		# Goddess statue completion - do NOT dash to statue, just play heal animation
+		# Check if the statue hasn't been used yet to prevent multiple usages
+		if completed_entity.has_method("get") and completed_entity.get("has_been_used") != true:
+			print("Goddess statue completed! Playing heal animation.")
+			completed_entity.play_heal_animation()
+		else:
+			print("Goddess statue already used - not triggering again.")
 	else:
-		# Regular enemy completion
+		# Regular enemy completion - dash to and attack
+		print("Enemy completed! Player dashing to enemy.")
 		player.dash_to_enemy(entity_position, completed_entity)
 
 	# Reset processing flag after a small delay to ensure actions start

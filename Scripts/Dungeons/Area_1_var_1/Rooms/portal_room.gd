@@ -1,8 +1,8 @@
 extends Node2D
 
-enum RoomType { SMALL, MEDIUM, BOSS }
+enum RoomType { SMALL, MEDIUM, BOSS, PORTAL }
 
-@export var room_type: RoomType = RoomType.BOSS
+@export var room_type: RoomType = RoomType.PORTAL
 var is_cleared: bool = false
 var is_ready_to_clear: bool = false
 
