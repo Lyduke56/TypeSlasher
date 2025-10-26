@@ -256,6 +256,7 @@ var health: int = 3
 
 func take_damage():
 	"""Take damage and update heart container"""
+	print("Player taking damage!")
 	# Check for Shield buff damage reduction
 	var damage_blocked = false
 

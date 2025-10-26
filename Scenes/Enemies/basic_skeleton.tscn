@@ -1,7 +1,7 @@
 [gd_scene load_steps=40 format=3 uid="uid://xcriddmqeofd"]
 
-[ext_resource type="Texture2D" uid="uid://djaif4ofcg86t" path="res://assets/sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton.png" id="1_j7i8a"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_inopb"]
+[ext_resource type="Texture2D" uid="uid://djaif4ofcg86t" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton.png" id="1_j7i8a"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_inopb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wgvsg"]
 atlas = ExtResource("1_j7i8a")
@@ -284,9 +284,7 @@ radius = 7.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_77k81")
-animation = &"skeleton_attack_1"
-frame = 6
-frame_progress = 1.0
+animation = &"skeleton_idle"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 z_index = 3

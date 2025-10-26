@@ -4,7 +4,6 @@ extends Node2D
 @export var green: Color = Color("#639765")
 @export var red: Color = Color("#a65455")
 
-@export var speed: float = 50.0  # Movement speed towards target
 @onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
@@ -26,6 +25,11 @@ func _ready() -> void:
 	if anim:
 		anim.animation_finished.connect(_on_animation_finished)
 	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+	# The archer should start shooting as soon as it is ready
+	has_reached_target = true
+	target_node = get_node("/root/Main/Player")
+	shoot_timer.wait_time = 5.0  # Shoot every 5 seconds
+	shoot_timer.start()
 	pass
 
 func _process(delta: float) -> void:
@@ -39,9 +43,8 @@ func get_prompt() -> String:
 	return word.text
 
 func set_target_position(target: Vector2) -> void:
-	target_position = target
-	has_target = true
-	print("Enemy target set to: ", target)
+	# This function is no longer needed for the archer
+	pass
 
 func set_next_character(next_character_index: int):
 	if is_being_targeted:
@@ -87,19 +90,9 @@ func set_targeted_state(targeted: bool):
 		modulate = Color.WHITE
 
 func play_death_animation():
-	if not anim:
-		queue_free()
-		return
-
-	if anim.animation == "death" or anim.animation == "damaged":
-		return
-
-	if anim.animation_finished.is_connected(_on_damage_animation_finished):
-		anim.animation_finished.disconnect(_on_damage_animation_finished)
-
-	anim.animation_finished.connect(_on_damage_animation_finished, CONNECT_ONE_SHOT)
-	anim.play("damaged")
-	print("Enemy damage animation started")
+	Global.current_score += points_for_kill
+	Global.on_enemy_killed()
+	queue_free()
 
 func _on_damage_animation_finished():
 	if anim.animation == "damaged":
@@ -117,55 +110,34 @@ func _on_death_animation_finished():
 		queue_free()
 
 func _on_body_entered(body: Node2D):
-	if body is StaticBody2D and body.get_parent().name == "Target":
-		if not has_reached_target:
-			has_reached_target = true
-			target_node = body.get_parent()
-			has_target = false
-			shoot_timer.start()
-			if anim:
-				anim.play("idle")
+	# This function is no longer needed as the archer does not move
+	pass
 
 func _on_shoot_timer_timeout():
-	if has_reached_target and not is_being_targeted and anim:
+	if not is_being_targeted and anim:
 		anim.play("skeleton_archer_attack")
 
 func _on_animation_finished():
 	if anim and (anim.animation == "death" or anim.animation == "damaged" or is_being_targeted):
 		return
 
-	if has_reached_target and anim and anim.animation == "skeleton_archer_attack":
+	if anim and anim.animation == "skeleton_archer_attack":
 		shoot_arrow()
 		anim.play("idle")
 
 func shoot_arrow():
 	var arrow = arrow_scene.instantiate()
-	get_node("/root/Game/ProjectileContainer").add_child(arrow)
+	get_parent().add_child(arrow)
 	arrow.global_position = global_position
 	arrow.set_target(target_node)
+	var word = WordDatabase.get_random_word("easy")
+	arrow.set_prompt(word)
 
 func _physics_process(delta: float) -> void:
-	if is_being_targeted or has_reached_target:
-		if anim and (anim.animation == "death" or anim.animation == "damaged"):
-			return
-
-		if anim and has_reached_target and not is_being_targeted and anim.animation != "skeleton_archer_attack":
+	if is_being_targeted:
+		if anim and anim.animation != "death" and anim.animation != "damaged":
 			anim.play("idle")
 		return
 
-	if has_target:
-		var direction = (target_position - global_position).normalized()
-
-		if anim:
-			anim.play("run")
-			anim.flip_h = direction.x < 0
-
-		global_position += direction * speed * delta
-
-		if global_position.distance_to(target_position) < 5.0:
-			has_target = false
-			if anim:
-				anim.play("idle")
-	else:
-		if anim:
-			anim.play("idle")
+	if anim and anim.animation != "skeleton_archer_attack" and anim.animation != "death" and anim.animation != "damaged":
+		anim.play("idle")

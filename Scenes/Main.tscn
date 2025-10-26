@@ -20,6 +20,8 @@ zoom = Vector2(2.635, 2.075)
 position = Vector2(1, 0)
 script = ExtResource("2_v1gob")
 
+[node name="ProjectileContainer" type="Node2D" parent="."]
+
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 7
 follow_viewport_enabled = true
