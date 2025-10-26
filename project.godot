@@ -24,6 +24,7 @@ run/stretch/mode="viewport"
 [autoload]
 
 Global="*res://Scripts/global.gd"
+DungeonProgress="*res://Scripts/dungeon_progress.gd"
 
 [display]
 

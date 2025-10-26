@@ -3,6 +3,16 @@ extends Node2D
 # Current loaded dungeon scene
 var current_dungeon: Node2D = null
 
+# Use the dedicated DungeonProgress autoload for persistence
+
+func boss_dungeon_cleared():
+	"""Called when boss dungeon is completed - trigger final buff selection"""
+	print("Boss dungeon cleared! Triggering final buff selection...")
+	# Clear all progress data for a fresh run
+	DungeonProgress.reset_progress()
+	# Go to final buff selection
+	get_tree().change_scene_to_file("res://Scenes/BuffSelection.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Check if we're coming back from buff selection
@@ -27,13 +37,14 @@ func _ready() -> void:
 			Global.sword_heal_chance = Global.sword_buff_stacks * 15  # 15% per stack
 			print("Sword buff applied! Now have ", Global.sword_buff_stacks, " stack(s) - ", Global.sword_heal_chance, "% chance to heal on enemy kills")
 
-		# Load the boss dungeon after buff selection
-		load_dungeon("res://Scenes/Rooms/Area 1/Area-1-boss-var1.tscn")
+		# After buff selection - continue with dungeon progression using DungeonProgress autoload
+		load_random_dungeon()
+
 		# Update heart container in Main scene after health buff application
 		call_deferred("_update_main_heart_container")
 	else:
-		# Load the initial dungeon
-		load_dungeon("res://Scenes/Rooms/Area 1/Area-1-var4.tscn")
+		# Load a random initial dungeon instead of fixed one
+		load_random_dungeon()
 		# Update heart container in Main scene
 		call_deferred("_update_main_heart_container")
 
@@ -42,10 +53,13 @@ func _process(delta: float) -> void:
 	pass
 
 func load_dungeon(dungeon_path: String) -> void:
-	# Clear current dungeon if exists
+	# Clear current dungeon if exists - ensure proper cleanup
 	if current_dungeon:
+		# Force immediate cleanup to prevent visual glitches
 		current_dungeon.queue_free()
 		current_dungeon = null
+		# Small delay to ensure cleanup is complete
+		await get_tree().process_frame
 
 	# Load new dungeon scene
 	var dungeon_scene = load(dungeon_path)
@@ -123,6 +137,44 @@ func _play_player_spawn_animation(player) -> void:
 		print("ERROR: Player doesn't have Overlay node")
 
 func switch_to_boss_dungeon() -> void:
+	"""Called when player types 'Warp' in portal room"""
 	print("Switching to boss dungeon...")
-	# Change to buff selection scene
-	get_tree().change_scene_to_file("res://Scenes/BuffSelection.tscn")
+
+	# Mark current dungeon as cleared
+	if current_dungeon:
+		mark_dungeon_cleared(current_dungeon.scene_file_path)
+
+	# Check if we have cleared enough dungeons
+	dungeon_completed()
+
+func dungeon_completed():
+	"""Called when a dungeon is completed - tracks progress and decides next dungeon"""
+	DungeonProgress.dungeons_cleared += 1
+	print("Dungeon completed! Total cleared: ", DungeonProgress.dungeons_cleared, "/", DungeonProgress.dungeons_required)
+
+	# Buff selection after 1st dungeon and after 3rd dungeon, boss after 4th
+	if DungeonProgress.dungeons_cleared == 1:
+		print("Buff selection triggered after clearing first dungeon!")
+		# Go to buff selection scene (leads to more dungeons or boss)
+		get_tree().change_scene_to_file("res://Scenes/BuffSelection.tscn")
+	elif DungeonProgress.dungeons_cleared == 3:
+		print("Buff selection triggered after clearing third dungeon!")
+		# Go to buff selection scene (leads to more dungeons)
+		get_tree().change_scene_to_file("res://Scenes/BuffSelection.tscn")
+	elif DungeonProgress.dungeons_cleared >= DungeonProgress.dungeons_required:
+		# Directly enter boss dungeon after meeting requirements (no buff before boss)
+		print("All dungeons cleared! Entering boss dungeon...")
+		load_dungeon("res://Scenes/Rooms/Area 1/Area-1-boss-var1.tscn")
+	elif DungeonProgress.dungeons_cleared < DungeonProgress.dungeons_required:
+		# Load another random dungeon (between checkpoints)
+		load_random_dungeon()
+
+func load_random_dungeon():
+	"""Select a random dungeon that hasn't been cleared yet"""
+	# Use DungeonProgress autoload for persistent tracking
+	var dungeon_path = DungeonProgress.get_next_random_dungeon()
+	load_dungeon(dungeon_path)
+
+func mark_dungeon_cleared(dungeon_path: String):
+	"""Mark a specific dungeon as completed by its path"""
+	DungeonProgress.mark_dungeon_cleared(dungeon_path)
