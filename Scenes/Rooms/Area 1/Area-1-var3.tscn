@@ -20415,7 +20415,6 @@ sources/31 = SubResource("TileSetAtlasSource_amvvu")
 [node name="Player" parent="." instance=ExtResource("1_7jbvn")]
 z_index = 10
 position = Vector2(-2.00012, -2.00002)
-scale = Vector2(0.655, 0.655)
 
 [node name="Node" type="Node" parent="."]
 
