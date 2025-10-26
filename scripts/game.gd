@@ -12,7 +12,7 @@ extends Node2D
 var active_enemy = null
 var current_letter_index: int = -1
 var EnemyScene = preload("res://Scenes/Enemies/Orc_enemy.tscn")
-var SkeletonArcherScene = preload("res://Scenes/Enemies/basic_skeleton_archer.tscn")
+var SkeletonArcherScene = preload("res://Scenes/Enemies/Orc_enemy.tscn")
 var BuffScene = preload("res://scenes/Buff.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
 var PortalScene = preload("res://scenes/GreenPortal.tscn")

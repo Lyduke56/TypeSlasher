@@ -15,7 +15,7 @@ signal room_started
 signal room_cleared
 
 # Enemy spawning
-var EnemyScene = preload("res://Scenes/Enemies/basic_skeleton_archer.tscn")
+var EnemyScene = preload("res://Scenes/Enemies/Orc_enemy.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
 var current_category = "medium"  # Can be: easy, medium, hard, typo, sentence, casing
 var enemies_spawned = 0  # How many we've actually spawned
