@@ -11,6 +11,9 @@ var after_buff_selection: bool = false
 var selected_buff_index: int = -1
 var selected_buff_type: int = -1
 
+# Buff reset counter
+var buff_resets_available: int = 2
+
 # Flag to track health buff application
 var health_buff_applied: bool = false
 

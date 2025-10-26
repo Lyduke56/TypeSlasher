@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1j1v5x5v5j1h"]
+
+[ext_resource type="Script" path="res://Scripts/arrow.gd" id="1_abcde"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_12345"]
+size = Vector2(20, 6)
+
+[node name="Arrow" type="Area2D"]
+script = ExtResource("1_abcde")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_12345")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "a"
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(-10, 0, 10, 0)
+width = 2.0
+

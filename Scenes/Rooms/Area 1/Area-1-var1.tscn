@@ -204,7 +204,7 @@ texture = ExtResource("10_315x1")
 [sub_resource type="TileSet" id="TileSet_wa0in"]
 sources/1 = SubResource("TileSetAtlasSource_dwvem")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mdnki"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wa0in"]
 texture = ExtResource("10_315x1")
 0:0/0 = 0
 1:0/0 = 0
@@ -378,7 +378,7 @@ texture = ExtResource("10_315x1")
 13:5/0 = 0
 13:6/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ibyc6"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mdnki"]
 texture = ExtResource("10_315x1")
 0:0/0 = 0
 1:0/0 = 0
@@ -553,10 +553,10 @@ texture = ExtResource("10_315x1")
 14:11/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_0yvo1"]
-sources/1 = SubResource("TileSetAtlasSource_mdnki")
-sources/13 = SubResource("TileSetAtlasSource_ibyc6")
+sources/1 = SubResource("TileSetAtlasSource_wa0in")
+sources/13 = SubResource("TileSetAtlasSource_mdnki")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tonbw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ibyc6"]
 texture = ExtResource("11_c0y1h")
 1:0/0 = 0
 2:0/0 = 0
@@ -749,9 +749,9 @@ texture = ExtResource("11_c0y1h")
 17:9/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_gkmiv"]
-sources/2 = SubResource("TileSetAtlasSource_tonbw")
+sources/2 = SubResource("TileSetAtlasSource_ibyc6")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dulka"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0yvo1"]
 texture = ExtResource("10_315x1")
 0:0/0 = 0
 1:0/0 = 0
@@ -926,7 +926,7 @@ texture = ExtResource("10_315x1")
 14:11/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_303ub"]
-sources/0 = SubResource("TileSetAtlasSource_dulka")
+sources/0 = SubResource("TileSetAtlasSource_0yvo1")
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_dwvem")

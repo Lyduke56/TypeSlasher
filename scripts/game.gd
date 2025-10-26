@@ -1,6 +1,7 @@
 extends Node2D
 @onready var buff_container = $BuffContainer
 @onready var enemy_container = $EnemyContainer
+@onready var projectile_container = $ProjectileContainer
 @onready var target_container = $TargetContainer
 @onready var portal_container = $PortalContainer
 @onready var buff_timer: Timer = $Buff_Timer
@@ -12,6 +13,7 @@ extends Node2D
 var active_enemy = null
 var current_letter_index: int = -1
 var EnemyScene = preload("res://Scenes/Enemies/Orc_enemy.tscn")
+var SkeletonArcherScene = preload("res://Scenes/Enemies/basic_skeleton_archer.tscn")
 var BuffScene = preload("res://scenes/Buff.tscn")
 var TargetScene = preload("res://scenes/target.tscn")
 var PortalScene = preload("res://scenes/GreenPortal.tscn")
@@ -162,7 +164,10 @@ func spawn_enemy():
 		return
 
 	# Create enemy instance
-	var enemy_instance = EnemyScene.instantiate()
+	var enemy_scenes = [EnemyScene, SkeletonArcherScene]
+	var random_enemy_scene = enemy_scenes[randi() % enemy_scenes.size()]
+	print("Spawning enemy: ", random_enemy_scene)
+	var enemy_instance = random_enemy_scene.instantiate()
 	enemy_instance.z_index = 3
 
 	# Set spawn position around circle
@@ -210,7 +215,7 @@ func find_new_active_enemy(typed_character: String):
 		return
 
 	# Check enemy_container, buff_container, and portal_container for targetable entities
-	for container in [enemy_container, buff_container, portal_container]:
+	for container in [enemy_container, buff_container, portal_container, projectile_container]:
 		for entity in container.get_children():
 			# Skip invalid entities or entities that don't have typing interface
 			if not is_instance_valid(entity) or not entity.has_method("get_prompt"):
@@ -262,6 +267,10 @@ func _complete_word():
 		# For portals, dash to portal and change scene
 		print("Portal completed! Player dashing to portal and changing scene.")
 		player.dash_to_portal(entity_position, completed_entity)
+	elif completed_entity.get_parent() == projectile_container:
+		# For projectiles, just play death animation immediately (no dash needed)
+		print("Projectile completed! Triggering projectile destruction.")
+		completed_entity.play_death_animation()
 	else:
 		# For enemies, trigger dash to enemy
 		print("Enemy completed! Player dashing to enemy.")

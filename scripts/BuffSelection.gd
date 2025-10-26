@@ -2,6 +2,8 @@ extends Control
 
 signal buff_selected(buff_index: int)
 
+@onready var resetButton = $NinePatchRect/VBoxContainer/ResetButton
+
 func _ready():
 	# Connect buff slot buttons
 	var grid_container = get_node_or_null("NinePatchRect/VBoxContainer/GridContainer")
@@ -13,6 +15,8 @@ func _ready():
 				buff_slot.set_meta("slot_index", i)
 				# Connect mouse input to this slot
 				buff_slot.gui_input.connect(_on_buff_slot_clicked)
+	resetButton.pressed.connect(_on_reset_button_pressed)
+	update_reset_button()
 
 # Called when the scene becomes active
 func _enter_tree():
@@ -75,3 +79,18 @@ func _find_buff_slot_under_mouse() -> Node:
 				if rect.has_point(mouse_pos):
 					return child
 	return null
+
+func _on_reset_button_pressed():
+	if Global.buff_resets_available > 0:
+		Global.buff_resets_available -= 1
+		var grid_container = get_node_or_null("NinePatchRect/VBoxContainer/GridContainer")
+		if grid_container:
+			for buff_slot in grid_container.get_children():
+				if buff_slot.has_method("reroll"):
+					buff_slot.reroll()
+		update_reset_button()
+
+func update_reset_button():
+	resetButton.text = "Reset (" + str(Global.buff_resets_available) + ")"
+	if Global.buff_resets_available == 0:
+		resetButton.disabled = true

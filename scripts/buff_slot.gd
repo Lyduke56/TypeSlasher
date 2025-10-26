@@ -57,3 +57,6 @@ func _gui_input(event: InputEvent) -> void:
 		# Keep the current chosen icon
 		if chosen_index >= 0 and chosen_index < buff_icons.size():
 			icon.texture = buff_icons[chosen_index]
+
+func reroll():
+	start_auto_spin()
