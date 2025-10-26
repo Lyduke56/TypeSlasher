@@ -91,7 +91,7 @@ func _spawn_goddess_statue():
 		if has_been_used:
 			goddess_instance.set_prompt("")  # Clear prompt for used statue
 		else:
-			goddess_instance.set_prompt("Heal")  # Reset prompt for available statue
+			goddess_instance.set_prompt("PLS HEAL ME")  # Reset prompt for available statue
 		return  # Don't spawn new one
 
 	goddess_instance = GoddessStatueScene.instantiate()

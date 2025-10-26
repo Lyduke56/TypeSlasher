@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://blo2csfxsl57m"]
+
+[ext_resource type="Script" uid="uid://bn3i3clhbvtqf" path="res://Scripts/center_platform.gd" id="1_nbq57"]
+[ext_resource type="Texture2D" uid="uid://bluhw2i3qtex1" path="res://Assets/Sprites/Other Scenes/room_center-Sheet.png" id="1_um6uq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbq57"]
+atlas = ExtResource("1_um6uq")
+region = Rect2(0, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3m1e"]
+atlas = ExtResource("1_um6uq")
+region = Rect2(128, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwmyj"]
+atlas = ExtResource("1_um6uq")
+region = Rect2(256, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocawd"]
+atlas = ExtResource("1_um6uq")
+region = Rect2(0, 96, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wua8"]
+atlas = ExtResource("1_um6uq")
+region = Rect2(128, 96, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvpsf"]
+atlas = ExtResource("1_um6uq")
+region = Rect2(256, 96, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ie2c4"]
+atlas = ExtResource("1_um6uq")
+region = Rect2(0, 192, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iaiuk"]
+atlas = ExtResource("1_um6uq")
+region = Rect2(128, 192, 128, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a2867"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbq57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3m1e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwmyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocawd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wua8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvpsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ie2c4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iaiuk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="CenterPlatform" type="Node2D"]
+scale = Vector2(0.625, 0.625)
+script = ExtResource("1_nbq57")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_a2867")
+animation = &"idle"
+frame_progress = 0.424177

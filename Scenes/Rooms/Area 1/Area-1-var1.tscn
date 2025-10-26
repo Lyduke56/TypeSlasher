@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://cullg0ljl0ex6"]
+[gd_scene load_steps=27 format=4 uid="uid://cullg0ljl0ex6"]
 
 [ext_resource type="Script" uid="uid://cvhdl8355whhu" path="res://Scripts/Dungeons/Area_1_var_1/area_1_var_1.gd" id="1_dwvem"]
 [ext_resource type="Script" uid="uid://bc0pa4v2utvx0" path="res://Scripts/Dungeons/dungeon_manager(A1V1).gd" id="2_wa0in"]
@@ -11,9 +11,10 @@
 [ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="9_303ub"]
 [ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="10_315x1"]
 [ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="11_c0y1h"]
+[ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="12_wa0in"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ean82"]
-size = Vector2(315, 353)
+size = Vector2(310, 342)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1gm7l"]
 size = Vector2(507, 534)
@@ -946,7 +947,7 @@ z_index = 2
 position = Vector2(0, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartingRoom/CameraArea"]
-position = Vector2(2.5, -11.5)
+position = Vector2(4, -6)
 shape = SubResource("RectangleShape2D_ean82")
 
 [node name="Right" type="Marker2D" parent="StartingRoom"]
@@ -958,6 +959,10 @@ position = Vector2(2, 133)
 [node name="TargetContainer" type="Node2D" parent="StartingRoom"]
 z_index = 2
 position = Vector2(0, 1)
+
+[node name="CenterPlatform3" parent="StartingRoom" instance=ExtResource("12_wa0in")]
+z_index = 3
+position = Vector2(2.38419e-07, -0.999999)
 
 [node name="RoomA - Medium" type="Node2D" parent="."]
 position = Vector2(784, -18)
@@ -978,7 +983,7 @@ position = Vector2(-247, 8)
 position = Vector2(-1, 248)
 
 [node name="TargetContainer" type="Node2D" parent="RoomA - Medium"]
-z_index = 2
+z_index = 4
 position = Vector2(0, 1)
 
 [node name="EnemyContainer" type="Node2D" parent="RoomA - Medium"]
@@ -992,6 +997,10 @@ visible = false
 
 [node name="SpawnLocations" parent="RoomA - Medium/MediumRoomSpawn" index="1"]
 position = Vector2(1, 2)
+
+[node name="CenterPlatform4" parent="RoomA - Medium" instance=ExtResource("12_wa0in")]
+z_index = 3
+position = Vector2(0, 1)
 
 [node name="RoomB - Small" type="Node2D" parent="."]
 position = Vector2(1, 804)
@@ -1012,8 +1021,8 @@ position = Vector2(0, -214)
 position = Vector2(-198, -7)
 
 [node name="TargetContainer" type="Node2D" parent="RoomB - Small"]
-z_index = 2
-position = Vector2(0, -2)
+z_index = 4
+position = Vector2(-1, -2)
 
 [node name="EnemyContainer" type="Node2D" parent="RoomB - Small"]
 z_index = 2
@@ -1026,6 +1035,10 @@ visible = false
 
 [node name="SpawnLocations" parent="RoomB - Small/SmallRoomSpawn" index="1"]
 position = Vector2(-1, -3)
+
+[node name="CenterPlatform2" parent="RoomB - Small" instance=ExtResource("12_wa0in")]
+z_index = 3
+position = Vector2(-1.96695e-06, -1.99994)
 
 [node name="RoomC - Medium" type="Node2D" parent="."]
 position = Vector2(-898, 796)
@@ -1043,7 +1056,7 @@ shape = SubResource("RectangleShape2D_52s0k")
 position = Vector2(260, 8)
 
 [node name="TargetContainer" type="Node2D" parent="RoomC - Medium"]
-z_index = 2
+z_index = 4
 position = Vector2(1, 6)
 
 [node name="EnemyContainer" type="Node2D" parent="RoomC - Medium"]
@@ -1057,6 +1070,10 @@ visible = false
 
 [node name="SpawnLocations" parent="RoomC - Medium/MediumRoomSpawn" index="1"]
 position = Vector2(16, 7)
+
+[node name="CenterPlatform" parent="RoomC - Medium" instance=ExtResource("12_wa0in")]
+z_index = 3
+position = Vector2(1, 6)
 
 [node name="PortalRoom" type="Node2D" parent="."]
 position = Vector2(785, 755)
@@ -1107,6 +1124,8 @@ visible = false
 z_index = 10
 tile_map_data = PackedByteArray("AAAsAA4AAAAXAAEAAAAsAA8AAAAXAAIAAAAtAA4AAAAXAAEAAAAtAA8AAAAXAAIAAAAuAA4AAAAXAAEAAAAuAA8AAAAXAAIAAAAvAA4AAAAXAAEAAAAvAA8AAAAXAAIAAAAwAA4AAAAXAAEAAAAwAA8AAAAXAAIAAAAxAA4AAAAXAAEAAAAxAA8AAAAXAAIAAAAyAA4AAAAXAAEAAAAyAA8AAAAXAAIAAAAzAA4AAAAXAAEAAAAzAA8AAAAXAAIAAAA0AA4AAAAXAAEAAAA0AA8AAAAXAAIAAAA1AA4AAAAXAAEAAAA1AA8AAAAXAAIAAAAsACQAAAAXAAEAAAAsACUAAAAXAAIAAAAtACQAAAAXAAEAAAAtACUAAAAXAAIAAAAuACQAAAAXAAEAAAAuACUAAAAXAAIAAAAvACQAAAAXAAEAAAAvACUAAAAXAAIAAAAwACQAAAAXAAEAAAAwACUAAAAXAAIAAAAxACQAAAAXAAEAAAAxACUAAAAXAAIAAAAyACQAAAAXAAEAAAAyACUAAAAXAAIAAAAzACQAAAAXAAEAAAAzACUAAAAXAAIAAAA0ACQAAAAXAAEAAAA0ACUAAAAXAAIAAAA1ACQAAAAXAAEAAAA1ACUAAAAXAAIAAAADAAgAAAAXAAEAAAADAAkAAAAXAAIAAAACAAgAAAAXAAEAAAACAAkAAAAXAAIAAAABAAgAAAAXAAEAAAABAAkAAAAXAAIAAAAAAAgAAAAXAAEAAAAAAAkAAAAXAAIAAAD//wgAAAAXAAEAAAD//wkAAAAXAAIAAAD+/wgAAAAXAAEAAAD+/wkAAAAXAAIAAAD9/wgAAAAXAAEAAAD9/wkAAAAXAAIAAAD8/wgAAAAXAAEAAAD8/wkAAAAXAAIAAAADACQAAAAXAAEAAAADACUAAAAXAAIAAAACACQAAAAXAAEAAAACACUAAAAXAAIAAAABACQAAAAXAAEAAAABACUAAAAXAAIAAAAAACQAAAAXAAEAAAAAACUAAAAXAAIAAAD//yQAAAAXAAEAAAD//yUAAAAXAAIAAAD+/yQAAAAXAAEAAAD+/yUAAAAXAAIAAAD9/yQAAAAXAAEAAAD9/yUAAAAXAAIAAAD8/yQAAAAXAAEAAAD8/yUAAAAXAAIAAAAhAPr/AAAXAAIAAAAhAPv/AAAXAAIAAAAhAPz/AAAXAAIAAAAhAP3/AAAXAAIAAAAhAP7/AAAXAAIAAAAhAP//AAAXAAIAAAAhAAAAAAAXAAIAAAAhAAEAAAAXAAIAAAAhAAIAAAAXAAIAAAAJAPr/AAAXAAIAAAAJAPv/AAAXAAIAAAAJAPz/AAAXAAIAAAAJAP3/AAAXAAIAAAAJAP7/AAAXAAIAAAAJAP//AAAXAAIAAAAJAAAAAAAXAAIAAAAJAAEAAAAXAAIAAAAJAAIAAAAXAAIAAADz/ywAAAAXAAIAAADz/y0AAAAXAAIAAADz/y4AAAAXAAIAAADz/y8AAAAXAAIAAADz/zAAAAAXAAIAAADz/zEAAAAXAAIAAADz/zIAAAAXAAIAAADz/zMAAAAXAAIAAADz/zQAAAAXAAIAAADz/zUAAAAXAAIAAADz/zYAAAAXAAIAAADX/ywAAAAXAAIAAADX/y0AAAAXAAIAAADX/y4AAAAXAAIAAADX/y8AAAAXAAIAAADX/zAAAAAXAAIAAADX/zEAAAAXAAIAAADX/zIAAAAXAAIAAADX/zMAAAAXAAIAAADX/zQAAAAXAAIAAADX/zUAAAAXAAIAAADX/zYAAAAXAAIAAAA=")
 tile_set = SubResource("TileSet_303ub")
+
+[node name="Platforms" type="Node" parent="."]
 
 [connection signal="body_entered" from="StartingRoom/CameraArea" to="StartingRoom" method="_on_camera_area_body_entered"]
 [connection signal="body_exited" from="StartingRoom/CameraArea" to="StartingRoom" method="_on_camera_area_body_exited"]

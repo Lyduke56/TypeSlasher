@@ -33,7 +33,7 @@ func _ready() -> void:
 		call_deferred("_update_main_heart_container")
 	else:
 		# Load the initial dungeon
-		load_dungeon("res://Scenes/Rooms/Area 1/Area-1-var1.tscn")
+		load_dungeon("res://Scenes/Rooms/Area 1/Area-1-var4.tscn")
 		# Update heart container in Main scene
 		call_deferred("_update_main_heart_container")
 
