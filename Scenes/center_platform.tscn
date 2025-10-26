@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://blo2csfxsl57m"]
 
 [ext_resource type="Script" uid="uid://bn3i3clhbvtqf" path="res://Scripts/center_platform.gd" id="1_nbq57"]
-[ext_resource type="Texture2D" uid="uid://bluhw2i3qtex1" path="res://Assets/Sprites/Other Scenes/room_center-Sheet.png" id="1_um6uq"]
+[ext_resource type="Texture2D" uid="uid://byj3lh4r248t7" path="res://Assets/Sprites/Other Scenes/room_center-Sheet.png" id="1_um6uq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nbq57"]
 atlas = ExtResource("1_um6uq")
@@ -74,4 +74,4 @@ script = ExtResource("1_nbq57")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_a2867")
 animation = &"idle"
-frame_progress = 0.424177
+frame_progress = 0.145982

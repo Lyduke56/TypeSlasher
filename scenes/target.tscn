@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://28xk36nmgyyr"]
+[gd_scene load_steps=26 format=3 uid="uid://28xk36nmgyyr"]
 
 [ext_resource type="Script" uid="uid://br0gn5w4fyli0" path="res://Scripts/target.gd" id="1_ls7vh"]
-[ext_resource type="Texture2D" uid="uid://c4k3iv8iqg5wp" path="res://Assets/Sprites/Other Scenes/pedestal-Sheet.png" id="2_ls7vh"]
+[ext_resource type="Texture2D" uid="uid://cdvrucby7es5k" path="res://Assets/Sprites/Other Scenes/pedestal-Sheet.png" id="2_ls7vh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ls7vh"]
 atlas = ExtResource("2_ls7vh")
@@ -71,6 +71,22 @@ region = Rect2(192, 0, 64, 64)
 atlas = ExtResource("2_ls7vh")
 region = Rect2(256, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii4eo"]
+atlas = ExtResource("2_ls7vh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tohg"]
+atlas = ExtResource("2_ls7vh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5stl"]
+atlas = ExtResource("2_ls7vh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng57k"]
+atlas = ExtResource("2_ls7vh")
+region = Rect2(0, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_fnysw"]
 animations = [{
 "frames": [{
@@ -134,10 +150,22 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7jiyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii4eo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tohg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5stl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ng57k")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nlbrr"]
@@ -152,7 +180,8 @@ script = ExtResource("1_ls7vh")
 position = Vector2(0, -6.39535)
 scale = Vector2(0.265, 0.265)
 sprite_frames = SubResource("SpriteFrames_fnysw")
-animation = &"damaged"
+animation = &"idle"
+frame_progress = 0.203108
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 33)
