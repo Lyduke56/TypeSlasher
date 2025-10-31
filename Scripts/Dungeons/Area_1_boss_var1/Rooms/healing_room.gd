@@ -39,6 +39,9 @@ func _ready() -> void:
 	# Healing room is always cleared (no enemies to fight)
 	is_cleared = true
 
+	# Spawn goddess statue immediately when scene loads (before room transitions)
+	_spawn_goddess_statue()
+
 func set_connected_room(direction: String, room_node: Node2D):
 	connected_rooms[direction] = room_node
 
@@ -48,6 +51,9 @@ func get_connected_room(direction: String) -> Node2D:
 func start_room():
 	room_started.emit(self)
 	print("Room " + name + " started")
+
+	# Spawn goddess statue when room starts (so it's visible before player enters camera area)
+	_spawn_goddess_statue()
 
 func clear_room():
 	is_cleared = true

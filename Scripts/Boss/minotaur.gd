@@ -262,6 +262,9 @@ func _on_death_animation_finished():
 		Global.current_score += points_for_kill
 		# Check for Sword buff health restoration
 		Global.on_enemy_killed()
+
+		# Boss death doesn't complete the dungeon - that happens when the player types "Warp" in a portal room
+
 		queue_free()  # Remove enemy from scene
 
 func _attempt_reach_target_via_proximity():
