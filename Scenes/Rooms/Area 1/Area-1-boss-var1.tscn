@@ -1,7 +1,8 @@
-[gd_scene load_steps=115 format=4 uid="uid://fttmx3fict8g"]
+[gd_scene load_steps=116 format=4 uid="uid://fttmx3fict8g"]
 
 [ext_resource type="Script" uid="uid://dcxejv140b6cc" path="res://Scripts/Dungeons/Area_1_boss_var1/dungeon_manager(A1B1).gd" id="1_p6v1s"]
 [ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="2_301vw"]
+[ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="3_301vw"]
 [ext_resource type="Script" uid="uid://gi3ma2tv7svj" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_a___medium.gd" id="3_yxq16"]
 [ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="4_wq55k"]
 [ext_resource type="Script" uid="uid://cdrdygid30spt" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_c___medium.gd" id="5_gxbce"]
@@ -14321,6 +14322,9 @@ position = Vector2(1, -168)
 [node name="TargetContainer" type="Node2D" parent="StartingRoom"]
 z_index = 2
 
+[node name="CenterPlatform" parent="StartingRoom" instance=ExtResource("3_301vw")]
+z_index = 2
+
 [node name="RoomA - Medium" type="Node2D" parent="."]
 position = Vector2(862, -21)
 script = ExtResource("3_yxq16")
@@ -14346,6 +14350,10 @@ position = Vector2(0, 1)
 [node name="EnemyContainer" type="Node2D" parent="RoomA - Medium"]
 z_index = 2
 position = Vector2(1, 0)
+
+[node name="CenterPlatform" parent="RoomA - Medium" instance=ExtResource("3_301vw")]
+z_index = 2
+position = Vector2(0, 1)
 
 [node name="MediumRoomSpawn" parent="RoomA - Medium" instance=ExtResource("4_wq55k")]
 
@@ -14395,6 +14403,9 @@ visible = false
 [node name="SpawnLocations" parent="RoomB - Medium/MediumRoomSpawn" index="1"]
 position = Vector2(1, 2)
 
+[node name="CenterPlatform" parent="RoomB - Medium" instance=ExtResource("3_301vw")]
+z_index = 2
+
 [node name="RoomC - Medium" type="Node2D" parent="."]
 position = Vector2(-868, -19)
 script = ExtResource("3_yxq16")
@@ -14412,7 +14423,7 @@ position = Vector2(260, 8)
 
 [node name="TargetContainer" type="Node2D" parent="RoomC - Medium"]
 z_index = 2
-position = Vector2(1, 6)
+position = Vector2(4, 3)
 
 [node name="EnemyContainer" type="Node2D" parent="RoomC - Medium"]
 z_index = 2
@@ -14425,6 +14436,10 @@ visible = false
 
 [node name="SpawnLocations" parent="RoomC - Medium/MediumRoomSpawn" index="1"]
 position = Vector2(16, 7)
+
+[node name="CenterPlatform" parent="RoomC - Medium" instance=ExtResource("3_301vw")]
+z_index = 2
+position = Vector2(4, 3)
 
 [node name="RoomD - Medium" type="Node2D" parent="."]
 position = Vector2(864, -888)
@@ -14446,7 +14461,7 @@ position = Vector2(-1, 248)
 
 [node name="TargetContainer" type="Node2D" parent="RoomD - Medium"]
 z_index = 2
-position = Vector2(0, 1)
+position = Vector2(0, 7)
 
 [node name="EnemyContainer" type="Node2D" parent="RoomD - Medium"]
 z_index = 2
@@ -14459,6 +14474,10 @@ visible = false
 
 [node name="SpawnLocations" parent="RoomD - Medium/MediumRoomSpawn" index="1"]
 position = Vector2(1, 2)
+
+[node name="CenterPlatform" parent="RoomD - Medium" instance=ExtResource("3_301vw")]
+z_index = 2
+position = Vector2(0, 7)
 
 [node name="RoomE - Medium" type="Node2D" parent="."]
 position = Vector2(-866, -886)
@@ -14477,7 +14496,7 @@ position = Vector2(260, 8)
 
 [node name="TargetContainer" type="Node2D" parent="RoomE - Medium"]
 z_index = 2
-position = Vector2(1, 6)
+position = Vector2(2, 6)
 
 [node name="EnemyContainer" type="Node2D" parent="RoomE - Medium"]
 z_index = 2
@@ -14490,6 +14509,10 @@ visible = false
 
 [node name="SpawnLocations" parent="RoomE - Medium/MediumRoomSpawn" index="1"]
 position = Vector2(16, 7)
+
+[node name="CenterPlatform" parent="RoomE - Medium" instance=ExtResource("3_301vw")]
+z_index = 2
+position = Vector2(2, 6)
 
 [node name="BossRoom" type="Node2D" parent="."]
 z_index = 5
@@ -14519,6 +14542,9 @@ position = Vector2(0, -1)
 
 [node name="TileMapLayer" parent="BossRoom/BossRoomSpawn" index="0"]
 visible = false
+
+[node name="CenterPlatform" parent="BossRoom" instance=ExtResource("3_301vw")]
+z_index = 2
 
 [node name="HealingRoom" type="Node2D" parent="."]
 position = Vector2(0, 759)
