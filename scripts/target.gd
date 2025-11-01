@@ -23,7 +23,7 @@ func take_damage(amount: int = 1):
 		# Wait for death animation to finish
 		await animated_sprite.animation_finished
 		# Wait additional 2 seconds
-		await get_tree().create_timer(2.0).timeout
+		await get_tree().create_timer(3.0).timeout
 		print("GAME OVER")
 		get_tree().quit()
 	else:
