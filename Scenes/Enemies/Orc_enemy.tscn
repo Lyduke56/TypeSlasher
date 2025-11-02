@@ -288,7 +288,7 @@ speed = 25.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -7)
 sprite_frames = SubResource("SpriteFrames_c1uly")
-animation = &"Slash"
+animation = &"Hack"
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=3 format=3 uid="uid://b6ejt5aqvl6t7"]
+
+[ext_resource type="PackedScene" uid="uid://xcriddmqeofd" path="res://Scenes/Enemies/basic_skeleton.tscn" id="1"]
+[ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/EnemyWave.gd" id="2"]
+
+[resource]
+script = ExtResource("2")
+enemy_scene = ExtResource("1")
+count = 3
+spawn_delay = 1.5
+wave_delay = 0.0

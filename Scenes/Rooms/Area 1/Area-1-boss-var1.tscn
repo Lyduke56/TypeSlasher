@@ -14515,7 +14515,7 @@ z_index = 2
 position = Vector2(2, 6)
 
 [node name="BossRoom" type="Node2D" parent="."]
-z_index = 5
+z_index = 2
 position = Vector2(0, -1983)
 script = ExtResource("6_yibwt")
 
@@ -14529,6 +14529,7 @@ shape = SubResource("RectangleShape2D_qaakt")
 position = Vector2(4, 374)
 
 [node name="TargetContainer" type="Node2D" parent="BossRoom"]
+z_index = 3
 
 [node name="PortalContainer" type="Node2D" parent="BossRoom"]
 z_index = 2

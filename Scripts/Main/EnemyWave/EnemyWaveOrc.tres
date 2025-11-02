@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=3 format=3 uid="uid://c1ro6ikkvfsi8"]
+
+[ext_resource type="PackedScene" uid="uid://h5i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0" path="res://Scenes/Enemies/Orc_enemy.tscn" id="1"]
+[ext_resource type="Script" path="res://Scripts/EnemyWave.gd" id="2"]
+
+[resource]
+script = ExtResource("2")
+enemy_scene = ExtResource("1")
+count = 3
+spawn_delay = 2.5
+wave_delay = 0.0

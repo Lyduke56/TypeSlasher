@@ -1,7 +1,9 @@
-[gd_scene load_steps=40 format=3 uid="uid://xcriddmqeofd"]
+[gd_scene load_steps=42 format=3 uid="uid://xcriddmqeofd"]
 
-[ext_resource type="Texture2D" uid="uid://djaif4ofcg86t" path="res://assets/sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton.png" id="1_j7i8a"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_inopb"]
+[ext_resource type="Script" uid="uid://c55ljwejvu72u" path="res://Scripts/Enemies/basic_skeleton.gd" id="1_gd8pk"]
+[ext_resource type="Texture2D" uid="uid://djaif4ofcg86t" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton.png" id="1_j7i8a"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_inopb"]
+[ext_resource type="Texture2D" uid="uid://bpm2vg434y8at" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton-Hurt.png" id="3_srawy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wgvsg"]
 atlas = ExtResource("1_j7i8a")
@@ -55,21 +57,21 @@ region = Rect2(400, 200, 100, 100)
 atlas = ExtResource("1_j7i8a")
 region = Rect2(500, 200, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gun86"]
-atlas = ExtResource("1_j7i8a")
-region = Rect2(0, 500, 100, 100)
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7uhn"]
+atlas = ExtResource("3_srawy")
+region = Rect2(0, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vwlgb"]
-atlas = ExtResource("1_j7i8a")
-region = Rect2(100, 500, 100, 100)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmdb5"]
+atlas = ExtResource("3_srawy")
+region = Rect2(100, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o88k6"]
-atlas = ExtResource("1_j7i8a")
-region = Rect2(200, 500, 100, 100)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut5wb"]
+atlas = ExtResource("3_srawy")
+region = Rect2(200, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pasu5"]
-atlas = ExtResource("1_j7i8a")
-region = Rect2(300, 500, 100, 100)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjerx"]
+atlas = ExtResource("3_srawy")
+region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7o715"]
 atlas = ExtResource("1_j7i8a")
@@ -196,17 +198,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gun86")
+"texture": SubResource("AtlasTexture_a7uhn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vwlgb")
+"texture": SubResource("AtlasTexture_tmdb5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o88k6")
+"texture": SubResource("AtlasTexture_ut5wb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pasu5")
+"texture": SubResource("AtlasTexture_jjerx")
+}],
+"loop": false,
+"name": &"skeleton_damaged",
+"speed": 5.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7o715")
 }, {
@@ -280,25 +287,27 @@ animations = [{
 radius = 7.0
 
 [node name="Skeleton" type="Node2D"]
+z_index = 4
+script = ExtResource("1_gd8pk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_77k81")
-animation = &"skeleton_attack_1"
-frame = 6
-frame_progress = 1.0
+animation = &"skeleton_idle"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Word" type="RichTextLabel" parent="."]
 z_index = 3
 offset_left = -127.0
 offset_right = 128.0
 offset_bottom = 45.0
 theme_override_fonts/normal_font = ExtResource("2_inopb")
-text = " Type This \"arkel is gay and he is a femboy\""
+text = " Type This "
 horizontal_alignment = 1
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -9)
+position = Vector2(2, -7)
 shape = SubResource("CircleShape2D_2ey31")
