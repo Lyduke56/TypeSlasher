@@ -15,7 +15,7 @@ signal room_started
 signal room_cleared
 
 # Enemy spawning
-var EnemyScene = preload("res://Scenes/Enemies/Orc_enemy.tscn")
+@export var enemy_waves: Array[EnemyWave] = []
 var TargetScene = preload("res://scenes/target.tscn")
 var MinotaurScene = preload("res://Scenes/Boss/Minotaur.tscn")
 var current_category = "medium"  # Can be: easy, medium, hard, typo, sentence, casing
@@ -25,7 +25,10 @@ var enemies_remaining = 0  # How many are still alive
 var available_spawn_points = []
 var is_spawning_enemies = false  # True when enemies are still spawning
 var boss_spawned = false  # Track if boss has been spawned
+var current_wave_index = 0  # Current wave being spawned
+var current_wave_spawned = 0  # Enemies spawned in current wave
 @onready var spawn_timer: Timer = Timer.new()
+@onready var wave_delay_timer: Timer = Timer.new()
 
 @onready var camera_area: Area2D = $CameraArea
 @onready var enemy_container: Node2D = $EnemyContainer
@@ -66,11 +69,18 @@ func start_room():
 		print("Room " + name + " is already in progress, skipping spawning")
 		return
 
-	# Determine enemy count based on room type
-	max_enemies_to_spawn = 20 if room_type == RoomType.BOSS else 20
+	# Calculate total enemies from all waves
+	max_enemies_to_spawn = 0
+	for wave in enemy_waves:
+		max_enemies_to_spawn += wave.count
+
+	if max_enemies_to_spawn == 0:
+		print("No enemies configured for room: " + name)
+		is_ready_to_clear = true
+		return
 
 	# Spawn enemies and target
-	_spawn_room_enemies(max_enemies_to_spawn)
+	_spawn_room_enemies()
 
 func clear_room():
 	is_cleared = true
@@ -123,8 +133,8 @@ func _on_camera_area_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		print("Player exited room: " + name)
 
-func _spawn_room_enemies(max_enemies: int):
-	"""Spawn enemies at spawn points and the target"""
+func _spawn_room_enemies():
+	"""Spawn enemies in waves at spawn points and the target"""
 	is_spawning_enemies = true
 
 	# First spawn the target
@@ -158,19 +168,25 @@ func _spawn_room_enemies(max_enemies: int):
 		is_spawning_enemies = false
 		return
 
-	# Set up timer for spawning enemies one by one every 3 seconds
-	add_child(spawn_timer)
-	spawn_timer.wait_time = 2.0
-	spawn_timer.one_shot = false
-	spawn_timer.timeout.connect(_spawn_next_enemy)
-	spawn_timer.start()
-
-	# Record max enemies for this room
-	max_enemies_to_spawn = min(max_enemies, available_spawn_points.size())
+	# Initialize wave spawning
+	current_wave_index = 0
 	enemies_spawned = 0
 	enemies_remaining = 0
 
-	print("Starting enemy spawn sequence in room: " + name + " (will spawn " + str(max_enemies_to_spawn) + " enemies)")
+	# Set up timers
+	add_child(spawn_timer)
+	add_child(wave_delay_timer)
+
+	spawn_timer.one_shot = false
+	spawn_timer.timeout.connect(_spawn_next_enemy_in_wave)
+
+	wave_delay_timer.one_shot = true
+	wave_delay_timer.timeout.connect(_start_next_wave)
+
+	# Start first wave
+	_start_next_wave()
+
+	print("Starting wave-based enemy spawn sequence in room: " + name + " (" + str(enemy_waves.size()) + " waves, " + str(max_enemies_to_spawn) + " total enemies)")
 
 func _spawn_target():
 	"""Spawn the target at the target container"""
@@ -179,39 +195,64 @@ func _spawn_target():
 	target_instance.position = Vector2.ZERO  # Position within container
 	print("Spawned target in room: " + name)
 
-func _spawn_next_enemy():
-	"""Spawn the next enemy at a random available spawn point"""
-	if enemies_spawned >= max_enemies_to_spawn:
-		spawn_timer.stop()
+func _start_next_wave():
+	"""Start spawning the next wave of enemies"""
+	if current_wave_index >= enemy_waves.size():
+		# All waves complete
 		is_spawning_enemies = false
-		print("Enemy spawn sequence complete in room: " + name)
+		print("All waves complete in room: " + name)
 		if enemies_remaining <= 0:
 			is_ready_to_clear = true
 		return
 
-	if available_spawn_points.is_empty():
+	var current_wave = enemy_waves[current_wave_index]
+	current_wave_spawned = 0
+
+	print("Starting wave " + str(current_wave_index + 1) + "/" + str(enemy_waves.size()) + " in room: " + name + " (" + str(current_wave.count) + " enemies)")
+
+	# Start spawning enemies in this wave
+	spawn_timer.wait_time = current_wave.spawn_delay
+	spawn_timer.start()
+
+func _spawn_next_enemy_in_wave():
+	"""Spawn the next enemy in the current wave"""
+	if current_wave_index >= enemy_waves.size():
 		spawn_timer.stop()
-		is_spawning_enemies = false
+		return
+
+	var current_wave = enemy_waves[current_wave_index]
+
+	if current_wave_spawned >= current_wave.count:
+		# Current wave complete, move to next wave
+		spawn_timer.stop()
+		current_wave_index += 1
+
+		if current_wave.wave_delay > 0:
+			# Wait before starting next wave
+			wave_delay_timer.wait_time = current_wave.wave_delay
+			wave_delay_timer.start()
+		else:
+			# Start next wave immediately
+			_start_next_wave()
+		return
+
+	if available_spawn_points.is_empty():
 		print("No available spawn points left in room: " + name)
-		if enemies_remaining <= 0:
-			is_ready_to_clear = true
+		spawn_timer.stop()
 		return
 
 	# Pick a random spawn point
 	var random_index = randi() % available_spawn_points.size()
 	var spawn_point = available_spawn_points[random_index]
 
-	_spawn_enemy_at_position(spawn_point.position)
+	_spawn_enemy_at_position(spawn_point.position, current_wave.enemy_scene)
 	enemies_spawned += 1
 	enemies_remaining += 1
+	current_wave_spawned += 1
 
-	# Check if boss should spawn after this enemy spawns
-	if enemies_spawned >= max_enemies_to_spawn / 2 and not has_boss_spawned():
-		_spawn_minotaur_boss()
+	print("Spawned enemy " + str(current_wave_spawned) + "/" + str(current_wave.count) + " in wave " + str(current_wave_index + 1) + " (total: " + str(enemies_spawned) + "/" + str(max_enemies_to_spawn) + ") in room: " + name)
 
-	print("Spawned enemy " + str(enemies_spawned) + "/" + str(max_enemies_to_spawn) + " in room: " + name)
-
-func _spawn_enemy_at_position(spawn_position: Vector2):
+func _spawn_enemy_at_position(spawn_position: Vector2, enemy_scene: PackedScene):
 	"""Spawn a single enemy at the given position"""
 	await get_tree().process_frame
 
@@ -221,7 +262,7 @@ func _spawn_enemy_at_position(spawn_position: Vector2):
 		return
 
 	# Create enemy instance
-	var enemy_instance = EnemyScene.instantiate()
+	var enemy_instance = enemy_scene.instantiate()
 	enemy_instance.z_index = 3
 	enemy_instance.position = spawn_position
 
@@ -265,23 +306,14 @@ func _on_enemy_died():
 	"""Called when an enemy dies - check if room is ready to be cleared"""
 	enemies_remaining -= 1
 
-	# Check if room is actually ready to clear:
-	# - All regular enemies must be dead (enemies_remaining <= 0)
+	# Check if room is ready to clear:
+	# - All enemies must be dead (enemies_remaining <= 0)
 	# - Not currently spawning new enemies (is_spawning_enemies == false)
-	# - Either no boss was spawned or the boss is also dead
-	var boss_is_alive = boss_spawned and enemy_container.get_child_count() > 0
-	for child in enemy_container.get_children():
-		if child and child.has_method("get_prompt") and child.name.contains("Minotaur"):
-			boss_is_alive = true
-			break
-		else:
-			boss_is_alive = false
-
-	if enemies_remaining <= 0 and not is_spawning_enemies and not boss_is_alive:
+	if enemies_remaining <= 0 and not is_spawning_enemies:
 		is_ready_to_clear = true
-		print("Room ready to clear: All enemies defeated, including boss!")
+		print("Room ready to clear: All enemies defeated!")
 	else:
-		print("Room not yet ready to clear: enemies_remaining=", enemies_remaining, " is_spawning=", is_spawning_enemies, " boss_alive=", boss_is_alive)
+		print("Room not yet ready to clear: enemies_remaining=", enemies_remaining, " is_spawning=", is_spawning_enemies)
 
 func _handle_camera_on_room_enter():
 	"""Move camera to this room if it's uncleared (combat room)"""

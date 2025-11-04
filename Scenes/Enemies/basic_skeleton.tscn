@@ -288,8 +288,10 @@ radius = 7.0
 
 [node name="Skeleton" type="Node2D"]
 z_index = 4
+scale = Vector2(1.2, 1.2)
 script = ExtResource("1_gd8pk")
 speed = 30.0
+points_for_kill = 150
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)

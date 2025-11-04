@@ -23,8 +23,9 @@ func _ready() -> void:
 	# Health persists across dungeons - clamp current health to ensure it's within valid range
 	Global.player_current_health = clamp(Global.player_current_health, 0, Global.player_max_health)
 
-	# Create heart container immediately
+	# Create heart container and score label immediately
 	setup_heart_container()
+	setup_score_label()
 
 	# Wait for target to apply health buffs, then update heart container
 	await get_tree().process_frame
@@ -436,6 +437,10 @@ func _process_single_character(key_typed: String):
 
 	var next_character = prompt.substr(current_letter_index, 1)
 	if key_typed == next_character:
+		# ADD SCORING LOGIC HERE
+		update_score()
+		Global.wpm_note_correct_characters(1)
+
 		current_letter_index += 1
 
 		# Update visual feedback - cached: minimize checks
@@ -485,3 +490,25 @@ func _on_health_changed(new_health: int, max_health: int):
 				heart_container.setMaxhearts(max_health)
 			heart_container.setHealth(new_health)
 			print("Updated heart display! Current health: ", new_health, "/", max_health)
+
+func setup_score_label():
+	"""Create and setup the score label for the dungeon"""
+	var canvas_layer = get_node_or_null("CanvasLayer")
+	if not canvas_layer:
+		# Create canvas layer if it doesn't exist
+		canvas_layer = CanvasLayer.new()
+		canvas_layer.name = "CanvasLayer"
+		add_child(canvas_layer)
+
+	# Add score label to the canvas layer
+	var score_label = load("res://Scenes/current_score.tscn").instantiate()
+	score_label.name = "CurrentScoreLabel"
+	canvas_layer.add_child(score_label)
+
+	print("Score label initialized for dungeon!")
+
+func update_score():
+	"""Update score tracking (called when correct characters are typed)"""
+	Global.previous_score = Global.current_score
+	if Global.current_score > Global.high_score:
+		Global.high_score = Global.current_score

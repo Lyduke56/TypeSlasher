@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbe7velh1ej5l"]
+
+[ext_resource type="Script" uid="uid://b5kpp21ay8abs" path="res://Scripts/current_score_label.gd" id="1_kmgkl"]
+
+[node name="CurrentScore" type="RichTextLabel"]
+offset_left = 945.0
+offset_top = 2.0
+offset_right = 2434.0
+offset_bottom = 428.0
+scale = Vector2(0.14, 0.14)
+theme_override_font_sizes/normal_font_size = 121
+text = "Current Score: 99999"
+fit_content = true
+text_direction = 1
+script = ExtResource("1_kmgkl")

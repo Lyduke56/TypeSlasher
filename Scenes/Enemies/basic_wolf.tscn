@@ -335,6 +335,7 @@ radius = 7.0
 [node name="Wolf" type="Node2D"]
 z_index = 4
 script = ExtResource("1_gag1n")
+points_for_kill = 200
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)

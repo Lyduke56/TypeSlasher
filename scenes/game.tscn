@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=4 uid="uid://btrhod848g6q"]
+[gd_scene load_steps=14 format=4 uid="uid://btrhod848g6q"]
 
 [ext_resource type="Script" uid="uid://e3wfi17cwkqa" path="res://Scripts/game.gd" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://Scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://cbe7velh1ej5l" path="res://Scenes/current_score.tscn" id="3_1l0tm"]
 [ext_resource type="Texture2D" uid="uid://b4lopj71ao0q8" path="res://Assets/Map Tiles/Tileset/Extras/texture.png" id="5_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bphv0yr26jjg" path="res://Scenes/tile_map_layer_2.tscn" id="5_p57ef"]
-[ext_resource type="Script" uid="uid://b5kpp21ay8abs" path="res://Scripts/current_score_label.gd" id="6_1l0tm"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="6_gee14"]
 [ext_resource type="Script" uid="uid://cbtgswhpnotg2" path="res://Scripts/timer.gd" id="6_p57ef"]
 [ext_resource type="Texture2D" uid="uid://dgtu1g8ffnbv1" path="res://Assets/Map Tiles/Tileset/Seasonal/spring.png" id="8_ssvqc"]
 
@@ -131,20 +130,13 @@ z_index = 5
 zoom = Vector2(0.67, 0.67)
 
 [node name="scoreLabels" type="StaticBody2D" parent="."]
+z_index = 9
 
-[node name="currentScoreLabel" type="RichTextLabel" parent="scoreLabels"]
-z_index = 10
-offset_left = 490.0
+[node name="CurrentScore" parent="scoreLabels" instance=ExtResource("3_1l0tm")]
+offset_left = 551.0
 offset_top = -476.0
-offset_right = 1864.0
-offset_bottom = -193.0
-scale = Vector2(0.265, 0.265)
-theme_override_fonts/normal_font = ExtResource("6_gee14")
-theme_override_font_sizes/normal_font_size = 102
-text = "CURRENT SCORE:9999"
-scroll_active = false
-tab_size = 24
-script = ExtResource("6_1l0tm")
+offset_right = 2082.0
+offset_bottom = -50.0
 
 [node name="TileMap" type="Node" parent="."]
 

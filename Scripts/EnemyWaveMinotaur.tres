@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=3 format=3 uid="uid://dcf8t0qwsnqpc"]
+
+[ext_resource type="PackedScene" uid="uid://b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q3r4s5t6u7v8w9x0y1z2a3b4c5d6e7f8" path="res://Scenes/Boss/Minotaur.tscn" id="1"]
+[ext_resource type="Script" path="res://Scripts/EnemyWave.gd" id="2"]
+
+[resource]
+script = ExtResource("2")
+enemy_scene = ExtResource("1")
+count = 1
+spawn_delay = 0.5
+wave_delay = 0.0

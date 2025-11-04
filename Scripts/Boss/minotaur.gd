@@ -28,7 +28,7 @@ var hack_timer: Timer
 # Reference to target node for taking damage
 var target_node: Node2D
 
-var points_for_kill = 5000
+@export var points_for_kill = 5000
 
 # Boss health system
 var max_boss_health: int = 5
