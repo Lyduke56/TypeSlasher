@@ -9,9 +9,9 @@
 [ext_resource type="Script" uid="uid://bf6yqy35jf53w" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_b___small.gd" id="6_tonbw"]
 [ext_resource type="PackedScene" uid="uid://b50h76ql65ea1" path="res://Scenes/RoomSpawns/small_room_spawn.tscn" id="7_gkmiv"]
 [ext_resource type="Script" uid="uid://cdrdygid30spt" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_c___medium.gd" id="8_dulka"]
-[ext_resource type="PackedScene" uid="uid://ivgoec3n72vd" path="res://Scenes/Enemies/Orc_enemy.tscn" id="8_gkmiv"]
 [ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="9_303ub"]
 [ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="10_315x1"]
+[ext_resource type="PackedScene" uid="uid://ds85cxxblat1n" path="res://Scenes/Enemies/basic_skeleton_archer.tscn" id="10_tonbw"]
 [ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="11_c0y1h"]
 [ext_resource type="PackedScene" uid="uid://bil2sj0ots4r2" path="res://Scenes/Enemies/basic_wolf.tscn" id="12_tonbw"]
 [ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="12_wa0in"]
@@ -33,8 +33,8 @@ size = Vector2(507, 534)
 
 [sub_resource type="Resource" id="Resource_dulka"]
 script = ExtResource("6_ibyc6")
-enemy_scene = ExtResource("8_gkmiv")
-count = 5
+enemy_scene = ExtResource("10_tonbw")
+count = 2
 spawn_delay = 1.5
 wave_delay = 0.0
 metadata/_custom_type_script = "uid://oupik81g26s2"

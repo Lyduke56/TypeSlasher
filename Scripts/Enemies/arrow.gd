@@ -4,7 +4,8 @@ extends Node2D
 @export var green: Color = Color("#639765")
 @export var red: Color = Color("#a65455")
 
-@export var speed: float = 50.0  # Movement speed towards target
+@export var speed: float = 150.0  # Projectile speed
+@export var lifetime: float = 10.0  # How long arrow lives before disappearing
 @onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
@@ -18,20 +19,35 @@ var has_target: bool = false
 # Targeting state - prevents retyping once word is completed
 var is_being_targeted: bool = false
 
-# Collision state
-var has_reached_target: bool = false
-var hack_timer: Timer
-# Reference to target node for taking damage
-var target_node: Node2D
+# Projectile state
+var direction: Vector2
+var lifetime_timer: Timer
 
-@export var points_for_kill = 100
+@export var points_for_kill = 50
 
 func _ready() -> void:
+	# Setup lifetime timer
+	lifetime_timer = Timer.new()
+	add_child(lifetime_timer)
+	lifetime_timer.wait_time = lifetime
+	lifetime_timer.one_shot = true
+	lifetime_timer.timeout.connect(_on_lifetime_expired)
+	lifetime_timer.start()
+
 	# Connect collision signal
 	area.body_entered.connect(_on_body_entered)
 	# Connect animation finished signal
 	if anim:
 		anim.animation_finished.connect(_on_animation_finished)
+
+	# Calculate direction to target
+	if has_target:
+		direction = (target_position - global_position).normalized()
+		# Rotate only the arrow sprite to face the target, leave text upright
+		var arrow_rotation = direction.angle()
+		if anim:
+			anim.rotation = arrow_rotation
+
 	pass  # Word will be set by the game manager via set_prompt()
 
 func _process(delta: float) -> void:
@@ -104,119 +120,53 @@ func set_targeted_state(targeted: bool):
 		modulate = Color.WHITE  # Reset color
 
 func play_death_animation():
-	"""Play damage animation followed by death animation"""
-	if not anim:
-		queue_free()  # Fallback if no animation
-		return
+	"""Arrow only has idle animation - just award points and remove"""
+	Global.current_score += points_for_kill
+	# Check for Sword buff health restoration
+	Global.on_enemy_killed()
+	queue_free()  # Remove enemy from scene
 
-	# Prevent multiple animations on the same enemy
-	if anim.animation == "arrow_death" or anim.animation == "arrow_damaged":
-		return
+	print("Arrow killed - awarded points and removed")
 
-	# Disconnect any existing connections to prevent duplicates
-	if anim.animation_finished.is_connected(_on_damage_animation_finished):
-		anim.animation_finished.disconnect(_on_damage_animation_finished)
-
-	# Connect the signal and play damage animation first
-	anim.animation_finished.connect(_on_damage_animation_finished, CONNECT_ONE_SHOT)
-	anim.play("arrow_damaged")
-
-	print("Enemy damage animation started")
-
-func _on_damage_animation_finished():
-	"""Called when damage animation completes - plays death animation"""
-	if anim.animation == "arrow_damaged":
-		# Disconnect any existing connections to prevent duplicates
-		if anim.animation_finished.is_connected(_on_death_animation_finished):
-			anim.animation_finished.disconnect(_on_death_animation_finished)
-
-		# Connect the signal and play death animation
-		anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
-		anim.play("arrow_death")
-
-		print("Enemy death animation started")
-
-func _on_death_animation_finished():
-	"""Called when death animation completes"""
-	if anim.animation == "arrow_death":
-		Global.current_score += points_for_kill
-		# Check for Sword buff health restoration
-		Global.on_enemy_killed()
-		queue_free()  # Remove enemy from scene
+func _on_lifetime_expired():
+	"""Called when arrow lifetime expires"""
+	if not is_being_targeted:
+		queue_free()
+		print("Arrow expired and was removed")
 
 func _on_body_entered(body: Node2D):
-	"""Called when enemy collides with something"""
+	"""Called when arrow collides with target"""
 	# Check if collided with target (target has StaticBody2D)
 	if body is StaticBody2D and body.get_parent().name == "Target":
-		if not has_reached_target:
-			has_reached_target = true
-			target_node = body.get_parent()  # Store reference to target for damage
-			has_target = false  # Stop normal movement
-			print("Enemy reached target! Starting hack timer and playing idle.")
+		# Arrow hit the target - deal damage and destroy arrow
+		var target_node = body.get_parent()
+		if target_node and target_node.has_method("take_damage"):
+			target_node.take_damage()
+			print("Arrow hit target and dealt damage!")
 
-			# Play idle animation immediately
-			if anim:
-				anim.play("arrow_idle")
-
-			# Create and start timer for 1.5 second intervals
-			hack_timer = Timer.new()
-			add_child(hack_timer)
-			hack_timer.wait_time = 1.5
-			hack_timer.one_shot = false  # Repeat indefinitely
-			hack_timer.timeout.connect(_on_hack_timer_timeout)
-			hack_timer.start()
-
-func _on_hack_timer_timeout():
-	"""Called every 1.5 seconds to play hack animation"""
-	if has_reached_target and not is_being_targeted and anim:
-		# Temporarily disable looping for hack animation so it plays once
-		anim.sprite_frames.set_animation_loop("arrow_attack", false)
-		anim.play("arrow_attack")
-		print("Enemy hacking the target!")
+		# Destroy arrow immediately
+		queue_free()
 
 func _on_animation_finished():
 	"""Called when any animation finishes"""
-	# Don't interfere with death/damage animations or when enemy is being targeted
-	if anim and (anim.animation == "arrow_death" or anim.animation == "arrow_damaged" or is_being_targeted):
-		return
-
-	if has_reached_target and anim and anim.animation == "arrow_attack":
-		# Hack animation finished, go back to idle and take damage
+	# Arrow only has idle animation, so just ensure it stays idle when not targeted
+	if anim and not is_being_targeted:
 		anim.play("arrow_idle")
-		print("Enemy finished hacking, back to idle.")
-		if target_node:
-			target_node.take_damage()
 
 func _physics_process(delta: float) -> void:
-	# STOP ALL MOVEMENT if being targeted or has reached target
-	if is_being_targeted or has_reached_target:
-		# Don't override death/damage animations
-		if anim and (anim.animation == "arrow_death" or anim.animation == "arrow_damaged"):
-			return  # Let death/damage animations play
+	# Stop movement if being targeted (being typed)
+	if is_being_targeted:
+		return
 
-		# When reached target and not being targeted, play idle only if not currently hacking
-		if anim and has_reached_target and not is_being_targeted and anim.animation != "arrow_attack":
-			anim.play("arrow_idle")
-		return  # Exit function completely - no movement at all
-
-	# Only move if NOT being targeted and hasn't reached target
-	if has_target:
-		# Move towards target position
-		var direction = (target_position - global_position).normalized()
-
-		if anim:
-			anim.play("arrow_run")
-			anim.flip_h = direction.x < 0
-
+	# Move toward target if we have one
+	if has_target and direction != Vector2.ZERO:
 		global_position += direction * speed * delta
 
-		# Stop when close enough to target
-		if global_position.distance_to(target_position) < 5.0:
-			has_target = false
-			if anim:
-				anim.play("arrow_idle")
-	else:
-		# Fallback: move downward if no specific target
-		if anim:
-			anim.play("arrow_idle")
-		global_position.y += speed * delta
+		# Check if we've reached close to target position
+		if global_position.distance_to(target_position) < 10.0:
+			# Hit the target
+			var target_node = get_node("/root/Main/Target")
+			if target_node and target_node.has_method("take_damage"):
+				target_node.take_damage()
+				print("Arrow reached target and dealt damage!")
+			queue_free()

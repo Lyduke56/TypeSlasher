@@ -4,31 +4,36 @@ extends Node2D
 @export var green: Color = Color("#639765")
 @export var red: Color = Color("#a65455")
 
-@export var speed: float = 50.0  # Movement speed towards target
+@export var attack_interval: float = 2.0  # Time between arrow shots
 @onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
-@onready var prompt = $Word
-@onready var prompt_text = prompt.text
 @onready var area: Area2D = $Area2D
 
-# Target tracking
+# Target tracking - archer stays in place
 var target_position: Vector2
 var has_target: bool = false
 
 # Targeting state - prevents retyping once word is completed
 var is_being_targeted: bool = false
 
-# Collision state
-var has_reached_target: bool = false
-var hack_timer: Timer
-# Reference to target node for taking damage
-var target_node: Node2D
+# Attack state
+var attack_timer: Timer
+var can_attack: bool = true
 
-@export var points_for_kill = 100
+@export var points_for_kill = 150
 
 func _ready() -> void:
-	# Connect collision signal
-	area.body_entered.connect(_on_body_entered)
+	# Archer stays in place and attacks with arrows
+	anim.play("skeleton_archer_idle")
+
+	# Setup attack timer
+	attack_timer = Timer.new()
+	add_child(attack_timer)
+	attack_timer.wait_time = attack_interval
+	attack_timer.one_shot = false
+	attack_timer.timeout.connect(_on_attack_timer_timeout)
+	attack_timer.start()
+
 	# Connect animation finished signal
 	if anim:
 		anim.animation_finished.connect(_on_animation_finished)
@@ -144,35 +149,70 @@ func _on_death_animation_finished():
 		Global.on_enemy_killed()
 		queue_free()  # Remove enemy from scene
 
-func _on_body_entered(body: Node2D):
-	"""Called when enemy collides with something"""
-	# Check if collided with target (target has StaticBody2D)
-	if body is StaticBody2D and body.get_parent().name == "Target":
-		if not has_reached_target:
-			has_reached_target = true
-			target_node = body.get_parent()  # Store reference to target for damage
-			has_target = false  # Stop normal movement
-			print("Enemy reached target! Starting hack timer and playing idle.")
+func _on_attack_timer_timeout():
+	"""Called periodically to shoot arrows"""
+	if not is_being_targeted and can_attack:
+		shoot_arrow()
 
-			# Play idle animation immediately
-			if anim:
-				anim.play("skeleton_archer_idle")
+func shoot_arrow():
+	"""Instantiate and shoot an arrow toward the target - similar to slime spawning children"""
+	if not has_target:
+		return
 
-			# Create and start timer for 1.5 second intervals
-			hack_timer = Timer.new()
-			add_child(hack_timer)
-			hack_timer.wait_time = 1.5
-			hack_timer.one_shot = false  # Repeat indefinitely
-			hack_timer.timeout.connect(_on_hack_timer_timeout)
-			hack_timer.start()
-
-func _on_hack_timer_timeout():
-	"""Called every 1.5 seconds to play hack animation"""
-	if has_reached_target and not is_being_targeted and anim:
-		# Temporarily disable looping for hack animation so it plays once
-		anim.sprite_frames.set_animation_loop("skeleton_archer_attack", false)
+	# Play attack animation
+	if anim:
 		anim.play("skeleton_archer_attack")
-		print("Enemy hacking the target!")
+
+	# Get the parent container (same as slime spawning)
+	var parent_container = get_parent()  # Usually EnemyContainer
+
+	# Create arrow instance
+	var arrow_scene = load("res://Scenes/Enemies/arrow.tscn")
+	var arrow = arrow_scene.instantiate()
+
+	# Position arrow in front of archer using local coordinates (like slime children)
+	var arrow_offset = Vector2(20, -10)  # Adjust based on archer facing
+	if anim and anim.flip_h:
+		arrow_offset.x = -20  # Flip for left-facing
+
+	# Convert global position to local coordinates relative to parent container
+	arrow.position = parent_container.to_local(global_position) + arrow_offset
+
+	# Set arrow target to the same target as archer
+	arrow.set_target_position(target_position)
+
+	# Set a random word for the arrow (deferred like slime children)
+	call_deferred("_setup_arrow_prompt", arrow)
+
+	# Add arrow to the same parent container as the archer
+	parent_container.add_child(arrow)
+
+	print("Skeleton archer shot an arrow at position: ", arrow.global_position)
+
+func _setup_arrow_prompt(arrow: Node2D):
+	"""Deferred setup of arrow prompt to ensure proper initialization"""
+	# Give arrow an easy word (same as slime children)
+	var arrow_word = _get_unique_word("easy")  # Use easy words for arrows
+	arrow.set_prompt(arrow_word)
+	print("Arrow spawned with word: '", arrow_word, "' (easy difficulty)")
+
+func _get_unique_word(new_category: String = "") -> String:
+	"""Get a unique word for the enemy (same as slime)"""
+	var category_to_use = new_category if new_category != "" else "medium"
+
+	if not WordDatabase:
+		print("WordDatabase not loaded!")
+		return "enemy"
+
+	var available_words = WordDatabase.get_category_words(category_to_use)
+	if available_words.is_empty():
+		print("No words available in category: " + category_to_use + ", falling back to medium")
+		available_words = WordDatabase.get_category_words("medium")
+		if available_words.is_empty():
+			return "enemy"
+
+	# Pick random word
+	return available_words[randi() % available_words.size()]
 
 func _on_animation_finished():
 	"""Called when any animation finishes"""
@@ -180,43 +220,10 @@ func _on_animation_finished():
 	if anim and (anim.animation == "skeleton_archer_death" or anim.animation == "skeleton_archer_damaged" or is_being_targeted):
 		return
 
-	if has_reached_target and anim and anim.animation == "skeleton_archer_attack":
-		# Hack animation finished, go back to idle and take damage
+	# Return to idle after attack animation
+	if anim and anim.animation == "skeleton_archer_attack":
 		anim.play("skeleton_archer_idle")
-		print("Enemy finished hacking, back to idle.")
-		if target_node:
-			target_node.take_damage()
 
 func _physics_process(delta: float) -> void:
-	# STOP ALL MOVEMENT if being targeted or has reached target
-	if is_being_targeted or has_reached_target:
-		# Don't override death/damage animations
-		if anim and (anim.animation == "skeleton_archer_death" or anim.animation == "skeleton_archer_damaged"):
-			return  # Let death/damage animations play
-
-		# When reached target and not being targeted, play idle only if not currently hacking
-		if anim and has_reached_target and not is_being_targeted and anim.animation != "skeleton_archer_attack":
-			anim.play("skeleton_archer_idle")
-		return  # Exit function completely - no movement at all
-
-	# Only move if NOT being targeted and hasn't reached target
-	if has_target:
-		# Move towards target position
-		var direction = (target_position - global_position).normalized()
-
-		if anim:
-			anim.play("skeleton_archer_run")
-			anim.flip_h = direction.x < 0
-
-		global_position += direction * speed * delta
-
-		# Stop when close enough to target
-		if global_position.distance_to(target_position) < 5.0:
-			has_target = false
-			if anim:
-				anim.play("skeleton_archer_idle")
-	else:
-		# Fallback: move downward if no specific target
-		if anim:
-			anim.play("skeleton_archer_idle")
-		global_position.y += speed * delta
+	# Archer stays in place - no movement
+	pass
