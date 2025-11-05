@@ -55,6 +55,10 @@ func _ready() -> void:
 	# Connect resume signal
 	if pause_ui.has_signal("request_resume_game"):
 		pause_ui.connect("request_resume_game", Callable(self, "_resume_game"))
+
+	# Setup active buffs display
+	setup_active_buffs()
+
 	WordDatabase.load_word_database()
 	# Reset WPM session at game start
 	Global.wpm_reset()
@@ -493,6 +497,20 @@ func _resume_game() -> void:
 		pause_ui.visible = false
 	# Inform WPM tracker
 	Global.wpm_on_resume()
+
+func setup_active_buffs():
+	"""Create and setup the active buffs display for the game"""
+	# Create canvas layer
+	var canvas_layer = CanvasLayer.new()
+	canvas_layer.name = "BuffCanvasLayer"
+	add_child(canvas_layer)
+
+	# Add active buffs display to the canvas layer
+	var active_buffs = load("res://Scenes/active_buffs.tscn").instantiate()
+	active_buffs.name = "ActiveBuffs"
+	canvas_layer.add_child(active_buffs)
+
+	print("Active buffs display initialized for game!")
 
 func _set_node_tree_process_mode(node: Node, mode: Node.ProcessMode) -> void:
 	# Recursively set process mode for a subtree so input works while paused

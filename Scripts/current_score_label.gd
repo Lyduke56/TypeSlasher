@@ -15,7 +15,7 @@ func _process(delta):
 		update_timer = 0.0
 		var current_score = Global.current_score
 		var current_wpm = Global.get_wpm()
-		
+
 		# Only update text if values changed
 		if current_score != cached_score or current_wpm != cached_wpm:
 			cached_score = current_score

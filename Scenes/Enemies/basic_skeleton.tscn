@@ -290,13 +290,13 @@ radius = 7.0
 z_index = 4
 scale = Vector2(1.2, 1.2)
 script = ExtResource("1_gd8pk")
-speed = 30.0
-points_for_kill = 150
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_77k81")
-animation = &"skeleton_idle"
+animation = &"skeleton_death"
+frame = 3
+frame_progress = 1.0
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3
