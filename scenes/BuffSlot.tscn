@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b5k8r1ne8t1xv"]
 
-[ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://Assets/Sprites/GUI/wood_panel.png" id="1_akj64"]
 [ext_resource type="Script" uid="uid://dvja66cxl6y7a" path="res://Scripts/buff_slot.gd" id="1_wnf47"]
+[ext_resource type="Texture2D" uid="uid://dlx3vcjexni0n" path="res://Assets/Sprites/GUI/buffslot-Sheet.png" id="2_qysbd"]
 [ext_resource type="Texture2D" uid="uid://doxffh06abuao" path="res://Assets/Sprites/GUI/gold_castle.png" id="3_5l6pw"]
 [ext_resource type="Texture2D" uid="uid://dv0xhkid1l24b" path="res://Assets/Sprites/GUI/silver_feather.png" id="4_yjnon"]
 [ext_resource type="Texture2D" uid="uid://wtijxtf8tf3m" path="res://Assets/Sprites/GUI/wood_sword.png" id="5_83e28"]
@@ -46,16 +46,17 @@ _data = {
 
 [node name="BuffSlot" type="PanelContainer"]
 custom_minimum_size = Vector2(100, 100)
-offset_right = 304.0
-offset_bottom = 268.0
+offset_right = 100.0
+offset_bottom = 100.0
 script = ExtResource("1_wnf47")
 
 [node name="BG" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("1_akj64")
+texture = ExtResource("2_qysbd")
 
 [node name="ICON" type="TextureRect" parent="."]
 layout_mode = 2
+stretch_mode = 3
 
 [node name="Spin" type="AnimationPlayer" parent="."]
 root_node = NodePath("../ICON")
