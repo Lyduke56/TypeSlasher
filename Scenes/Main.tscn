@@ -13,7 +13,7 @@ y_sort_enabled = true
 script = ExtResource("1_v1gob")
 
 [node name="Player" parent="." instance=ExtResource("1_rgh2o")]
-z_index = 7
+z_index = 124
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2.635, 2.075)

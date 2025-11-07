@@ -33,6 +33,8 @@ var current_wave_spawned = 0  # Enemies spawned in current wave
 @onready var camera_area: Area2D = $CameraArea
 @onready var enemy_container: Node2D = $EnemyContainer
 @onready var target_container: Node2D = $TargetContainer
+@onready var barrier_on: TileMapLayer = get_node_or_null("../Node/Barrier_On")
+@onready var barrier_off: TileMapLayer = get_node_or_null("../Node/Barrier_Off")
 
 func _ready() -> void:
 	# Find markers
@@ -56,6 +58,8 @@ func get_connected_room(direction: String) -> Node2D:
 func start_room():
 	room_started.emit(self)
 	print("Room " + name + " started")
+	barrier_on.visible = true
+	barrier_off.visible = false
 
 	# Handle camera positioning when entering the room
 	_handle_camera_on_room_enter()
@@ -63,6 +67,8 @@ func start_room():
 	# Only spawn if room is not cleared and not already in progress
 	if is_cleared:
 		print("Room " + name + " is already cleared, skipping spawning")
+		barrier_on.visible = false
+		barrier_off.visible = true
 		return
 
 	if spawn_timer and spawn_timer.time_left > 0 and enemies_spawned > 0:
@@ -84,6 +90,8 @@ func start_room():
 
 func clear_room():
 	is_cleared = true
+	barrier_on.visible = false
+	barrier_off.visible = true
 
 	# Remove instantiated target after clearing
 	if target_container.get_child_count() > 0:
