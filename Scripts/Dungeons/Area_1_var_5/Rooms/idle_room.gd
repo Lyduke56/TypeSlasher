@@ -15,12 +15,13 @@ signal room_started
 signal room_cleared
 
 @onready var camera_area: Area2D = $CameraArea
-@onready var barrier: TileMapLayer = get_node_or_null("Node/Barrier")
+@onready var barrier_on: TileMapLayer = get_node_or_null("Node/Barrier_On")
+@onready var barrier_off: TileMapLayer = get_node_or_null("Node/Barrier_Off")
 
 func _ready() -> void:
 	# Find markers
-	if barrier:
-		barrier.visible = false
+	if barrier_off:
+		barrier_off.visible = true
 
 	for child in get_children():
 		if child is Marker2D:

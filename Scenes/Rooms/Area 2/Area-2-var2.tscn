@@ -31,7 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="29_6krgj"]
 [ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="30_myn2e"]
 [ext_resource type="PackedScene" uid="uid://b4o3t4arf1fch" path="res://Scenes/GreenPortal.tscn" id="31_hn1pa"]
-[ext_resource type="Texture2D" uid="uid://cwmvxf44vkvb7" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="32_ua5gg"]
+[ext_resource type="Texture2D" uid="uid://cgn25u7abs02d" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="32_ua5gg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2icd"]
 texture = ExtResource("2_ua5gg")

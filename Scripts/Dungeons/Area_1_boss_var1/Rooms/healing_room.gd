@@ -17,6 +17,8 @@ signal room_cleared
 @onready var camera_area: Area2D = $CameraArea
 @onready var healing_container: Node2D = $HealingContainer
 @onready var target_container: Node2D = $TargetContainer
+@onready var barrier_on: TileMapLayer = get_node_or_null("Node/Barrier_On")
+@onready var barrier_off: TileMapLayer = get_node_or_null("Node/Barrier_Off")
 
 # Goddess statue system
 var GoddessStatueScene = preload("res://scenes/godess_statue.tscn")
@@ -25,6 +27,9 @@ var has_been_used: bool = false
 
 func _ready() -> void:
 	# Find markers
+	if barrier_off:
+		barrier_off.visible = true
+
 	for child in get_children():
 		if child is Marker2D:
 			exit_markers[child.name.to_lower()] = child

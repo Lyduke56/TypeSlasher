@@ -44,7 +44,7 @@
 [ext_resource type="Script" uid="uid://dupdl2bqtnva" path="res://Scripts/Dungeons/Area_1_boss_var1/Rooms/healing_room.gd" id="36_skw5e"]
 [ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="37_hrclj"]
 [ext_resource type="Script" uid="uid://bqfp0k4m2tr2q" path="res://Scripts/Dungeons/Area_1_var_5/Rooms/idle_room.gd" id="38_hrclj"]
-[ext_resource type="Texture2D" uid="uid://c0oerwykuqwno" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="45_x673d"]
+[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="45_x673d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke2tx"]
 size = Vector2(311, 344)
