@@ -4,7 +4,7 @@ signal buff_selected(buff_index: int)
 
 func _ready():
 	# Connect buff slot buttons
-	var grid_container = get_node_or_null("NinePatchRect/VBoxContainer/GridContainer")
+	var grid_container = get_node_or_null("BuffScroll/VBoxContainer/GridContainer")
 	if grid_container:
 		for i in range(grid_container.get_child_count()):
 			var buff_slot = grid_container.get_child(i)
@@ -66,7 +66,7 @@ func _on_buff_slot_clicked(event: InputEvent):
 
 func _find_buff_slot_under_mouse() -> Node:
 	"""Find the buff slot under the mouse cursor"""
-	var grid_container = get_node_or_null("NinePatchRect/VBoxContainer/GridContainer")
+	var grid_container = get_node_or_null("BuffScroll/VBoxContainer/GridContainer")
 	if grid_container:
 		var mouse_pos = get_viewport().get_mouse_position()
 		for child in grid_container.get_children():
