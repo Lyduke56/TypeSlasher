@@ -3,6 +3,9 @@ extends Node2D
 # Current loaded dungeon scene
 var current_dungeon: Node2D = null
 
+# Debug dungeon path - set in editor for testing specific dungeons
+@export var debug_dungeon_path: String = ""
+
 # Use the dedicated DungeonProgress autoload for persistence
 
 func boss_dungeon_cleared():
@@ -43,8 +46,11 @@ func _ready() -> void:
 		# Update heart container in Main scene after health buff application
 		call_deferred("_update_main_heart_container")
 	else:
-		# Load a random initial dungeon instead of fixed one
-		load_random_dungeon()
+		# Load debug dungeon if specified, otherwise load random initial dungeon
+		if debug_dungeon_path != "":
+			load_dungeon(debug_dungeon_path)
+		else:
+			load_random_dungeon()
 		# Update heart container in Main scene
 		call_deferred("_update_main_heart_container")
 
