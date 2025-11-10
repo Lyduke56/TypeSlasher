@@ -359,6 +359,25 @@ func find_new_active_enemy(typed_character: String):
 				active_enemy.set_next_character(current_letter_index)
 				break
 
+	# Also check for portals in boss rooms
+	if current_room and current_room.has_node("PortalContainer") and current_room.name == "BossRoom":
+		var portal_container = current_room.get_node("PortalContainer")
+		for entity in portal_container.get_children():
+			# Skip invalid entities or entities that don't have typing interface
+			if not is_instance_valid(entity) or not entity.has_method("get_prompt"):
+				continue
+			# Skip entities that are already being targeted
+			if entity.get("is_being_targeted") == true:
+				continue
+
+			var prompt = entity.get_prompt()
+			if prompt.length() > 0 and prompt.substr(0, 1).to_lower() == typed_character:
+				print("Found portal that starts with ", typed_character)
+				active_enemy = entity
+				current_letter_index = 1
+				active_enemy.set_next_character(current_letter_index)
+				break
+
 func _complete_word():
 	"""Handle word completion with atomic operation"""
 	if is_processing_completion or active_enemy == null or not is_instance_valid(active_enemy):
@@ -394,6 +413,14 @@ func _complete_word():
 		# Portal completion - do NOT dash to portal, just play disappear animation
 		print("Portal completed! Playing disappear animation.")
 		completed_entity.play_disappear_animation()
+		# For portals, trigger activation immediately (no await needed)
+		if current_room and current_room.has_method("_on_portal_activated"):
+			current_room._on_portal_activated()
+		# Reset processing flag immediately for portals
+		is_processing_completion = false
+		# Clear any inputs that got buffered during completion
+		input_buffer.clear()
+		return
 	elif completed_entity.has_method("play_heal_animation"):
 		# Goddess statue completion - do NOT dash to statue, just play heal animation
 		# Check if the statue hasn't been used yet to prevent multiple usages

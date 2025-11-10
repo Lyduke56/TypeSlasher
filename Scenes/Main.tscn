@@ -19,9 +19,8 @@ z_index = 124
 zoom = Vector2(2.635, 2.075)
 
 [node name="MainManager" type="Node2D" parent="."]
-position = Vector2(1, 0)
+position = Vector2(2, 0)
 script = ExtResource("2_v1gob")
-debug_dungeon_path = "res://Scenes/Rooms/Area 2/Area-2-boss-var-1.tscn"
 
 [node name="HUD" type="CanvasLayer" parent="."]
 process_priority = 1

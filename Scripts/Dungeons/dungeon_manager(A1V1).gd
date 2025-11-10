@@ -26,6 +26,7 @@ func _ready() -> void:
 	# Create heart container and score label immediately
 	setup_heart_container()
 	setup_score_label()
+	setup_active_buffs()
 
 	# Wait for target to apply health buffs, then update heart container
 	await get_tree().process_frame
@@ -502,6 +503,22 @@ func setup_score_label():
 	canvas_layer.add_child(score_label)
 
 	print("Score label initialized for dungeon!")
+
+func setup_active_buffs():
+	"""Create and setup the active buffs display for the dungeon"""
+	var canvas_layer = get_node_or_null("CanvasLayer")
+	if not canvas_layer:
+		# Create canvas layer if it doesn't exist
+		canvas_layer = CanvasLayer.new()
+		canvas_layer.name = "CanvasLayer"
+		add_child(canvas_layer)
+
+	# Add active buffs display to the canvas layer
+	var active_buffs = load("res://Scenes/active_buffs.tscn").instantiate()
+	active_buffs.name = "ActiveBuffs"
+	canvas_layer.add_child(active_buffs)
+
+	print("Active buffs display initialized for dungeon!")
 
 func update_score():
 	"""Update score tracking (called when correct characters are typed)"""

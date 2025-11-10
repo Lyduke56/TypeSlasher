@@ -4,18 +4,25 @@ extends Node
 var dungeons_required: int = 4  # Number of dungeons needed to unlock boss
 var dungeons_cleared: int = 0
 var cleared_dungeons: Array = []  # List of cleared dungeon indices
+var current_area: int = 1  # Current area (1, 2, etc.)
 
 # Persistence methods
 func reset_progress():
 	dungeons_cleared = 0
 	cleared_dungeons.clear()
 
+func advance_to_next_area():
+	current_area += 1
+	if current_area > 2:  # Loop back to area 1 after area 2
+		current_area = 1
+	reset_progress()  # Reset dungeon progress for new area
+
 func save_dungeon_count(count: int):
 	dungeons_cleared = count
 
 func is_dungeon_cleared(dungeon_name: String) -> bool:
 	# Extract variant number (e.g., "Area-1-var-3" -> 2)
-	if dungeon_name.begins_with("Area-1-var"):
+	if dungeon_name.begins_with("Area-" + str(current_area) + "-var"):
 		var variant_str = dungeon_name.substr(dungeon_name.length() - 1)  # Get last character
 		var variant_index = int(variant_str) - 1  # Convert to 0-based index
 
@@ -25,10 +32,10 @@ func is_dungeon_cleared(dungeon_name: String) -> bool:
 
 func mark_dungeon_cleared(dungeon_path: String):
 	"""Mark a specific dungeon as completed by its path"""
-	var dungeon_name = dungeon_path.get_file().get_basename()  # "Area-1-var-N"
+	var dungeon_name = dungeon_path.get_file().get_basename()  # "Area-X-var-N"
 
 	# Extract the variant number (e.g., "Area-1-var-3" -> 2)
-	if dungeon_name.begins_with("Area-1-var"):
+	if dungeon_name.begins_with("Area-" + str(current_area) + "-var"):
 		var variant_str = dungeon_name.substr(dungeon_name.length() - 1)  # Get last character
 		var variant_index = int(variant_str) - 1  # Convert to 0-based index
 
@@ -57,7 +64,7 @@ func get_next_random_dungeon() -> String:
 
 	# Pick random dungeon from available ones
 	var selected_idx = available[randi_range(0, available.size() - 1)]
-	var dungeon_name = "Area 1/Area-1-var" + str(selected_idx + 1) + ".tscn"
+	var dungeon_name = "Area " + str(current_area) + "/Area-" + str(current_area) + "-var" + str(selected_idx + 1) + ".tscn"
 	var dungeon_path = "res://Scenes/Rooms/" + dungeon_name
 
 	print("Loading random dungeon: ", dungeon_path, " from available: ", available)

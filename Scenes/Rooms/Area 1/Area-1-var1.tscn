@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bil2sj0ots4r2" path="res://Scenes/Enemies/basic_wolf.tscn" id="12_tonbw"]
 [ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="12_wa0in"]
 [ext_resource type="PackedScene" uid="uid://xcriddmqeofd" path="res://Scenes/Enemies/basic_skeleton.tscn" id="13_gkmiv"]
-[ext_resource type="Texture2D" uid="uid://dyhobrtd8dx37" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="17_gkmiv"]
+[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="17_gkmiv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ean82"]
 size = Vector2(310, 342)
@@ -983,7 +983,6 @@ script = ExtResource("2_wa0in")
 [node name="Timer" type="Timer" parent="."]
 
 [node name="StartingRoom" type="Node2D" parent="."]
-visible = false
 position = Vector2(-2, -7)
 script = ExtResource("3_mdnki")
 
@@ -1011,7 +1010,6 @@ z_index = 3
 position = Vector2(2.38419e-07, -0.999999)
 
 [node name="RoomA - Medium" type="Node2D" parent="."]
-visible = false
 position = Vector2(784, -18)
 script = ExtResource("4_ibyc6")
 enemy_waves = Array[ExtResource("6_ibyc6")]([SubResource("Resource_tonbw")])
@@ -1051,7 +1049,6 @@ z_index = 3
 position = Vector2(0, 1)
 
 [node name="RoomB - Small" type="Node2D" parent="."]
-visible = false
 position = Vector2(1, 804)
 script = ExtResource("6_tonbw")
 enemy_waves = Array[ExtResource("6_ibyc6")]([SubResource("Resource_dulka")])
@@ -1091,7 +1088,6 @@ z_index = 3
 position = Vector2(-1.96695e-06, -1.99994)
 
 [node name="RoomC - Medium" type="Node2D" parent="."]
-visible = false
 position = Vector2(-898, 796)
 script = ExtResource("8_dulka")
 enemy_waves = Array[ExtResource("6_ibyc6")]([SubResource("Resource_315x1"), SubResource("Resource_c0y1h")])
@@ -1128,7 +1124,6 @@ z_index = 3
 position = Vector2(1, 6)
 
 [node name="PortalRoom" type="Node2D" parent="."]
-visible = false
 position = Vector2(785, 755)
 script = ExtResource("9_303ub")
 

@@ -7,6 +7,9 @@ var previous_score: int
 # Flag to track if we're coming back from buff selection
 var after_buff_selection: bool = false
 
+# Flag to track if we're coming back from boss completion buff selection
+var after_boss_completion: bool = false
+
 # Store selected buff information
 var selected_buff_index: int = -1
 var selected_buff_type: int = -1

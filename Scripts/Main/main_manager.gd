@@ -9,11 +9,11 @@ var current_dungeon: Node2D = null
 # Use the dedicated DungeonProgress autoload for persistence
 
 func boss_dungeon_cleared():
-	"""Called when boss dungeon is completed - trigger final buff selection"""
-	print("Boss dungeon cleared! Triggering final buff selection...")
-	# Clear all progress data for a fresh run
-	DungeonProgress.reset_progress()
-	# Go to final buff selection
+	"""Called when boss dungeon is completed - go to buff selection"""
+	print("Boss dungeon cleared! Going to buff selection...")
+	# Set flag that we're coming from boss completion
+	Global.after_boss_completion = true
+	# Go to buff selection
 	get_tree().change_scene_to_file("res://Scenes/BuffSelection.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -40,8 +40,17 @@ func _ready() -> void:
 			Global.sword_heal_chance = Global.sword_buff_stacks * 15  # 15% per stack
 			print("Sword buff applied! Now have ", Global.sword_buff_stacks, " stack(s) - ", Global.sword_heal_chance, "% chance to heal on enemy kills")
 
-		# After buff selection - continue with dungeon progression using DungeonProgress autoload
-		load_random_dungeon()
+		# Check if we just completed a boss dungeon
+		if Global.get("after_boss_completion") == true:
+			Global.after_boss_completion = false
+			print("Returning from buff selection after boss completion - advancing to next area")
+			# Advance to next area and reset dungeon progress
+			DungeonProgress.advance_to_next_area()
+			# Load first dungeon of next area
+			load_random_dungeon()
+		else:
+			# After buff selection - continue with dungeon progression using DungeonProgress autoload
+			load_random_dungeon()
 
 		# Update heart container in Main scene after health buff application
 		call_deferred("_update_main_heart_container")
@@ -158,9 +167,9 @@ func dungeon_completed():
 	DungeonProgress.dungeons_cleared += 1
 	print("Dungeon completed! Total cleared: ", DungeonProgress.dungeons_cleared, "/", DungeonProgress.dungeons_required)
 
-	# Buff selection after 1st dungeon and after 3rd dungeon, boss after 4th
-	if DungeonProgress.dungeons_cleared == 1:
-		print("Buff selection triggered after clearing first dungeon!")
+	# Buff selection logic based on current area
+	if DungeonProgress.current_area == 1 and DungeonProgress.dungeons_cleared == 1:
+		print("Buff selection triggered after clearing first dungeon in Area 1!")
 		# Go to buff selection scene (leads to more dungeons or boss)
 		get_tree().change_scene_to_file("res://Scenes/BuffSelection.tscn")
 	elif DungeonProgress.dungeons_cleared == 3:
@@ -170,7 +179,8 @@ func dungeon_completed():
 	elif DungeonProgress.dungeons_cleared >= DungeonProgress.dungeons_required:
 		# Directly enter boss dungeon after meeting requirements (no buff before boss)
 		print("All dungeons cleared! Entering boss dungeon...")
-		load_dungeon("res://Scenes/Rooms/Area 1/Area-1-boss-var1.tscn")
+		var boss_path = "res://Scenes/Rooms/Area " + str(DungeonProgress.current_area) + "/Area-" + str(DungeonProgress.current_area) + "-boss-var1.tscn"
+		load_dungeon(boss_path)
 	elif DungeonProgress.dungeons_cleared < DungeonProgress.dungeons_required:
 		# Load another random dungeon (between checkpoints)
 		load_random_dungeon()

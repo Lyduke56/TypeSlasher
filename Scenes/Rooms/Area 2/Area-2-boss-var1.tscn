@@ -1,49 +1,48 @@
-[gd_scene load_steps=126 format=4 uid="uid://cum31vs8vh8f0"]
+[gd_scene load_steps=127 format=4 uid="uid://cum31vs8vh8f0"]
 
-[ext_resource type="Script" uid="uid://c24wvvrucoba" path="res://Scripts/Area2/Area_2_boss_var_1/dungeon_manager(A2B1).gd" id="1_hybv2"]
-[ext_resource type="Script" uid="uid://bxg5j83xcck8a" path="res://Scripts/Area2/Area_2_boss_var_1/area_2_boss_var_1.gd" id="1_wlsuq"]
-[ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://Assets/Map Tiles/Tileset/Dungeon/decor.png" id="2_vt3hx"]
-[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_wgyak"]
-[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_nqywp"]
-[ext_resource type="Texture2D" uid="uid://bxbciwx4rffsj" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_Autotiles.png" id="5_e3gty"]
-[ext_resource type="Texture2D" uid="uid://b1nifvoxgl61n" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_DecorationsC.png" id="6_tydf3"]
-[ext_resource type="PackedScene" uid="uid://deffovyu7rooc" path="res://Scenes/Boss/Tentaclussy.tscn" id="6_uo2ga"]
-[ext_resource type="Texture2D" uid="uid://04bfptemmdc7" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsA2.png" id="7_r8bkx"]
-[ext_resource type="Texture2D" uid="uid://dcv7vre6w0q8" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsA5.png" id="8_dkgdg"]
-[ext_resource type="Texture2D" uid="uid://bkotaa0wf2s22" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsSandA5.png" id="9_twlsj"]
-[ext_resource type="Script" uid="uid://8psmg1e6527k" path="res://Scripts/Area2/Area_2_boss_var_1/boss_room(A2B1).gd" id="10_44k52"]
-[ext_resource type="Texture2D" uid="uid://c6aenh02h86va" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FurnitureB.png" id="10_etmgw"]
-[ext_resource type="Texture2D" uid="uid://c3ytj82ayrhso" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_SandDecorationsC.png" id="11_44k52"]
-[ext_resource type="Texture2D" uid="uid://f5xqnv8o2xvg" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_WallsAndFloors.png" id="12_hybv2"]
-[ext_resource type="Texture2D" uid="uid://b7yfdmqbsrsdu" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_WaterA1.png" id="13_wlsuq"]
-[ext_resource type="Texture2D" uid="uid://crc5edqhths4q" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_WaterAnimation.png" id="14_uo2ga"]
-[ext_resource type="Texture2D" uid="uid://5way452bne8q" path="res://Assets/Map Tiles/Tileset/Dungeon/fire_animation2.png" id="15_m1dnf"]
-[ext_resource type="Texture2D" uid="uid://cd3t48t2eli3o" path="res://Assets/Map Tiles/Tileset/Dungeon/fire_animation.png" id="16_v7p5h"]
-[ext_resource type="Texture2D" uid="uid://xhy43jccxm0s" path="res://Assets/Map Tiles/Tileset/Dungeon/Island_24x24.png" id="17_l0k5m"]
-[ext_resource type="Texture2D" uid="uid://5yoq24vvstyn" path="res://Assets/Map Tiles/Tileset/Dungeon/Objects.png" id="18_1v5ji"]
-[ext_resource type="Texture2D" uid="uid://usuxawsm3gqu" path="res://Assets/Map Tiles/Tileset/Dungeon/pool no water.png" id="19_73nmm"]
-[ext_resource type="Texture2D" uid="uid://datxj4qt71v6d" path="res://Assets/Map Tiles/Tileset/Dungeon/pool water.png" id="20_btxui"]
-[ext_resource type="Texture2D" uid="uid://nimcngt6erc0" path="res://Assets/Map Tiles/Tileset/Dungeon/Tileset_Water_Temple.png" id="21_cv5tq"]
-[ext_resource type="Texture2D" uid="uid://c17oom8qpwlbo" path="res://Assets/Map Tiles/Tileset/Dungeon/trap_animation.png" id="22_ewi7s"]
-[ext_resource type="Texture2D" uid="uid://bmlb2dwygk47l" path="res://Assets/Map Tiles/Tileset/Dungeon/walls_floor.png" id="23_6u462"]
-[ext_resource type="Texture2D" uid="uid://casqns6bsbloo" path="res://Assets/Map Tiles/Tileset/Dungeon/Water_coasts_animation.png" id="24_237k6"]
-[ext_resource type="Texture2D" uid="uid://dqasttlqfpeuh" path="res://Assets/Map Tiles/Tileset/Dungeon/water_details_animation.png" id="25_q8crg"]
-[ext_resource type="Texture2D" uid="uid://2l50whv7dosh" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_2gfdc"]
-[ext_resource type="Texture2D" uid="uid://dyhobrtd8dx37" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="27_3ouh1"]
-[ext_resource type="Texture2D" uid="uid://ch0cutbtie3ps" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_coasts_animation.png" id="28_vskux"]
-[ext_resource type="Texture2D" uid="uid://dhjqbiubpoqe7" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_floor.png" id="29_xfgd2"]
-[ext_resource type="Texture2D" uid="uid://bbfu5byw1ys67" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_walls.png" id="30_qwyy7"]
-[ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="31_7meml"]
-[ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="32_jcbcd"]
-[ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="32_wlkvc"]
-[ext_resource type="Script" uid="uid://gi3ma2tv7svj" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_a___medium.gd" id="33_wgyak"]
-[ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="34_nqywp"]
-[ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="35_e3gty"]
-[ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="36_e3gty"]
-[ext_resource type="PackedScene" uid="uid://ds85cxxblat1n" path="res://Scenes/Enemies/basic_skeleton_archer.tscn" id="37_tydf3"]
-[ext_resource type="Script" uid="uid://dupdl2bqtnva" path="res://Scripts/Dungeons/Area_1_boss_var1/Rooms/healing_room.gd" id="38_tydf3"]
-[ext_resource type="PackedScene" uid="uid://1autrsiutlos" path="res://Scenes/RoomSpawns/boss_room_spawn.tscn" id="43_m1dnf"]
-[ext_resource type="Texture2D" uid="uid://cxgnvq8exo56k" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Sprites.png" id="46_uo2ga"]
+[ext_resource type="Script" uid="uid://bxg5j83xcck8a" path="res://Scripts/Area2/Area_2_boss_var_1/area_2_boss_var_1.gd" id="1_3owjx"]
+[ext_resource type="Script" uid="uid://c24wvvrucoba" path="res://Scripts/Area2/Area_2_boss_var_1/dungeon_manager(A2B1).gd" id="2_ptan2"]
+[ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="3_ietmg"]
+[ext_resource type="Script" uid="uid://gi3ma2tv7svj" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_a___medium.gd" id="4_15lsb"]
+[ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="5_wswjs"]
+[ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="6_5df77"]
+[ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="7_o1fjt"]
+[ext_resource type="PackedScene" uid="uid://ds85cxxblat1n" path="res://Scenes/Enemies/basic_skeleton_archer.tscn" id="8_e1as4"]
+[ext_resource type="Script" uid="uid://dupdl2bqtnva" path="res://Scripts/Dungeons/Area_1_boss_var1/Rooms/healing_room.gd" id="9_5saxb"]
+[ext_resource type="Script" uid="uid://8psmg1e6527k" path="res://Scripts/Area2/Area_2_boss_var_1/boss_room(A2B1).gd" id="10_g560o"]
+[ext_resource type="PackedScene" uid="uid://1autrsiutlos" path="res://Scenes/RoomSpawns/boss_room_spawn.tscn" id="12_roua8"]
+[ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://Assets/Map Tiles/Tileset/Dungeon/decor.png" id="13_p3od4"]
+[ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="14_2w4ov"]
+[ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="15_v3hen"]
+[ext_resource type="Texture2D" uid="uid://bxbciwx4rffsj" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_Autotiles.png" id="16_ms404"]
+[ext_resource type="Texture2D" uid="uid://b1nifvoxgl61n" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_DecorationsC.png" id="17_qr5q7"]
+[ext_resource type="Texture2D" uid="uid://04bfptemmdc7" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsA2.png" id="18_kinsq"]
+[ext_resource type="Texture2D" uid="uid://dcv7vre6w0q8" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsA5.png" id="19_f8rxl"]
+[ext_resource type="Texture2D" uid="uid://bkotaa0wf2s22" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsSandA5.png" id="20_pdx70"]
+[ext_resource type="Texture2D" uid="uid://c6aenh02h86va" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FurnitureB.png" id="21_go0me"]
+[ext_resource type="Texture2D" uid="uid://c3ytj82ayrhso" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_SandDecorationsC.png" id="22_yu5c3"]
+[ext_resource type="Texture2D" uid="uid://f5xqnv8o2xvg" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_WallsAndFloors.png" id="23_bfw6a"]
+[ext_resource type="Texture2D" uid="uid://b7yfdmqbsrsdu" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_WaterA1.png" id="24_luqip"]
+[ext_resource type="Texture2D" uid="uid://crc5edqhths4q" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_WaterAnimation.png" id="25_deckc"]
+[ext_resource type="Texture2D" uid="uid://5way452bne8q" path="res://Assets/Map Tiles/Tileset/Dungeon/fire_animation2.png" id="26_xosv7"]
+[ext_resource type="Texture2D" uid="uid://cd3t48t2eli3o" path="res://Assets/Map Tiles/Tileset/Dungeon/fire_animation.png" id="27_s6gto"]
+[ext_resource type="Texture2D" uid="uid://xhy43jccxm0s" path="res://Assets/Map Tiles/Tileset/Dungeon/Island_24x24.png" id="28_hie7y"]
+[ext_resource type="Texture2D" uid="uid://5yoq24vvstyn" path="res://Assets/Map Tiles/Tileset/Dungeon/Objects.png" id="29_3mdw7"]
+[ext_resource type="Texture2D" uid="uid://usuxawsm3gqu" path="res://Assets/Map Tiles/Tileset/Dungeon/pool no water.png" id="30_ix80v"]
+[ext_resource type="Texture2D" uid="uid://datxj4qt71v6d" path="res://Assets/Map Tiles/Tileset/Dungeon/pool water.png" id="31_p3vqf"]
+[ext_resource type="Texture2D" uid="uid://nimcngt6erc0" path="res://Assets/Map Tiles/Tileset/Dungeon/Tileset_Water_Temple.png" id="32_itvep"]
+[ext_resource type="Texture2D" uid="uid://c17oom8qpwlbo" path="res://Assets/Map Tiles/Tileset/Dungeon/trap_animation.png" id="33_2fl4q"]
+[ext_resource type="Texture2D" uid="uid://bmlb2dwygk47l" path="res://Assets/Map Tiles/Tileset/Dungeon/walls_floor.png" id="34_710r7"]
+[ext_resource type="Texture2D" uid="uid://casqns6bsbloo" path="res://Assets/Map Tiles/Tileset/Dungeon/Water_coasts_animation.png" id="35_yy0j4"]
+[ext_resource type="Texture2D" uid="uid://dqasttlqfpeuh" path="res://Assets/Map Tiles/Tileset/Dungeon/water_details_animation.png" id="36_6cb0c"]
+[ext_resource type="Texture2D" uid="uid://cgn25u7abs02d" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="37_kjijw"]
+[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="38_axkh8"]
+[ext_resource type="Texture2D" uid="uid://ch0cutbtie3ps" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_coasts_animation.png" id="39_wcst4"]
+[ext_resource type="Texture2D" uid="uid://dhjqbiubpoqe7" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_floor.png" id="40_k7gua"]
+[ext_resource type="Texture2D" uid="uid://bbfu5byw1ys67" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_walls.png" id="41_xqenj"]
+[ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="42_33dv3"]
+[ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="43_wftic"]
+[ext_resource type="Texture2D" uid="uid://dwgqx23vqf7r5" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Sprites.png" id="44_a5cd3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qgj6"]
 size = Vector2(303, 324)
@@ -55,8 +54,8 @@ size = Vector2(491, 513)
 size = Vector2(491, 516)
 
 [sub_resource type="Resource" id="Resource_ht05q"]
-script = ExtResource("36_e3gty")
-enemy_scene = ExtResource("37_tydf3")
+script = ExtResource("7_o1fjt")
+enemy_scene = ExtResource("8_e1as4")
 count = 2
 spawn_delay = 1.5
 wave_delay = 0.0
@@ -71,19 +70,11 @@ size = Vector2(494, 515)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twlsj"]
 size = Vector2(301, 320)
 
-[sub_resource type="Resource" id="Resource_44k52"]
-script = ExtResource("36_e3gty")
-enemy_scene = ExtResource("6_uo2ga")
-count = 1
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7p5h"]
 size = Vector2(787, 807.5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2icd"]
-texture = ExtResource("2_vt3hx")
+texture = ExtResource("13_p3od4")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -155,7 +146,7 @@ texture = ExtResource("2_vt3hx")
 7:8/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssj8n"]
-texture = ExtResource("3_wgyak")
+texture = ExtResource("14_2w4ov")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -329,7 +320,7 @@ texture = ExtResource("3_wgyak")
 14:11/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rs2mm"]
-texture = ExtResource("4_nqywp")
+texture = ExtResource("15_v3hen")
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -521,7 +512,7 @@ texture = ExtResource("4_nqywp")
 17:9/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qke02"]
-texture = ExtResource("5_e3gty")
+texture = ExtResource("16_ms404")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -682,7 +673,7 @@ texture = ExtResource("5_e3gty")
 7:14/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nl252"]
-texture = ExtResource("6_tydf3")
+texture = ExtResource("17_qr5q7")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -855,7 +846,7 @@ texture = ExtResource("6_tydf3")
 5:12/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6t10y"]
-texture = ExtResource("7_r8bkx")
+texture = ExtResource("18_kinsq")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -960,7 +951,7 @@ texture = ExtResource("7_r8bkx")
 7:11/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_luqys"]
-texture = ExtResource("8_dkgdg")
+texture = ExtResource("19_f8rxl")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1189,7 +1180,7 @@ texture = ExtResource("8_dkgdg")
 5:15/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gip4f"]
-texture = ExtResource("9_twlsj")
+texture = ExtResource("20_pdx70")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1230,7 +1221,7 @@ texture = ExtResource("9_twlsj")
 4:7/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q27kt"]
-texture = ExtResource("10_etmgw")
+texture = ExtResource("21_go0me")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1419,7 +1410,7 @@ texture = ExtResource("10_etmgw")
 15:15/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujp0t"]
-texture = ExtResource("11_44k52")
+texture = ExtResource("22_yu5c3")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1433,7 +1424,7 @@ texture = ExtResource("11_44k52")
 0:4/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ug38d"]
-texture = ExtResource("12_hybv2")
+texture = ExtResource("23_bfw6a")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1570,7 +1561,7 @@ texture = ExtResource("12_hybv2")
 1:22/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iabls"]
-texture = ExtResource("13_wlsuq")
+texture = ExtResource("24_luqip")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1609,7 +1600,7 @@ texture = ExtResource("13_wlsuq")
 5:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rst30"]
-texture = ExtResource("4_nqywp")
+texture = ExtResource("15_v3hen")
 texture_region_size = Vector2i(24, 24)
 1:0/0 = 0
 2:0/0 = 0
@@ -1952,7 +1943,7 @@ texture_region_size = Vector2i(24, 24)
 17:9/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6l5t3"]
-texture = ExtResource("14_uo2ga")
+texture = ExtResource("25_deckc")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -2009,7 +2000,7 @@ texture = ExtResource("14_uo2ga")
 8:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r0ffc"]
-texture = ExtResource("15_m1dnf")
+texture = ExtResource("26_xosv7")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -2074,7 +2065,7 @@ texture = ExtResource("15_m1dnf")
 5:11/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_471w2"]
-texture = ExtResource("16_v7p5h")
+texture = ExtResource("27_s6gto")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -2271,7 +2262,7 @@ texture = ExtResource("16_v7p5h")
 10:17/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b0pbl"]
-texture = ExtResource("17_l0k5m")
+texture = ExtResource("28_hie7y")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -2415,7 +2406,7 @@ texture = ExtResource("17_l0k5m")
 7:11/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_13a12"]
-texture = ExtResource("18_1v5ji")
+texture = ExtResource("29_3mdw7")
 1:1/0 = 0
 3:1/0 = 0
 6:1/0 = 0
@@ -2558,7 +2549,7 @@ texture = ExtResource("18_1v5ji")
 6:8/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3p56f"]
-texture = ExtResource("19_73nmm")
+texture = ExtResource("30_ix80v")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -2608,7 +2599,7 @@ texture = ExtResource("19_73nmm")
 8:4/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jgt6f"]
-texture = ExtResource("20_btxui")
+texture = ExtResource("31_p3vqf")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -2658,7 +2649,7 @@ texture = ExtResource("20_btxui")
 8:4/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aio0v"]
-texture = ExtResource("21_cv5tq")
+texture = ExtResource("32_itvep")
 0:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
@@ -3473,7 +3464,7 @@ texture = ExtResource("21_cv5tq")
 5:74/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0iwc"]
-texture = ExtResource("22_ewi7s")
+texture = ExtResource("33_2fl4q")
 1:2/0 = 0
 2:2/0 = 0
 3:2/0 = 0
@@ -3654,7 +3645,7 @@ texture = ExtResource("22_ewi7s")
 10:29/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8k2ei"]
-texture = ExtResource("23_6u462")
+texture = ExtResource("34_710r7")
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
@@ -3937,7 +3928,7 @@ texture = ExtResource("23_6u462")
 15:27/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q38my"]
-texture = ExtResource("2_vt3hx")
+texture = ExtResource("13_p3od4")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -4009,7 +4000,7 @@ texture = ExtResource("2_vt3hx")
 7:8/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x68wo"]
-texture = ExtResource("24_237k6")
+texture = ExtResource("35_yy0j4")
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
@@ -4547,7 +4538,7 @@ texture = ExtResource("24_237k6")
 11:30/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j00gn"]
-texture = ExtResource("25_q8crg")
+texture = ExtResource("36_6cb0c")
 4:1/0 = 0
 5:1/0 = 0
 6:1/0 = 0
@@ -5562,7 +5553,7 @@ texture = ExtResource("25_q8crg")
 12:75/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ts02t"]
-texture = ExtResource("26_2gfdc")
+texture = ExtResource("37_kjijw")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -5610,14 +5601,14 @@ texture = ExtResource("26_2gfdc")
 2:7/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vm2jg"]
-texture = ExtResource("27_3ouh1")
+texture = ExtResource("38_axkh8")
 0:0/0 = 0
 0:1/0 = 0
 0:2/0 = 0
 0:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cn5sq"]
-texture = ExtResource("28_vskux")
+texture = ExtResource("39_wcst4")
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
@@ -5956,7 +5947,7 @@ texture = ExtResource("28_vskux")
 17:23/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e3fd1"]
-texture = ExtResource("29_xfgd2")
+texture = ExtResource("40_k7gua")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -6079,7 +6070,7 @@ texture = ExtResource("29_xfgd2")
 7:14/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n37oy"]
-texture = ExtResource("30_qwyy7")
+texture = ExtResource("41_xqenj")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -6338,7 +6329,7 @@ texture = ExtResource("30_qwyy7")
 7:31/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b4gh1"]
-texture = ExtResource("31_7meml")
+texture = ExtResource("42_33dv3")
 0:0/0 = 0
 4:0/0 = 0
 5:0/0 = 0
@@ -6476,7 +6467,7 @@ texture = ExtResource("31_7meml")
 9:14/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hswx"]
-texture = ExtResource("3_wgyak")
+texture = ExtResource("14_2w4ov")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -6650,7 +6641,7 @@ texture = ExtResource("3_wgyak")
 14:11/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v4epv"]
-texture = ExtResource("32_jcbcd")
+texture = ExtResource("43_wftic")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -7056,11 +7047,11 @@ sources/32 = SubResource("TileSetAtlasSource_ts02t")
 sources/33 = SubResource("TileSetAtlasSource_vm2jg")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fxllc"]
-texture = ExtResource("2_vt3hx")
+texture = ExtResource("13_p3od4")
 texture_region_size = Vector2i(24, 24)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jb3em"]
-texture = ExtResource("3_wgyak")
+texture = ExtResource("14_2w4ov")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -7234,7 +7225,7 @@ texture = ExtResource("3_wgyak")
 13:6/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ay83h"]
-texture = ExtResource("4_nqywp")
+texture = ExtResource("15_v3hen")
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -7426,7 +7417,7 @@ texture = ExtResource("4_nqywp")
 17:9/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qrqga"]
-texture = ExtResource("26_2gfdc")
+texture = ExtResource("37_kjijw")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -7474,7 +7465,7 @@ texture = ExtResource("26_2gfdc")
 2:7/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m1dnf"]
-texture = ExtResource("25_q8crg")
+texture = ExtResource("36_6cb0c")
 4:1/0 = 0
 5:1/0 = 0
 6:1/0 = 0
@@ -8489,7 +8480,7 @@ texture = ExtResource("25_q8crg")
 12:75/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v7p5h"]
-texture = ExtResource("46_uo2ga")
+texture = ExtResource("44_a5cd3")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -8575,7 +8566,7 @@ sources/4 = SubResource("TileSetAtlasSource_m1dnf")
 sources/5 = SubResource("TileSetAtlasSource_v7p5h")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i0ilx"]
-texture = ExtResource("2_vt3hx")
+texture = ExtResource("13_p3od4")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -8647,7 +8638,7 @@ texture = ExtResource("2_vt3hx")
 7:8/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ft4qk"]
-texture = ExtResource("3_wgyak")
+texture = ExtResource("14_2w4ov")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -8821,7 +8812,7 @@ texture = ExtResource("3_wgyak")
 14:11/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nhe0x"]
-texture = ExtResource("4_nqywp")
+texture = ExtResource("15_v3hen")
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -9013,7 +9004,7 @@ texture = ExtResource("4_nqywp")
 17:9/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b12oo"]
-texture = ExtResource("5_e3gty")
+texture = ExtResource("16_ms404")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -9174,7 +9165,7 @@ texture = ExtResource("5_e3gty")
 7:14/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rx7bf"]
-texture = ExtResource("6_tydf3")
+texture = ExtResource("17_qr5q7")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -9347,7 +9338,7 @@ texture = ExtResource("6_tydf3")
 5:12/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_udgc0"]
-texture = ExtResource("7_r8bkx")
+texture = ExtResource("18_kinsq")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -9452,7 +9443,7 @@ texture = ExtResource("7_r8bkx")
 7:11/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qi4mw"]
-texture = ExtResource("8_dkgdg")
+texture = ExtResource("19_f8rxl")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -9681,7 +9672,7 @@ texture = ExtResource("8_dkgdg")
 5:15/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n8k3j"]
-texture = ExtResource("9_twlsj")
+texture = ExtResource("20_pdx70")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -9722,7 +9713,7 @@ texture = ExtResource("9_twlsj")
 4:7/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8sda7"]
-texture = ExtResource("10_etmgw")
+texture = ExtResource("21_go0me")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -9911,7 +9902,7 @@ texture = ExtResource("10_etmgw")
 15:15/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sehob"]
-texture = ExtResource("11_44k52")
+texture = ExtResource("22_yu5c3")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -9925,7 +9916,7 @@ texture = ExtResource("11_44k52")
 0:4/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_joegw"]
-texture = ExtResource("12_hybv2")
+texture = ExtResource("23_bfw6a")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -10062,7 +10053,7 @@ texture = ExtResource("12_hybv2")
 1:22/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wp5k"]
-texture = ExtResource("13_wlsuq")
+texture = ExtResource("24_luqip")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -10101,7 +10092,7 @@ texture = ExtResource("13_wlsuq")
 5:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qrpcx"]
-texture = ExtResource("4_nqywp")
+texture = ExtResource("15_v3hen")
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -10293,7 +10284,7 @@ texture = ExtResource("4_nqywp")
 17:9/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h4ntd"]
-texture = ExtResource("14_uo2ga")
+texture = ExtResource("25_deckc")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -10350,7 +10341,7 @@ texture = ExtResource("14_uo2ga")
 8:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jpetl"]
-texture = ExtResource("15_m1dnf")
+texture = ExtResource("26_xosv7")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -10415,7 +10406,7 @@ texture = ExtResource("15_m1dnf")
 5:11/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2t3wj"]
-texture = ExtResource("16_v7p5h")
+texture = ExtResource("27_s6gto")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -10612,7 +10603,7 @@ texture = ExtResource("16_v7p5h")
 10:17/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jtfo1"]
-texture = ExtResource("17_l0k5m")
+texture = ExtResource("28_hie7y")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -10756,7 +10747,7 @@ texture = ExtResource("17_l0k5m")
 7:11/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4veqm"]
-texture = ExtResource("18_1v5ji")
+texture = ExtResource("29_3mdw7")
 1:1/0 = 0
 3:1/0 = 0
 6:1/0 = 0
@@ -10899,7 +10890,7 @@ texture = ExtResource("18_1v5ji")
 6:8/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hfs7o"]
-texture = ExtResource("19_73nmm")
+texture = ExtResource("30_ix80v")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -10949,7 +10940,7 @@ texture = ExtResource("19_73nmm")
 8:4/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ytxhd"]
-texture = ExtResource("20_btxui")
+texture = ExtResource("31_p3vqf")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -10999,7 +10990,7 @@ texture = ExtResource("20_btxui")
 8:4/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wukg3"]
-texture = ExtResource("21_cv5tq")
+texture = ExtResource("32_itvep")
 0:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
@@ -11814,7 +11805,7 @@ texture = ExtResource("21_cv5tq")
 5:74/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2bfhy"]
-texture = ExtResource("22_ewi7s")
+texture = ExtResource("33_2fl4q")
 1:2/0 = 0
 2:2/0 = 0
 3:2/0 = 0
@@ -11995,7 +11986,7 @@ texture = ExtResource("22_ewi7s")
 10:29/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mcot6"]
-texture = ExtResource("23_6u462")
+texture = ExtResource("34_710r7")
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
@@ -12278,7 +12269,7 @@ texture = ExtResource("23_6u462")
 15:27/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bu6h6"]
-texture = ExtResource("2_vt3hx")
+texture = ExtResource("13_p3od4")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -12350,7 +12341,7 @@ texture = ExtResource("2_vt3hx")
 7:8/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a5y06"]
-texture = ExtResource("24_237k6")
+texture = ExtResource("35_yy0j4")
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
@@ -12888,7 +12879,7 @@ texture = ExtResource("24_237k6")
 11:30/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_amvvu"]
-texture = ExtResource("25_q8crg")
+texture = ExtResource("36_6cb0c")
 4:1/0 = 0
 5:1/0 = 0
 6:1/0 = 0
@@ -13903,7 +13894,7 @@ texture = ExtResource("25_q8crg")
 12:75/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6sogm"]
-texture = ExtResource("28_vskux")
+texture = ExtResource("39_wcst4")
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
@@ -14242,7 +14233,7 @@ texture = ExtResource("28_vskux")
 17:23/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7e8wi"]
-texture = ExtResource("29_xfgd2")
+texture = ExtResource("40_k7gua")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -14365,7 +14356,7 @@ texture = ExtResource("29_xfgd2")
 7:14/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dpu1c"]
-texture = ExtResource("30_qwyy7")
+texture = ExtResource("41_xqenj")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -14624,7 +14615,7 @@ texture = ExtResource("30_qwyy7")
 7:31/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e72r0"]
-texture = ExtResource("31_7meml")
+texture = ExtResource("42_33dv3")
 0:0/0 = 0
 4:0/0 = 0
 5:0/0 = 0
@@ -14762,7 +14753,7 @@ texture = ExtResource("31_7meml")
 9:14/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4mu8q"]
-texture = ExtResource("3_wgyak")
+texture = ExtResource("14_2w4ov")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -14936,7 +14927,7 @@ texture = ExtResource("3_wgyak")
 14:11/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d0fqd"]
-texture = ExtResource("32_jcbcd")
+texture = ExtResource("43_wftic")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -15340,14 +15331,13 @@ sources/30 = SubResource("TileSetAtlasSource_a5y06")
 sources/31 = SubResource("TileSetAtlasSource_amvvu")
 
 [node name="Dungeon" type="Node2D"]
-script = ExtResource("1_wlsuq")
+script = ExtResource("1_3owjx")
 
 [node name="DungeonManager" type="Node2D" parent="."]
-script = ExtResource("1_hybv2")
+script = ExtResource("2_ptan2")
 
 [node name="StartingRoom" type="Node2D" parent="."]
-visible = false
-script = ExtResource("32_wlkvc")
+script = ExtResource("3_ietmg")
 
 [node name="CameraArea" type="Area2D" parent="StartingRoom"]
 visibility_layer = 3
@@ -15371,9 +15361,8 @@ position = Vector2(160, 0)
 z_index = 2
 
 [node name="RoomA - Medium" type="Node2D" parent="."]
-visible = false
 position = Vector2(865, 0)
-script = ExtResource("33_wgyak")
+script = ExtResource("4_15lsb")
 
 [node name="CameraArea" type="Area2D" parent="RoomA - Medium"]
 visibility_layer = 3
@@ -15397,7 +15386,7 @@ position = Vector2(0, 1)
 z_index = 2
 position = Vector2(1, 0)
 
-[node name="MediumRoomSpawn" parent="RoomA - Medium" instance=ExtResource("34_nqywp")]
+[node name="MediumRoomSpawn" parent="RoomA - Medium" instance=ExtResource("5_wswjs")]
 
 [node name="TileMapLayer" parent="RoomA - Medium/MediumRoomSpawn" index="0"]
 visible = false
@@ -15417,14 +15406,13 @@ position = Vector2(174, -181)
 [node name="SpawnPoint1" parent="RoomA - Medium/MediumRoomSpawn/SpawnLocations" index="4"]
 position = Vector2(-189, -178)
 
-[node name="CenterPlatform4" parent="RoomA - Medium" instance=ExtResource("35_e3gty")]
+[node name="CenterPlatform4" parent="RoomA - Medium" instance=ExtResource("6_5df77")]
 z_index = 3
 position = Vector2(0, 1)
 
 [node name="RoomB - Medium" type="Node2D" parent="."]
-visible = false
 position = Vector2(865, 959)
-script = ExtResource("33_wgyak")
+script = ExtResource("4_15lsb")
 
 [node name="CameraArea" type="Area2D" parent="RoomB - Medium"]
 visibility_layer = 3
@@ -15445,7 +15433,7 @@ position = Vector2(0, 1)
 z_index = 2
 position = Vector2(1, 0)
 
-[node name="MediumRoomSpawn" parent="RoomB - Medium" instance=ExtResource("34_nqywp")]
+[node name="MediumRoomSpawn" parent="RoomB - Medium" instance=ExtResource("5_wswjs")]
 
 [node name="TileMapLayer" parent="RoomB - Medium/MediumRoomSpawn" index="0"]
 visible = false
@@ -15465,15 +15453,14 @@ position = Vector2(174, -181)
 [node name="SpawnPoint1" parent="RoomB - Medium/MediumRoomSpawn/SpawnLocations" index="4"]
 position = Vector2(-189, -178)
 
-[node name="CenterPlatform4" parent="RoomB - Medium" instance=ExtResource("35_e3gty")]
+[node name="CenterPlatform4" parent="RoomB - Medium" instance=ExtResource("6_5df77")]
 z_index = 3
 position = Vector2(0, 1)
 
 [node name="RoomC - Medium" type="Node2D" parent="."]
-visible = false
 position = Vector2(-864, 0)
-script = ExtResource("33_wgyak")
-enemy_waves = Array[ExtResource("36_e3gty")]([SubResource("Resource_ht05q")])
+script = ExtResource("4_15lsb")
+enemy_waves = Array[ExtResource("7_o1fjt")]([SubResource("Resource_ht05q")])
 
 [node name="CameraArea" type="Area2D" parent="RoomC - Medium"]
 visibility_layer = 3
@@ -15497,7 +15484,7 @@ position = Vector2(0, 1)
 z_index = 2
 position = Vector2(1, 0)
 
-[node name="MediumRoomSpawn" parent="RoomC - Medium" instance=ExtResource("34_nqywp")]
+[node name="MediumRoomSpawn" parent="RoomC - Medium" instance=ExtResource("5_wswjs")]
 
 [node name="TileMapLayer" parent="RoomC - Medium/MediumRoomSpawn" index="0"]
 visible = false
@@ -15505,14 +15492,13 @@ visible = false
 [node name="SpawnLocations" parent="RoomC - Medium/MediumRoomSpawn" index="1"]
 position = Vector2(1, 2)
 
-[node name="CenterPlatform4" parent="RoomC - Medium" instance=ExtResource("35_e3gty")]
+[node name="CenterPlatform4" parent="RoomC - Medium" instance=ExtResource("6_5df77")]
 z_index = 3
 position = Vector2(0, 1)
 
 [node name="RoomD - Medium" type="Node2D" parent="."]
-visible = false
 position = Vector2(-864, 958)
-script = ExtResource("33_wgyak")
+script = ExtResource("4_15lsb")
 
 [node name="CameraArea" type="Area2D" parent="RoomD - Medium"]
 visibility_layer = 3
@@ -15534,7 +15520,7 @@ position = Vector2(0, 1)
 z_index = 2
 position = Vector2(1, 0)
 
-[node name="MediumRoomSpawn" parent="RoomD - Medium" instance=ExtResource("34_nqywp")]
+[node name="MediumRoomSpawn" parent="RoomD - Medium" instance=ExtResource("5_wswjs")]
 
 [node name="TileMapLayer" parent="RoomD - Medium/MediumRoomSpawn" index="0"]
 visible = false
@@ -15554,14 +15540,13 @@ position = Vector2(174, -181)
 [node name="SpawnPoint1" parent="RoomD - Medium/MediumRoomSpawn/SpawnLocations" index="4"]
 position = Vector2(-189, -178)
 
-[node name="CenterPlatform4" parent="RoomD - Medium" instance=ExtResource("35_e3gty")]
+[node name="CenterPlatform4" parent="RoomD - Medium" instance=ExtResource("6_5df77")]
 z_index = 3
 position = Vector2(0, 1)
 
 [node name="HealingRoom" type="Node2D" parent="."]
-visible = false
 position = Vector2(0, 768)
-script = ExtResource("38_tydf3")
+script = ExtResource("9_5saxb")
 
 [node name="CameraArea" type="Area2D" parent="HealingRoom"]
 visibility_layer = 3
@@ -15587,11 +15572,9 @@ z_index = 2
 position = Vector2(0, -1)
 
 [node name="BossRoom" type="Node2D" parent="."]
-visible = false
 z_index = 2
 position = Vector2(0, 1904)
-script = ExtResource("10_44k52")
-enemy_waves = Array[ExtResource("36_e3gty")]([SubResource("Resource_44k52")])
+script = ExtResource("10_g560o")
 
 [node name="CameraArea" type="Area2D" parent="BossRoom"]
 position = Vector2(0, -135)
@@ -15608,12 +15591,12 @@ z_index = 3
 
 [node name="PortalContainer" type="Node2D" parent="BossRoom"]
 z_index = 2
-position = Vector2(0, 256)
+position = Vector2(0, 158)
 
 [node name="EnemyContainer" type="Node2D" parent="BossRoom"]
 z_index = 20
 
-[node name="BossRoomSpawn" parent="BossRoom" instance=ExtResource("43_m1dnf")]
+[node name="BossRoomSpawn" parent="BossRoom" instance=ExtResource("12_roua8")]
 position = Vector2(0, -136)
 
 [node name="TileMapLayer" parent="BossRoom/BossRoomSpawn" index="0"]
@@ -15655,7 +15638,7 @@ position = Vector2(0, -128)
 [node name="West" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="10"]
 position = Vector2(0, -128)
 
-[node name="CenterPlatform" parent="BossRoom" instance=ExtResource("35_e3gty")]
+[node name="CenterPlatform" parent="BossRoom" instance=ExtResource("6_5df77")]
 z_index = 2
 
 [node name="Node" type="Node" parent="."]

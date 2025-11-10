@@ -98,19 +98,19 @@ func _spawn_portal():
 
 	# Make the portal findable by the typing system
 	# The typing system looks for portals in the main Game scene
-	call_deferred("_register_portal_with_typing_system", portal_instance)
-
-func _register_portal_with_typing_system(portal):
-	"""Ensure the portal can be found by the typing system"""
-	# Find the main Game node that contains the typing system
-	var game = get_tree().root.get_node_or_null("Main/Game")
-	if game:
-		# Add portal to game's portal container for typing detection
-		game.get_node("PortalContainer").add_child(portal)
-		portal.position = self.global_position
-		print("Portal registered with typing system")
-	else:
-		print("WARNING: Could not find Game node for portal registration!")
+	#call_deferred("_register_portal_with_typing_system", portal_instance)
+#
+#func _register_portal_with_typing_system(portal):
+	#"""Ensure the portal can be found by the typing system"""
+	## Find the main Game node that contains the typing system
+	#var game = get_tree().root.get_node_or_null("Main/Game")
+	#if game:
+		## Add portal to game's portal container for typing detection
+		#game.get_node("PortalContainer").add_child(portal)
+		#portal.position = self.global_position
+		#print("Portal registered with typing system")
+	#else:
+		#print("WARNING: Could not find Game node for portal registration!")
 
 func _on_portal_activated():
 	"""Called when portal is activated - this replaces scene change"""

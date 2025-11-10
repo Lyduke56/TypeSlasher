@@ -35,6 +35,8 @@ var current_wave_spawned = 0  # Enemies spawned in current wave
 @onready var target_container: Node2D = $TargetContainer
 @onready var barrier_on: TileMapLayer = get_node_or_null("../Node/Barrier_On")
 @onready var barrier_off: TileMapLayer = get_node_or_null("../Node/Barrier_Off")
+@onready var portal_container: Node2D = $PortalContainer
+var GreenPortalScene = preload("res://scenes/GreenPortal.tscn")
 
 func _ready() -> void:
 	# Find markers
@@ -105,6 +107,9 @@ func clear_room():
 
 	# Give camera back to player when room is cleared
 	_handle_camera_on_room_clear()
+
+	# Spawn portal after boss room is cleared
+	_spawn_portal()
 
 	room_cleared.emit(self)
 	print("Room " + name + " cleared")
@@ -476,3 +481,31 @@ func _spawn_boss():
 
 	boss_spawned = true
 	print("MINOTAUR BOSS SPAWNED - Fight for your life!")
+
+func _spawn_portal():
+	"""Spawn the portal if not already spawned"""
+	if portal_container.get_child_count() > 0:
+		return  # Already has portal
+
+	var portal_instance = GreenPortalScene.instantiate()
+	portal_container.add_child(portal_instance)
+	portal_instance.position = Vector2.ZERO  # Position within container
+	portal_instance.set_prompt("Warp")  # Set typing prompt
+	portal_instance.play_appear_animation()  # Play appear animation
+
+	# Connect to portal activated signal
+	if not portal_instance.is_connected("portal_activated", _on_portal_activated):
+		portal_instance.connect("portal_activated", _on_portal_activated)
+
+	print("Spawned portal in boss room")
+
+func _on_portal_activated():
+	"""Called when portal is activated - trigger boss dungeon completion"""
+	print("Portal activated! Completing boss dungeon.")
+
+	# Get reference to MainManager and call boss dungeon cleared
+	var main_manager = get_tree().root.get_node_or_null("Main/MainManager")
+	if main_manager:
+		main_manager.boss_dungeon_cleared()
+	else:
+		print("ERROR: Could not find MainManager!")
