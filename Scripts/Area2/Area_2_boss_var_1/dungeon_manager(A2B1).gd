@@ -66,6 +66,9 @@ func _ready() -> void:
 		room.room_cleared.connect(_on_room_cleared)
 		room.room_started.connect(_on_room_started)
 
+	# Connect to boss targetable phase ended signal
+	_connect_boss_signals()
+
 func _process(_delta):
 	# Process input buffer one character per frame for high WPM handling
 	# Cached: Moved update_score to only when actual progress is made
@@ -283,7 +286,8 @@ func _on_room_cleared(room):
 
 func _on_room_started(room):
 	if room == current_room:
-		pass
+		# Connect boss signals when room starts (bosses might be spawned here)
+		_connect_boss_signals()
 
 func _on_player_returned():
 	"""Called when player finishes returning to center - check if room can be cleared"""
@@ -541,6 +545,23 @@ func setup_active_buffs():
 	canvas_layer.add_child(active_buffs)
 
 	print("Active buffs display initialized for dungeon!")
+
+func _connect_boss_signals():
+	"""Connect to boss targetable phase ended signals"""
+	# Find boss enemies in the current room and connect their signals
+	if current_room and current_room.has_node("EnemyContainer"):
+		var enemy_container = current_room.get_node("EnemyContainer")
+		for entity in enemy_container.get_children():
+			if is_instance_valid(entity) and entity.has_signal("targetable_phase_ended"):
+				entity.targetable_phase_ended.connect(_on_boss_targetable_phase_ended)
+
+func _on_boss_targetable_phase_ended(boss):
+	"""Called when a boss's targetable phase ends - reset typing state"""
+	print("Boss targetable phase ended - resetting typing state")
+	if active_enemy == boss:
+		active_enemy = null
+		current_letter_index = -1
+		input_buffer.clear()
 
 func update_score():
 	"""Update score tracking (called when correct characters are typed)"""
