@@ -22098,7 +22098,7 @@ sources/30 = SubResource("TileSetAtlasSource_p3c8p")
 sources/31 = SubResource("TileSetAtlasSource_qevcv")
 sources/32 = SubResource("TileSetAtlasSource_6a3oh")
 
-[node name="Dungeon" type="Node2D"]
+[node name="Dungeon2" type="Node2D"]
 script = ExtResource("1_ydola")
 
 [node name="DungeonManager" type="Node2D" parent="."]

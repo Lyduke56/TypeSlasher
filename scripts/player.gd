@@ -90,7 +90,13 @@ func _handle_movement(delta: float) -> void:
 
 	# Check if we've reached the target (use larger threshold to account for collision shapes)
 	if global_position.distance_to(target_pos) < 50.0:
-		global_position = target_pos
+		# For enemies, don't place player at exact enemy position to avoid knockback issues
+		if target_enemy != null and is_instance_valid(target_enemy):
+			# Keep player at current position for enemy attacks
+			pass  # Don't set global_position = target_pos
+		else:
+			# For portals or other targets, place at exact position
+			global_position = target_pos
 
 		if is_dashing:
 			_finish_dash()
