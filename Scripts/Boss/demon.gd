@@ -6,6 +6,7 @@ extends CharacterBody2D
 
 @export var boss_health: int = 5  # Boss health, requires 5 hits to defeat
 @export var word_category: String = "medium"  # Category for boss words
+@export var targetable_word_category: String = "sentence"  # Category for words during targetable phase after knockback
 @onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
@@ -545,7 +546,7 @@ func start_targetable_phase():
 	current_attack_state = AttackState.IDLE
 
 	# Set word and show it
-	var targetable_word = _get_unique_word(word_category)
+	var targetable_word = _get_unique_word(targetable_word_category)
 	set_prompt(targetable_word)
 	if word:
 		word.visible = true

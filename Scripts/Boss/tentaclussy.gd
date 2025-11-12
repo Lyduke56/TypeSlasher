@@ -4,7 +4,7 @@ extends Node2D
 @export var green: Color = Color("#639765")
 @export var red: Color = Color("#a65455")
 
-@export var attack_interval: float = 2.0  # Time between arrow shots
+@export var attack_interval: float = 1.25  # Time between arrow shots
 @export var boss_health: int = 5  # Boss health, requires 5 hits to defeat
 @export var word_category: String = "sentence"  # Category for boss words
 @onready var anim = $AnimatedSprite2D
@@ -41,7 +41,7 @@ var can_attack: bool = true
 
 # Targeting phases
 var attacks_since_last_targetable: int = 0
-var attacks_required_for_targetable: int = 4  # 15-20 attacks, using 18 as middle
+var attacks_required_for_targetable: int = 8  # 15-20 attacks, using 18 as middle
 var is_targetable: bool = false
 var targetable_timer: Timer
 var targetable_duration: float = 10.0  # 10 seconds targetable
