@@ -1,7 +1,6 @@
-[gd_scene load_steps=129 format=4 uid="uid://dg1ggv0p4qg61"]
+[gd_scene load_steps=128 format=4 uid="uid://dg1ggv0p4qg61"]
 
 [ext_resource type="Script" uid="uid://tjby8o2u6rgv" path="res://Scripts/Area3/dungeon_manager(A3B1).gd" id="1_kau1o"]
-[ext_resource type="Script" uid="uid://b5q4gh30t4pfo" path="res://Scripts/Area3/area_3_boss_var_1.gd" id="1_qdm2w"]
 [ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://Assets/Map Tiles/Tileset/Dungeon/decor.png" id="2_ld7c8"]
 [ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_ohwbk"]
 [ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_f5flv"]
@@ -18346,7 +18345,6 @@ sources/31 = SubResource("TileSetAtlasSource_amvvu")
 sources/32 = SubResource("TileSetAtlasSource_x56x6")
 
 [node name="Dungeon" type="Node2D"]
-script = ExtResource("1_qdm2w")
 
 [node name="DungeonManager" type="Node2D" parent="."]
 script = ExtResource("1_kau1o")
@@ -18547,7 +18545,7 @@ visible = false
 scale = Vector2(0.92, 0.92)
 
 [node name="Top" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="0"]
-position = Vector2(0, -232.609)
+position = Vector2(0, -289.13)
 
 [node name="Left" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="1"]
 position = Vector2(-295.652, 0)

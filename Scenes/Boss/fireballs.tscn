@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://dwm5g2r1af5fo"]
+
+[ext_resource type="Script" uid="uid://bxmvhi4epx1oq" path="res://Scripts/Boss/fireball.gd" id="1_okd1d"]
+[ext_resource type="Texture2D" uid="uid://c1kd2hjqvayif" path="res://Assets/Sprites/Boss/FB000-ezgif.com-gif-to-sprite-converter.png" id="2_okd1d"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_shnke"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64c46"]
+atlas = ExtResource("2_okd1d")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shnke"]
+atlas = ExtResource("2_okd1d")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg6kh"]
+atlas = ExtResource("2_okd1d")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5hyt"]
+atlas = ExtResource("2_okd1d")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1388"]
+atlas = ExtResource("2_okd1d")
+region = Rect2(256, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ar18v"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64c46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shnke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg6kh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5hyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1388")
+}],
+"loop": true,
+"name": &"fireball_idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ek4i2"]
+radius = 6.71855
+
+[node name="Fireball" type="Node2D"]
+z_index = 4
+scale = Vector2(1.2, 1.2)
+script = ExtResource("1_okd1d")
+speed = 10.0
+lifetime = 100.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4.16667, -15)
+scale = Vector2(0.817, 0.774)
+sprite_frames = SubResource("SpriteFrames_ar18v")
+animation = &"fireball_idle"
+frame_progress = 0.425566
+
+[node name="Word" type="RichTextLabel" parent="."]
+z_index = 3
+offset_left = -127.0
+offset_right = 128.0
+offset_bottom = 45.0
+theme_override_fonts/normal_font = ExtResource("3_shnke")
+text = " Type This "
+horizontal_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0.0324996, 6.59066)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(5.80083, -23.2573)
+shape = SubResource("CircleShape2D_ek4i2")

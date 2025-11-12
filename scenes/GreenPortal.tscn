@@ -143,7 +143,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_uuryn")
 }],
 "loop": false,
-"name": &"dissappear",
+"name": &"disappear",
 "speed": 10.0
 }, {
 "frames": [{
@@ -189,8 +189,7 @@ script = ExtResource("1_v3wd8")
 position = Vector2(-0.999992, -1)
 scale = Vector2(2.51563, 2.79688)
 sprite_frames = SubResource("SpriteFrames_4fvjr")
-animation = &"idle"
-frame_progress = 0.172785
+animation = &"disappear"
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
 
