@@ -541,6 +541,9 @@ func start_targetable_phase():
 	is_targetable = true
 	is_after_knockback_recovery = true  # Mark that this is after knockback recovery
 
+	# Stop any ongoing attack movement
+	current_attack_state = AttackState.IDLE
+
 	# Set word and show it
 	var targetable_word = _get_unique_word(word_category)
 	set_prompt(targetable_word)

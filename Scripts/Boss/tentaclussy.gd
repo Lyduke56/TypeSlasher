@@ -6,7 +6,7 @@ extends Node2D
 
 @export var attack_interval: float = 2.0  # Time between arrow shots
 @export var boss_health: int = 5  # Boss health, requires 5 hits to defeat
-@export var word_category: String = "medium"  # Category for boss words
+@export var word_category: String = "sentence"  # Category for boss words
 @onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word

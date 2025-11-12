@@ -36,13 +36,13 @@
 [ext_resource type="Texture2D" uid="uid://casqns6bsbloo" path="res://Assets/Map Tiles/Tileset/Dungeon/Water_coasts_animation.png" id="24_68fd7"]
 [ext_resource type="Texture2D" uid="uid://dqasttlqfpeuh" path="res://Assets/Map Tiles/Tileset/Dungeon/water_details_animation.png" id="25_fb06g"]
 [ext_resource type="Texture2D" uid="uid://ch0cutbtie3ps" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_coasts_animation.png" id="26_wmkgo"]
-[ext_resource type="Texture2D" uid="uid://2l50whv7dosh" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_xpgen"]
+[ext_resource type="Texture2D" uid="uid://cgn25u7abs02d" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_xpgen"]
 [ext_resource type="Texture2D" uid="uid://dhjqbiubpoqe7" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_floor.png" id="27_dlod6"]
-[ext_resource type="Texture2D" uid="uid://dyhobrtd8dx37" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="27_sdyyt"]
+[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="27_sdyyt"]
 [ext_resource type="Texture2D" uid="uid://bbfu5byw1ys67" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_walls.png" id="28_la64u"]
 [ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="29_rusyf"]
 [ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="30_it7f7"]
-[ext_resource type="Texture2D" uid="uid://cxgnvq8exo56k" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Sprites.png" id="43_07lnw"]
+[ext_resource type="Texture2D" uid="uid://dwgqx23vqf7r5" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Sprites.png" id="43_07lnw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6vgn"]
 size = Vector2(298, 324)

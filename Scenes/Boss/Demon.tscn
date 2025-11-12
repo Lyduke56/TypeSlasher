@@ -562,6 +562,7 @@ height = 28.0
 [node name="Demon" type="CharacterBody2D"]
 script = ExtResource("1_xmelb")
 move_speed = 180.0
+max_fireballs = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-7, -60)

@@ -37,6 +37,8 @@ animations = [{
 z_index = 4
 scale = Vector2(1.2, 1.2)
 script = ExtResource("1_k8bsg")
+speed = 100.0
+lifetime = 50.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0.0324996, -15.9093)
