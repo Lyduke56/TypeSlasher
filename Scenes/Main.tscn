@@ -21,7 +21,7 @@ zoom = Vector2(2.635, 2.075)
 [node name="MainManager" type="Node2D" parent="."]
 position = Vector2(2, 0)
 script = ExtResource("2_v1gob")
-debug_dungeon_path = "res://Scenes/Rooms/Area 3/Area-3-var2.tscn"
+debug_dungeon_path = "res://Scenes/Rooms/Area 3/Area-3-var3.tscn"
 
 [node name="HUD" type="CanvasLayer" parent="."]
 process_priority = 1
