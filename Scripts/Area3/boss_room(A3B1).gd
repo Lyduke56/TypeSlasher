@@ -478,7 +478,7 @@ func _spawn_boss():
 		var target_instance = target_container.get_child(0)
 		target_position = target_instance.global_position
 
-	print("Summoning MINOTAUR BOSS at:", spawn_point.position, "(spawn point:", spawn_point.name if spawn_point.has_method("get") else "center", ")")
+	print("Summoning DEMON BOSS at:", spawn_point.position, "(spawn point:", spawn_point.name if spawn_point.has_method("get") else "center", ")")
 	print("Moving towards target at:", target_position)
 
 	# Add to enemy container (so input selection works)
@@ -497,7 +497,7 @@ func _spawn_boss():
 	boss_instance.tree_exited.connect(_on_enemy_died)
 
 	boss_spawned = true
-	print("MINOTAUR BOSS SPAWNED - Fight for your life!")
+	print("DEMON BOSS SPAWNED - Fight for your life!")
 
 func _spawn_demon_boss():
 	"""Spawn the Demon boss at the Top node position"""
