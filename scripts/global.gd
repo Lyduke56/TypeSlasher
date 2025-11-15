@@ -57,7 +57,7 @@ func take_damage(amount: int = 1):
 	else:
 		print("Player took ", actual_damage, " damage! Health: ", player_current_health, "/", player_max_health)
 			# Check for game over
-	
+
 	if player_current_health <= 0:
 		print("Player died! Game Over!")
 		# Game over will be handled by a deferred call to allow the heart animation to show
