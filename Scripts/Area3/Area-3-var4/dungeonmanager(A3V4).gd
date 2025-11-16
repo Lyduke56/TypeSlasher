@@ -46,11 +46,14 @@ func _ready() -> void:
 	# Find player (now in Main scene, not dungeon scene)
 	player = get_node("/root/Main/Player")
 
+	# Make player's camera current for UI rendering
+	if player.has_node("Camera2D"):
+		player.get_node("Camera2D").make_current()
+
 	# Connect player signals to handle enemy destruction
 	player.enemy_reached.connect(_on_enemy_reached)
 	player.slash_completed.connect(_on_player_slash_completed)
 	player.player_returned.connect(_on_player_returned)
-
 
 	# Start in the starting room
 	current_room = get_node("../StartingRoom")
@@ -66,9 +69,6 @@ func _ready() -> void:
 		room.room_cleared.connect(_on_room_cleared)
 		room.room_started.connect(_on_room_started)
 
-	# Connect to boss targetable phase ended signal
-	_connect_boss_signals()
-
 func _process(_delta):
 	# Process input buffer one character per frame for high WPM handling
 	# Cached: Moved update_score to only when actual progress is made
@@ -82,17 +82,31 @@ func _process(_delta):
 # ------------------------------------------------------------
 func setup_room_connections():
 	var starting = get_node("../StartingRoom")
-	var boss = get_node("../BossRoom")
+	var room_a = get_node("../RoomA - Medium")
+	var room_b = get_node("../RoomB - Medium")
+	var room_c = get_node("../RoomC - Medium")
+	var room_d = get_node("../RoomD - Medium")
+	var portal = get_node("../PortalRoom")
 	var healing = get_node("../HealingRoom")
 
-	starting.set_connected_room("bottom", healing)
+	starting.set_connected_room("top", room_b)
+	starting.set_connected_room("bottom", room_d)
+	starting.set_connected_room("right", room_a)
+	starting.set_connected_room("left", room_c)
 
+	room_a.set_connected_room("left", starting)
+	room_a.set_connected_room("bottom", portal)
 
-	healing.set_connected_room("top", starting)
-	healing.set_connected_room("bottom", boss)
+	room_b.set_connected_room("bottom", starting)
 
-	boss.set_connected_room("top", healing)
+	room_c.set_connected_room("right", starting)
+	room_c.set_connected_room("bottom", healing)
 
+	room_d.set_connected_room("top", starting)
+
+	portal.set_connected_room("top", room_a)
+
+	healing.set_connected_room("top", room_c)
 
 # ------------------------------------------------------------
 # DIRECTION PROMPT
@@ -116,8 +130,12 @@ func _input(event):
 		return
 
 	# Block movement during enemy processing, word completion, or enemy spawning
-	# Skip blocking for starting room, portal room, and healing room (they don't spawn enemies)
-	var skip_blocking = current_room != null and (current_room.name == "StartingRoom" or current_room.name == "PortalRoom" or current_room.name == "HealingRoom")
+	# Block movement if player can't move (before spawn animation)
+	if Global.player_can_move == false:
+		return
+
+	# Skip blocking for starting room, portal room, idle room, and healing room (they don't spawn enemies)
+	var skip_blocking = current_room != null and (current_room.name == "StartingRoom" or current_room.name == "PortalRoom" or current_room.name == "IdleRoom" or current_room.name == "HealingRoom")
 	if not skip_blocking and (active_enemy != null or is_processing_completion or (current_room != null and current_room.has_method("get") and current_room.get("is_spawning_enemies") == true)):
 		return
 
@@ -214,7 +232,7 @@ func transition_to_room(direction: String):
 		active_enemy = null
 		current_letter_index = -1
 
-		# Switch to new room (camera handled by room start)
+			# Switch to new room (no camera management needed - handled by room start)
 		current_room = next_room
 		next_room.start_room()
 		show_directions()
@@ -236,14 +254,14 @@ func transition_to_room(direction: String):
 					# Yes, to ensure the whole shape is visible, zoom out if necessary
 					zoom_level = min(viewport_size.x / shape.size.x, viewport_size.y / shape.size.y)
 					var target_zoom = Vector2(zoom_level, zoom_level)
-					var target_pos = camera_area.global_position
+					var target_pos = current_room.position + camera_area.position
 
 					# Animate camera zoom and position
 					var new_tween = create_tween()
 					new_tween.set_trans(Tween.TRANS_SINE)
 					new_tween.set_ease(Tween.EASE_IN_OUT)
 					new_tween.tween_property(camera, "zoom", target_zoom, 0.5)
-					new_tween.tween_property(camera, "global_position", target_pos, 0.5)
+					new_tween.tween_property(camera, "global_position", global_position + target_pos, 0.5)
 					await new_tween.finished  # Wait for camera animation
 
 					# Reset limits to allow zooming
@@ -261,7 +279,6 @@ func transition_to_room(direction: String):
 		print("Transition complete")
 	)
 
-
 # ------------------------------------------------------------
 # SIGNAL HANDLERS
 # ------------------------------------------------------------
@@ -271,8 +288,15 @@ func _on_room_cleared(room):
 
 func _on_room_started(room):
 	if room == current_room:
-		# Connect boss signals when room starts (bosses might be spawned here)
-		_connect_boss_signals()
+		pass
+
+	# Ensure goddess statue is spawned when entering healing room
+	var healing_container = room.get_node_or_null("HealingContainer")
+	if healing_container and room.name == "HealingRoom":
+		if healing_container.get_child_count() == 0:
+			print("Healing room started - ensuring goddess statue is spawned")
+			if room.has_method("_spawn_goddess_statue"):
+				room._spawn_goddess_statue()
 
 func _on_player_returned():
 	"""Called when player finishes returning to center - check if room can be cleared"""
@@ -344,25 +368,6 @@ func find_new_active_enemy(typed_character: String):
 				active_enemy.set_next_character(current_letter_index)
 				break
 
-	# Also check for portals in boss rooms
-	if current_room and current_room.has_node("PortalContainer") and current_room.name == "BossRoom":
-		var portal_container = current_room.get_node("PortalContainer")
-		for entity in portal_container.get_children():
-			# Skip invalid entities or entities that don't have typing interface
-			if not is_instance_valid(entity) or not entity.has_method("get_prompt"):
-				continue
-			# Skip entities that are already being targeted
-			if entity.get("is_being_targeted") == true:
-				continue
-
-			var prompt = entity.get_prompt()
-			if prompt.length() > 0 and prompt.substr(0, 1).to_lower() == typed_character:
-				print("Found portal that starts with ", typed_character)
-				active_enemy = entity
-				current_letter_index = 1
-				active_enemy.set_next_character(current_letter_index)
-				break
-
 func _complete_word():
 	"""Handle word completion with atomic operation"""
 	if is_processing_completion or active_enemy == null or not is_instance_valid(active_enemy):
@@ -380,8 +385,11 @@ func _complete_word():
 	if completed_entity.has_method("set_targeted_state"):
 		# Avoid targeting visual on bosses (prevents greying out/stuck state)
 		var is_boss = false
+		# Detect boss by presence of boss-specific property used in boss script
 		if completed_entity != null:
-			var boss_max = completed_entity.get("max_boss_health")
+			var boss_max = null
+			# Using get() returns null if property doesn't exist
+			boss_max = completed_entity.get("max_boss_health")
 			is_boss = boss_max != null
 		if not is_boss:
 			completed_entity.set("is_being_targeted", true)
@@ -395,17 +403,16 @@ func _complete_word():
 
 	# Handle different entity types after completion
 	if completed_entity.has_method("play_disappear_animation"):
-		# Portal completion - do NOT dash to portal, just play disappear animation
-		print("Portal completed! Playing disappear animation.")
+		# Portal completion - do NOT dash to portal, just play disappear animation and notify MainManager
+		print("Portal completed! Playing disappear animation and switching to boss dungeon.")
 		completed_entity.play_disappear_animation()
-		# For portals, trigger activation immediately (no await needed)
-		if current_room and current_room.has_method("_on_portal_activated"):
-			current_room._on_portal_activated()
-		# Reset processing flag immediately for portals
-		is_processing_completion = false
-		# Clear any inputs that got buffered during completion
-		input_buffer.clear()
-		return
+		# After portal animation, notify MainManager to handle progression
+		var main_manager = get_tree().root.get_node_or_null("Main/MainManager")
+		if main_manager and main_manager.has_method("switch_to_boss_dungeon"):
+			await get_tree().create_timer(0.5).timeout  # Wait for disappear animation
+			main_manager.switch_to_boss_dungeon()
+		else:
+			print("ERROR: Could not find MainManager or switch_to_boss_dungeon method!")
 	elif completed_entity.has_method("play_heal_animation"):
 		# Goddess statue completion - do NOT dash to statue, just play heal animation
 		# Check if the statue hasn't been used yet to prevent multiple usages
@@ -420,7 +427,7 @@ func _complete_word():
 		player.dash_to_enemy(entity_position, completed_entity)
 
 	# Reset processing flag after a small delay to ensure actions start
-	await get_tree().create_timer(0.1).timeout
+	#await get_tree().create_timer(0.1).timeout
 	is_processing_completion = false
 	# Clear any inputs that got buffered during completion
 	input_buffer.clear()
@@ -516,7 +523,6 @@ func setup_heart_container():
 func _on_health_changed(new_health: int, max_health: int):
 	"""Update heart container when health changes"""
 	var canvas_layer = get_node_or_null("CanvasLayer")
-
 	if canvas_layer:
 		var heart_container = canvas_layer.get_node_or_null("HeartContainer")
 		if heart_container:
@@ -557,23 +563,6 @@ func setup_active_buffs():
 	canvas_layer.add_child(active_buffs)
 
 	print("Active buffs display initialized for dungeon!")
-
-func _connect_boss_signals():
-	"""Connect to boss targetable phase ended signals"""
-	# Find boss enemies in the current room and connect their signals
-	if current_room and current_room.has_node("EnemyContainer"):
-		var enemy_container = current_room.get_node("EnemyContainer")
-		for entity in enemy_container.get_children():
-			if is_instance_valid(entity) and entity.has_signal("targetable_phase_ended"):
-				entity.targetable_phase_ended.connect(_on_boss_targetable_phase_ended)
-
-func _on_boss_targetable_phase_ended(boss):
-	"""Called when a boss's targetable phase ends - reset typing state"""
-	print("Boss targetable phase ended - resetting typing state")
-	if active_enemy == boss:
-		active_enemy = null
-		current_letter_index = -1
-		input_buffer.clear()
 
 func update_score():
 	"""Update score tracking (called when correct characters are typed)"""

@@ -17,6 +17,10 @@ var is_processing_completion: bool = false
 var input_buffer: Array[String] = []
 
 func _ready() -> void:
+	# Load WordDatabase for the dungeon
+	WordDatabase.load_word_database()
+	print("WordDatabase loaded for dungeon Area 4 Final Boss")
+
 	# Connect to health changes first, before any health modifications
 	Global.player_health_changed.connect(_on_health_changed)
 
@@ -46,11 +50,14 @@ func _ready() -> void:
 	# Find player (now in Main scene, not dungeon scene)
 	player = get_node("/root/Main/Player")
 
+	# Make player's camera current for UI rendering
+	if player.has_node("Camera2D"):
+		player.get_node("Camera2D").make_current()
+
 	# Connect player signals to handle enemy destruction
 	player.enemy_reached.connect(_on_enemy_reached)
 	player.slash_completed.connect(_on_player_slash_completed)
 	player.player_returned.connect(_on_player_returned)
-
 
 	# Start in the starting room
 	current_room = get_node("../StartingRoom")
@@ -66,84 +73,30 @@ func _ready() -> void:
 		room.room_cleared.connect(_on_room_cleared)
 		room.room_started.connect(_on_room_started)
 
-	# Connect to boss targetable phase ended signal
-	_connect_boss_signals()
-
-func _process(_delta):
-	# Process input buffer one character per frame for high WPM handling
-	# Cached: Moved update_score to only when actual progress is made
-	if not input_buffer.is_empty() and not is_processing_completion:
-		var key_typed = input_buffer.pop_front()
-		_process_single_character(key_typed)
-
-
-# ------------------------------------------------------------
-# ROOM CONNECTION SETUP
-# ------------------------------------------------------------
-func setup_room_connections():
-	var starting = get_node("../StartingRoom")
-	var boss = get_node("../BossRoom")
-	var healing = get_node("../HealingRoom")
-
-	starting.set_connected_room("bottom", healing)
-
-
-	healing.set_connected_room("top", starting)
-	healing.set_connected_room("bottom", boss)
-
-	boss.set_connected_room("top", healing)
-
-
-# ------------------------------------------------------------
-# DIRECTION PROMPT
-# ------------------------------------------------------------
-func show_directions():
-	if direction_label and current_room != null:
-		if current_room.is_cleared:
-			var directions = current_room.exit_markers.keys()
-			direction_label.text = "Type direction: " + ", ".join(directions)
-			direction_label.visible = true
-		else:
-			direction_label.visible = false
-
-
-# ------------------------------------------------------------
-# INPUT HANDLING (Arrow Keys)
-# ------------------------------------------------------------
 func _input(event):
 	# Block ALL input during room transitions
 	if block_all_input:
 		return
 
-	# Block movement during enemy processing, word completion, or enemy spawning
-	# Skip blocking for starting room, portal room, and healing room (they don't spawn enemies)
-	var skip_blocking = current_room != null and (current_room.name == "StartingRoom" or current_room.name == "PortalRoom" or current_room.name == "HealingRoom")
-	if not skip_blocking and (active_enemy != null or is_processing_completion or (current_room != null and current_room.has_method("get") and current_room.get("is_spawning_enemies") == true)):
+	# Block movement during enemy processing in combat rooms
+	var skip_blocking = current_room != null and (current_room.name == "StartingRoom" or current_room.name == "HealingRoom")
+	if not skip_blocking and (current_room != null and current_room.has_method("get") and current_room.get("is_spawning_enemies") == true):
 		return
 
 	if event is InputEventKey and event.pressed and not event.echo:
 		var direction = ""
-		match event.keycode:
-			KEY_UP:
-				direction = "top"
-			KEY_DOWN:
-				direction = "bottom"
-			KEY_LEFT:
-				direction = "left"
-			KEY_RIGHT:
-				direction = "right"
+		if event.keycode == KEY_UP:
+			direction = "top"
+		elif event.keycode == KEY_DOWN:
+			direction = "bottom"
 
 		if direction != "" and current_room != null and current_room.exit_markers.has(direction) and not self.is_transitioning:
-			# Only allow transition if current room is cleared (skip check for starting/portal rooms)
+			# Only allow transition if current room is cleared (skip check for starting/healing rooms)
 			if not skip_blocking and not current_room.is_cleared:
 				print("Cannot transition - current room is not cleared yet")
 				return
 			transition_to_room(direction)
 
-
-# ------------------------------------------------------------
-# ROOM TRANSITIONS
-# ------------------------------------------------------------
 func transition_to_room(direction: String):
 	if current_room == null:
 		return
@@ -170,20 +123,20 @@ func transition_to_room(direction: String):
 
 	# Find opposite direction marker in next room
 	var opposite = ""
-	match direction:
-		"top": opposite = "bottom"
-		"bottom": opposite = "top"
-		"left": opposite = "right"
-		"right": opposite = "left"
+	if direction == "top": opposite = "bottom"
+	elif direction == "bottom": opposite = "top"
 
 	var enter_marker = next_room.exit_markers.get(opposite)
 	if not enter_marker:
 		enter_marker = next_room.global_position
 
-	# Check for TargetContainer in the new room (or PortalContainer for portal rooms)
+	# Check for TargetContainer in the new room (or HealingContainer, PortalContainer)
 	var center_marker = next_room.get_node_or_null("TargetContainer")
 	if center_marker == null:
+		center_marker = next_room.get_node_or_null("HealingContainer")
+	if center_marker == null:
 		center_marker = next_room.get_node_or_null("PortalContainer")
+
 	var final_position = center_marker.global_position if center_marker else (enter_marker.global_position if enter_marker is Marker2D else enter_marker)
 
 	self.is_transitioning = true
@@ -193,7 +146,7 @@ func transition_to_room(direction: String):
 	player.set_physics_process(false)
 
 	player.anim.play("run")
-	# Set initial direction for first tween
+	# Set initial direction
 	var initial_dir = (exit_marker.global_position - player.global_position).normalized()
 	if initial_dir.x != 0:
 		player.anim.flip_h = initial_dir.x < 0
@@ -214,7 +167,7 @@ func transition_to_room(direction: String):
 		active_enemy = null
 		current_letter_index = -1
 
-		# Switch to new room (camera handled by room start)
+			# Switch to new room (no camera management needed - handled by room start)
 		current_room = next_room
 		next_room.start_room()
 		show_directions()
@@ -261,23 +214,38 @@ func transition_to_room(direction: String):
 		print("Transition complete")
 	)
 
+func setup_room_connections():
+	var starting = get_node("../StartingRoom")
+	var healing = get_node("../HealingRoom")
+	var boss = get_node("../BossRoom")
 
-# ------------------------------------------------------------
-# SIGNAL HANDLERS
-# ------------------------------------------------------------
+	starting.set_connected_room("top", healing)
+
+	healing.set_connected_room("top", boss)
+	healing.set_connected_room("bottom", starting)
+
+	boss.set_connected_room("bottom", healing)
+
+
 func _on_room_cleared(room):
 	if room == current_room:
 		show_directions()
 
 func _on_room_started(room):
 	if room == current_room:
-		# Connect boss signals when room starts (bosses might be spawned here)
-		_connect_boss_signals()
+		pass
 
-func _on_player_returned():
-	"""Called when player finishes returning to center - check if room can be cleared"""
-	if current_room and current_room.is_ready_to_clear and not current_room.is_cleared:
-		current_room.clear_room()
+# ------------------------------------------------------------
+# DIRECTION PROMPT
+# ------------------------------------------------------------
+func show_directions():
+	if direction_label and current_room != null:
+		if current_room.is_cleared:
+			var directions = current_room.exit_markers.keys()
+			direction_label.text = "Type direction: " + ", ".join(directions)
+			direction_label.visible = true
+		else:
+			direction_label.visible = false
 
 # ------------------------------------------------------------
 # TYPING MECHANICS (similar to game.gd)
@@ -306,25 +274,6 @@ func find_new_active_enemy(typed_character: String):
 				active_enemy.set_next_character(current_letter_index)
 				break
 
-	# Also check for portals in portal rooms
-	if current_room and current_room.has_node("PortalContainer") and current_room.name == "PortalRoom":
-		var portal_container = current_room.get_node("PortalContainer")
-		for entity in portal_container.get_children():
-			# Skip invalid entities or entities that don't have typing interface
-			if not is_instance_valid(entity) or not entity.has_method("get_prompt"):
-				continue
-			# Skip entities that are already being targeted
-			if entity.get("is_being_targeted") == true:
-				continue
-
-			var prompt = entity.get_prompt()
-			if prompt.length() > 0 and prompt.substr(0, 1).to_lower() == typed_character:
-				print("Found portal that starts with ", typed_character)
-				active_enemy = entity
-				current_letter_index = 1
-				active_enemy.set_next_character(current_letter_index)
-				break
-
 	# Also check for goddess statue in healing rooms
 	if current_room and current_room.has_node("HealingContainer") and current_room.name == "HealingRoom":
 		var healing_container = current_room.get_node("HealingContainer")
@@ -339,25 +288,6 @@ func find_new_active_enemy(typed_character: String):
 			var prompt = entity.get_prompt()
 			if prompt.length() > 0 and prompt.substr(0, 1).to_lower() == typed_character:
 				print("Found goddess statue that starts with ", typed_character)
-				active_enemy = entity
-				current_letter_index = 1
-				active_enemy.set_next_character(current_letter_index)
-				break
-
-	# Also check for portals in boss rooms
-	if current_room and current_room.has_node("PortalContainer") and current_room.name == "BossRoom":
-		var portal_container = current_room.get_node("PortalContainer")
-		for entity in portal_container.get_children():
-			# Skip invalid entities or entities that don't have typing interface
-			if not is_instance_valid(entity) or not entity.has_method("get_prompt"):
-				continue
-			# Skip entities that are already being targeted
-			if entity.get("is_being_targeted") == true:
-				continue
-
-			var prompt = entity.get_prompt()
-			if prompt.length() > 0 and prompt.substr(0, 1).to_lower() == typed_character:
-				print("Found portal that starts with ", typed_character)
 				active_enemy = entity
 				current_letter_index = 1
 				active_enemy.set_next_character(current_letter_index)
@@ -381,7 +311,9 @@ func _complete_word():
 		# Avoid targeting visual on bosses (prevents greying out/stuck state)
 		var is_boss = false
 		if completed_entity != null:
-			var boss_max = completed_entity.get("max_boss_health")
+			var boss_max = null
+			# Using get() returns null if property doesn't exist
+			boss_max = completed_entity.get("max_boss_health")
 			is_boss = boss_max != null
 		if not is_boss:
 			completed_entity.set("is_being_targeted", true)
@@ -394,19 +326,7 @@ func _complete_word():
 	input_buffer.clear()
 
 	# Handle different entity types after completion
-	if completed_entity.has_method("play_disappear_animation"):
-		# Portal completion - do NOT dash to portal, just play disappear animation
-		print("Portal completed! Playing disappear animation.")
-		completed_entity.play_disappear_animation()
-		# For portals, trigger activation immediately (no await needed)
-		if current_room and current_room.has_method("_on_portal_activated"):
-			current_room._on_portal_activated()
-		# Reset processing flag immediately for portals
-		is_processing_completion = false
-		# Clear any inputs that got buffered during completion
-		input_buffer.clear()
-		return
-	elif completed_entity.has_method("play_heal_animation"):
+	if completed_entity.has_method("play_heal_animation"):
 		# Goddess statue completion - do NOT dash to statue, just play heal animation
 		# Check if the statue hasn't been used yet to prevent multiple usages
 		if completed_entity.has_method("get") and completed_entity.get("has_been_used") != true:
@@ -444,6 +364,11 @@ func _on_player_slash_completed(enemy):
 			enemy.play_death_animation()
 
 	# Note: Room clearing is already handled in the room scripts via enemy death signals
+
+func _on_player_returned():
+	"""Called when player finishes returning to center - check if room can be cleared"""
+	if current_room and current_room.is_ready_to_clear and not current_room.is_cleared:
+		current_room.clear_room()
 
 func _process_single_character(key_typed: String):
 	"""Process one character at a time to handle high WPM"""
@@ -516,7 +441,6 @@ func setup_heart_container():
 func _on_health_changed(new_health: int, max_health: int):
 	"""Update heart container when health changes"""
 	var canvas_layer = get_node_or_null("CanvasLayer")
-
 	if canvas_layer:
 		var heart_container = canvas_layer.get_node_or_null("HeartContainer")
 		if heart_container:
@@ -558,25 +482,15 @@ func setup_active_buffs():
 
 	print("Active buffs display initialized for dungeon!")
 
-func _connect_boss_signals():
-	"""Connect to boss targetable phase ended signals"""
-	# Find boss enemies in the current room and connect their signals
-	if current_room and current_room.has_node("EnemyContainer"):
-		var enemy_container = current_room.get_node("EnemyContainer")
-		for entity in enemy_container.get_children():
-			if is_instance_valid(entity) and entity.has_signal("targetable_phase_ended"):
-				entity.targetable_phase_ended.connect(_on_boss_targetable_phase_ended)
-
-func _on_boss_targetable_phase_ended(boss):
-	"""Called when a boss's targetable phase ends - reset typing state"""
-	print("Boss targetable phase ended - resetting typing state")
-	if active_enemy == boss:
-		active_enemy = null
-		current_letter_index = -1
-		input_buffer.clear()
-
 func update_score():
 	"""Update score tracking (called when correct characters are typed)"""
 	Global.previous_score = Global.current_score
 	if Global.current_score > Global.high_score:
 		Global.high_score = Global.current_score
+
+func _process(_delta):
+	# Process input buffer one character per frame for high WPM handling
+	# Cached: Moved update_score to only when actual progress is made
+	if not input_buffer.is_empty() and not is_processing_completion:
+		var key_typed = input_buffer.pop_front()
+		_process_single_character(key_typed)

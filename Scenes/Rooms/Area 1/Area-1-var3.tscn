@@ -45,7 +45,7 @@
 [ext_resource type="Script" uid="uid://1g2hlemr4fpw" path="res://Scripts/Dungeons/dungeon_manager(A1V3).gd" id="37_vctew"]
 [ext_resource type="Script" uid="uid://b7kjdcnndyuyq" path="res://Scripts/Dungeons/Area_1_var_3/room_d___hard.gd" id="39_v0juv"]
 [ext_resource type="PackedScene" uid="uid://fpyaquswd18i" path="res://Scenes/RoomSpawns/hard_room_spawn.tscn" id="40_okw71"]
-[ext_resource type="Texture2D" uid="uid://dyhobrtd8dx37" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="46_f33v5"]
+[ext_resource type="Texture2D" uid="uid://1m42j1xpugay" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="46_f33v5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhssv"]
 size = Vector2(310, 342)
