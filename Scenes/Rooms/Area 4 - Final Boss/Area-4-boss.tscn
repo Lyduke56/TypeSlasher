@@ -1,6 +1,6 @@
 [gd_scene load_steps=153 format=4 uid="uid://capcce7s5ld0m"]
 
-[ext_resource type="Script" uid="uid://c24wvvrucoba" path="res://Scripts/Area2/Area_2_boss_var_1/dungeon_manager(A2B1).gd" id="1_5p7dr"]
+[ext_resource type="Script" uid="uid://bpawtedpgeuym" path="res://Scripts/Area4/dungeon_manager(A4B1).gd" id="1_5p7dr"]
 [ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://Assets/Map Tiles/Tileset/Dungeon/decor.png" id="2_cylfd"]
 [ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_if8ti"]
 [ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_suvxe"]
@@ -18993,7 +18993,7 @@ z_index = 2
 position = Vector2(0, -1)
 
 [node name="StartingRoom" type="Node2D" parent="."]
-position = Vector2(-1, -23)
+position = Vector2(0, -24)
 script = ExtResource("56_1vqqj")
 
 [node name="CameraArea" type="Area2D" parent="StartingRoom"]
