@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=4 uid="uid://cum31vs8vh8f0"]
+[gd_scene load_steps=127 format=4 uid="uid://cum31vs8vh8f0"]
 
 [ext_resource type="Script" uid="uid://bxg5j83xcck8a" path="res://Scripts/Area2/Area_2_boss_var_1/area_2_boss_var_1.gd" id="1_3owjx"]
 [ext_resource type="Script" uid="uid://c24wvvrucoba" path="res://Scripts/Area2/Area_2_boss_var_1/dungeon_manager(A2B1).gd" id="2_ptan2"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://ds85cxxblat1n" path="res://Scenes/Enemies/basic_skeleton_archer.tscn" id="8_e1as4"]
 [ext_resource type="Script" uid="uid://dupdl2bqtnva" path="res://Scripts/Dungeons/Area_1_boss_var1/Rooms/healing_room.gd" id="9_5saxb"]
 [ext_resource type="Script" uid="uid://8psmg1e6527k" path="res://Scripts/Area2/Area_2_boss_var_1/boss_room(A2B1).gd" id="10_g560o"]
-[ext_resource type="PackedScene" uid="uid://deffovyu7rooc" path="res://Scenes/Boss/Tentaclussy.tscn" id="11_3owjx"]
 [ext_resource type="PackedScene" uid="uid://1autrsiutlos" path="res://Scenes/RoomSpawns/boss_room_spawn.tscn" id="12_roua8"]
 [ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://Assets/Map Tiles/Tileset/Dungeon/decor.png" id="13_p3od4"]
 [ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="14_2w4ov"]
@@ -70,14 +69,6 @@ size = Vector2(494, 515)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twlsj"]
 size = Vector2(301, 320)
-
-[sub_resource type="Resource" id="Resource_ptan2"]
-script = ExtResource("7_o1fjt")
-enemy_scene = ExtResource("11_3owjx")
-count = 1
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7p5h"]
 size = Vector2(787, 807.5)
@@ -15584,7 +15575,6 @@ position = Vector2(0, -1)
 z_index = 2
 position = Vector2(0, 1904)
 script = ExtResource("10_g560o")
-enemy_waves = Array[ExtResource("7_o1fjt")]([SubResource("Resource_ptan2")])
 
 [node name="CameraArea" type="Area2D" parent="BossRoom"]
 position = Vector2(0, -135)
