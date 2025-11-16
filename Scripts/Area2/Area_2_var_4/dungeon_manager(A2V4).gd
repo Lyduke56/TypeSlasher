@@ -99,7 +99,7 @@ func setup_room_connections():
 
 	healing.set_connected_room("left", room_a)
 	healing.set_connected_room("bottom", room_b)
-	
+
 	room_b.set_connected_room("top", healing)
 	room_b.set_connected_room("bottom", portal)
 
