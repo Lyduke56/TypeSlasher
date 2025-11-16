@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=4 uid="uid://dq0dlbgamele8"]
+[gd_scene load_steps=141 format=4 uid="uid://dq0dlbgamele8"]
 
 [ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="1_8w600"]
 [ext_resource type="Script" uid="uid://572rss2dxaa6" path="res://Scripts/Area2/Area_2_var_1/area_2_var_1.gd" id="1_877lg"]
@@ -41,14 +41,15 @@
 [ext_resource type="Texture2D" uid="uid://bmlb2dwygk47l" path="res://Assets/Map Tiles/Tileset/Dungeon/walls_floor.png" id="23_trcja"]
 [ext_resource type="Texture2D" uid="uid://casqns6bsbloo" path="res://Assets/Map Tiles/Tileset/Dungeon/Water_coasts_animation.png" id="24_xld6p"]
 [ext_resource type="Texture2D" uid="uid://dqasttlqfpeuh" path="res://Assets/Map Tiles/Tileset/Dungeon/water_details_animation.png" id="25_3us04"]
-[ext_resource type="Texture2D" uid="uid://7en0wv0bguo3" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_8w600"]
+[ext_resource type="Texture2D" uid="uid://2l50whv7dosh" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_8w600"]
 [ext_resource type="Texture2D" uid="uid://ch0cutbtie3ps" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_coasts_animation.png" id="26_sj7lx"]
 [ext_resource type="Texture2D" uid="uid://dhjqbiubpoqe7" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_floor.png" id="27_ihfh7"]
 [ext_resource type="Texture2D" uid="uid://bbfu5byw1ys67" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_walls.png" id="28_b15pr"]
 [ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="29_pvipn"]
 [ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="30_hnq4t"]
-[ext_resource type="Texture2D" uid="uid://bdi5xsyqlu60" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Sprites.png" id="43_knquu"]
-[ext_resource type="Texture2D" uid="uid://1m42j1xpugay" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="48_clbd4"]
+[ext_resource type="Texture2D" uid="uid://cxgnvq8exo56k" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Sprites.png" id="43_knquu"]
+[ext_resource type="Texture2D" uid="uid://dyhobrtd8dx37" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="48_clbd4"]
+[ext_resource type="AudioStream" uid="uid://jnk1knx5jnd" path="res://Assets/Sfx/Background/BGM - Area 2.ogg" id="50_latbk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pdf0d"]
 size = Vector2(303, 325)
@@ -16162,6 +16163,11 @@ visible = false
 z_index = 15
 tile_map_data = PackedByteArray("AAD7/0QAIQAAAAAAAAD7/0UAIQAAAAEAAAD8/0QAIQAAAAAAAAD8/0UAIQAAAAEAAAD9/0QAIQAAAAAAAAD9/0UAIQAAAAEAAAD+/0QAIQAAAAAAAAD+/0UAIQAAAAEAAAD//0QAIQAAAAAAAAD//0UAIQAAAAEAAAAAAEQAIQAAAAAAAAAAAEUAIQAAAAEAAAABAEQAIQAAAAAAAAABAEUAIQAAAAEAAAACAEQAIQAAAAAAAAACAEUAIQAAAAEAAAADAEQAIQAAAAAAAAADAEUAIQAAAAEAAAAEAEQAIQAAAAAAAAAEAEUAIQAAAAEAAAAPAC8AIQAAAAMAAAAPADAAIQAAAAMAAAAPADEAIQAAAAMAAAAPADIAIQAAAAMAAAAPADMAIQAAAAMAAAAPADQAIQAAAAMAAAAPADUAIQAAAAMAAAAPADYAIQAAAAMAAAAPADcAIQAAAAMAAAAPADgAIQAAAAMAAAAPADkAIQAAAAMAAAAPAC4AIQAAAAMAAAAsAC4AIQAAAAMAAAAsAC8AIQAAAAMAAAAsADAAIQAAAAMAAAAsADEAIQAAAAMAAAAsADIAIQAAAAMAAAAsADMAIQAAAAMAAAAsADQAIQAAAAMAAAAsADUAIQAAAAMAAAAsADYAIQAAAAMAAAAsADcAIQAAAAMAAAAsADgAIQAAAAMAAAAsADkAIQAAAAMAAAD7/yQAIQAAAAAAAAD7/yUAIQAAAAEAAAD8/yQAIQAAAAAAAAD8/yUAIQAAAAEAAAD9/yQAIQAAAAAAAAD9/yUAIQAAAAEAAAD+/yQAIQAAAAAAAAD+/yUAIQAAAAEAAAD//yQAIQAAAAAAAAD//yUAIQAAAAEAAAAAACQAIQAAAAAAAAAAACUAIQAAAAEAAAABACQAIQAAAAAAAAABACUAIQAAAAEAAAACACQAIQAAAAAAAAACACUAIQAAAAEAAAADACQAIQAAAAAAAAADACUAIQAAAAEAAAAEACQAIQAAAAAAAAAEACUAIQAAAAEAAAD7/wgAIQAAAAAAAAD7/wkAIQAAAAEAAAD8/wgAIQAAAAAAAAD8/wkAIQAAAAEAAAD9/wgAIQAAAAAAAAD9/wkAIQAAAAEAAAD+/wgAIQAAAAAAAAD+/wkAIQAAAAEAAAD//wgAIQAAAAAAAAD//wkAIQAAAAEAAAAAAAgAIQAAAAAAAAAAAAkAIQAAAAEAAAABAAgAIQAAAAAAAAABAAkAIQAAAAEAAAACAAgAIQAAAAAAAAACAAkAIQAAAAEAAAADAAgAIQAAAAAAAAADAAkAIQAAAAEAAAAEAAgAIQAAAAAAAAAEAAkAIQAAAAEAAAD2//j/IQAAAAMAAAD2//n/IQAAAAMAAAD2//r/IQAAAAMAAAD2//v/IQAAAAMAAAD2//z/IQAAAAMAAAD2//3/IQAAAAMAAAD2//7/IQAAAAMAAAD2////IQAAAAMAAAD2/wAAIQAAAAMAAAD2/wEAIQAAAAMAAAD2/wIAIQAAAAMAAAD2/wMAIQAAAAMAAAAJAPj/IQAAAAMAAAAJAPn/IQAAAAMAAAAJAPr/IQAAAAMAAAAJAPv/IQAAAAMAAAAJAPz/IQAAAAMAAAAJAP3/IQAAAAMAAAAJAP7/IQAAAAMAAAAJAP//IQAAAAMAAAAJAAAAIQAAAAMAAAAJAAEAIQAAAAMAAAAJAAIAIQAAAAMAAAAJAAMAIQAAAAMAAAAnAPj/IQAAAAMAAAAnAPn/IQAAAAMAAAAnAPr/IQAAAAMAAAAnAPv/IQAAAAMAAAAnAPz/IQAAAAMAAAAnAP3/IQAAAAMAAAAnAP7/IQAAAAMAAAAnAP//IQAAAAMAAAAnAAAAIQAAAAMAAAAnAAEAIQAAAAMAAAAnAAIAIQAAAAMAAAAnAAMAIQAAAAMAAAAvAPH/IQAAAAAAAAAvAPL/IQAAAAEAAAAwAPH/IQAAAAAAAAAwAPL/IQAAAAEAAAAxAPH/IQAAAAAAAAAxAPL/IQAAAAEAAAAyAPH/IQAAAAAAAAAyAPL/IQAAAAEAAAAzAPH/IQAAAAAAAAAzAPL/IQAAAAEAAAA0APH/IQAAAAAAAAA0APL/IQAAAAEAAAA1APH/IQAAAAAAAAA1APL/IQAAAAEAAAA2APH/IQAAAAAAAAA2APL/IQAAAAEAAAAvANX/IQAAAAAAAAAvANb/IQAAAAEAAAAwANX/IQAAAAAAAAAwANb/IQAAAAEAAAAxANX/IQAAAAAAAAAxANb/IQAAAAEAAAAyANX/IQAAAAAAAAAyANb/IQAAAAEAAAAzANX/IQAAAAAAAAAzANb/IQAAAAEAAAA0ANX/IQAAAAAAAAA0ANb/IQAAAAEAAAA1ANX/IQAAAAAAAAA1ANb/IQAAAAEAAAA2ANX/IQAAAAAAAAA2ANb/IQAAAAEAAADc//n/IQAAAAMAAADc//r/IQAAAAMAAADc//v/IQAAAAMAAADc//z/IQAAAAMAAADc//3/IQAAAAMAAADc//7/IQAAAAMAAADc////IQAAAAMAAADc/wAAIQAAAAMAAADc/wEAIQAAAAMAAADc/wIAIQAAAAMAAADc/wMAIQAAAAMAAADc//j/IQAAAAMAAAD7/2AAIQAAAAAAAAD7/2EAIQAAAAEAAAD8/2AAIQAAAAAAAAD8/2EAIQAAAAEAAAD9/2AAIQAAAAAAAAD9/2EAIQAAAAEAAAD+/2AAIQAAAAAAAAD+/2EAIQAAAAEAAAD//2AAIQAAAAAAAAD//2EAIQAAAAEAAAAAAGAAIQAAAAAAAAAAAGEAIQAAAAEAAAABAGAAIQAAAAAAAAABAGEAIQAAAAEAAAACAGAAIQAAAAAAAAACAGEAIQAAAAEAAAADAGAAIQAAAAAAAAADAGEAIQAAAAEAAAAEAGAAIQAAAAAAAAAEAGEAIQAAAAEAAAA=")
 tile_set = SubResource("TileSet_6wyqo")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("50_latbk")
+autoplay = true
+parameters/looping = true
 
 [connection signal="body_entered" from="StartingRoom/CameraArea" to="StartingRoom" method="_on_camera_area_body_entered"]
 [connection signal="body_exited" from="StartingRoom/CameraArea" to="StartingRoom" method="_on_camera_area_body_exited"]
