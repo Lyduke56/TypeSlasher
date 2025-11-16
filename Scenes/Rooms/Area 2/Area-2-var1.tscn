@@ -41,14 +41,14 @@
 [ext_resource type="Texture2D" uid="uid://bmlb2dwygk47l" path="res://Assets/Map Tiles/Tileset/Dungeon/walls_floor.png" id="23_trcja"]
 [ext_resource type="Texture2D" uid="uid://casqns6bsbloo" path="res://Assets/Map Tiles/Tileset/Dungeon/Water_coasts_animation.png" id="24_xld6p"]
 [ext_resource type="Texture2D" uid="uid://dqasttlqfpeuh" path="res://Assets/Map Tiles/Tileset/Dungeon/water_details_animation.png" id="25_3us04"]
-[ext_resource type="Texture2D" uid="uid://2l50whv7dosh" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_8w600"]
+[ext_resource type="Texture2D" uid="uid://7en0wv0bguo3" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_8w600"]
 [ext_resource type="Texture2D" uid="uid://ch0cutbtie3ps" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_coasts_animation.png" id="26_sj7lx"]
 [ext_resource type="Texture2D" uid="uid://dhjqbiubpoqe7" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_floor.png" id="27_ihfh7"]
 [ext_resource type="Texture2D" uid="uid://bbfu5byw1ys67" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_walls.png" id="28_b15pr"]
 [ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="29_pvipn"]
 [ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="30_hnq4t"]
-[ext_resource type="Texture2D" uid="uid://cxgnvq8exo56k" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Sprites.png" id="43_knquu"]
-[ext_resource type="Texture2D" uid="uid://dyhobrtd8dx37" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="48_clbd4"]
+[ext_resource type="Texture2D" uid="uid://bdi5xsyqlu60" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Sprites.png" id="43_knquu"]
+[ext_resource type="Texture2D" uid="uid://1m42j1xpugay" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="48_clbd4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pdf0d"]
 size = Vector2(303, 325)

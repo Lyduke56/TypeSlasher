@@ -82,26 +82,11 @@ func _process(_delta):
 # ------------------------------------------------------------
 func setup_room_connections():
 	var starting = get_node("../StartingRoom")
-	var room_a = get_node("../RoomA - Medium")
-	var room_b = get_node("../RoomB - Medium")
-	var room_c = get_node("../RoomC - Medium")
-	var room_d = get_node("../RoomD - Medium")
 	var boss = get_node("../BossRoom")
 	var healing = get_node("../HealingRoom")
 
-	starting.set_connected_room("right", room_a)
-	starting.set_connected_room("left", room_c)
 	starting.set_connected_room("bottom", healing)
 
-	room_a.set_connected_room("bottom", room_b)
-	room_a.set_connected_room("left", starting)
-
-	room_b.set_connected_room("top", room_a)
-
-	room_c.set_connected_room("right", starting)
-	room_c.set_connected_room("bottom", room_d)
-
-	room_d.set_connected_room("top", room_c)
 
 	healing.set_connected_room("top", starting)
 	healing.set_connected_room("bottom", boss)

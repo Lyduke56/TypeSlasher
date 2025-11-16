@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bil2sj0ots4r2" path="res://Scenes/Enemies/basic_wolf.tscn" id="12_tonbw"]
 [ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="12_wa0in"]
 [ext_resource type="PackedScene" uid="uid://xcriddmqeofd" path="res://Scenes/Enemies/basic_skeleton.tscn" id="13_gkmiv"]
-[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="17_gkmiv"]
+[ext_resource type="Texture2D" uid="uid://1m42j1xpugay" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="17_gkmiv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ean82"]
 size = Vector2(310, 342)
