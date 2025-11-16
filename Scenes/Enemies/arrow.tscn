@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c47p165yqy5xy"]
+[gd_scene load_steps=8 format=3 uid="uid://c47p165yqy5xy"]
 
 [ext_resource type="Script" uid="uid://cnmbwu004e4dj" path="res://Scripts/Enemies/arrow.gd" id="1_50ud7"]
 [ext_resource type="Texture2D" uid="uid://b542xgtx3mde4" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton Archer/Arrow(projectile)/Arrow03(32x32).png" id="2_k1jd8"]
+[ext_resource type="AudioStream" uid="uid://b6x5owaijuija" path="res://Assets/Sfx/Enemies/Skeleton/Bow Impact Hit 1.wav" id="4_k1jd8"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="4_smulm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2qmkp"]
@@ -54,4 +55,8 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(2, -7)
+scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_2ey31")
+
+[node name="sfx_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_k1jd8")

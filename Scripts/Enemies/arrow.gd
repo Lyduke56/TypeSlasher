@@ -137,6 +137,7 @@ func _on_lifetime_expired():
 func _on_body_entered(body: Node2D):
 	"""Called when arrow collides with target"""
 	# Check if collided with target (target has StaticBody2D)
+	$sfx_hit.play()
 	if body is StaticBody2D and body.get_parent().name == "Target":
 		# Arrow hit the target - deal damage and destroy arrow
 		var target_node = body.get_parent()
@@ -152,7 +153,7 @@ func _on_animation_finished():
 	# Arrow only has idle animation, so just ensure it stays idle when not targeted
 	if anim and not is_being_targeted:
 		anim.play("arrow_idle")
-
+		
 func _physics_process(delta: float) -> void:
 	# Stop movement if being targeted (being typed)
 	if is_being_targeted:

@@ -1,9 +1,12 @@
-[gd_scene load_steps=38 format=3 uid="uid://ds85cxxblat1n"]
+[gd_scene load_steps=41 format=3 uid="uid://ds85cxxblat1n"]
 
 [ext_resource type="Script" uid="uid://bvvxra1wdwirw" path="res://Scripts/Enemies/basic_skeleton_archer.gd" id="1_kvtgg"]
 [ext_resource type="Texture2D" uid="uid://diiun1snohy83" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer/Skeleton Archer.png" id="1_xq2fd"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_kvtgg"]
 [ext_resource type="Texture2D" uid="uid://7h65yprg7ef2" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer/Skeleton Archer-Hurt.png" id="3_cpbnd"]
+[ext_resource type="AudioStream" uid="uid://2r5b6f5iv0hv" path="res://Assets/Sfx/Enemies/Skeleton/Bow Attack 2.wav" id="5_vsl7u"]
+[ext_resource type="AudioStream" uid="uid://d01ftv24gjyva" path="res://Assets/Sfx/Enemies/Skeleton/skeleton-death-1.wav" id="6_km8pw"]
+[ext_resource type="AudioStream" uid="uid://dxhli4rfbkrup" path="res://Assets/Sfx/Enemies/Generic/thud-1.wav" id="7_km8pw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2xdt"]
 atlas = ExtResource("1_xq2fd")
@@ -277,3 +280,12 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_2ey31")
+
+[node name="sfx_attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_vsl7u")
+
+[node name="sfx_death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_km8pw")
+
+[node name="sfx_damaged" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_km8pw")

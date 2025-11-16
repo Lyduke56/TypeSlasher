@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://x1cke1ps3mou"]
 
 [ext_resource type="Script" uid="uid://c1dt32mog37rc" path="res://Scripts/godess_statue.gd" id="1_u6xe7"]
-[ext_resource type="Texture2D" uid="uid://bdpqwm88cmp7q" path="res://Assets/Sprites/Other Scenes/shrine-sheet.png" id="2_w1j7x"]
+[ext_resource type="Texture2D" uid="uid://b1ploj6kqve71" path="res://Assets/Sprites/Other Scenes/shrine-sheet.png" id="2_w1j7x"]
 [ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://Assets/Themes/Outline.tres" id="3_so02s"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="4_mwbop"]
 
@@ -98,13 +98,13 @@ animations = [{
 }],
 "loop": false,
 "name": &"heal",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2750n")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle",
 "speed": 5.0
 }]
@@ -114,7 +114,7 @@ script = ExtResource("1_u6xe7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_x2v48")
-animation = &"heal"
+animation = &"idle"
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3
