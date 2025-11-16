@@ -3,6 +3,9 @@ extends Node2D
 @export var blue: Color = Color("#4682b4")
 @export var green: Color = Color("#639765")
 @export var red: Color = Color("#a65455")
+@onready var sfx_attack: AudioStreamPlayer2D = $sfx_attack
+@onready var sfx_death: AudioStreamPlayer2D = $sfx_death
+@onready var sfx_damaged: AudioStreamPlayer2D = $sfx_damaged
 
 @export var attack_interval: float = 2.0  # Time between arrow shots
 @onready var anim = $AnimatedSprite2D
@@ -125,7 +128,7 @@ func play_death_animation():
 	# Connect the signal and play damage animation first
 	anim.animation_finished.connect(_on_damage_animation_finished, CONNECT_ONE_SHOT)
 	anim.play("skeleton_archer_damaged")
-
+	$sfx_damaged.play()
 	print("Enemy damage animation started")
 
 func _on_damage_animation_finished():
@@ -138,7 +141,7 @@ func _on_damage_animation_finished():
 		# Connect the signal and play death animation
 		anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
 		anim.play("skeleton_archer_death")
-
+		$sfx_death.play()
 		print("Enemy death animation started")
 
 func _on_death_animation_finished():
@@ -162,7 +165,7 @@ func shoot_arrow():
 	# Play attack animation
 	if anim:
 		anim.play("skeleton_archer_attack")
-
+		$sfx_attack.play()
 	# Get the parent container (same as slime spawning)
 	var parent_container = get_parent()  # Usually EnemyContainer
 
