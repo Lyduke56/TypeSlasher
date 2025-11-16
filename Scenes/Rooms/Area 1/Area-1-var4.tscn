@@ -1,4 +1,4 @@
-[gd_scene load_steps=154 format=4 uid="uid://b5evyhmvudibs"]
+[gd_scene load_steps=155 format=4 uid="uid://b5evyhmvudibs"]
 
 [ext_resource type="Script" uid="uid://djq1f8ivhl58g" path="res://Scripts/Dungeons/Area_1_var_4/area_1_var_4.gd" id="1_54bfd"]
 [ext_resource type="Script" uid="uid://gi3ma2tv7svj" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_a___medium.gd" id="1_351yt"]
@@ -42,6 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="30_n4cnn"]
 [ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="30_p77xy"]
 [ext_resource type="Texture2D" uid="uid://dyhobrtd8dx37" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="42_lg8bu"]
+[ext_resource type="AudioStream" uid="uid://dnfl6ad8wv7k5" path="res://Assets/Sfx/Background/BGM - Area 1.ogg" id="43_6dio2"]
 
 [sub_resource type="Resource" id="Resource_08ass"]
 script = ExtResource("4_fmsb3")
@@ -20715,6 +20716,11 @@ tile_set = SubResource("TileSet_cx2dn")
 z_index = 15
 tile_map_data = PackedByteArray("AAAxACsAAAAAAAMAAAAyACsAAAAAAAMAAAAzACsAAAAAAAMAAAA0ACsAAAAAAAMAAAA1ACsAAAAAAAMAAAA2ACsAAAAAAAMAAAA3ACsAAAAAAAMAAAA4ACsAAAAAAAMAAAA5ACsAAAAAAAMAAAA6ACsAAAAAAAMAAAD8/yUAAAAAAAMAAAD9/yUAAAAAAAMAAAD+/yUAAAAAAAMAAAD//yUAAAAAAAMAAAAAACUAAAAAAAMAAAABACUAAAAAAAMAAAACACUAAAAAAAMAAAADACUAAAAAAAMAAAD8/wkAAAAAAAMAAAD9/wkAAAAAAAMAAAD+/wkAAAAAAAMAAAD//wkAAAAAAAMAAAAAAAkAAAAAAAMAAAABAAkAAAAAAAMAAAACAAkAAAAAAAMAAAADAAkAAAAAAAMAAAAJAPv/AAAAAAMAAAAJAPz/AAAAAAMAAAAJAP3/AAAAAAMAAAAJAP7/AAAAAAMAAAAJAP//AAAAAAMAAAAJAAAAAAAAAAMAAAAJAAEAAAAAAAMAAAAJAAIAAAAAAAMAAAAmAPv/AAAAAAMAAAAmAPz/AAAAAAMAAAAmAP3/AAAAAAMAAAAmAP7/AAAAAAMAAAAmAP//AAAAAAMAAAAmAAAAAAAAAAMAAAAmAAEAAAAAAAMAAAAmAAIAAAAAAAMAAAAxAO//AAAAAAMAAAAyAO//AAAAAAMAAAAzAO//AAAAAAMAAAA0AO//AAAAAAMAAAA1AO//AAAAAAMAAAA2AO//AAAAAAMAAAA3AO//AAAAAAMAAAA4AO//AAAAAAMAAAA5AO//AAAAAAMAAAA6AO//AAAAAAMAAAAxANP/AAAAAAMAAAAyANP/AAAAAAMAAAAzANP/AAAAAAMAAAA0ANP/AAAAAAMAAAA1ANP/AAAAAAMAAAA2ANP/AAAAAAMAAAA3ANP/AAAAAAMAAAA4ANP/AAAAAAMAAAA5ANP/AAAAAAMAAAA6ANP/AAAAAAMAAABCAMH/AAAAAAMAAABCAML/AAAAAAMAAABCAMP/AAAAAAMAAABCAMT/AAAAAAMAAABCAMX/AAAAAAMAAABCAMb/AAAAAAMAAABCAMf/AAAAAAMAAABCAMj/AAAAAAMAAABCAMn/AAAAAAMAAABCAMr/AAAAAAMAAABfAMH/AAAAAAMAAABfAML/AAAAAAMAAABfAMP/AAAAAAMAAABfAMT/AAAAAAMAAABfAMX/AAAAAAMAAABfAMb/AAAAAAMAAABfAMf/AAAAAAMAAABfAMj/AAAAAAMAAABfAMn/AAAAAAMAAABfAMr/AAAAAAMAAAAxAA8AAAAAAAMAAAAyAA8AAAAAAAMAAAAzAA8AAAAAAAMAAAA0AA8AAAAAAAMAAAA1AA8AAAAAAAMAAAA2AA8AAAAAAAMAAAA3AA8AAAAAAAMAAAA4AA8AAAAAAAMAAAA5AA8AAAAAAAMAAAA6AA8AAAAAAAMAAAA=")
 tile_set = SubResource("TileSet_g2qdi")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("43_6dio2")
+autoplay = true
+parameters/looping = true
 
 [connection signal="body_entered" from="RoomA - Medium/CameraArea" to="RoomA - Medium" method="_on_camera_area_body_entered"]
 [connection signal="body_exited" from="RoomA - Medium/CameraArea" to="RoomA - Medium" method="_on_camera_area_body_exited"]
