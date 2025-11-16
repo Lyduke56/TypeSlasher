@@ -17,14 +17,18 @@ extends CharacterBody2D
 var max_boss_health: int = 5
 var death_started: bool = false
 
-# Movement pattern system - Top, Right, Bottom, Left cycle
-enum MovementState { IDLE, MOVING_TOP, MOVING_RIGHT, MOVING_BOTTOM, MOVING_LEFT }
+# Movement pattern system - All 8 directions cycle
+enum MovementState { IDLE, MOVING_TOP, MOVING_TOPRIGHT, MOVING_RIGHT, MOVING_BOTTOMRIGHT, MOVING_BOTTOM, MOVING_BOTTOMLEFT, MOVING_LEFT, MOVING_TOPLEFT }
 var current_movement_state: MovementState = MovementState.IDLE
 @export var move_speed: float = 80.0  # Movement speed between nodes
 var top_position: Vector2
+var topright_position: Vector2
 var right_position: Vector2
+var bottomright_position: Vector2
 var bottom_position: Vector2
+var bottomleft_position: Vector2
 var left_position: Vector2
+var topleft_position: Vector2
 var current_target_position: Vector2
 
 # Attack pattern system
@@ -68,6 +72,10 @@ var is_after_knockback_recovery: bool = false  # True when targetable after knoc
 var room_center: Vector2 = Vector2.ZERO
 var room_size: Vector2 = Vector2.ZERO
 
+# Portal spawning system
+var PurplePortalScene = preload("res://Scenes/Enemies/PurplePortal.tscn")
+var spawned_portals: Array = []  # Track spawned portals to avoid duplicates
+
 @export var points_for_kill = 150
 
 # Signals
@@ -78,7 +86,7 @@ func _ready() -> void:
 	boss_health = max_boss_health
 
 	# Start with idle animation
-	anim.play("demon_idle")
+	anim.play("cthulhu_idle")
 
 	# Setup timers
 	setup_timers()
@@ -100,7 +108,7 @@ func _ready() -> void:
 	# Start the boss pattern
 	start_boss_pattern()
 
-	print("Demon boss initialized - starting at Top position")
+	print("cthulhu boss initialized - starting at Top position")
 
 func _process(delta: float) -> void:
 	pass
@@ -170,7 +178,7 @@ func set_targeted_state(targeted: bool):
 	if targeted:
 		# Stop moving and play idle animation when targeted
 		if anim:
-			anim.play("demon_idle")
+			anim.play("cthulhu_idle")
 		modulate = Color.GRAY  # Darken the enemy
 	else:
 		modulate = Color.WHITE  # Reset color
@@ -183,12 +191,12 @@ func take_damage(attacker_global_position: Vector2 = global_position):
 
 	# If boss was targetable during attack phase AND after knockback recovery, take damage immediately
 	if is_targetable and is_after_knockback_recovery:
-		print("Demon boss attacked during targetable phase after knockback - taking damage immediately")
+		print("cthulhu boss attacked during targetable phase after knockback - taking damage immediately")
 		is_after_knockback_recovery = false  # Reset flag
 		boss_health -= 1
 		update_boss_health_ui()
 
-		print("Demon boss damaged! Health: ", boss_health, "/", max_boss_health)
+		print("cthulhu boss damaged! Health: ", boss_health, "/", max_boss_health)
 
 		# If dead now, play death immediately
 		if boss_health <= 0:
@@ -197,13 +205,13 @@ func take_damage(attacker_global_position: Vector2 = global_position):
 
 		# Play damaged animation and reset to normal pattern
 		if anim:
-			anim.play("demon_damaged")
+			anim.play("cthulhu_damaged")
 		become_untargetable()
 		return
 
 	# If boss was targetable during initial attack phase, perform knockback WITHOUT losing health
 	if is_targetable:
-		print("Demon boss interrupted during targetable phase - knockback without health loss")
+		print("cthulhu boss interrupted during targetable phase - knockback without health loss")
 		perform_knockback(attacker_global_position)
 		return
 
@@ -211,7 +219,7 @@ func take_damage(attacker_global_position: Vector2 = global_position):
 	boss_health -= 1
 	update_boss_health_ui()
 
-	print("Demon boss damaged! Health: ", boss_health, "/", max_boss_health)
+	print("cthulhu boss damaged! Health: ", boss_health, "/", max_boss_health)
 
 	# If dead now, play death immediately
 	if boss_health <= 0:
@@ -234,7 +242,7 @@ func play_death_animation():
 		return
 
 	# Prevent multiple death plays
-	if death_started or anim.animation == "demon_death":
+	if death_started or anim.animation == "cthulhu_death":
 		return
 
 	# Only play death if boss health is 0
@@ -250,29 +258,40 @@ func play_death_animation():
 	if anim.animation_finished.is_connected(_on_damage_animation_finished):
 		anim.animation_finished.disconnect(_on_damage_animation_finished)
 	anim.animation_finished.connect(_on_death_animation_finished)
-	anim.play("demon_death")
+	anim.play("cthulhu_death")
 	print("Tentaclussy death animation started")
 
 func _on_damage_animation_finished():
 	"""Called when damage animation completes - plays death animation"""
-	if anim.animation == "demon_damaged":
+	if anim.animation == "cthulhu_damaged":
 		# Disconnect any existing connections to prevent duplicates
 		if anim.animation_finished.is_connected(_on_death_animation_finished):
 			anim.animation_finished.disconnect(_on_death_animation_finished)
 
 		# Connect the signal and play death animation
 		anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
-		anim.play("demon_death")
+		anim.play("cthulhu_death")
 
 		print("Enemy death animation started")
 
 func _on_death_animation_finished():
 	"""Called when death animation completes"""
-	if anim.animation == "demon_death":
+	if anim.animation == "cthulhu_death":
 		Global.current_score += points_for_kill
 		# Check for Sword buff health restoration
 		Global.on_enemy_killed()
+
+		# Clean up any remaining portals
+		cleanup_portals()
+
 		queue_free()  # Remove enemy from scene
+
+func cleanup_portals():
+	"""Remove all spawned portals when boss dies"""
+	for portal in spawned_portals:
+		if is_instance_valid(portal):
+			portal.queue_free()
+	print("Cleaned up ", spawned_portals.size(), " portals after boss death")
 
 func setup_boss_health_ui():
 	"""Setup the health UI for the boss"""
@@ -303,7 +322,7 @@ func update_boss_health_ui():
 		print("Boss health UI updated: ", boss_health, " hearts remaining")
 
 func setup_timers():
-	"""Setup all timers for the demon boss"""
+	"""Setup all timers for the cthulhu boss"""
 	attack_timer = Timer.new()
 	add_child(attack_timer)
 	attack_timer.one_shot = false
@@ -334,7 +353,7 @@ func setup_room_bounds():
 			room_center = camera_area.global_position
 
 func start_boss_pattern():
-	"""Start the demon boss pattern - begin at Top position"""
+	"""Start the cthulhu boss pattern - begin at Top position"""
 	# Find the Top node position
 	find_node_positions()
 
@@ -347,30 +366,42 @@ func start_boss_pattern():
 	# Start shooting fireballs immediately at Top
 	start_shooting_fireballs()
 
-	print("Demon boss pattern started - at Top, shooting fireballs")
+	print("cthulhu boss pattern started - at Top, shooting fireballs")
 
 func find_node_positions():
-	"""Find the positions of Top, Right, Bottom, Left nodes in BossRoomSpawn/SpawnLocations"""
+	"""Find the positions of all 8 direction nodes in BossRoomSpawn/SpawnLocations"""
 	var room = get_parent()  # EnemyContainer
 	if room and room.has_method("get_node_or_null"):
 		# Look for nodes in BossRoomSpawn/SpawnLocations
 		var spawn_locations = room.get_node_or_null("../BossRoomSpawn/SpawnLocations")
 		if spawn_locations:
 			var top_node = spawn_locations.get_node_or_null("Top")
+			var topright_node = spawn_locations.get_node_or_null("TopRight")
 			var right_node = spawn_locations.get_node_or_null("Right")
+			var bottomright_node = spawn_locations.get_node_or_null("BottomRight")
 			var bottom_node = spawn_locations.get_node_or_null("Bottom")
+			var bottomleft_node = spawn_locations.get_node_or_null("BottomLeft")
 			var left_node = spawn_locations.get_node_or_null("Left")
+			var topleft_node = spawn_locations.get_node_or_null("TopLeft")
 
 			if top_node:
 				top_position = top_node.global_position
+			if topright_node:
+				topright_position = topright_node.global_position
 			if right_node:
 				right_position = right_node.global_position
+			if bottomright_node:
+				bottomright_position = bottomright_node.global_position
 			if bottom_node:
 				bottom_position = bottom_node.global_position
+			if bottomleft_node:
+				bottomleft_position = bottomleft_node.global_position
 			if left_node:
 				left_position = left_node.global_position
+			if topleft_node:
+				topleft_position = topleft_node.global_position
 
-			print("Found node positions in BossRoomSpawn/SpawnLocations - Top:", top_position, " Right:", right_position, " Bottom:", bottom_position, " Left:", left_position)
+			print("Found node positions in BossRoomSpawn/SpawnLocations - Top:", top_position, " TopRight:", topright_position, " Right:", right_position, " BottomRight:", bottomright_position, " Bottom:", bottom_position, " BottomLeft:", bottomleft_position, " Left:", left_position, " TopLeft:", topleft_position)
 		else:
 			print("ERROR: BossRoomSpawn/SpawnLocations not found!")
 
@@ -385,7 +416,7 @@ func start_shooting_fireballs():
 	attack_timer.wait_time = fireball_interval
 	attack_timer.start()
 
-	print("Demon boss started shooting fireballs at position")
+	print("cthulhu boss started shooting fireballs at position")
 
 func _on_fireball_timer_timeout():
 	"""Shoot individual fireballs"""
@@ -396,7 +427,7 @@ func _on_fireball_timer_timeout():
 
 	# Play attack animation
 	if anim:
-		anim.play("demon_attack")
+		anim.play("cthulhu_attack")
 
 	# Shoot fireball
 	shoot_fireball()
@@ -444,7 +475,7 @@ func shoot_fireball():
 	# Add fireball to the container
 	parent_container.add_child(fireball)
 
-	print("Demon boss shot fireball", fireball_count, "/", max_fireballs, " at offset:", fireball_offset)
+	print("cthulhu boss shot fireball", fireball_count, "/", max_fireballs, " at offset:", fireball_offset)
 
 func _setup_fireball_prompt(fireball: Node2D):
 	"""Setup prompt for fireball"""
@@ -456,22 +487,22 @@ func start_idle_phase():
 	"""Start the idle phase after shooting fireballs at a position"""
 	positions_completed += 1
 
-	if positions_completed < 4:
+	if positions_completed < 8:
 		# Move to next position
 		advance_to_next_position()
 		current_attack_state = AttackState.SHOOTING
 		has_reached_position = false  # Reset flag for next movement
 		if anim:
-			anim.play("demon_run")
-		print("Demon boss completed shooting at position ", positions_completed, ", moving to next position")
+			anim.play("cthulhu_run")
+		print("cthulhu boss completed shooting at position ", positions_completed, ", moving to next position")
 	else:
 		# All positions completed, do the final idle
 		current_attack_state = AttackState.WAITING
 		if anim:
-			anim.play("demon_idle")
+			anim.play("cthulhu_idle")
 		idle_timer.wait_time = idle_duration
 		idle_timer.start()
-		print("Demon boss completed all positions, entering final idle phase for ", idle_duration, " seconds")
+		print("cthulhu boss completed all positions, entering final idle phase for ", idle_duration, " seconds")
 
 func _on_idle_timer_timeout():
 	"""Called when idle phase ends - start dash phase"""
@@ -500,7 +531,7 @@ func start_dash_phase():
 	targetable_timer.wait_time = targetable_duration
 	targetable_timer.start()
 
-	print("Demon boss became TARGETABLE and is moving to attack!")
+	print("cthulhu boss became TARGETABLE and is moving to attack!")
 
 func perform_knockback(attacker_position: Vector2):
 	"""Perform knockback when interrupted during dash (like Minotaur)"""
@@ -533,9 +564,9 @@ func perform_knockback(attacker_position: Vector2):
 
 	# Play damage animation
 	if anim:
-		anim.play("demon_damaged")
+		anim.play("cthulhu_damaged")
 
-	print("Demon boss knocked back - will become targetable after recovery")
+	print("cthulhu boss knocked back - will become targetable after recovery")
 
 func start_targetable_phase():
 	"""Start the targetable phase after knockback recovery"""
@@ -553,23 +584,23 @@ func start_targetable_phase():
 
 	# Play targetable animation
 	if anim:
-		anim.play("demon_targettable")
+		anim.play("cthulhu_targettable")
 
 	# Start targetable timer
 	targetable_timer.wait_time = targetable_duration
 	targetable_timer.start()
 
-	print("Demon boss became TARGETABLE for", targetable_duration, "seconds after knockback")
+	print("cthulhu boss became TARGETABLE for", targetable_duration, "seconds after knockback")
 
 func _on_targetable_timer_timeout():
 	"""Called when targetable phase ends - boss takes damage for failed interruption"""
-	print("Demon boss targetable timer expired - boss takes damage and resets to normal pattern")
+	print("cthulhu boss targetable timer expired - boss takes damage and resets to normal pattern")
 
 	# Boss takes damage for failing to be interrupted within time limit
 	boss_health -= 1
 	update_boss_health_ui()
 
-	print("Demon boss damaged by timeout! Health: ", boss_health, "/", max_boss_health)
+	print("cthulhu boss damaged by timeout! Health: ", boss_health, "/", max_boss_health)
 
 	# If dead now, play death immediately
 	if boss_health <= 0:
@@ -578,7 +609,7 @@ func _on_targetable_timer_timeout():
 
 	# Play damaged animation
 	if anim:
-		anim.play("demon_damaged")
+		anim.play("cthulhu_damaged")
 
 	become_untargetable()
 
@@ -614,11 +645,14 @@ func reset_to_normal_pattern():
 	has_reached_position = false
 	has_attacked_target = false
 
+	# Spawn portals at corner positions
+	spawn_corner_portals()
+
 	# Move to Top position using movement system (no teleport)
 	current_movement_state = MovementState.MOVING_TOP
 	current_target_position = top_position
 
-	print("Demon boss reset to normal pattern - moving to Top position")
+	print("cthulhu boss reset to normal pattern - moving to Top position")
 
 func _setup_arrow_prompt(arrow: Node2D):
 	"""Deferred setup of arrow prompt to ensure proper initialization"""
@@ -648,24 +682,24 @@ func _get_unique_word(new_category: String = "") -> String:
 func _on_animation_finished():
 	"""Called when any animation finishes"""
 	# Don't interfere with death/damage animations or when enemy is being targeted
-	if anim and (anim.animation == "demon_death" or anim.animation == "demon_damaged" or is_being_targeted):
+	if anim and (anim.animation == "cthulhu_death" or anim.animation == "cthulhu_damaged" or is_being_targeted):
 		return
 
 	# Handle targetable animation - during targetable phase, keep playing targettable animation
-	if anim and anim.animation == "demon_targettable" and is_targetable:
+	if anim and anim.animation == "cthulhu_targettable" and is_targetable:
 		# Stay in targettable animation during targetable phase
-		anim.play("demon_targettable")
+		anim.play("cthulhu_targettable")
 		return
 
 	# Handle targetable animation - when targetable phase ends, go to idle
-	if anim and anim.animation == "demon_targettable" and not is_targetable:
-		anim.play("demon_idle")
+	if anim and anim.animation == "cthulhu_targettable" and not is_targetable:
+		anim.play("cthulhu_idle")
 		return
 
 	# Handle attack animation - single attack then reset cycle
-	if has_reached_target and anim and anim.animation == "demon_attack":
+	if has_reached_target and anim and anim.animation == "cthulhu_attack":
 		# Attack animation finished, deal damage and reset to normal pattern
-		print("Demon boss finished ", anim.animation, ", dealing damage and resetting cycle.")
+		print("cthulhu boss finished ", anim.animation, ", dealing damage and resetting cycle.")
 		if target_node:  # Deal damage after attack animation
 			target_node.take_damage()
 		# Reset to normal pattern (go back to Top and restart cycle)
@@ -673,38 +707,58 @@ func _on_animation_finished():
 		return
 
 	# Return to appropriate animation after attack animations
-	if anim and anim.animation == "demon_attack":
+	if anim and anim.animation == "cthulhu_attack":
 		# Check if we're currently moving between nodes
 		var is_moving = (current_movement_state == MovementState.MOVING_TOP or
+						current_movement_state == MovementState.MOVING_TOPRIGHT or
 						current_movement_state == MovementState.MOVING_RIGHT or
+						current_movement_state == MovementState.MOVING_BOTTOMRIGHT or
 						current_movement_state == MovementState.MOVING_BOTTOM or
-						current_movement_state == MovementState.MOVING_LEFT)
+						current_movement_state == MovementState.MOVING_BOTTOMLEFT or
+						current_movement_state == MovementState.MOVING_LEFT or
+						current_movement_state == MovementState.MOVING_TOPLEFT)
 
 		if is_moving:
-			anim.play("demon_run")
+			anim.play("cthulhu_run")
 		else:
-			anim.play("demon_idle")
+			anim.play("cthulhu_idle")
 
 func advance_to_next_position():
-	"""Advance to the next position in the cycle: Top → Right → Bottom → Left → Top..."""
+	"""Advance to the next position in the cycle: Top → TopRight → Right → BottomRight → Bottom → BottomLeft → Left → TopLeft → Top..."""
 	match positions_completed:
 		1:
+			current_movement_state = MovementState.MOVING_TOPRIGHT
+			current_target_position = topright_position
+			print("cthulhu boss moving from Top to TopRight")
+		2:
 			current_movement_state = MovementState.MOVING_RIGHT
 			current_target_position = right_position
-			print("Demon boss moving from Top to Right")
-		2:
+			print("cthulhu boss moving from TopRight to Right")
+		3:
+			current_movement_state = MovementState.MOVING_BOTTOMRIGHT
+			current_target_position = bottomright_position
+			print("cthulhu boss moving from Right to BottomRight")
+		4:
 			current_movement_state = MovementState.MOVING_BOTTOM
 			current_target_position = bottom_position
-			print("Demon boss moving from Right to Bottom")
-		3:
+			print("cthulhu boss moving from BottomRight to Bottom")
+		5:
+			current_movement_state = MovementState.MOVING_BOTTOMLEFT
+			current_target_position = bottomleft_position
+			print("cthulhu boss moving from Bottom to BottomLeft")
+		6:
 			current_movement_state = MovementState.MOVING_LEFT
 			current_target_position = left_position
-			print("Demon boss moving from Bottom to Left")
+			print("cthulhu boss moving from BottomLeft to Left")
+		7:
+			current_movement_state = MovementState.MOVING_TOPLEFT
+			current_target_position = topleft_position
+			print("cthulhu boss moving from Left to TopLeft")
 		_:
-			# Default to Top
+			# Default to Top (completing the cycle)
 			current_movement_state = MovementState.MOVING_TOP
 			current_target_position = top_position
-			print("Demon boss defaulting to Top position")
+			print("cthulhu boss moving from TopLeft to Top (completing cycle)")
 
 func _physics_process(delta: float) -> void:
 	# Handle knockback physics (highest priority)
@@ -744,8 +798,8 @@ func _physics_process(delta: float) -> void:
 			anim.flip_h = direction.x < 0
 
 		# Play run animation only if not attacking
-		if anim and anim.animation != "demon_run" and not anim.animation.begins_with("demon_attack"):
-			anim.play("demon_run")
+		if anim and anim.animation != "cthulhu_run" and not anim.animation.begins_with("cthulhu_attack"):
+			anim.play("cthulhu_run")
 
 		move_and_slide()
 		clamp_within_room_bounds()
@@ -760,8 +814,8 @@ func _physics_process(delta: float) -> void:
 		velocity = direction * move_speed
 
 		# Play run animation
-		if anim and anim.animation != "demon_run":
-			anim.play("demon_run")
+		if anim and anim.animation != "cthulhu_run":
+			anim.play("cthulhu_run")
 
 		# Update facing direction
 		if anim and direction.x != 0:
@@ -795,7 +849,7 @@ func _attempt_reach_target_via_proximity():
 		has_reached_target = true
 		has_target = false
 		current_attack_state = AttackState.ATTACKING
-		print("Demon boss reached target (proximity)! Performing single attack.")
+		print("cthulhu boss reached target (proximity)! Performing single attack.")
 
 		# Try to locate the Target node for damage calls if not already set
 		if target_node == null:
@@ -815,21 +869,21 @@ func _on_hack_timer_timeout():
 		has_reached_target = false
 		current_attack_state = AttackState.DASHING
 		if anim and anim.animation.begins_with("attack"):
-			anim.play("demon_idle")
+			anim.play("cthulhu_idle")
 		# Resume approach
 		set_target_position(target_position)
 		return
 	if has_reached_target and not is_being_targeted:
 		play_random_attack_animation()
-		print("Demon boss attacking the target!")
+		print("cthulhu boss attacking the target!")
 
 func play_random_attack_animation():
-	"""Play the attack animation (demon boss only has one attack animation)"""
-	if not anim or anim.animation == "demon_death" or anim.animation == "demon_damaged":
+	"""Play the attack animation (cthulhu boss only has one attack animation)"""
+	if not anim or anim.animation == "cthulhu_death" or anim.animation == "cthulhu_damaged":
 		return
 
-	anim.play("demon_attack")
-	print("Demon boss playing attack: demon_attack")
+	anim.play("cthulhu_attack")
+	print("cthulhu boss playing attack: cthulhu_attack")
 
 func get_target_node() -> Node2D:
 	"""Get the target node to attack"""
@@ -855,3 +909,65 @@ func clamp_within_room_bounds():
 
 	if p != global_position:
 		global_position = p
+
+func spawn_corner_portals():
+	"""Spawn purple portals at the 4 corner positions that spawn NightBorne enemies"""
+	# Avoid spawning duplicates
+	if not spawned_portals.is_empty():
+		print("Portals already spawned, skipping")
+		return
+
+	# Get the parent container (EnemyContainer)
+	var parent_container = get_parent()
+	if not parent_container:
+		print("ERROR: Cannot spawn portals - no parent container!")
+		return
+
+	# Get the spawn locations node
+	var spawn_locations = get_parent().get_node_or_null("../BossRoomSpawn/SpawnLocations")
+	if not spawn_locations:
+		print("ERROR: BossRoomSpawn/SpawnLocations not found!")
+		return
+
+	# Fetch portal positions directly
+	var portal_topleft = spawn_locations.get_node_or_null("PortalTopLeft")
+	var portal_topright = spawn_locations.get_node_or_null("PortalTopRight")
+	var portal_bottomleft = spawn_locations.get_node_or_null("PortalBottomLeft")
+	var portal_bottomright = spawn_locations.get_node_or_null("PortalBottomRight")
+
+	var portal_positions = []
+	if portal_topleft:
+		portal_positions.append(portal_topleft.global_position)
+	if portal_topright:
+		portal_positions.append(portal_topright.global_position)
+	if portal_bottomleft:
+		portal_positions.append(portal_bottomleft.global_position)
+	if portal_bottomright:
+		portal_positions.append(portal_bottomright.global_position)
+
+	print("Spawning purple portals at portal positions: ", portal_positions)
+
+	for i in range(portal_positions.size()):
+		var portal_position = portal_positions[i]
+
+		# Create portal instance
+		var portal = PurplePortalScene.instantiate()
+		portal.z_index = 3
+		portal.position = parent_container.to_local(portal_position)
+
+		# Set target position for the portal (center target)
+		if target_position != Vector2.ZERO:
+			portal.target_position = target_position
+		else:
+			# Fallback to find Target node
+			var target_node = get_tree().root.find_child("Target", true, false)
+			if target_node:
+				portal.target_position = target_node.global_position
+
+		# Add portal to container
+		parent_container.add_child(portal)
+		spawned_portals.append(portal)
+
+		print("Spawned purple portal at position ", portal_position, " (local: ", portal.position, ")")
+
+	print("Successfully spawned ", spawned_portals.size(), " purple portals")

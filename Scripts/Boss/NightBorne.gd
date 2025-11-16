@@ -4,11 +4,11 @@ extends Node2D
 @export var green: Color = Color("#639765")
 @export var red: Color = Color("#a65455")
 
-@export var speed: float = 50.0  # Movement speed towards target
+@export var speed: float = 25  # Movement speed towards target
 @onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
-@onready var prompt_text = prompt.text
+var prompt_text: String = ""
 @onready var area: Area2D = $Area2D
 
 # Target tracking
@@ -32,6 +32,11 @@ func _ready() -> void:
 	# Connect animation finished signal
 	if anim:
 		anim.animation_finished.connect(_on_animation_finished)
+
+	# Initialize prompt_text if word is available
+	if word:
+		prompt_text = word.text
+
 	pass  # Word will be set by the game manager via set_prompt()
 
 func _process(delta: float) -> void:
@@ -39,11 +44,15 @@ func _process(delta: float) -> void:
 
 # --- Set word from spawner ---
 func set_prompt(new_word: String) -> void:
-	word.text = new_word  # keep a clean text for reference
-	word.parse_bbcode(new_word)  # start with plain text
+	prompt_text = new_word  # keep a clean text for reference
+	if word:  # Safety check in case node isn't ready
+		word.text = new_word
+		word.parse_bbcode(new_word)  # start with plain text
 
 func get_prompt() -> String:
-	return word.text
+	if word:
+		return word.text
+	return prompt_text
 
 # --- Set target position (where to move towards) ---
 func set_target_position(target: Vector2) -> void:

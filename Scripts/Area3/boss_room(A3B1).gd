@@ -271,18 +271,18 @@ func _spawn_enemy_at_position(spawn_position: Vector2, enemy_scene: PackedScene)
 
 	# Check if this is a boss enemy - if so, try to use specific boss spawn point
 	var is_boss_enemy = false
-	var is_demon_boss = false
+	var is_cthulhu_boss = false
 	if enemy_scene:
 		var temp_instance = enemy_scene.instantiate()
 		is_boss_enemy = temp_instance.get("max_boss_health") != null
 		# Check if this is specifically the Demon boss
-		is_demon_boss = temp_instance.get("max_boss_health") != null and temp_instance.has_method("start_boss_pattern")
+		is_cthulhu_boss = temp_instance.get("max_boss_health") != null and temp_instance.has_method("start_boss_pattern")
 		temp_instance.queue_free()
 
 	var final_spawn_position = spawn_position
 	if is_boss_enemy:
-		if is_demon_boss:
-			# Demon boss always spawns at Top node in BossRoomSpawn/SpawnLocations
+		if is_cthulhu_boss:
+			# cthulhu boss always spawns at Top node in BossRoomSpawn/SpawnLocations
 			var spawn_locations = get_node_or_null("BossRoomSpawn/SpawnLocations")
 			if spawn_locations:
 				var top_node = spawn_locations.get_node_or_null("Top")
@@ -499,7 +499,7 @@ func _spawn_boss():
 	boss_spawned = true
 	print("DEMON BOSS SPAWNED - Fight for your life!")
 
-func _spawn_demon_boss():
+func _spawn_cthulhu_boss():
 	"""Spawn the Demon boss at the Top node position"""
 	if boss_spawned:
 		return
@@ -507,7 +507,7 @@ func _spawn_demon_boss():
 	# Find the Top node position
 	var top_node = get_node_or_null("../Top")
 	if not top_node:
-		print("ERROR: Top node not found for demon boss spawn!")
+		print("ERROR: Top node not found for cthulhu boss spawn!")
 		is_spawning_enemies = false
 		return
 

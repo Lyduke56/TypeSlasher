@@ -15,12 +15,29 @@ var portal_index: int = 0
 var is_being_targeted: bool = false
 var prompt_text: String = ""
 
+# Enemy spawning variables
+var NightBorneScene = preload("res://Scenes/Boss/NightBorne.tscn")
+var spawn_timer: Timer
+@export var spawn_interval: float = 3.0  # Spawn a NightBorne every 3 seconds
+var target_position: Vector2
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	area_2d.body_entered.connect(_on_body_entered)
-	var location_names = ["Top", "Left", "Right"]
-	prompt_text = location_names[portal_index]
-	set_prompt(prompt_text)  # Display location name
+
+	# Set a random word for the portal
+	var portal_word = _get_unique_word("medium")
+	set_prompt(portal_word)
+
+	# Setup enemy spawning timer
+	spawn_timer = Timer.new()
+	add_child(spawn_timer)
+	spawn_timer.wait_time = spawn_interval
+	spawn_timer.one_shot = false
+	spawn_timer.timeout.connect(_spawn_nightborne)
+	spawn_timer.start()
+
+	print("Purple portal activated - spawning NightBorne every ", spawn_interval, " seconds")
 
 # --- Typing interface functions (similar to enemies) ---
 func set_prompt(new_word: String) -> void:
@@ -94,3 +111,66 @@ func play_disappear_animation():
 # Portal handled by typing completion now - kept for safety
 func _on_body_entered(body: Node2D):
 	pass  # Typing system handles portal activation now
+
+func _spawn_nightborne():
+	"""Spawn a NightBorne enemy at the portal's position"""
+	# Get the parent container (EnemyContainer in the boss room)
+	var parent_container = get_parent()
+
+	if not parent_container:
+		print("ERROR: Purple portal has no parent container!")
+		return
+
+	# Create NightBorne instance
+	var nightborne = NightBorneScene.instantiate()
+	nightborne.z_index = 3
+
+	# Position at portal location
+	nightborne.position = position
+
+	# Make NightBorne faster than regular enemies
+	nightborne.speed = 75.0  # Faster than orc's 50
+
+	# Set target position (should be toward the center/target)
+	if target_position != Vector2.ZERO:
+		nightborne.set_target_position(target_position)
+	else:
+		# Fallback: try to find the Target node
+		var target = get_tree().root.find_child("Target", true, false)
+		if target:
+			nightborne.set_target_position(target.global_position)
+
+	# Add to enemy container first
+	parent_container.add_child(nightborne)
+
+	# Force the NightBorne to be ready and then set its word
+	await get_tree().process_frame  # Wait one frame for nodes to be ready
+	_setup_nightborne_prompt_immediately(nightborne)
+
+	print("Purple portal spawned NightBorne at ", position)
+
+func _setup_nightborne_prompt_immediately(nightborne: Node2D):
+	"""Immediate setup of NightBorne prompt"""
+	var enemy_word = _get_unique_word("medium")
+	nightborne.set_prompt(enemy_word)
+	print("NightBorne spawned with word: '", enemy_word, "'")
+
+func _setup_nightborne_prompt(nightborne: Node2D):
+	"""Deferred setup of NightBorne prompt"""
+	var enemy_word = _get_unique_word("medium")
+	nightborne.set_prompt(enemy_word)
+	print("NightBorne spawned with word: '", enemy_word, "'")
+
+func _get_unique_word(category: String = "medium") -> String:
+	"""Get a unique word for the enemy"""
+	if not WordDatabase:
+		print("WordDatabase not loaded!")
+		return "enemy"
+
+	var available_words = WordDatabase.get_category_words(category)
+	if available_words.is_empty():
+		print("No words available in category: " + category)
+		return "enemy"
+
+	# Pick random word
+	return available_words[randi() % available_words.size()]

@@ -17,6 +17,10 @@ var is_processing_completion: bool = false
 var input_buffer: Array[String] = []
 
 func _ready() -> void:
+	# Load WordDatabase for the dungeon
+	WordDatabase.load_word_database()
+	print("WordDatabase loaded for dungeon Area 4 Final Boss")
+
 	# Connect to health changes first, before any health modifications
 	Global.player_health_changed.connect(_on_health_changed)
 

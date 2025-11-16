@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://c2rw07ejo4fcf"]
 
-[ext_resource type="Script" uid="uid://dkoe3xk6t0r8a" path="res://Scripts/green_portal.gd" id="1_ucv88"]
+[ext_resource type="Script" uid="uid://cvrxg0lvw6euk" path="res://Scripts/Boss/purple_portal.gd" id="1_ucv88"]
 [ext_resource type="Texture2D" uid="uid://62p58c3l650e" path="res://Assets/Sprites/Portals/Purple_Portal_Sprite_Sheet.png" id="2_8unqk"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_d7ob6"]
 
