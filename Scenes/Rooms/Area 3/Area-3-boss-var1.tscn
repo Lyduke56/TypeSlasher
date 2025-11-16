@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://04bfptemmdc7" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsA2.png" id="7_kau1o"]
 [ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="7_v2so2"]
 [ext_resource type="Texture2D" uid="uid://dcv7vre6w0q8" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsA5.png" id="8_e5w70"]
-[ext_resource type="PackedScene" uid="uid://y5d6xtntiawe" path="res://Scenes/Boss/Cthulu.tscn" id="9_qdm2w"]
+[ext_resource type="PackedScene" uid="uid://c1b2kana4a24y" path="res://Scenes/Boss/Demon.tscn" id="9_qdm2w"]
 [ext_resource type="Texture2D" uid="uid://bkotaa0wf2s22" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsSandA5.png" id="9_v2so2"]
 [ext_resource type="Texture2D" uid="uid://c6aenh02h86va" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FurnitureB.png" id="10_qdm2w"]
 [ext_resource type="Texture2D" uid="uid://c3ytj82ayrhso" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_SandDecorationsC.png" id="11_dx2xn"]

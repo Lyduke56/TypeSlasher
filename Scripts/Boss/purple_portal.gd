@@ -18,7 +18,9 @@ var prompt_text: String = ""
 # Enemy spawning variables
 var NightBorneScene = preload("res://Scenes/Boss/NightBorne.tscn")
 var spawn_timer: Timer
-@export var spawn_interval: float = 3.0  # Spawn a NightBorne every 3 seconds
+@export var min_spawn_interval: float = 1.0  # Minimum time to spawn NightBorne
+@export var max_spawn_interval: float = 5.0  # Maximum time to spawn NightBorne
+@export var nightborne_speed: float = 75.0  # Speed to set on spawned NightBorne
 var target_position: Vector2
 
 # Called when the node enters the scene tree for the first time.
@@ -32,12 +34,12 @@ func _ready() -> void:
 	# Setup enemy spawning timer
 	spawn_timer = Timer.new()
 	add_child(spawn_timer)
-	spawn_timer.wait_time = spawn_interval
-	spawn_timer.one_shot = false
+	spawn_timer.wait_time = randf_range(min_spawn_interval, max_spawn_interval)
+	spawn_timer.one_shot = true
 	spawn_timer.timeout.connect(_spawn_nightborne)
 	spawn_timer.start()
 
-	print("Purple portal activated - spawning NightBorne every ", spawn_interval, " seconds")
+	print("Purple portal activated - spawning NightBorne with random intervals between ", min_spawn_interval, " and ", max_spawn_interval, " seconds")
 
 # --- Typing interface functions (similar to enemies) ---
 func set_prompt(new_word: String) -> void:
@@ -61,6 +63,14 @@ func set_next_character(next_character_index: int):
 	# Bounds checking
 	if next_character_index < -1 or next_character_index > full_text.length():
 		print("Warning: Invalid character index: ", next_character_index)
+		return
+
+	# Check if typing is complete (last character typed)
+	var is_complete = (next_character_index >= full_text.length())
+
+	if is_complete:
+		# Typing completed - play disappear animation immediately
+		play_disappear_animation()
 		return
 
 	var typed_part = ""
@@ -90,11 +100,15 @@ func get_bbcode_end_color_tag() -> String:
 
 func set_targeted_state(targeted: bool):
 	"""Called when portal becomes targeted"""
+	var was_targeted = is_being_targeted
 	is_being_targeted = targeted
 	if targeted:
 		modulate = Color.GRAY  # Darken the portal
 	else:
 		modulate = Color.WHITE  # Reset color
+		# If was targeted and completed targeting, play disappear animation
+		if was_targeted:
+			play_disappear_animation()
 
 func play_appear_animation():
 	animated_sprite.play("appear")
@@ -102,6 +116,10 @@ func play_appear_animation():
 	animated_sprite.play("idle")
 
 func play_disappear_animation():
+	# Stop spawning new enemies during disappear animation
+	if spawn_timer:
+		spawn_timer.stop()
+
 	animated_sprite.play("disappear")
 	await animated_sprite.animation_finished
 	portal_selected.emit(portal_index)  # Portal selected for navigation
@@ -129,7 +147,7 @@ func _spawn_nightborne():
 	nightborne.position = position
 
 	# Make NightBorne faster than regular enemies
-	nightborne.speed = 75.0  # Faster than orc's 50
+	nightborne.speed = nightborne_speed
 
 	# Set target position (should be toward the center/target)
 	if target_position != Vector2.ZERO:
@@ -146,6 +164,10 @@ func _spawn_nightborne():
 	# Force the NightBorne to be ready and then set its word
 	await get_tree().process_frame  # Wait one frame for nodes to be ready
 	_setup_nightborne_prompt_immediately(nightborne)
+
+	# Restart timer with new random interval
+	spawn_timer.wait_time = randf_range(min_spawn_interval, max_spawn_interval)
+	spawn_timer.start()
 
 	print("Purple portal spawned NightBorne at ", position)
 

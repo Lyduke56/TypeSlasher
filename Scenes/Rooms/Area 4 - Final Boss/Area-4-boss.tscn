@@ -18989,16 +18989,22 @@ position = Vector2(77.1739, -201.087)
 [node name="Left" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="15"]
 position = Vector2(-175, -1.08696)
 
-[node name="Right" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="16"]
+[node name="LeftHit" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="16"]
+position = Vector2(-114.13, -1.08696)
+
+[node name="Right" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="17"]
 position = Vector2(172.826, -1.08695)
 
-[node name="Bottom" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="17"]
+[node name="RightHit" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="18"]
+position = Vector2(111.957, -1.08695)
+
+[node name="Bottom" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="19"]
 position = Vector2(-1.08696, 216.304)
 
-[node name="BottomLeft" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="18"]
+[node name="BottomLeft" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="20"]
 position = Vector2(-105.435, 216.304)
 
-[node name="BottomRight" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="19"]
+[node name="BottomRight" type="Node2D" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="21"]
 position = Vector2(111.957, 216.304)
 
 [node name="HealingRoom" type="Node2D" parent="."]

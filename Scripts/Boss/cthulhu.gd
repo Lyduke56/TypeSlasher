@@ -17,10 +17,25 @@ extends CharacterBody2D
 var max_boss_health: int = 5
 var death_started: bool = false
 
+func get_run_animation_name() -> String:
+	return "cthulhu_run2" if current_phase == 2 else "cthulhu_run"
+
+func check_phase_switch():
+	if boss_health <= phase_2_health_threshold and current_phase == 1:
+		current_phase = 2
+		print("Boss entering Phase 2! Health:", boss_health, " Speed:", phase_2_speed)
+
 # Movement pattern system - All 8 directions cycle
 enum MovementState { IDLE, MOVING_TOP, MOVING_TOPRIGHT, MOVING_RIGHT, MOVING_BOTTOMRIGHT, MOVING_BOTTOM, MOVING_BOTTOMLEFT, MOVING_LEFT, MOVING_TOPLEFT }
 var current_movement_state: MovementState = MovementState.IDLE
 @export var move_speed: float = 80.0  # Movement speed between nodes
+@export var fast_speed: float = 120.0  # Fast speed during node iteration phase
+
+@export var phase_2_health_threshold: int = 3  # Health at which phase 2 starts
+@export var phase_2_speed: float = 160.0  # Movement speed in phase 2
+
+var in_fast_mode: bool = false  # True when moving faster during node traversal
+var current_phase: int = 1  # Current boss phase
 var top_position: Vector2
 var topright_position: Vector2
 var right_position: Vector2
@@ -32,11 +47,12 @@ var topleft_position: Vector2
 var current_target_position: Vector2
 
 # Attack pattern system
-enum AttackState { IDLE, SHOOTING, WAITING, DASHING, ATTACKING }
+enum AttackState { IDLE, SHOOTING, WAITING, DASHING, ATTACKING, MOVING_TO_HIT }
 var current_attack_state: AttackState = AttackState.IDLE
 var attack_timer: Timer
 var idle_timer: Timer
 var hack_timer: Timer  # Like minotaur - continuous attack timer
+var attack2_idle_timer: Timer
 var fireball_count: int = 0
 @export var max_fireballs: int = 1  # 2 fireballs per position (8 total)
 @export var idle_duration: float = 3.0  # 3 seconds idle before becoming targetable
@@ -67,6 +83,13 @@ var knockback_velocity: Vector2 = Vector2.ZERO
 var targetable_timer: Timer
 var targetable_duration: float = 10.0  # 10 seconds targetable after knockback
 var is_after_knockback_recovery: bool = false  # True when targetable after knockback recovery
+
+# Attack2 phase variables
+var is_attack2: bool = false  # True when performing attack2 at final positions
+var attack2_timer: Timer  # Timer for attack2 duration if needed
+var lefthit_position: Vector2
+var righthit_position: Vector2
+var chosen_hit_position: Vector2
 
 # Room bounds
 var room_center: Vector2 = Vector2.ZERO
@@ -174,6 +197,7 @@ func set_targeted_state(targeted: bool):
 	if targeted and not is_targetable:
 		return
 
+	var was_targeted = is_being_targeted  # Remember previous state
 	is_being_targeted = targeted
 	if targeted:
 		# Stop moving and play idle animation when targeted
@@ -182,6 +206,9 @@ func set_targeted_state(targeted: bool):
 		modulate = Color.GRAY  # Darken the enemy
 	else:
 		modulate = Color.WHITE  # Reset color
+		# If was targeted and completed targeting, take damage
+		if was_targeted:
+			take_damage()
 
 func take_damage(attacker_global_position: Vector2 = global_position):
 	"""Boss takes damage from player, requires 5 hits to defeat"""
@@ -189,11 +216,33 @@ func take_damage(attacker_global_position: Vector2 = global_position):
 	if boss_health <= 0:
 		return
 
+	# If boss was attacked during attack2 phase (sentence completed), take damage immediately
+	if is_attack2:
+		print("cthulhu boss attacked during attack2 phase (sentence completed) - taking damage immediately")
+		is_attack2 = false
+		boss_health -= 1
+		check_phase_switch()
+		update_boss_health_ui()
+
+		print("cthulhu boss damaged! Health: ", boss_health, "/", max_boss_health)
+
+		# If dead now, play death immediately
+		if boss_health <= 0:
+			play_death_animation()
+			return
+
+		# Play damaged animation and become untargetable
+		if anim:
+			anim.play("cthulhu_damaged")
+		become_untargetable()
+		return
+
 	# If boss was targetable during attack phase AND after knockback recovery, take damage immediately
 	if is_targetable and is_after_knockback_recovery:
 		print("cthulhu boss attacked during targetable phase after knockback - taking damage immediately")
 		is_after_knockback_recovery = false  # Reset flag
 		boss_health -= 1
+		check_phase_switch()
 		update_boss_health_ui()
 
 		print("cthulhu boss damaged! Health: ", boss_health, "/", max_boss_health)
@@ -217,6 +266,7 @@ func take_damage(attacker_global_position: Vector2 = global_position):
 
 	# Only reduce health if NOT targetable (i.e., after knockback recovery)
 	boss_health -= 1
+	check_phase_switch()
 	update_boss_health_ui()
 
 	print("cthulhu boss damaged! Health: ", boss_health, "/", max_boss_health)
@@ -333,10 +383,15 @@ func setup_timers():
 	idle_timer.one_shot = true
 	idle_timer.timeout.connect(_on_idle_timer_timeout)
 
-	targetable_timer = Timer.new()
-	add_child(targetable_timer)
+	# Use the TargetableTimer from the scene
+	targetable_timer = $TargetableTimer
 	targetable_timer.one_shot = true
 	targetable_timer.timeout.connect(_on_targetable_timer_timeout)
+
+	attack2_idle_timer = Timer.new()
+	add_child(attack2_idle_timer)
+	attack2_idle_timer.one_shot = true
+	attack2_idle_timer.timeout.connect(_on_attack2_idle_timer_timeout)
 
 func setup_room_bounds():
 	"""Setup room bounds for knockback clamping"""
@@ -356,6 +411,9 @@ func start_boss_pattern():
 	"""Start the cthulhu boss pattern - begin at Top position"""
 	# Find the Top node position
 	find_node_positions()
+
+	# Enable fast mode for the node traversal phase
+	in_fast_mode = true
 
 	# Start at Top position
 	global_position = top_position
@@ -383,6 +441,8 @@ func find_node_positions():
 			var bottomleft_node = spawn_locations.get_node_or_null("BottomLeft")
 			var left_node = spawn_locations.get_node_or_null("Left")
 			var topleft_node = spawn_locations.get_node_or_null("TopLeft")
+			var lefthit_node = spawn_locations.get_node_or_null("LeftHit")
+			var righthit_node = spawn_locations.get_node_or_null("RightHit")
 
 			if top_node:
 				top_position = top_node.global_position
@@ -400,8 +460,12 @@ func find_node_positions():
 				left_position = left_node.global_position
 			if topleft_node:
 				topleft_position = topleft_node.global_position
+			if lefthit_node:
+				lefthit_position = lefthit_node.global_position
+			if righthit_node:
+				righthit_position = righthit_node.global_position
 
-			print("Found node positions in BossRoomSpawn/SpawnLocations - Top:", top_position, " TopRight:", topright_position, " Right:", right_position, " BottomRight:", bottomright_position, " Bottom:", bottom_position, " BottomLeft:", bottomleft_position, " Left:", left_position, " TopLeft:", topleft_position)
+			print("Found node positions in BossRoomSpawn/SpawnLocations - Top:", top_position, " TopRight:", topright_position, " Right:", right_position, " BottomRight:", bottomright_position, " Bottom:", bottom_position, " BottomLeft:", bottomleft_position, " Left:", left_position, " TopLeft:", topleft_position, " LeftHit:", lefthit_position, " RightHit:", righthit_position)
 		else:
 			print("ERROR: BossRoomSpawn/SpawnLocations not found!")
 
@@ -427,7 +491,7 @@ func _on_fireball_timer_timeout():
 
 	# Play attack animation
 	if anim:
-		anim.play("cthulhu_attack")
+		anim.play(get_run_animation_name())
 
 	# Shoot fireball
 	shoot_fireball()
@@ -493,16 +557,55 @@ func start_idle_phase():
 		current_attack_state = AttackState.SHOOTING
 		has_reached_position = false  # Reset flag for next movement
 		if anim:
-			anim.play("cthulhu_run")
+			anim.play(get_run_animation_name())
 		print("cthulhu boss completed shooting at position ", positions_completed, ", moving to next position")
 	else:
-		# All positions completed, do the final idle
-		current_attack_state = AttackState.WAITING
-		if anim:
-			anim.play("cthulhu_idle")
-		idle_timer.wait_time = idle_duration
-		idle_timer.start()
-		print("cthulhu boss completed all positions, entering final idle phase for ", idle_duration, " seconds")
+		# All positions completed, start final attack phase at RightHit or LeftHit
+		start_final_attack_phase()
+		print("cthulhu boss completed all positions, starting final attack at hit position")
+
+func start_final_attack_phase():
+	"""Start the final attack phase at RightHit or LeftHit by walking there"""
+	# Choose randomly between RightHit and LeftHit positions
+	chosen_hit_position = righthit_position if randi() % 2 == 0 else lefthit_position
+	current_attack_state = AttackState.MOVING_TO_HIT
+	current_target_position = chosen_hit_position
+	has_reached_position = false
+
+	print("cthulhu boss starting to walk to final hit position")
+
+func start_attack2_phase():
+	"""Start attack2 phase - idle first, then attack2, become targetable, damage if sentence not completed"""
+	is_attack2 = true
+	is_targetable = true
+
+	# Try to locate the Target node for damage calls
+	if target_node == null:
+		target_node = get_target_node()
+
+	# Set word and show it
+	var attack2_word = _get_unique_word(targetable_word_category)
+	set_prompt(attack2_word)
+	if word:
+		word.visible = true
+
+	# First, play idle and wait
+	if anim:
+		anim.play("cthulhu_idle")
+
+	# Start idle timer for attack2
+	attack2_idle_timer.wait_time = idle_duration
+	attack2_idle_timer.start()
+
+	print("cthulhu boss started attack2 phase idle - will play attack2 after ", idle_duration, " seconds")
+
+func _on_attack2_idle_timer_timeout():
+	"""Called when attack2 idle ends - start attack2 animation"""
+	# Play attack2 animation - damage player if not completed by animation end
+	if anim:
+		anim.play("cthulhu_attack2")
+
+	print("cthulhu boss transitioned to attack2 - damage player if not completed by animation end")
 
 func _on_idle_timer_timeout():
 	"""Called when idle phase ends - start dash phase"""
@@ -516,6 +619,9 @@ func start_dash_phase():
 	current_attack_state = AttackState.DASHING
 	is_targetable = true
 	has_reached_target = false  # Reset for new approach
+
+	# Disable fast mode as we've completed the node traversals
+	in_fast_mode = false
 
 	# Face right during dash phase
 	if anim:
@@ -594,9 +700,8 @@ func start_targetable_phase():
 
 func _on_targetable_timer_timeout():
 	"""Called when targetable phase ends - boss takes damage for failed interruption"""
+	# Normal case - boss takes damage
 	print("cthulhu boss targetable timer expired - boss takes damage and resets to normal pattern")
-
-	# Boss takes damage for failing to be interrupted within time limit
 	boss_health -= 1
 	update_boss_health_ui()
 
@@ -616,6 +721,7 @@ func _on_targetable_timer_timeout():
 func become_untargetable():
 	"""Reset to normal attack pattern"""
 	is_targetable = false
+	is_attack2 = false  # Reset attack2 flag
 
 	# Stop the targetable timer if it's still running
 	if targetable_timer and targetable_timer.is_stopped() == false:
@@ -706,6 +812,14 @@ func _on_animation_finished():
 		become_untargetable()
 		return
 
+	# Handle attack2 animation finish - damage player if not completed
+	if anim and anim.animation == "cthulhu_attack2":
+		if is_attack2:
+			if target_node:
+				target_node.take_damage()
+			become_untargetable()
+		return
+
 	# Return to appropriate animation after attack animations
 	if anim and anim.animation == "cthulhu_attack":
 		# Check if we're currently moving between nodes
@@ -719,7 +833,7 @@ func _on_animation_finished():
 						current_movement_state == MovementState.MOVING_TOPLEFT)
 
 		if is_moving:
-			anim.play("cthulhu_run")
+			anim.play(get_run_animation_name())
 		else:
 			anim.play("cthulhu_idle")
 
@@ -791,15 +905,16 @@ func _physics_process(delta: float) -> void:
 	if current_attack_state == AttackState.DASHING:
 		# Move toward target like a regular enemy
 		var direction = (target_position - global_position).normalized()
-		velocity = direction * move_speed
+		var current_speed = phase_2_speed if current_phase == 2 else move_speed
+		velocity = direction * current_speed
 
 		# Update facing direction
 		if anim and direction.x != 0:
 			anim.flip_h = direction.x < 0
 
 		# Play run animation only if not attacking
-		if anim and anim.animation != "cthulhu_run" and not anim.animation.begins_with("cthulhu_attack"):
-			anim.play("cthulhu_run")
+		if anim and anim.animation != get_run_animation_name() and not anim.animation.begins_with("cthulhu_attack"):
+			anim.play(get_run_animation_name())
 
 		move_and_slide()
 		clamp_within_room_bounds()
@@ -811,11 +926,12 @@ func _physics_process(delta: float) -> void:
 	# Handle movement between nodes during shooting phase
 	if current_attack_state == AttackState.SHOOTING and current_movement_state != MovementState.IDLE:
 		var direction = (current_target_position - global_position).normalized()
-		velocity = direction * move_speed
+		var current_speed = fast_speed if in_fast_mode else (phase_2_speed if current_phase == 2 else move_speed)
+		velocity = direction * current_speed
 
 		# Play run animation
-		if anim and anim.animation != "cthulhu_run":
-			anim.play("cthulhu_run")
+		if anim and anim.animation != get_run_animation_name():
+			anim.play(get_run_animation_name())
 
 		# Update facing direction
 		if anim and direction.x != 0:
@@ -831,6 +947,34 @@ func _physics_process(delta: float) -> void:
 			global_position = current_target_position
 			current_movement_state = MovementState.IDLE
 			start_shooting_fireballs()
+		return
+
+	# Handle movement to hit position for final attack
+	if current_attack_state == AttackState.MOVING_TO_HIT:
+		var direction = (current_target_position - global_position).normalized()
+		var current_speed = phase_2_speed if current_phase == 2 else move_speed
+		velocity = direction * current_speed
+
+		if anim and anim.animation != get_run_animation_name():
+			anim.play(get_run_animation_name())
+
+		if anim and direction.x != 0:
+			anim.flip_h = direction.x < 0
+
+		move_and_slide()
+		clamp_within_room_bounds()
+
+		if not has_reached_position and global_position.distance_to(current_target_position) <= 5.0:
+			has_reached_position = true
+			global_position = current_target_position
+
+			# Set facing based on position
+			if chosen_hit_position == lefthit_position:
+				anim.flip_h = false  # face right
+			else:
+				anim.flip_h = true  # face left
+
+			start_attack2_phase()
 		return
 
 	# Idle or waiting states
