@@ -13,7 +13,7 @@ func reset_progress():
 
 func advance_to_next_area():
 	current_area += 1
-	if current_area > 2:  # Loop back to area 1 after area 2
+	if current_area > 3:  # Loop back to area 1 after area 3
 		current_area = 1
 	reset_progress()  # Reset dungeon progress for new area
 
