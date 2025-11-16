@@ -3,7 +3,9 @@ extends Node2D
 @export var blue: Color = Color("#4682b4")
 @export var green: Color = Color("#639765")
 @export var red: Color = Color("#a65455")
-
+@onready var sfx_damaged: AudioStreamPlayer2D = $sfx_damaged
+@onready var sfx_death: AudioStreamPlayer2D = $sfx_death
+@onready var sfx_attack: AudioStreamPlayer2D = $sfx_attack
 @export var speed: float = 50.0  # Movement speed towards target
 @onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
@@ -120,6 +122,8 @@ func play_death_animation():
 	# Connect the signal and play damage animation first
 	anim.animation_finished.connect(_on_damage_animation_finished, CONNECT_ONE_SHOT)
 	anim.play("damaged")
+	$sfx_damaged.play()
+		
 
 	print("Enemy damage animation started")
 
@@ -133,7 +137,9 @@ func _on_damage_animation_finished():
 		# Connect the signal and play death animation
 		anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
 		anim.play("death")
-
+		$sfx_death.play()
+			
+	
 		print("Enemy death animation started")
 
 func _on_death_animation_finished():
@@ -172,6 +178,7 @@ func _on_hack_timer_timeout():
 		# Temporarily disable looping for hack animation so it plays once
 		anim.sprite_frames.set_animation_loop("Hack", false)
 		anim.play("Hack")
+		$sfx_attack.play()
 		print("Enemy hacking the target!")
 
 func _on_animation_finished():
