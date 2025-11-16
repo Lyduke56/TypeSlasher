@@ -507,8 +507,7 @@ script = ExtResource("1_25tac")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -40)
 sprite_frames = SubResource("SpriteFrames_phdkv")
-animation = &"cthulhu_attack2"
-frame_progress = 0.936437
+animation = &"cthulu_run"
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3

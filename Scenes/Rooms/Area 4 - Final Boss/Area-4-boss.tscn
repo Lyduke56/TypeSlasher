@@ -42,7 +42,6 @@
 [ext_resource type="Texture2D" uid="uid://bvfal3qv4lv5l" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Tentacle 2 Sheet.png" id="35_uo8ns"]
 [ext_resource type="Texture2D" uid="uid://dunhog73j7swt" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Eye 1 Sheet.png" id="36_uo8ns"]
 [ext_resource type="Texture2D" uid="uid://b170xtaab5xco" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Mouth 2 Sheet.png" id="37_cc474"]
-[ext_resource type="Texture2D" uid="uid://b5gvgaw8av840" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Mouth 1 Sheet.png" id="38_28iq7"]
 [ext_resource type="Texture2D" uid="uid://c3w3xevfp1cdd" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Eldritch Entity Awaken.png" id="39_iv5km"]
 [ext_resource type="Texture2D" uid="uid://bpfkfc83p7i6p" path="res://Assets/Background/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 01 - Solid colour.png" id="40_gv354"]
 [ext_resource type="Texture2D" uid="uid://lxv4lwowq4jg" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Eldritch Entity Dormant.png" id="40_qf6ck"]
@@ -8410,8 +8409,11 @@ texture = ExtResource("37_cc474")
 0:0/animation_frame_17/duration = 1.0
 0:0/0 = 0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0sn0l"]
+load_path = "res://.godot/imported/Mouth 1 Sheet.png-7a4fd1e5011c0abdd3a53f14550b4222.ctex"
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iv5km"]
-texture = ExtResource("38_28iq7")
+texture = SubResource("CompressedTexture2D_0sn0l")
 0:0/size_in_atlas = Vector2i(4, 4)
 0:0/animation_columns = 18
 0:0/animation_speed = 6.0
@@ -18960,16 +18962,16 @@ visible = false
 scale = Vector2(0.92, 0.92)
 
 [node name="BottomRightPoint" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="0"]
-position = Vector2(254.348, 255.435)
+position = Vector2(207.609, 172.826)
 
 [node name="BottomLeftPoint" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="1"]
-position = Vector2(-258.696, 258.696)
+position = Vector2(-209.783, 172.826)
 
 [node name="TopRightPoint" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="2"]
-position = Vector2(258.696, -256.522)
+position = Vector2(207.609, -175)
 
 [node name="TopLeftPoint" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="3"]
-position = Vector2(-255.435, -252.174)
+position = Vector2(-209.783, -175)
 
 [node name="North" parent="BossRoom/BossRoomSpawn/SpawnLocations" index="4"]
 position = Vector2(-1.08696, -1.08699)
