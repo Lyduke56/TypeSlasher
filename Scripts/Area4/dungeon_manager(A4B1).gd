@@ -220,7 +220,12 @@ func setup_room_connections():
 	var boss = get_node("../BossRoom")
 
 	starting.set_connected_room("top", healing)
+
 	healing.set_connected_room("top", boss)
+	healing.set_connected_room("bottom", starting)
+
+	boss.set_connected_room("bottom", healing)
+
 
 func _on_room_cleared(room):
 	if room == current_room:

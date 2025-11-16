@@ -1,6 +1,7 @@
-[gd_scene load_steps=153 format=4 uid="uid://capcce7s5ld0m"]
+[gd_scene load_steps=150 format=4 uid="uid://capcce7s5ld0m"]
 
 [ext_resource type="Script" uid="uid://bpawtedpgeuym" path="res://Scripts/Area4/dungeon_manager(A4B1).gd" id="1_5p7dr"]
+[ext_resource type="Script" uid="uid://bmkgk3418upiv" path="res://Scripts/Area4/boss_room(A4B1).gd" id="2_b7s7f"]
 [ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://Assets/Map Tiles/Tileset/Dungeon/decor.png" id="2_cylfd"]
 [ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_if8ti"]
 [ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_suvxe"]
@@ -25,47 +26,36 @@
 [ext_resource type="Texture2D" uid="uid://bmlb2dwygk47l" path="res://Assets/Map Tiles/Tileset/Dungeon/walls_floor.png" id="23_bjf4c"]
 [ext_resource type="Texture2D" uid="uid://casqns6bsbloo" path="res://Assets/Map Tiles/Tileset/Dungeon/Water_coasts_animation.png" id="24_8h36a"]
 [ext_resource type="Texture2D" uid="uid://dqasttlqfpeuh" path="res://Assets/Map Tiles/Tileset/Dungeon/water_details_animation.png" id="25_rg4ky"]
-[ext_resource type="Texture2D" uid="uid://7en0wv0bguo3" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_wvlb2"]
-[ext_resource type="Texture2D" uid="uid://1m42j1xpugay" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="27_iqimg"]
-[ext_resource type="Texture2D" uid="uid://bbg3sxcrfmldc" path="res://Assets/Map Tiles/Tileset/Dungeon/mainlevbuild.png" id="28_s3251"]
+[ext_resource type="Texture2D" uid="uid://cgn25u7abs02d" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_wvlb2"]
+[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="27_iqimg"]
+[ext_resource type="Texture2D" uid="uid://c8fbufax2v2vo" path="res://Assets/Map Tiles/Tileset/Dungeon/mainlevbuild.png" id="28_s3251"]
 [ext_resource type="Texture2D" uid="uid://ch0cutbtie3ps" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_coasts_animation.png" id="29_gtoew"]
-[ext_resource type="Texture2D" uid="uid://ensl5bekl1v" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Tileset.png" id="29_ugin6"]
+[ext_resource type="Texture2D" uid="uid://bsqhnuh0djsfb" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Tileset.png" id="29_ugin6"]
 [ext_resource type="Texture2D" uid="uid://dhjqbiubpoqe7" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_floor.png" id="30_4ln5w"]
-[ext_resource type="Texture2D" uid="uid://ct87ffe8050iy" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Terrain/Floating Rock A1 Sheet.png" id="30_ce1yc"]
-[ext_resource type="Texture2D" uid="uid://p8fb7fpn3e4b" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Terrain/Floating Rock A2 Sheet.png" id="31_jmmyv"]
+[ext_resource type="Texture2D" uid="uid://co5sjj6yp53u1" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Terrain/Floating Rock A1 Sheet.png" id="30_ce1yc"]
+[ext_resource type="Texture2D" uid="uid://bpxhfdvpmm25a" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Terrain/Floating Rock A2 Sheet.png" id="31_jmmyv"]
 [ext_resource type="Texture2D" uid="uid://bbfu5byw1ys67" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_walls.png" id="31_nxj3d"]
-[ext_resource type="Texture2D" uid="uid://bsfi0uhlorel1" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Amalgam 1 Sheet.png" id="32_jmmyv"]
+[ext_resource type="Texture2D" uid="uid://dhri2205mm1bx" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Amalgam 1 Sheet.png" id="32_jmmyv"]
 [ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="32_kxc0b"]
 [ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="33_p5pk2"]
-[ext_resource type="Texture2D" uid="uid://fppimhvqixca" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Tentacle 1 Sheet.png" id="34_gv354"]
-[ext_resource type="Texture2D" uid="uid://b0a7mo0e4as7s" path="res://Assets/Map Tiles/mainlevbuild.png" id="34_haq6m"]
+[ext_resource type="Texture2D" uid="uid://5y175ypcx4mm" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Tentacle 1 Sheet.png" id="34_gv354"]
+[ext_resource type="Texture2D" uid="uid://b600ebtolewct" path="res://Assets/Map Tiles/mainlevbuild.png" id="34_haq6m"]
 [ext_resource type="PackedScene" uid="uid://b4o3t4arf1fch" path="res://Scenes/GreenPortal.tscn" id="35_3q8tg"]
-[ext_resource type="Texture2D" uid="uid://bvfal3qv4lv5l" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Tentacle 2 Sheet.png" id="35_uo8ns"]
-[ext_resource type="Texture2D" uid="uid://dunhog73j7swt" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Eye 1 Sheet.png" id="36_uo8ns"]
-[ext_resource type="Texture2D" uid="uid://b170xtaab5xco" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Mouth 2 Sheet.png" id="37_cc474"]
-[ext_resource type="Texture2D" uid="uid://c3w3xevfp1cdd" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Eldritch Entity Awaken.png" id="39_iv5km"]
-[ext_resource type="Texture2D" uid="uid://bpfkfc83p7i6p" path="res://Assets/Background/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 01 - Solid colour.png" id="40_gv354"]
-[ext_resource type="Texture2D" uid="uid://lxv4lwowq4jg" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Eldritch Entity Dormant.png" id="40_qf6ck"]
-[ext_resource type="Texture2D" uid="uid://ct8okfqep1qte" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Eldritch Entity Awaken-Sheet.png" id="41_pqykg"]
-[ext_resource type="Texture2D" uid="uid://eswr87po86l1" path="res://Assets/Background/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 02 - Shadows 2.png" id="41_uo8ns"]
-[ext_resource type="Texture2D" uid="uid://bq6liq4rg6p8y" path="res://Assets/Background/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 02 - Shadows.png" id="43_cc474"]
-[ext_resource type="Texture2D" uid="uid://c411d2mdmiwm1" path="res://Assets/Background/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 03 - Stars 2.png" id="44_28iq7"]
-[ext_resource type="Texture2D" uid="uid://cableviyyeoh2" path="res://Assets/Background/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 03 - Stars.png" id="45_uqukp"]
-[ext_resource type="Script" uid="uid://bw6da8wfwocqs" path="res://Scripts/Area3/boss_room(A3B1).gd" id="52_b7s7f"]
-[ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="53_1vqqj"]
-[ext_resource type="PackedScene" uid="uid://y5d6xtntiawe" path="res://Scenes/Boss/Cthulu.tscn" id="54_5p7dr"]
+[ext_resource type="Texture2D" uid="uid://dxsy0eyssbgs6" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Tentacle 2 Sheet.png" id="35_uo8ns"]
+[ext_resource type="Texture2D" uid="uid://b4qd66dvj4wnb" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Eye 1 Sheet.png" id="36_uo8ns"]
+[ext_resource type="Texture2D" uid="uid://ctuqd7glvyqyv" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Mouth 2 Sheet.png" id="37_cc474"]
+[ext_resource type="Texture2D" uid="uid://78mauevidvlu" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Eldritch Entity Awaken.png" id="39_iv5km"]
+[ext_resource type="Texture2D" uid="uid://4x4wshm46i7c" path="res://Assets/Background/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 01 - Solid colour.png" id="40_gv354"]
+[ext_resource type="Texture2D" uid="uid://bfjko0wws871a" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Eldritch Entity Dormant.png" id="40_qf6ck"]
+[ext_resource type="Texture2D" uid="uid://hhqde14xl7uh" path="res://Assets/Map Tiles/Tileset/CRAWLING DEPTHS/Creatures/Eldritch Entity Awaken-Sheet.png" id="41_pqykg"]
+[ext_resource type="Texture2D" uid="uid://cvvo1r0v8ccvc" path="res://Assets/Background/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 02 - Shadows 2.png" id="41_uo8ns"]
+[ext_resource type="Texture2D" uid="uid://cstn34ycsb4md" path="res://Assets/Background/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 02 - Shadows.png" id="43_cc474"]
+[ext_resource type="Texture2D" uid="uid://dov4nvdn1v1w8" path="res://Assets/Background/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 03 - Stars 2.png" id="44_28iq7"]
+[ext_resource type="Texture2D" uid="uid://qbo8apd1ik1l" path="res://Assets/Background/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 03 - Stars.png" id="45_uqukp"]
 [ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="55_dl0hv"]
 [ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="56_1vqqj"]
 [ext_resource type="PackedScene" uid="uid://1autrsiutlos" path="res://Scenes/RoomSpawns/boss_room_spawn.tscn" id="56_cyctb"]
 [ext_resource type="Script" uid="uid://dupdl2bqtnva" path="res://Scripts/Dungeons/Area_1_boss_var1/Rooms/healing_room.gd" id="57_5p7dr"]
-
-[sub_resource type="Resource" id="Resource_v2so2"]
-script = ExtResource("53_1vqqj")
-enemy_scene = ExtResource("54_5p7dr")
-count = 1
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7yqwt"]
 size = Vector2(672, 640)
@@ -18848,8 +18838,7 @@ script = ExtResource("1_5p7dr")
 [node name="BossRoom" type="Node2D" parent="."]
 z_index = 2
 position = Vector2(1, -1183)
-script = ExtResource("52_b7s7f")
-enemy_waves = Array[ExtResource("53_1vqqj")]([SubResource("Resource_v2so2")])
+script = ExtResource("2_b7s7f")
 
 [node name="CameraArea" type="Area2D" parent="BossRoom"]
 
