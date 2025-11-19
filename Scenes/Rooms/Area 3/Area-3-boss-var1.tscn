@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=4 uid="uid://dg1ggv0p4qg61"]
+[gd_scene load_steps=136 format=4 uid="uid://dg1ggv0p4qg61"]
 
 [ext_resource type="Script" uid="uid://tjby8o2u6rgv" path="res://Scripts/Area3/dungeon_manager(A3B1).gd" id="1_kau1o"]
 [ext_resource type="Script" uid="uid://b5q4gh30t4pfo" path="res://Scripts/Area3/area_3_boss_var_1.gd" id="1_qdm2w"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://uw280smh4xbt" path="res://Scenes/Enemies/basic_orc_rider.tscn" id="9_kkki6"]
 [ext_resource type="PackedScene" uid="uid://c1b2kana4a24y" path="res://Scenes/Boss/Demon.tscn" id="9_qdm2w"]
 [ext_resource type="Texture2D" uid="uid://bkotaa0wf2s22" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsSandA5.png" id="9_v2so2"]
+[ext_resource type="PackedScene" uid="uid://o7y4fhdlmdju" path="res://Scenes/Enemies/basic_werebear.tscn" id="10_am6ty"]
 [ext_resource type="Texture2D" uid="uid://c6aenh02h86va" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FurnitureB.png" id="10_qdm2w"]
 [ext_resource type="Texture2D" uid="uid://c3ytj82ayrhso" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_SandDecorationsC.png" id="11_dx2xn"]
 [ext_resource type="Texture2D" uid="uid://f5xqnv8o2xvg" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_WallsAndFloors.png" id="12_n2bpw"]
@@ -72,6 +73,14 @@ metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ohwbk"]
 size = Vector2(508, 556)
+
+[sub_resource type="Resource" id="Resource_bbubp"]
+script = ExtResource("7_v2so2")
+enemy_scene = ExtResource("10_am6ty")
+count = 1
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrbvl"]
 size = Vector2(491, 513)
@@ -18499,6 +18508,7 @@ position = Vector2(0, 1)
 [node name="RoomC - Medium" type="Node2D" parent="."]
 position = Vector2(0, 864)
 script = ExtResource("35_ohwbk")
+enemy_waves = Array[ExtResource("7_v2so2")]([SubResource("Resource_bbubp")])
 
 [node name="CameraArea" type="Area2D" parent="RoomC - Medium"]
 visibility_layer = 3
