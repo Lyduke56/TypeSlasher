@@ -287,7 +287,7 @@ func take_damage():
 			target.take_damage()
 
 		if health <= 0:
-			get_tree().quit()
+			get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 	else:
 		print("Shield prevented damage! Health unchanged:", health)
 

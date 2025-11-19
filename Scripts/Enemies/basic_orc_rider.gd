@@ -9,7 +9,7 @@ extends Node2D
 @export var word_category: String = "medium"  # Category for enemy words
 @onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
-@onready var prompt = $Words
+@onready var prompt = $Word
 @onready var prompt_text = prompt.text
 @onready var area: Area2D = $Area2D
 @onready var heart_container = $"Node2D/HeartContainer"

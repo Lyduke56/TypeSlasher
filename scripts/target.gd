@@ -25,7 +25,7 @@ func take_damage(amount: int = 1):
 		# Wait additional 2 seconds
 		await get_tree().create_timer(3.0).timeout
 		print("GAME OVER")
-		get_tree().quit()
+		get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 	else:
 		# Wait for damaged animation to finish, then return to idle
 		await animated_sprite.animation_finished

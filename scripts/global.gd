@@ -66,7 +66,9 @@ func take_damage(amount: int = 1):
 func _handle_game_over():
 	"""Handle game over with a slight delay to show the last heart disappearing"""
 	await get_tree().create_timer(0.5).timeout
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
+	player_max_health = 3  # Default max health, increases permanently
+	player_current_health = 3  # Current health, resets to max when entering dungeon
 
 func heal_damage(amount: int = 1):
 	"""Increase player health and emit signal for UI updates"""
