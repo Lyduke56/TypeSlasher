@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://8nbud2wu7ebp"]
+[gd_scene load_steps=9 format=3 uid="uid://8nbud2wu7ebp"]
 
 [ext_resource type="PackedScene" uid="uid://d1rhn5n4v0ppc" path="res://Scenes/player.tscn" id="1_rgh2o"]
 [ext_resource type="Script" uid="uid://b7u6emsb5wigv" path="res://Scripts/Main/main.gd" id="1_v1gob"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_v1gob"]
 [ext_resource type="Script" uid="uid://coopnli5wbrbj" path="res://Scripts/heart_container.gd" id="4_script"]
 [ext_resource type="Script" uid="uid://b5kpp21ay8abs" path="res://Scripts/current_score_label.gd" id="7_jw32o"]
+[ext_resource type="PackedScene" uid="uid://dimjdi1unntal" path="res://Scenes/prompt_display.tscn" id="8_PROMPT"]
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
@@ -21,7 +22,7 @@ zoom = Vector2(2.635, 2.075)
 [node name="MainManager" type="Node2D" parent="."]
 position = Vector2(2, 0)
 script = ExtResource("2_v1gob")
-debug_dungeon_path = "res://Scenes/Rooms/Area 3/Area-3-boss-var1.tscn"
+debug_dungeon_path = "res://Scenes/Rooms/Area 1/Area-1-var1.tscn"
 
 [node name="HUD" type="CanvasLayer" parent="."]
 process_priority = 1
@@ -71,3 +72,6 @@ scroll_active = false
 tab_size = 24
 script = ExtResource("7_jw32o")
 metadata/_edit_use_anchors_ = true
+
+[node name="PromptDisplay" parent="." instance=ExtResource("8_PROMPT")]
+visible = false

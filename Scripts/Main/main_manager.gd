@@ -84,6 +84,9 @@ func load_dungeon(dungeon_path: String) -> void:
 		add_child(current_dungeon)
 		print("Loaded dungeon: " + dungeon_path)
 
+		# Connect dungeon signals to prompt display
+		connect_dungeon_signals()
+
 		# Ensure player is positioned in the new dungeon's starting room center
 		call_deferred("_position_player_in_new_dungeon")
 	else:
@@ -194,3 +197,44 @@ func load_random_dungeon():
 func mark_dungeon_cleared(dungeon_path: String):
 	"""Mark a specific dungeon as completed by its path"""
 	DungeonProgress.mark_dungeon_cleared(dungeon_path)
+
+func connect_dungeon_signals():
+	"""Connect dungeon signals to the prompt display"""
+	if not current_dungeon:
+		return
+
+	# Get the prompt display from Main scene
+	var prompt_display = get_node("/root/Main/PromptDisplay")
+	if not prompt_display:
+		print("Warning: Could not find PromptDisplay node")
+		return
+
+	# Find the dungeon manager node (search recursively for one that has the signals)
+	var dungeon_manager = find_dungeon_manager(current_dungeon)
+	if not dungeon_manager:
+		print("Warning: Could not find any node with prompt signals in dungeon")
+		return
+
+	# Disconnect any existing connections to avoid duplicates
+	if dungeon_manager.prompt_updated.is_connected(prompt_display.update_prompt_display):
+		dungeon_manager.prompt_updated.disconnect(prompt_display.update_prompt_display)
+	if dungeon_manager.prompt_cleared.is_connected(prompt_display.clear_prompt_display):
+		dungeon_manager.prompt_cleared.disconnect(prompt_display.clear_prompt_display)
+
+	# Connect dungeon signals to prompt display
+	dungeon_manager.prompt_updated.connect(prompt_display.update_prompt_display)
+	dungeon_manager.prompt_cleared.connect(prompt_display.clear_prompt_display)
+
+	print("Connected dungeon signals to prompt display")
+
+func find_dungeon_manager(node: Node) -> Node:
+	"""Recursively search for a node that has the prompt signals"""
+	if node.has_signal("prompt_updated") and node.has_signal("prompt_cleared"):
+		return node
+
+	for child in node.get_children():
+		var found = find_dungeon_manager(child)
+		if found:
+			return found
+
+	return null
