@@ -16,6 +16,10 @@ var current_letter_index: int = -1
 var is_processing_completion: bool = false
 var input_buffer: Array[String] = []
 
+# Signal for prompt update
+signal prompt_updated(full_text: String, current_index: int)
+signal prompt_cleared
+
 func _ready() -> void:
 	# Connect to health changes first, before any health modifications
 	Global.player_health_changed.connect(_on_health_changed)
@@ -224,6 +228,7 @@ func transition_to_room(direction: String):
 		input_buffer.clear()
 		active_enemy = null
 		current_letter_index = -1
+		prompt_cleared.emit()  # Clear prompt on room transition
 
 			# Switch to new room (no camera management needed - handled by room start)
 		current_room = next_room
@@ -314,6 +319,7 @@ func find_new_active_enemy(typed_character: String):
 				active_enemy = entity
 				current_letter_index = 1
 				active_enemy.set_next_character(current_letter_index)
+				prompt_updated.emit(prompt, current_letter_index)  # Emit signal
 				break
 
 	# Also check for portals in portal rooms
@@ -333,6 +339,7 @@ func find_new_active_enemy(typed_character: String):
 				active_enemy = entity
 				current_letter_index = 1
 				active_enemy.set_next_character(current_letter_index)
+				prompt_updated.emit(prompt, current_letter_index)  # Emit signal
 				break
 
 func _complete_word():
@@ -364,6 +371,9 @@ func _complete_word():
 
 	active_enemy = null
 	current_letter_index = -1
+
+	# Clear the prompt display
+	prompt_cleared.emit()
 
 	# Clear input buffer of any remaining inputs
 	input_buffer.clear()
@@ -443,6 +453,7 @@ func _process_single_character(key_typed: String):
 		# Update visual feedback - cached: minimize checks
 		if is_instance_valid(active_enemy):
 			active_enemy.set_next_character(current_letter_index)
+			prompt_updated.emit(prompt, current_letter_index)  # Emit update signal
 
 		# Check completion
 		if current_letter_index >= prompt.length():

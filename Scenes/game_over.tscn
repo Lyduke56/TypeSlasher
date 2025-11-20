@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://davq3fhjf5sv7"]
+[gd_scene load_steps=7 format=3 uid="uid://davq3fhjf5sv7"]
 
 [ext_resource type="Script" uid="uid://p6chgi83pfav" path="res://Scripts/game_over.gd" id="1_8fo1c"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="1_ojehl"]
+[ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_ek8ke"]
 
 [sub_resource type="Animation" id="Animation_8fo1c"]
 resource_name = "Fade_in"
@@ -75,13 +76,15 @@ grow_vertical = 2
 color = Color(0.999935, 0.41322, 0.376307, 0.631373)
 
 [node name="Label" type="Label" parent="."]
-offset_left = 219.0
+offset_left = 238.0
 offset_top = 86.0
-offset_right = 2634.0
+offset_right = 2653.0
 offset_bottom = 693.0
 scale = Vector2(0.295, 0.295)
+theme_override_fonts/font = ExtResource("2_ek8ke")
 theme_override_font_sizes/font_size = 445
 text = "Game Over"
+horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 383.0

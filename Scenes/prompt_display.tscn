@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dimjdi1unntal"]
+
+[ext_resource type="Script" uid="uid://m3rrboq13283" path="res://Scripts/prompt_display.gd" id="1_8q2l4"]
+[ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="1_x4j6a"]
+
+[node name="PromptDisplay" type="CanvasLayer"]
+script = ExtResource("1_8q2l4")
+
+[node name="Word" type="RichTextLabel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -254.0
+offset_top = -78.0
+offset_right = 5076.0
+offset_bottom = 612.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.1, 0.1)
+theme_override_fonts/normal_font = ExtResource("1_x4j6a")
+theme_override_font_sizes/normal_font_size = 228
+text = "Prompt"
+horizontal_alignment = 1
