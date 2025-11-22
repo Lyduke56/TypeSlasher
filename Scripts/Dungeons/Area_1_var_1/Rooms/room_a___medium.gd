@@ -1,8 +1,8 @@
 extends Node2D
 
-enum RoomType { SMALL, MEDIUM, BOSS }
+enum RoomType { SMALL, MEDIUM, HARD, BOSS }
 
-@export var room_type: RoomType = RoomType.MEDIUM
+@export var room_type: RoomType = RoomType.HARD
 var is_cleared: bool = false
 var is_ready_to_clear: bool = false
 
@@ -162,7 +162,7 @@ func _spawn_room_enemies():
 	# Find spawn points
 	var spawn_locations = get_node_or_null("MediumRoomSpawn/SpawnLocations")
 	if not spawn_locations:
-		spawn_locations = get_node_or_null("SmallRoomSpawn/SpawnLocations")
+		spawn_locations = get_node_or_null("HardRoomSpawn/SpawnLocations")
 	if not spawn_locations:
 		print("No spawn locations found in room: " + name)
 		is_spawning_enemies = false
@@ -392,26 +392,37 @@ func _get_unique_word_for_category(category: String) -> String:
 		unused_words.append(word)
 
 	if unused_words.is_empty():
-		print("No unused words left in category: ", category)
+		print("No unused words left in category: ", category + " (room: " + name + ")")
 		return "enemy"  # Complete failure - all words used
 
-	# STEP 2: Get words with unused first letters (strict letter uniqueness for arrows/projectiles)
+	# STEP 2: Get words with unused first letters for arrows/projectiles
 	var available_words = []
+	var perfect_matches = []  # Words with unused letters (for arrows)
 
 	for word in unused_words:
 		var first_letter = word.substr(0, 1).to_upper()
 		if not active_letters.has(first_letter):
-			available_words.append(word)  # Must have unused letter for arrows
+			available_words.append(word)  # Letter is unique
+		# For arrows, we strictly enforce letter uniqueness
 
-	if available_words.size() > 0:
-		# Use only letter-unique words for arrows/projectiles
-		var selected_word = available_words[randi() % available_words.size()]
-		return selected_word
+	# Determine which array to use based on context (arrows vs regular enemies)
+	# This is approximated by checking category - adjust as needed
+	var word_pool = []
+	if category in ["easy"]:  # Arrows/projectiles use easy category
+		word_pool = available_words  # Strict letter uniqueness for projectiles
+		if word_pool.size() == 0:
+			print("No letter-unique words available for projectiles in category: ", category)
+			return "enemy"  # Block spawning rather than allow conflicts
 	else:
-		# No perfect matches available - this is a complete failure for arrows
-		# They should not spawn with letter conflicts
-		print("No arrow-word available without first-letter conflicts in category: ", category)
-		return "enemy"  # Block arrow spawning rather than allow conflicts
+		# Regular enemies: prefer unique letters, allow fallbacks
+		if available_words.size() > 0:
+			word_pool = available_words  # Use unique letters when possible
+		else:
+			# Fallback: any unused words from category
+			word_pool = unused_words
+
+	var selected_word = word_pool[randi() % word_pool.size()]
+	return selected_word
 
 func assign_word_to_enemy(enemy_instance: Node2D, word: String):
 	"""Track word assignment and letter usage"""
