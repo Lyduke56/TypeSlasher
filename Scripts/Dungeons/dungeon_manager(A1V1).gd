@@ -378,17 +378,28 @@ func _complete_word():
 	# Clear input buffer of any remaining inputs
 	input_buffer.clear()
 
-	# For dungeon enemies and portals, handle differently
-	if completed_entity.has_method("get_prompt") and completed_entity.get_prompt() == "Warp":
-		# This is a portal - switch dungeon immediately
-		print("Portal completed! Switching dungeon immediately.")
+	# Handle different entity types after completion
+	if completed_entity.has_method("play_disappear_animation"):
+		# Portal completion - do NOT dash to portal, just play disappear animation and notify MainManager
+		print("Portal completed! Playing disappear animation and switching to boss dungeon.")
+		completed_entity.play_disappear_animation()
+		# After portal animation, notify MainManager to handle progression
 		var main_manager = get_tree().root.get_node_or_null("Main/MainManager")
-		if main_manager:
+		if main_manager and main_manager.has_method("switch_to_boss_dungeon"):
+			await get_tree().create_timer(0.5).timeout  # Wait for disappear animation
 			main_manager.switch_to_boss_dungeon()
 		else:
-			print("ERROR: Could not find MainManager!")
+			print("ERROR: Could not find MainManager or switch_to_boss_dungeon method!")
+	elif completed_entity.has_method("play_heal_animation"):
+		# Goddess statue completion - do NOT dash to statue, just play heal animation
+		# Check if the statue hasn't been used yet to prevent multiple usages
+		if completed_entity.has_method("get") and completed_entity.get("has_been_used") != true:
+			print("Goddess statue completed! Playing heal animation.")
+			completed_entity.play_heal_animation()
+		else:
+			print("Goddess statue already used - not triggering again.")
 	else:
-		# This is an enemy - use dash_to_enemy
+		# Regular enemy completion - dash to and attack
 		print("Enemy completed! Player dashing to enemy.")
 		player.dash_to_enemy(entity_position, completed_entity)
 
