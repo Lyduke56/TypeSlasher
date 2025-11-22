@@ -9,6 +9,9 @@ extends Node2D
 @export var split_count: int = 2    # Number of children to spawn when splitting
 @export var word_category: String = "medium"  # Difficulty category for slime words
 @onready var anim = $AnimatedSprite2D
+
+# Room reference for word coordination
+var associated_room: Node2D = null
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
 @onready var prompt_text = prompt.text
@@ -188,11 +191,24 @@ func spawn_split_slimes(death_position: Vector2):
 
 func _setup_child_prompt(child_slime: Node2D):
 	"""Deferred setup of child slime prompt to ensure proper initialization"""
-	# Give child slime easier word
-	var child_word = _get_unique_word("easy")  # Easy difficulty for children
+	# Give child slime easier word - use room's tracking if possible
+	var child_word: String
+	if associated_room and associated_room.has_method("_get_unique_word_for_category"):
+		# Use room's tracked word selection
+		child_word = associated_room._get_unique_word_for_category("easy")
+		if child_word != "":
+			print("Child slime spawned with tracked word: '", child_word, "' (easy difficulty)")
+		else:
+			child_word = _get_unique_word("easy")  # Fallback
+			print("Child slime spawned with fallback word: '", child_word, "' (easy difficulty - fallback)")
+	else:
+		# Fallback to untracked random word
+		child_word = _get_unique_word("easy")
+		print("Child slime spawned with untracked word: '", child_word, "' (easy difficulty - untracked)")
+
 	child_slime.set_prompt(child_word)
 	child_slime.word_category = "easy"
-	print("Child slime spawned with word: '", child_word, "' (easy difficulty)")
+	child_slime.associated_room = associated_room  # Pass room reference to children
 
 func _get_unique_word(new_category: String = "") -> String:
 	"""Get a unique word for the enemy"""

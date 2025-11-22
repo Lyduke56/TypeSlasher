@@ -68,7 +68,7 @@ var is_after_knockback_recovery: bool = false  # True when targetable after knoc
 var room_center: Vector2 = Vector2.ZERO
 var room_size: Vector2 = Vector2.ZERO
 
-@export var points_for_kill = 150
+@export var points_for_kill = 2500
 
 # Signals
 signal targetable_phase_ended  # Emitted when targetable phase ends (timer or damage)
@@ -488,7 +488,7 @@ func start_dash_phase():
 
 	# Face right during dash phase
 	if anim:
-		anim.flip_h = false  # false = face right
+		anim.flip_h = true  # true = face right (flip left-facing sprite to face right)
 
 	# Set word and show it
 	var dash_word = _get_unique_word(word_category)
@@ -741,7 +741,7 @@ func _physics_process(delta: float) -> void:
 
 		# Update facing direction
 		if anim and direction.x != 0:
-			anim.flip_h = direction.x < 0
+			anim.flip_h = direction.x > 0
 
 		# Play run animation only if not attacking
 		if anim and anim.animation != "demon_run" and not anim.animation.begins_with("demon_attack"):
@@ -765,7 +765,7 @@ func _physics_process(delta: float) -> void:
 
 		# Update facing direction
 		if anim and direction.x != 0:
-			anim.flip_h = direction.x < 0
+			anim.flip_h = direction.x > 0
 
 		move_and_slide()
 		clamp_within_room_bounds()

@@ -7,6 +7,9 @@ extends Node2D
 @export var speed: float = 150.0  # Projectile speed
 @export var lifetime: float = 10.0  # How long arrow lives before disappearing
 @onready var anim = $AnimatedSprite2D
+
+# Room reference for word coordination
+var associated_room: Node2D = null
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
 @onready var prompt_text = prompt.text
