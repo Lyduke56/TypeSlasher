@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ct4hgdk2e8v47"]
+[gd_scene load_steps=15 format=3 uid="uid://ct4hgdk2e8v47"]
 
 [ext_resource type="Texture2D" uid="uid://cpdry547l3818" path="res://Assets/Sprites/GUI/border 1.png" id="1_2rnfa"]
 [ext_resource type="Theme" uid="uid://dx6raqafay30m" path="res://Assets/Themes/normal_button.tres" id="2_adret"]
@@ -10,6 +10,16 @@
 [ext_resource type="Texture2D" uid="uid://b8douqlbc8tj8" path="res://Assets/Sprites/GUI/wood_checkbox_unchecked.png" id="7_6yr7l"]
 [ext_resource type="Resource" uid="uid://cobaill6vere2" path="res://data/Enemy_Data/Skeleton.tres" id="7_olp6x"]
 [ext_resource type="FontFile" uid="uid://x5y3gace2sm1" path="res://Assets/Fonts/Perfect DOS VGA 437.ttf" id="9_r2bq1"]
+[ext_resource type="Script" uid="uid://8cl20qpfqtg0" path="res://Scenes/GUI/audio_control.gd" id="11_4e7uv"]
+[ext_resource type="Script" uid="uid://c77ulk7ceud3a" path="res://Scenes/GUI/fullscreen_control.gd" id="12_jcnnf"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_r2bq1"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_4e7uv"]
+color = Color(0.326424, 0.532407, 1, 1)
+thickness = 6
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -234,7 +244,6 @@ icon = ExtResource("7_6yr7l")
 flat = true
 
 [node name="Settings" type="NinePatchRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -261,6 +270,57 @@ offset_left = -56.0
 offset_bottom = 56.0
 grow_horizontal = 0
 icon = ExtResource("5_csd48")
+
+[node name="MusicControl" type="HSlider" parent="Settings"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 111.0
+offset_right = 441.0
+offset_bottom = 141.0
+theme_override_styles/slider = SubResource("StyleBoxLine_r2bq1")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_4e7uv")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("11_4e7uv")
+audio_bus_name = "Music"
+
+[node name="MasterControl" type="HSlider" parent="Settings"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 73.0
+offset_right = 441.0
+offset_bottom = 103.0
+theme_override_styles/slider = SubResource("StyleBoxLine_r2bq1")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_4e7uv")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("11_4e7uv")
+audio_bus_name = "Master"
+
+[node name="SFxControl" type="HSlider" parent="Settings"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 147.0
+offset_right = 441.0
+offset_bottom = 177.0
+theme_override_styles/slider = SubResource("StyleBoxLine_r2bq1")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_4e7uv")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("11_4e7uv")
+audio_bus_name = "SFx"
+
+[node name="FullscreenControl" type="CheckButton" parent="Settings"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 235.0
+offset_right = 205.0
+offset_bottom = 281.0
+text = "Full Screen"
+script = ExtResource("12_jcnnf")
 
 [node name="Buff" type="NinePatchRect" parent="."]
 visible = false
@@ -289,3 +349,8 @@ offset_right = 620.0
 offset_bottom = 65.0
 grow_vertical = 2
 columns = 3
+
+[connection signal="value_changed" from="Settings/MusicControl" to="Settings/MusicControl" method="_on_value_changed"]
+[connection signal="value_changed" from="Settings/MasterControl" to="Settings/MasterControl" method="_on_value_changed"]
+[connection signal="value_changed" from="Settings/SFxControl" to="Settings/SFxControl" method="_on_value_changed"]
+[connection signal="toggled" from="Settings/FullscreenControl" to="Settings/FullscreenControl" method="_on_toggled"]

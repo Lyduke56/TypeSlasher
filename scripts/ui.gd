@@ -1,10 +1,15 @@
 extends Control
 
 signal request_resume_game
+@onready var menu: NinePatchRect = $Menu
+@onready var information: NinePatchRect = $Information
+@onready var settings: NinePatchRect = $Settings
+@onready var buff: NinePatchRect = $Buff
 
 @export var description: NinePatchRect
 
 func _ready():
+	defaultsetup()
 	# Connect the main menu buttons
 	var continue_button = get_node_or_null("Menu/VBoxContainer/Continue")
 	if continue_button:
@@ -37,6 +42,12 @@ func _ready():
 		for slot in grid_container.get_children():
 			if slot.has_signal("slot_selected"):
 				slot.connect("slot_selected", Callable(self, "_on_slot_selected"))
+
+func defaultsetup():
+	menu.visible = true
+	information.visible = false
+	settings.visible = false
+	buff.visible = false
 
 
 func _on_continue_pressed():

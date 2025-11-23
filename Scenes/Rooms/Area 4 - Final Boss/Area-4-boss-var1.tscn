@@ -18850,6 +18850,7 @@ script = ExtResource("1_dvw62")
 stream = ExtResource("2_dbmmj")
 volume_db = 5.0
 autoplay = true
+bus = &"Music"
 
 [node name="BossRoom" type="Node2D" parent="."]
 z_index = 2
