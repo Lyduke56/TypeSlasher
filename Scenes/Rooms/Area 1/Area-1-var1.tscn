@@ -17,8 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://bil2sj0ots4r2" path="res://Scenes/Enemies/basic_wolf.tscn" id="12_tonbw"]
 [ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="12_wa0in"]
 [ext_resource type="PackedScene" uid="uid://xcriddmqeofd" path="res://Scenes/Enemies/basic_skeleton.tscn" id="13_gkmiv"]
-[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="17_gkmiv"]
-[ext_resource type="AudioStream" uid="uid://dp3d4f4xkgm5" path="res://Assets/Sfx/Background/BGM - Area 1.ogg" id="18_dulka"]
+[ext_resource type="Texture2D" uid="uid://1m42j1xpugay" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="17_gkmiv"]
+[ext_resource type="AudioStream" uid="uid://cue0pyibbgi1g" path="res://Assets/Sfx/Background/BGM - Area 1.ogg" id="18_dulka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ean82"]
 size = Vector2(310, 342)
@@ -984,7 +984,7 @@ texture = ExtResource("17_gkmiv")
 sources/0 = SubResource("TileSetAtlasSource_dulka")
 sources/1 = SubResource("TileSetAtlasSource_303ub")
 
-[node name="Dungeon2" type="Node2D"]
+[node name="Dungeon3" type="Node2D"]
 script = ExtResource("1_dwvem")
 
 [node name="DungeonManager" type="Node2D" parent="."]

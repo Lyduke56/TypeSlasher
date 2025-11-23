@@ -8,6 +8,8 @@ var current_dungeon: Node2D = null
 
 # Use the dedicated DungeonProgress autoload for persistence
 
+var pause_ui: Control
+
 func boss_dungeon_cleared():
 	"""Called when boss dungeon is completed - go to buff selection"""
 	print("Boss dungeon cleared! Going to buff selection...")
@@ -60,8 +62,29 @@ func _ready() -> void:
 			load_dungeon(debug_dungeon_path)
 		else:
 			load_random_dungeon()
-		# Update heart container in Main scene
-		call_deferred("_update_main_heart_container")
+	# Update heart container in Main scene
+	call_deferred("_update_main_heart_container")
+
+	# Use custom UI pause menu on a dedicated CanvasLayer, like heart_container
+	var ui_canvas = CanvasLayer.new()
+	ui_canvas.name = "UICanvas"
+	add_child(ui_canvas)
+
+	var ui_scene: PackedScene = preload("res://Scenes/GUI/UI.tscn")
+	pause_ui = ui_scene.instantiate()
+	ui_canvas.add_child(pause_ui)
+
+	# Ensure it and all children work while paused
+	_set_node_tree_process_mode(ui_canvas, Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED)
+
+	# Bring UI to front
+	if pause_ui is CanvasItem:
+		(pause_ui as CanvasItem).z_index = 4096
+	pause_ui.visible = false
+
+	# Connect resume signal
+	if pause_ui.has_signal("request_resume_game"):
+		pause_ui.connect("request_resume_game", Callable(self, "_resume_game"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -238,3 +261,33 @@ func find_dungeon_manager(node: Node) -> Node:
 			return found
 
 	return null
+
+func _pause_game() -> void:
+	get_tree().paused = true
+	if pause_ui:
+		pause_ui.visible = true
+		pause_ui.grab_focus()
+	# Inform WPM tracker
+	Global.wpm_on_pause()
+
+func _resume_game() -> void:
+	get_tree().paused = false
+	if pause_ui:
+		pause_ui.visible = false
+	# Inform WPM tracker
+	Global.wpm_on_resume()
+
+func _set_node_tree_process_mode(node: Node, mode: Node.ProcessMode) -> void:
+	# Recursively set process mode for a subtree so input works while paused
+	node.process_mode = mode
+	for child in node.get_children():
+		_set_node_tree_process_mode(child, mode)
+
+func _unhandled_input(event: InputEvent) -> void:
+	# ESC toggles the pause UI on/off
+	if event.is_action_pressed("ui_cancel"):
+		if get_tree().paused or (pause_ui and pause_ui.visible):
+			_resume_game()
+		else:
+			_pause_game()
+		return

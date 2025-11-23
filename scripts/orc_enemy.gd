@@ -123,7 +123,7 @@ func play_death_animation():
 	anim.animation_finished.connect(_on_damage_animation_finished, CONNECT_ONE_SHOT)
 	anim.play("damaged")
 	$sfx_damaged.play()
-		
+
 
 	print("Enemy damage animation started")
 
@@ -138,8 +138,8 @@ func _on_damage_animation_finished():
 		anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
 		anim.play("death")
 		$sfx_death.play()
-			
-	
+
+
 		print("Enemy death animation started")
 
 func _on_death_animation_finished():
