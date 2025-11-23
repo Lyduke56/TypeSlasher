@@ -1,7 +1,7 @@
 [gd_scene load_steps=48 format=3 uid="uid://ggfjnh3kxjeh"]
 
 [ext_resource type="Script" uid="uid://cl8wvldueq7cc" path="res://Scripts/Boss/tentaclussy.gd" id="1_qf7tl"]
-[ext_resource type="Texture2D" uid="uid://ctuvleat2dd47" path="res://Assets/Sprites/Boss/andromalius-57x88-Sheet.png" id="2_qf7tl"]
+[ext_resource type="Texture2D" uid="uid://ctgp236cibdn7" path="res://Assets/Sprites/Boss/andromalius-57x88-Sheet.png" id="2_qf7tl"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="4_d03gt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qf7tl"]

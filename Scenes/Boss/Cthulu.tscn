@@ -506,9 +506,12 @@ height = 28.0
 rotation = 0.0755045
 script = ExtResource("1_25tac")
 blue = Color(0, 0, 0, 1)
+boss_health = 2
+word_category = "medium"
+targetable_word_category = "sentence"
 move_speed = 200.0
 fast_speed = 300.0
-phase_2_health_threshold = 4
+phase_2_health_threshold = 1
 phase_2_speed = 400.0
 idle_duration = 10.0
 

@@ -396,7 +396,7 @@ script = ExtResource("1_gd8pk")
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_77k81")
 animation = &"skeleton_idle"
-frame_progress = 0.241729
+frame_progress = 0.879068
 
 [node name="FreezeVines" type="AnimatedSprite2D" parent="."]
 visible = false
