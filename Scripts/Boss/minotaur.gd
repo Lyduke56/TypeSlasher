@@ -38,6 +38,9 @@ var room_center: Vector2 = Vector2.ZERO
 var room_size: Vector2 = Vector2.ZERO
 var death_started: bool = false
 
+# Room reference for coordinated clearing
+var associated_room: Node2D = null
+
 func _ready() -> void:
 	# Initialize boss health
 	boss_health = max_boss_health

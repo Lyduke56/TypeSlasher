@@ -19,6 +19,9 @@ var has_target: bool = false
 # Targeting state - prevents retyping once word is completed
 var is_being_targeted: bool = false
 
+# Room reference for word coordination
+var associated_room: Node2D = null
+
 # Projectile state
 var direction: Vector2
 var lifetime_timer: Timer

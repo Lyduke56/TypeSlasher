@@ -30,6 +30,12 @@ var current_wave_spawned = 0  # Enemies spawned in current wave
 @onready var spawn_timer: Timer = Timer.new()
 @onready var wave_delay_timer: Timer = Timer.new()
 
+# Word and letter tracking
+var used_words = []  # Track all words used in this room (no reuse)
+var alive_enemies = {}  # enemy_instance -> word (for cleanup)
+var active_letters = {}  # first_letter -> enemy_instance (tracks living enemies using each letter)
+var occupied_static_spawn_points: Dictionary = {}  # position -> static enemy instance
+
 @onready var camera_area: Area2D = $CameraArea
 @onready var enemy_container: Node2D = $EnemyContainer
 @onready var target_container: Node2D = $TargetContainer
@@ -62,6 +68,12 @@ func start_room():
 	print("Room " + name + " started")
 	barrier_on.visible = true
 	barrier_off.visible = false
+
+	# Reset word and letter tracking for new room
+	used_words.clear()
+	alive_enemies.clear()
+	active_letters.clear()
+	occupied_static_spawn_points.clear()
 
 	# Handle camera positioning when entering the room
 	_handle_camera_on_room_enter()
@@ -269,15 +281,39 @@ func _spawn_enemy_at_position(spawn_position: Vector2, enemy_scene: PackedScene)
 	"""Spawn a single enemy at the given position"""
 	await get_tree().process_frame
 
+	# Create enemy instance first to check its properties
+	var enemy_instance = enemy_scene.instantiate()
+	enemy_instance.z_index = 3
+
+	# Determine spawn position based on static vs dynamic
+	var chosen_position = spawn_position
+	if enemy_instance.get("is_static") == true:
+		# Static enemy - ensure no occupying same position
+		if not occupied_static_spawn_points.has(spawn_position):
+			chosen_position = spawn_position
+			occupied_static_spawn_points[chosen_position] = enemy_instance
+		else:
+			# Find an alternative spawn point that isn't occupied by static enemies
+			var alternative_found = false
+			for potential_spawn in available_spawn_points:
+				var potential_pos = potential_spawn.position
+				if not occupied_static_spawn_points.has(potential_pos):
+					chosen_position = potential_pos
+					occupied_static_spawn_points[chosen_position] = enemy_instance
+					alternative_found = true
+					break
+			if not alternative_found:
+				# No available position for static enemy, skip spawning
+				enemy_instance.queue_free()
+				print("No available spawn position for static enemy in room: " + name)
+				return
+
+	enemy_instance.position = chosen_position
+
 	# Get a word for the enemy
 	var selected_word = _get_unique_word()
 	if selected_word == "":
 		return
-
-	# Create enemy instance
-	var enemy_instance = enemy_scene.instantiate()
-	enemy_instance.z_index = 3
-	enemy_instance.position = spawn_position
 
 	# Set target position (where the target is located)
 	var target_position = Vector2.ZERO  # Center, since target is at target_container.position
@@ -295,28 +331,126 @@ func _spawn_enemy_at_position(spawn_position: Vector2, enemy_scene: PackedScene)
 	# Set the word/prompt for this enemy
 	enemy_instance.set_prompt(selected_word)
 
+	# Track the word assignment
+	assign_word_to_enemy(enemy_instance, selected_word)
+
+	# Set room reference for self-controlled enemies (like archers)
+	enemy_instance.set("associated_room", self)
+
 	# Set enemy target (target position)
 	enemy_instance.set_target_position(target_position)
 
 	# Connect enemy death signal to check for room completion
-	enemy_instance.tree_exited.connect(_on_enemy_died)
+	enemy_instance.tree_exited.connect(_on_enemy_died.bind(enemy_instance))
+
+func assign_word_to_enemy(enemy_instance: Node2D, word: String):
+	"""Track word assignment and letter usage"""
+	used_words.append(word)
+	alive_enemies[enemy_instance] = word
+
+	var first_letter = word.substr(0, 1).to_upper()
+	active_letters[first_letter] = enemy_instance
 
 func _get_unique_word() -> String:
-	"""Get a unique word for the enemy"""
+	"""Get a unique word and letter for the enemy"""
 	if not WordDatabase:
 		print("WordDatabase not loaded!")
 		return "enemy"
 
-	var available_words = WordDatabase.get_category_words(current_category)
-	if available_words.is_empty():
-		print("No words available in category: " + current_category)
+	var foundation_words = WordDatabase.get_category_words(current_category)
+	if foundation_words.is_empty():
 		return "enemy"
 
-	# Pick random word
-	return available_words[randi() % available_words.size()]
+	# First, get words that are unused and have unused first letters
+	var available_words = []
+	for word in foundation_words:
+		if word.length() == 0:
+			continue
 
-func _on_enemy_died():
+		var first_letter = word.substr(0, 1).to_upper()
+
+		# Must not be used word AND (letter unused OR letter used by dead enemy)
+		if not used_words.has(word) and not active_letters.has(first_letter):
+			available_words.append(word)
+
+	# If no perfect matches, allow letter reuse (better than blocking spawn)
+	if available_words.is_empty():
+		available_words = []
+		for word in foundation_words:
+			if word.length() == 0 or used_words.has(word):
+				continue
+			# Allow any word that hasn't been used (even with shared first letters)
+			available_words.append(word)
+
+	if available_words.is_empty():
+		return "enemy"  # Complete fallback
+
+	var selected_word = available_words[randi() % available_words.size()]
+	return selected_word
+
+func _get_unique_word_for_category(category: String) -> String:
+	"""Get a unique word and letter for the enemy from a specific category"""
+	if not WordDatabase:
+		print("WordDatabase not loaded!")
+		return "enemy"
+
+	var foundation_words = WordDatabase.get_category_words(category)
+	if foundation_words.is_empty():
+		print("Category not available: ", category)
+		return "enemy"
+
+	# STEP 1: Get ALL words that haven't been used in this room (word uniqueness is priority)
+	var unused_words = []
+	for word in foundation_words:
+		if word.length() == 0 or used_words.has(word):
+			continue
+		unused_words.append(word)
+
+	if unused_words.is_empty():
+		print("No unused words left in category: ", category)
+		return "enemy"  # Complete failure - all words used
+
+	# STEP 2: Get words with unused first letters (strict letter uniqueness for arrows/projectiles)
+	var available_words = []
+
+	for word in unused_words:
+		var first_letter = word.substr(0, 1).to_upper()
+		if not active_letters.has(first_letter):
+			available_words.append(word)  # Must have unused letter for arrows
+
+	if available_words.size() > 0:
+		# Use only letter-unique words for arrows/projectiles
+		var selected_word = available_words[randi() % available_words.size()]
+		return selected_word
+	else:
+		# No perfect matches available - this is a complete failure for arrows
+		# They should not spawn with letter conflicts
+		print("No arrow-word available without first-letter conflicts in category: ", category)
+		return "enemy"  # Block arrow spawning rather than allow conflicts
+
+func _on_enemy_died(dead_enemy: Node2D = null):
 	"""Called when an enemy dies - check if room is ready to be cleared"""
+	# Enhanced cleanup for word/letter tracking if enemy is passed
+	if dead_enemy and dead_enemy in alive_enemies:
+		var dead_word = alive_enemies[dead_enemy]
+		if dead_word != "":
+			# Allow word reuse
+			used_words.erase(dead_word)
+			alive_enemies.erase(dead_enemy)   # Remove tracking
+
+			# Free the letter if this enemy was using it
+			var dead_letter = dead_word.substr(0, 1).to_upper()
+			if active_letters.get(dead_letter) == dead_enemy:
+				active_letters.erase(dead_letter)
+
+	# Free the static spawn position if this was a static enemy
+	if dead_enemy and dead_enemy.get("is_static") == true:
+		for pos in occupied_static_spawn_points.keys():
+			if occupied_static_spawn_points[pos] == dead_enemy:
+				occupied_static_spawn_points.erase(pos)
+				print("Freed static spawn position:", pos)
+				break
+
 	enemies_remaining -= 1
 
 	# Check if room is ready to clear:
@@ -421,11 +555,18 @@ func _spawn_minotaur_boss():
 		boss_word = "MINOTAUR"  # Fallback boss word
 	boss_instance.set_prompt(boss_word)
 
+	# Track the word assignment for boss
+	assign_word_to_enemy(boss_instance, boss_word)
+
 	# Set boss target position
 	boss_instance.set_target_position(target_position)
 
 	# Connect boss death signal to track room completion
-	boss_instance.tree_exited.connect(_on_enemy_died)
+	boss_instance.tree_exited.connect(_on_enemy_died.bind(boss_instance))
+
+	# Note: Boss is not counted in enemies_remaining (matches original logic)
+	# Boss spawn occurs after waves complete (is_ready_to_clear = true)
+	# Boss death will decrement enemies_remaining to <=0, triggering room clear
 
 	boss_spawned = true
 	print("MINOTAUR BOSS SPAWNED - Fight for your life!")

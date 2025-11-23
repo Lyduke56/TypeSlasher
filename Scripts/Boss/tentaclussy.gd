@@ -51,6 +51,9 @@ var targetable_duration: float = 10.0  # 10 seconds targetable
 # Signals
 signal targetable_phase_ended  # Emitted when targetable phase ends (timer or damage)
 
+# Room reference for word coordination
+var associated_room: Node2D = null
+
 func _ready() -> void:
 	# Initialize boss health
 	boss_health = max_boss_health
@@ -457,6 +460,10 @@ func shoot_arrow():
 	# Set arrow target to the same target as archer
 	arrow.set_target_position(target_position)
 
+	# Pass room reference to arrow for coordinated word selection
+	if associated_room:
+		arrow.associated_room = associated_room
+
 	# Set a random word for the arrow (deferred like slime children)
 	call_deferred("_setup_arrow_prompt", arrow)
 
@@ -467,10 +474,22 @@ func shoot_arrow():
 
 func _setup_arrow_prompt(arrow: Node2D):
 	"""Deferred setup of arrow prompt to ensure proper initialization"""
-	# Give arrow an easy word (same as slime children)
-	var arrow_word = _get_unique_word("easy")  # Use easy words for arrows
+	# Give arrow an easy word - use room's tracked system if available
+	var arrow_word: String
+
+	if associated_room and associated_room.has_method("_get_unique_word_for_category"):
+		# Use room's tracked word selection - room handles the print
+		arrow_word = associated_room._get_unique_word_for_category("easy")
+		if arrow_word == "":
+			# Room exhausted - use fallback
+			arrow_word = _get_unique_word("easy")
+			print("Arrow spawned with fallback word: '", arrow_word, "' (easy difficulty - fallback)")
+	else:
+		# No coordination - use untracked random word
+		arrow_word = _get_unique_word("easy")
+		print("Arrow spawned with untracked word: '", arrow_word, "' (easy difficulty - untracked)")
+
 	arrow.set_prompt(arrow_word)
-	print("Arrow spawned with word: '", arrow_word, "' (easy difficulty)")
 
 func _get_unique_word(new_category: String = "") -> String:
 	"""Get a unique word for the enemy (same as slime)"""
