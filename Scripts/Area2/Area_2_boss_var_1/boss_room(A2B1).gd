@@ -347,6 +347,9 @@ func _spawn_enemy_at_position(spawn_position: Vector2, enemy_scene: PackedScene)
 	# Set room reference for self-controlled enemies (like archers/bosses)
 	if is_boss_enemy or enemy_instance.get("is_static") == true:
 		enemy_instance.set("associated_room", self)
+		# For boss enemies, we track their word assignment
+		if is_boss_enemy:
+			assign_word_to_enemy(enemy_instance, selected_word)
 
 	# Set enemy target (target position)
 	enemy_instance.set_target_position(target_position)
@@ -409,22 +412,29 @@ func _get_unique_word_for_category(category: String) -> String:
 			continue
 		unused_words.append(word)
 
-	# STEP 2: Try to find words without first-letter conflicts (but allow them for projectiles)
+	# STEP 2: Strict letter uniqueness for projectiles (they compete less for focus)
 	if unused_words.size() > 0:
-		# Get subset with unused first letters (preferred but not required for projectiles)
+		# ONLY select words with completely unused first letters
 		var available_words = []
 		for word in unused_words:
 			var first_letter = word.substr(0, 1).to_upper()
 			if not active_letters.has(first_letter):
-				available_words.append(word)  # Preferred: no letter conflicts
+				available_words.append(word)  # Must have unique first letter
 
-		# If no perfect matches, use ANY unused word (allows some letter conflicts for projectiles)
-		if available_words.size() == 0:
-			available_words = unused_words
+		# If we have words with unique letters, use them
+		if available_words.size() > 0:
+			var selected_word = available_words[randi() % available_words.size()]
+			print("Arrow spawned with tracked word: '", selected_word, "' (easy difficulty)")
 
-		var selected_word = available_words[randi() % available_words.size()]
-		print("Arrow spawned with tracked word: '", selected_word, "' (easy difficulty)")
-		return selected_word
+			# Track projectile for proper cleanup
+			used_words.append(selected_word)  # Prevent same word reuse
+			# Letter will be tracked when projectile spawns below
+
+			return selected_word
+		else:
+			# No unused words with unique letters available - block spawning
+			print("No projectile words available without letter conflicts - will use fallback system")
+			return ""  # Signal to use fallback (prevents spawning with conflicts)
 	else:
 		# No unused words left in category - signal failure to allow fallback
 		print("No unused words left in easy category - will use fallback system")

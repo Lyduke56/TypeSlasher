@@ -489,6 +489,8 @@ func _setup_arrow_prompt(arrow: Node2D):
 		arrow_word = _get_unique_word("easy")
 		print("Arrow spawned with untracked word: '", arrow_word, "' (easy difficulty - untracked)")
 
+	# Track projectile for room cleanup
+	get_parent().get_parent().assign_word_to_enemy(arrow, arrow_word)
 	arrow.set_prompt(arrow_word)
 
 func _get_unique_word(new_category: String = "") -> String:
