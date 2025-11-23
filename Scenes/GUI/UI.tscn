@@ -33,6 +33,7 @@ offset_right = 175.0
 offset_bottom = 146.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.885, 0.885)
 texture = ExtResource("1_2rnfa")
 region_rect = Rect2(-3.2001, -2.88215, 123.629, 65.0007)
 patch_margin_left = 17

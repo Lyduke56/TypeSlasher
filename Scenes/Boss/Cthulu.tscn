@@ -1,9 +1,9 @@
 [gd_scene load_steps=72 format=3 uid="uid://y5d6xtntiawe"]
 
 [ext_resource type="Script" uid="uid://c25mhnltixs1i" path="res://Scripts/Boss/cthulhu.gd" id="1_25tac"]
-[ext_resource type="Texture2D" uid="uid://c7uojvxdlx7vq" path="res://Assets/Sprites/Boss/cthulu_192x112_SpriteSheet.png" id="2_persl"]
+[ext_resource type="Texture2D" uid="uid://dlbmq4u7tejf7" path="res://Assets/Sprites/Boss/cthulu_192x112_SpriteSheet.png" id="2_persl"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_acgxl"]
-[ext_resource type="AudioStream" uid="uid://gvsqst56uug7" path="res://Assets/Sfx/Background/BGM - Area 4 Boss.ogg" id="4_persl"]
+[ext_resource type="AudioStream" uid="uid://1rmrkjurclg" path="res://Assets/Sfx/Background/BGM - Area 4 Boss.ogg" id="4_persl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_acgxl"]
 atlas = ExtResource("2_persl")

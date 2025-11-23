@@ -3,6 +3,7 @@ extends Control
 @onready var health_buff = $GridContainer/HealthBuff
 @onready var shield_buff = $GridContainer/ShieldBuff
 @onready var sword_buff = $GridContainer/SwordBuff
+@onready var vine_buff = $GridContainer/VineBuff
 
 func _ready():
 	update_buff_display()
@@ -23,3 +24,8 @@ func update_buff_display():
 	sword_buff.visible = Global.sword_buff_stacks > 0
 	if sword_buff.visible:
 		sword_buff.get_node("StackLabel").text = str(Global.sword_buff_stacks)
+
+	# Vine buff (freeze)
+	vine_buff.visible = Global.freeze_buff_stacks > 0
+	if vine_buff.visible:
+		vine_buff.get_node("StackLabel").text = str(Global.freeze_buff_stacks)

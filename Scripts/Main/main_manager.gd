@@ -8,6 +8,8 @@ var current_dungeon: Node2D = null
 
 # Use the dedicated DungeonProgress autoload for persistence
 
+var pause_ui: Control
+
 func boss_dungeon_cleared():
 	"""Called when boss dungeon is completed - go to buff selection"""
 	print("Boss dungeon cleared! Going to buff selection...")
@@ -34,11 +36,17 @@ func _ready() -> void:
 		elif Global.selected_buff_type == 1:  # Shield
 			Global.shield_buff_stacks += 1
 			Global.shield_damage_reduction_chance = Global.shield_buff_stacks * 15  # 15% per stack
+			Global.buff_stacks_changed.emit()
 			print("Shield buff applied! Now have ", Global.shield_buff_stacks, " stack(s) - ", Global.shield_damage_reduction_chance, "% damage reduction chance")
 		elif Global.selected_buff_type == 2:  # Sword
 			Global.sword_buff_stacks += 1
 			Global.sword_heal_chance = Global.sword_buff_stacks * 15  # 15% per stack
+			Global.buff_stacks_changed.emit()
 			print("Sword buff applied! Now have ", Global.sword_buff_stacks, " stack(s) - ", Global.sword_heal_chance, "% chance to heal on enemy kills")
+		elif Global.selected_buff_type == 3:  # Pause Enemy
+			Global.freeze_buff_stacks += 1
+			Global.update_freeze_chance()
+			print("Pause enemy buff applied! Now have ", Global.freeze_buff_stacks, " stack(s). Activation chance: ", Global.freeze_activation_chance, "% every ", Global.freeze_timer_interval, " seconds")
 
 		# Check if we just completed a boss dungeon
 		if Global.get("after_boss_completion") == true:
@@ -60,8 +68,29 @@ func _ready() -> void:
 			load_dungeon(debug_dungeon_path)
 		else:
 			load_random_dungeon()
-		# Update heart container in Main scene
-		call_deferred("_update_main_heart_container")
+	# Update heart container in Main scene
+	call_deferred("_update_main_heart_container")
+
+	# Use custom UI pause menu on a dedicated CanvasLayer, like heart_container
+	var ui_canvas = CanvasLayer.new()
+	ui_canvas.name = "UICanvas"
+	add_child(ui_canvas)
+
+	var ui_scene: PackedScene = preload("res://Scenes/GUI/UI.tscn")
+	pause_ui = ui_scene.instantiate()
+	ui_canvas.add_child(pause_ui)
+
+	# Ensure it and all children work while paused
+	_set_node_tree_process_mode(ui_canvas, Node.ProcessMode.PROCESS_MODE_WHEN_PAUSED)
+
+	# Bring UI to front
+	if pause_ui is CanvasItem:
+		(pause_ui as CanvasItem).z_index = 4096
+	pause_ui.visible = false
+
+	# Connect resume signal
+	if pause_ui.has_signal("request_resume_game"):
+		pause_ui.connect("request_resume_game", Callable(self, "_resume_game"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -238,3 +267,34 @@ func find_dungeon_manager(node: Node) -> Node:
 			return found
 
 	return null
+
+func _pause_game() -> void:
+	get_tree().paused = true
+	if pause_ui:
+		pause_ui.visible = true
+		pause_ui.grab_focus()
+	# Inform WPM tracker
+	Global.wpm_on_pause()
+
+func _resume_game() -> void:
+	get_tree().paused = false
+	if pause_ui:
+		pause_ui.visible = false
+	# Inform WPM tracker
+	Global.wpm_on_resume()
+
+
+func _set_node_tree_process_mode(node: Node, mode: Node.ProcessMode) -> void:
+	# Recursively set process mode for a subtree so input works while paused
+	node.process_mode = mode
+	for child in node.get_children():
+		_set_node_tree_process_mode(child, mode)
+
+func _unhandled_input(event: InputEvent) -> void:
+	# ESC toggles the pause UI on/off
+	if event.is_action_pressed("ui_cancel"):
+		if get_tree().paused or (pause_ui and pause_ui.visible):
+			_resume_game()
+		else:
+			_pause_game()
+		return
