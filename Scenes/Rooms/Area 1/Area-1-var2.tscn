@@ -20470,7 +20470,7 @@ size = Vector2(507, 534)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_an758"]
 size = Vector2(349, 380)
 
-[node name="Dungeon2" type="Node2D"]
+[node name="Dungeon4" type="Node2D"]
 script = ExtResource("1_an758")
 
 [node name="DungeonManager" type="Node2D" parent="."]

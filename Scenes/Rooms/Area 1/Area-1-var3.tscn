@@ -20493,7 +20493,7 @@ texture = ExtResource("46_f33v5")
 [sub_resource type="TileSet" id="TileSet_i6mny"]
 sources/0 = SubResource("TileSetAtlasSource_0l6xi")
 
-[node name="Dungeon2" type="Node2D"]
+[node name="Dungeon4" type="Node2D"]
 script = ExtResource("1_6mc5c")
 
 [node name="DungeonManager" type="Node2D" parent="."]

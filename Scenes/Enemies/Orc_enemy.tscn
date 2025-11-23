@@ -1,12 +1,13 @@
-[gd_scene load_steps=44 format=3 uid="uid://ivgoec3n72vd"]
+[gd_scene load_steps=58 format=3 uid="uid://ivgoec3n72vd"]
 
 [ext_resource type="Script" uid="uid://m8m0o7d21tya" path="res://Scripts/orc_enemy.gd" id="1_k4htw"]
 [ext_resource type="Texture2D" uid="uid://dh1uc0yyct2li" path="res://Assets/Sprites/Placeholders/placeholder_orc.png" id="2_y22j2"]
+[ext_resource type="Texture2D" uid="uid://dpi8ru4kyjtmv" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="3_dgdvf"]
 [ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://Assets/Themes/Outline.tres" id="3_qi5uw"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="4_txv81"]
-[ext_resource type="AudioStream" uid="uid://cd65fmxf26fcl" path="res://Assets/Sfx/Enemies/Orc/orc_damaged.wav" id="5_txv81"]
-[ext_resource type="AudioStream" uid="uid://5eklwkhjsxml" path="res://Assets/Sfx/Enemies/Generic/hurt-2.wav" id="6_txv81"]
-[ext_resource type="AudioStream" uid="uid://b33mrxcl5qhfx" path="res://Assets/Sfx/Enemies/Orc/orc_attack.wav" id="7_p156o"]
+[ext_resource type="AudioStream" uid="uid://bvs0fmpkc8ymp" path="res://Assets/Sfx/Enemies/Orc/orc_damaged.wav" id="5_txv81"]
+[ext_resource type="AudioStream" uid="uid://b7tced0d7xeth" path="res://Assets/Sfx/Enemies/Generic/hurt-2.wav" id="6_txv81"]
+[ext_resource type="AudioStream" uid="uid://dee52j6spc2o3" path="res://Assets/Sfx/Enemies/Orc/orc_attack.wav" id="7_p156o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_prrqk"]
 atlas = ExtResource("2_y22j2")
@@ -279,6 +280,103 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_p156o"]
+atlas = ExtResource("3_dgdvf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ah0d1"]
+atlas = ExtResource("3_dgdvf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fw857"]
+atlas = ExtResource("3_dgdvf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq6a0"]
+atlas = ExtResource("3_dgdvf")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8owrh"]
+atlas = ExtResource("3_dgdvf")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4foto"]
+atlas = ExtResource("3_dgdvf")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51cc7"]
+atlas = ExtResource("3_dgdvf")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02gr0"]
+atlas = ExtResource("3_dgdvf")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02srh"]
+atlas = ExtResource("3_dgdvf")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnvjd"]
+atlas = ExtResource("3_dgdvf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tvqt"]
+atlas = ExtResource("3_dgdvf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ly70"]
+atlas = ExtResource("3_dgdvf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yjnap"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p156o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ah0d1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fw857")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq6a0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8owrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4foto")
+}],
+"loop": true,
+"name": &"freeze",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51cc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02gr0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02srh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnvjd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tvqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ly70")
+}],
+"loop": true,
+"name": &"unfreeze",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_v8qg3"]
 radius = 4.0
 
@@ -291,7 +389,15 @@ speed = 25.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -7)
 sprite_frames = SubResource("SpriteFrames_c1uly")
-animation = &"death"
+animation = &"damaged"
+
+[node name="FreezeVines" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-3, -12)
+scale = Vector2(0.382756, 0.797796)
+sprite_frames = SubResource("SpriteFrames_yjnap")
+animation = &"freeze"
+frame_progress = 0.212955
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3

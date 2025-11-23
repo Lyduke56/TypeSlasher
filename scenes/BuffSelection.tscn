@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bge3ik165tbxk"]
+[gd_scene load_steps=20 format=4 uid="uid://bge3ik165tbxk"]
 
 [ext_resource type="PackedScene" uid="uid://b5k8r1ne8t1xv" path="res://Scenes/BuffSlot.tscn" id="2_h4hes"]
 [ext_resource type="Script" uid="uid://dvr23xbu73x6j" path="res://Scripts/BuffSelection.gd" id="3_script"]
@@ -70,6 +70,14 @@ animations = [{
 "name": &"merchant_idle",
 "speed": 8.0
 }]
+
+[sub_resource type="Animation" id="Animation_tpb7f"]
+resource_name = "freeze"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xe11v"]
+_data = {
+&"freeze": SubResource("Animation_tpb7f")
+}
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tpb7f"]
 texture = ExtResource("5_qv0d8")
@@ -296,6 +304,9 @@ scale = Vector2(2, 2)
 texture = ExtResource("4_lo44q")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BuffScroll"]
+libraries = {
+&"": SubResource("AnimationLibrary_xe11v")
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BuffScroll"]
 layout_mode = 1
@@ -324,9 +335,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="BuffSlot3" parent="BuffScroll/VBoxContainer/GridContainer" instance=ExtResource("2_h4hes")]
-layout_mode = 2
-
-[node name="BuffSlot4" parent="BuffScroll/VBoxContainer/GridContainer" instance=ExtResource("2_h4hes")]
 layout_mode = 2
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
