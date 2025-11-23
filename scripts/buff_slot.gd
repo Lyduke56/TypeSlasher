@@ -7,7 +7,8 @@ extends PanelContainer
 var buff_icons = [
 	preload("res://Assets/Sprites/GUI/Buff_HealthPotion.png"),
 	preload("res://Assets/Sprites/GUI/Buff_Shield.png"),
-	preload("res://Assets/Sprites/GUI/Buff_sword.png")
+	preload("res://Assets/Sprites/GUI/Buff_sword.png"),
+	preload("res://Assets/Sprites/GUI/Buff_Vines.png")
 ]
 
 var chosen_index = 0

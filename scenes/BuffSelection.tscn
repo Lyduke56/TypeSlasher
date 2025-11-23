@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://b5k8r1ne8t1xv" path="res://Scenes/BuffSlot.tscn" id="2_h4hes"]
 [ext_resource type="Script" uid="uid://dvr23xbu73x6j" path="res://Scripts/BuffSelection.gd" id="3_script"]
-[ext_resource type="Texture2D" uid="uid://cuhg8wkmhk2jg" path="res://Assets/Sprites/GUI/buff-Sheet.png" id="4_lo44q"]
-[ext_resource type="Texture2D" uid="uid://bmxjv1x7p4ga3" path="res://Assets/Sprites/GUI/buff-merchant-Sheet.png" id="4_qv0d8"]
+[ext_resource type="Texture2D" uid="uid://b3byysv836we8" path="res://Assets/Sprites/GUI/buff-Sheet.png" id="4_lo44q"]
+[ext_resource type="Texture2D" uid="uid://don6tndgssij8" path="res://Assets/Sprites/GUI/buff-merchant-Sheet.png" id="4_qv0d8"]
 [ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="5_qv0d8"]
-[ext_resource type="AudioStream" uid="uid://ht5ia6qneg2y" path="res://Assets/Sfx/Background/BGM - Buff Selection.ogg" id="6_tpb7f"]
+[ext_resource type="AudioStream" uid="uid://dgvu0bj52jf8q" path="res://Assets/Sfx/Background/BGM - Buff Selection.ogg" id="6_tpb7f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpb7f"]
 atlas = ExtResource("4_qv0d8")
@@ -324,6 +324,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="BuffSlot3" parent="BuffScroll/VBoxContainer/GridContainer" instance=ExtResource("2_h4hes")]
+layout_mode = 2
+
+[node name="BuffSlot4" parent="BuffScroll/VBoxContainer/GridContainer" instance=ExtResource("2_h4hes")]
 layout_mode = 2
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]

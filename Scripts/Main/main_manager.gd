@@ -9,6 +9,8 @@ var current_dungeon: Node2D = null
 # Use the dedicated DungeonProgress autoload for persistence
 
 var pause_ui: Control
+var freeze_buff_stacks: int = 0
+var freeze_pause_duration: float = 3.0  # Editable in inspector
 
 func boss_dungeon_cleared():
 	"""Called when boss dungeon is completed - go to buff selection"""
@@ -41,6 +43,11 @@ func _ready() -> void:
 			Global.sword_buff_stacks += 1
 			Global.sword_heal_chance = Global.sword_buff_stacks * 15  # 15% per stack
 			print("Sword buff applied! Now have ", Global.sword_buff_stacks, " stack(s) - ", Global.sword_heal_chance, "% chance to heal on enemy kills")
+		elif Global.selected_buff_type == 3:  # Pause Enemy
+			freeze_buff_stacks += 1
+			print("Pause enemy buff applied! Now have ", freeze_buff_stacks, " stack(s). Duration: ", freeze_pause_duration)
+			# Immediately apply to a random enemy in current dungeon
+			_apply_freeze_buff_to_random_enemy()
 
 		# Check if we just completed a boss dungeon
 		if Global.get("after_boss_completion") == true:
@@ -276,6 +283,35 @@ func _resume_game() -> void:
 		pause_ui.visible = false
 	# Inform WPM tracker
 	Global.wpm_on_resume()
+
+func _apply_freeze_buff_to_random_enemy() -> void:
+	"""Apply freeze buff to a random enemy in the current dungeon"""
+	if not current_dungeon:
+		print("No current dungeon to apply freeze buff")
+		return
+
+	var enemies = []
+	_find_enemy_nodes(current_dungeon, enemies)
+	if enemies.is_empty():
+		print("No enemies found to freeze in current dungeon")
+		return
+
+	var random_enemy = enemies[randi() % enemies.size()]
+	print("Applying freeze to enemy: ", random_enemy.name, " for ", freeze_pause_duration, " seconds")
+
+	# Assume enemy has a pause_enemy method; if not, this will fail gracefully
+	if random_enemy.has_method("pause_enemy"):
+		random_enemy.pause_enemy(freeze_pause_duration)
+	else:
+		print("Warning: Enemy does not have pause_enemy method")
+
+func _find_enemy_nodes(node: Node, enemies: Array) -> void:
+	"""Recursively find enemy nodes (assuming they have 'Enemy' in name or similar)"""
+	if node.name.to_lower().contains("enemy") or node.name.to_lower().contains("boss"):
+		enemies.append(node)
+
+	for child in node.get_children():
+		_find_enemy_nodes(child, enemies)
 
 func _set_node_tree_process_mode(node: Node, mode: Node.ProcessMode) -> void:
 	# Recursively set process mode for a subtree so input works while paused
