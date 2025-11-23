@@ -10,6 +10,9 @@ extends Node2D
 @onready var prompt = $Word
 @onready var prompt_text = prompt.text
 @onready var area: Area2D = $Area2D
+@onready var sfx_attack: AudioStreamPlayer2D = $sfx_attack
+@onready var sfx_damaged: AudioStreamPlayer2D = $sfx_damaged
+@onready var sfx_death: AudioStreamPlayer2D = $sfx_death
 
 # Target tracking
 var target_position: Vector2
@@ -120,7 +123,7 @@ func play_death_animation():
 	# Connect the signal and play damage animation first
 	anim.animation_finished.connect(_on_damage_animation_finished, CONNECT_ONE_SHOT)
 	anim.play("werebear_damaged")
-
+	$sfx_damaged.play()
 	print("Enemy damage animation started")
 
 func _on_damage_animation_finished():
@@ -133,7 +136,7 @@ func _on_damage_animation_finished():
 		# Connect the signal and play death animation
 		anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
 		anim.play("werebear_death")
-
+		$sfx_death.play()
 		print("Enemy death animation started")
 
 func _on_death_animation_finished():
@@ -172,6 +175,7 @@ func _on_hack_timer_timeout():
 		# Temporarily disable looping for double attack animation so it plays once
 		anim.sprite_frames.set_animation_loop("werebear_double_attack", false)
 		anim.play("werebear_double_attack")
+		$sfx_attack.play()
 		print("Enemy performing double attack on target!")
 
 func _on_animation_finished():

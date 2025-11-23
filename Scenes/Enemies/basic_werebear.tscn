@@ -1,8 +1,11 @@
-[gd_scene load_steps=47 format=3 uid="uid://o7y4fhdlmdju"]
+[gd_scene load_steps=50 format=3 uid="uid://o7y4fhdlmdju"]
 
 [ext_resource type="Script" uid="uid://pr6qlg630k6" path="res://Scripts/Enemies/basic_werebear.gd" id="1_whet2"]
 [ext_resource type="Texture2D" uid="uid://3mtrk7r85cgj" path="res://Assets/Sprites/Enemies/Characters(100x100)/Werebear/Werebear/Werebear.png" id="2_ymo17"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_4tc14"]
+[ext_resource type="AudioStream" uid="uid://d0gr6fmklratj" path="res://Assets/Sfx/Enemies/Wolf/wolf_attack.wav" id="4_7g4xc"]
+[ext_resource type="AudioStream" uid="uid://dh1hbuaa7v2wl" path="res://Assets/Sfx/Enemies/Generic/hurt-2.wav" id="5_r1ajn"]
+[ext_resource type="AudioStream" uid="uid://dxhli4rfbkrup" path="res://Assets/Sfx/Enemies/Generic/thud-1.wav" id="6_5na6o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7g4xc"]
 atlas = ExtResource("2_ymo17")
@@ -354,3 +357,12 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(2, -7)
 shape = SubResource("CircleShape2D_2ey31")
+
+[node name="sfx_attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_7g4xc")
+
+[node name="sfx_damaged" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_r1ajn")
+
+[node name="sfx_death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_5na6o")

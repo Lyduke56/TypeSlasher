@@ -13,6 +13,9 @@ extends Node2D
 @onready var prompt_text = prompt.text
 @onready var area: Area2D = $Area2D
 @onready var heart_container = $"Node2D/HeartContainer"
+@onready var sfx_damaged: AudioStreamPlayer2D = $sfx_damaged
+@onready var sfx_death: AudioStreamPlayer2D = $sfx_death
+@onready var sfx_attack: AudioStreamPlayer2D = $sfx_attack
 
 # Target tracking
 var target_position: Vector2
@@ -167,6 +170,7 @@ func play_damage_animation():
 		return
 
 	anim.play("orc_rider_damaged")
+	$sfx_damaged.play()
 	print("Orc rider taking damage")
 
 func perform_death():
@@ -192,6 +196,7 @@ func perform_death():
 		anim.animation_finished.disconnect(_on_death_animation_finished)
 	anim.animation_finished.connect(_on_death_animation_finished)
 	anim.play("orc_rider_death")
+	$sfx_death.play()
 	print("Enemy death animation started")
 
 func setup_health_ui():
@@ -276,6 +281,7 @@ func _on_hack_timer_timeout():
 		# Temporarily disable looping for hack animation so it plays once
 		anim.sprite_frames.set_animation_loop("orc_rider_attack_2", false)
 		anim.play("orc_rider_attack_2")
+		$sfx_attack.play()
 		print("Enemy hacking the target!")
 
 func _on_animation_finished():

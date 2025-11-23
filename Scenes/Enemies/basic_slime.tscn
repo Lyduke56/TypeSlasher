@@ -1,9 +1,12 @@
-[gd_scene load_steps=39 format=3 uid="uid://b1j215u74lsl3"]
+[gd_scene load_steps=42 format=3 uid="uid://b1j215u74lsl3"]
 
 [ext_resource type="Script" uid="uid://odr6hmuvs21h" path="res://Scripts/Enemies/basic_slime.gd" id="1_1o3v8"]
 [ext_resource type="Texture2D" uid="uid://0xdxrtg1xuh4" path="res://Assets/Sprites/Enemies/Characters(100x100)/Slime/Slime/Slime.png" id="1_jawf3"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_1o3v8"]
 [ext_resource type="Texture2D" uid="uid://jk7pe3p101bo" path="res://Assets/Sprites/Enemies/Characters(100x100)/Slime/Slime/Slime-Hurt.png" id="3_ardnq"]
+[ext_resource type="AudioStream" uid="uid://d0gr6fmklratj" path="res://Assets/Sfx/Enemies/Wolf/wolf_attack.wav" id="5_oy7u2"]
+[ext_resource type="AudioStream" uid="uid://c60leonmuxfbh" path="res://Assets/Sfx/Enemies/Slime/slime_damaged.wav" id="6_e5csp"]
+[ext_resource type="AudioStream" uid="uid://dnsemg6lw4tly" path="res://Assets/Sfx/Enemies/Slime/slime_death.wav" id="7_ra671"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7kf66"]
 atlas = ExtResource("1_jawf3")
@@ -172,7 +175,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hd01u")
 }],
-"loop": true,
+"loop": false,
 "name": &"slime_attack",
 "speed": 10.0
 }, {
@@ -267,7 +270,7 @@ speed = 10.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_7kf66")
-animation = &"slime_attack"
+animation = &"slime_idle"
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3
@@ -286,3 +289,12 @@ collision_mask = 4
 position = Vector2(-1, -6)
 rotation = 1.5125
 shape = SubResource("CircleShape2D_ardnq")
+
+[node name="sfx_attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_oy7u2")
+
+[node name="sfx_damaged" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_e5csp")
+
+[node name="sfx_death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ra671")
