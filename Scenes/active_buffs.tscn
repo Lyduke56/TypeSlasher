@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4f31rhma7yhi"]
+[gd_scene load_steps=6 format=3 uid="uid://c4f31rhma7yhi"]
 
 [ext_resource type="Script" uid="uid://b2vgdopi1goid" path="res://Scripts/active_buffs.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://c3045pt6uw4at" path="res://Assets/Sprites/GUI/Buff_HealthPotion.png" id="2_health"]
 [ext_resource type="Texture2D" uid="uid://ciaqr3fonmypn" path="res://Assets/Sprites/GUI/Buff_Shield.png" id="3_shield"]
 [ext_resource type="Texture2D" uid="uid://k0fw6qq53bu3" path="res://Assets/Sprites/GUI/Buff_sword.png" id="4_sword"]
+[ext_resource type="Texture2D" uid="uid://d4c1j65kvqffj" path="res://Assets/Sprites/GUI/Buff_Vines.png" id="5_504qt"]
 
 [node name="ActiveBuffs" type="Control"]
 layout_mode = 3
@@ -26,14 +27,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -11.3823
-offset_top = -19.0714
-offset_right = 22.6428
-offset_bottom = 21.9286
+offset_left = -97.0
+offset_top = -67.0
+offset_right = 22.0
+offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 10
-columns = 3
+columns = 4
 
 [node name="HealthBuff" type="VBoxContainer" parent="GridContainer"]
 layout_mode = 2
@@ -70,6 +71,20 @@ texture = ExtResource("4_sword")
 stretch_mode = 5
 
 [node name="StackLabel" type="Label" parent="GridContainer/SwordBuff"]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+
+[node name="VineBuff" type="VBoxContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/VineBuff"]
+layout_mode = 2
+texture = ExtResource("5_504qt")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="StackLabel" type="Label" parent="GridContainer/VineBuff"]
 layout_mode = 2
 text = "1"
 horizontal_alignment = 1

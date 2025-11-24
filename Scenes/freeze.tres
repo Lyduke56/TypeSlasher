@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://b2mqrsvm2ag6q"]
+
+[ext_resource type="Texture2D" uid="uid://dpi8ru4kyjtmv" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="1_0k84h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfqvr"]
+atlas = ExtResource("1_0k84h")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0me1g"]
+atlas = ExtResource("1_0k84h")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ev568"]
+atlas = ExtResource("1_0k84h")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ja7k"]
+atlas = ExtResource("1_0k84h")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1vw1"]
+atlas = ExtResource("1_0k84h")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to0w7"]
+atlas = ExtResource("1_0k84h")
+region = Rect2(64, 32, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfqvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0me1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ev568")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ja7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1vw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_to0w7")
+}],
+"loop": true,
+"name": &"freeze",
+"speed": 5.0
+}]

@@ -41,8 +41,8 @@
 [ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="29_ttei8"]
 [ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="30_n4cnn"]
 [ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="30_p77xy"]
-[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="42_lg8bu"]
-[ext_resource type="AudioStream" uid="uid://dp3d4f4xkgm5" path="res://Assets/Sfx/Background/BGM - Area 1.ogg" id="43_6dio2"]
+[ext_resource type="Texture2D" uid="uid://1m42j1xpugay" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="42_lg8bu"]
+[ext_resource type="AudioStream" uid="uid://cue0pyibbgi1g" path="res://Assets/Sfx/Background/BGM - Area 1.ogg" id="43_6dio2"]
 
 [sub_resource type="Resource" id="Resource_08ass"]
 script = ExtResource("4_fmsb3")
@@ -20720,6 +20720,7 @@ tile_set = SubResource("TileSet_g2qdi")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("43_6dio2")
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [connection signal="body_entered" from="RoomA - Medium/CameraArea" to="RoomA - Medium" method="_on_camera_area_body_entered"]

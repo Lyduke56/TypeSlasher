@@ -17,8 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://bil2sj0ots4r2" path="res://Scenes/Enemies/basic_wolf.tscn" id="12_tonbw"]
 [ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="12_wa0in"]
 [ext_resource type="PackedScene" uid="uid://xcriddmqeofd" path="res://Scenes/Enemies/basic_skeleton.tscn" id="13_gkmiv"]
-[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="17_gkmiv"]
-[ext_resource type="AudioStream" uid="uid://dp3d4f4xkgm5" path="res://Assets/Sfx/Background/BGM - Area 1.ogg" id="18_dulka"]
+[ext_resource type="Texture2D" uid="uid://1m42j1xpugay" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="17_gkmiv"]
+[ext_resource type="AudioStream" uid="uid://cue0pyibbgi1g" path="res://Assets/Sfx/Background/BGM - Area 1.ogg" id="18_dulka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ean82"]
 size = Vector2(310, 342)
@@ -984,7 +984,7 @@ texture = ExtResource("17_gkmiv")
 sources/0 = SubResource("TileSetAtlasSource_dulka")
 sources/1 = SubResource("TileSetAtlasSource_303ub")
 
-[node name="Dungeon2" type="Node2D"]
+[node name="Dungeon3" type="Node2D"]
 script = ExtResource("1_dwvem")
 
 [node name="DungeonManager" type="Node2D" parent="."]
@@ -1158,6 +1158,12 @@ position = Vector2(-2, -54)
 
 [node name="Platforms" type="Node" parent="."]
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_dulka")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
 [node name="Node" type="Node" parent="."]
 
 [node name="Ground" type="TileMapLayer" parent="Node"]
@@ -1190,11 +1196,6 @@ visible = false
 z_index = 20
 tile_map_data = PackedByteArray("AAAsAA4AAQAAAAAAAAAsAA8AAQAAAAEAAAAtAA4AAQAAAAAAAAAtAA8AAQAAAAEAAAAuAA4AAQAAAAAAAAAuAA8AAQAAAAEAAAAvAA4AAQAAAAAAAAAvAA8AAQAAAAEAAAAwAA4AAQAAAAAAAAAwAA8AAQAAAAEAAAAxAA4AAQAAAAAAAAAxAA8AAQAAAAEAAAAyAA4AAQAAAAAAAAAyAA8AAQAAAAEAAAAzAA4AAQAAAAAAAAAzAA8AAQAAAAEAAAA0AA4AAQAAAAAAAAA0AA8AAQAAAAEAAAA1AA4AAQAAAAAAAAA1AA8AAQAAAAEAAAAsACQAAQAAAAAAAAAsACUAAQAAAAEAAAAtACQAAQAAAAAAAAAtACUAAQAAAAEAAAAuACQAAQAAAAAAAAAuACUAAQAAAAEAAAAvACQAAQAAAAAAAAAvACUAAQAAAAEAAAAwACQAAQAAAAAAAAAwACUAAQAAAAEAAAAxACQAAQAAAAAAAAAxACUAAQAAAAEAAAAyACQAAQAAAAAAAAAyACUAAQAAAAEAAAAzACQAAQAAAAAAAAAzACUAAQAAAAEAAAA0ACQAAQAAAAAAAAA0ACUAAQAAAAEAAAA1ACQAAQAAAAAAAAA1ACUAAQAAAAEAAAADAAgAAQAAAAAAAAADAAkAAQAAAAEAAAACAAgAAQAAAAAAAAACAAkAAQAAAAEAAAABAAgAAQAAAAAAAAABAAkAAQAAAAEAAAAAAAgAAQAAAAAAAAAAAAkAAQAAAAEAAAD//wgAAQAAAAAAAAD//wkAAQAAAAEAAAD+/wgAAQAAAAAAAAD+/wkAAQAAAAEAAAD9/wgAAQAAAAAAAAD9/wkAAQAAAAEAAAD8/wgAAQAAAAAAAAD8/wkAAQAAAAEAAAAhAPr/AQAAAAMAAAAhAPv/AQAAAAMAAAAhAPz/AQAAAAMAAAAhAP3/AQAAAAMAAAAhAP7/AQAAAAMAAAAhAP//AQAAAAMAAAAhAAAAAQAAAAMAAAAhAAEAAQAAAAMAAAAhAAIAAQAAAAMAAAAJAPr/AQAAAAMAAAAJAPv/AQAAAAMAAAAJAPz/AQAAAAMAAAAJAP3/AQAAAAMAAAAJAP7/AQAAAAMAAAAJAP//AQAAAAMAAAAJAAAAAQAAAAMAAAAJAAEAAQAAAAMAAAAJAAIAAQAAAAMAAADz/ywAAQAAAAMAAADz/y0AAQAAAAMAAADz/y4AAQAAAAMAAADz/y8AAQAAAAMAAADz/zAAAQAAAAMAAADz/zEAAQAAAAMAAADz/zIAAQAAAAMAAADz/zMAAQAAAAMAAADz/zQAAQAAAAMAAADz/zUAAQAAAAMAAADz/zYAAQAAAAMAAADX/y0AAQAAAAMAAADX/y4AAQAAAAMAAADX/y8AAQAAAAMAAADX/zAAAQAAAAMAAADX/zEAAQAAAAMAAADX/zIAAQAAAAMAAADX/zMAAQAAAAMAAADX/zQAAQAAAAMAAADX/zUAAQAAAAMAAADX/zYAAQAAAAMAAADX/ysAAQAAAAMAAADX/ywAAQAAAAMAAAD8/yUAAQAAAAEAAAD9/yUAAQAAAAEAAAD+/yUAAQAAAAEAAAD//yUAAQAAAAEAAAAAACUAAQAAAAEAAAABACUAAQAAAAEAAAACACUAAQAAAAEAAAADACUAAQAAAAEAAAD8/yQAAQAAAAAAAAD9/yQAAQAAAAAAAAD+/yQAAQAAAAAAAAD//yQAAQAAAAAAAAAAACQAAQAAAAAAAAABACQAAQAAAAAAAAACACQAAQAAAAAAAAADACQAAQAAAAAAAAAJAPn/AQAAAAMAAAAhAPn/AQAAAAMAAADz/ysAAQAAAAMAAAA=")
 tile_set = SubResource("TileSet_303ub")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("18_dulka")
-autoplay = true
-parameters/looping = true
 
 [connection signal="body_entered" from="StartingRoom/CameraArea" to="StartingRoom" method="_on_camera_area_body_entered"]
 [connection signal="body_exited" from="StartingRoom/CameraArea" to="StartingRoom" method="_on_camera_area_body_exited"]

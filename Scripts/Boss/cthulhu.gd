@@ -4,9 +4,9 @@ extends CharacterBody2D
 @export var green: Color = Color("#639765")
 @export var red: Color = Color("#a65455")
 
-@export var boss_health: int = 5  # Boss health, requires 5 hits to defeat
-@export var word_category: String = "medium"  # Category for boss words
-@export var targetable_word_category: String = "sentence"  # Category for words during targetable phase after knockback
+@export var boss_health: int  # Boss health, requires 5 hits to defeat
+@export var word_category: String  # Category for boss words
+@export var targetable_word_category: String  # Category for words during targetable phase after knockback
 @onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
@@ -101,12 +101,15 @@ var spawned_portals: Array = []  # Track spawned portals to avoid duplicates
 
 @export var points_for_kill = 150
 
+# Room reference for word coordination
+var associated_room: Node2D = null
+
 # Signals
 signal targetable_phase_ended  # Emitted when targetable phase ends (timer or damage)
 
 func _ready() -> void:
-	# Initialize boss health
-	boss_health = max_boss_health
+	# Initialize boss health - use the spawn-time health as max
+	max_boss_health = boss_health
 
 	# Start with idle animation
 	anim.play("cthulhu_idle")
@@ -280,7 +283,7 @@ func take_damage(attacker_global_position: Vector2 = global_position):
 	# _refresh_word() is not called here to prevent word changes during targeting
 
 func play_death_animation():
-	"""Play death animation immediately and clean up on finish"""
+	"""Play death animation and remove boss after animation completes"""
 	# Stop any attack loop
 	if attack_timer:
 		attack_timer.stop()
@@ -307,9 +310,10 @@ func play_death_animation():
 		anim.animation_finished.disconnect(_on_death_animation_finished)
 	if anim.animation_finished.is_connected(_on_damage_animation_finished):
 		anim.animation_finished.disconnect(_on_damage_animation_finished)
-	anim.animation_finished.connect(_on_death_animation_finished)
+	anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
+
 	anim.play("cthulhu_death")
-	print("Tentaclussy death animation started")
+	print("Cthulhu boss defeated - playing death animation")
 
 func _on_damage_animation_finished():
 	"""Called when damage animation completes - plays death animation"""
@@ -342,6 +346,11 @@ func cleanup_portals():
 		if is_instance_valid(portal):
 			portal.queue_free()
 	print("Cleaned up ", spawned_portals.size(), " portals after boss death")
+
+func _make_invisible():
+	"""Make the boss invisible"""
+	if anim:
+		anim.modulate = Color(1, 1, 1, 0)
 
 func setup_boss_health_ui():
 	"""Setup the health UI for the boss"""
@@ -543,9 +552,35 @@ func shoot_fireball():
 
 func _setup_fireball_prompt(fireball: Node2D):
 	"""Setup prompt for fireball"""
-	var fireball_word = _get_unique_word("easy")
-	fireball.set_prompt(fireball_word)
-	print("Fireball spawned with word: '", fireball_word, "'")
+	if associated_room:
+		print("Cthulhu has associated_room, checking method...")
+		if associated_room.has_method("_get_unique_word_for_category"):
+			print("Cthulhu room has method, calling...")
+			# Use room's tracked word selection - room handles cleanup
+			var fireball_word = associated_room._get_unique_word_for_category("easy")
+			if fireball_word != "":
+				print("Cthulhu got tracked word from room: ", fireball_word)
+				# Track projectile for room cleanup - room handles the rest
+				associated_room.assign_word_to_enemy(fireball, fireball_word)
+				fireball.set_prompt(fireball_word)
+			else:
+				# Room blocked spawning - no safe words available
+				print("Room blocked spawning - no safe projectile words available")
+				fireball_word = _get_unique_word("easy")
+				fireball.set_prompt(fireball_word)
+				print("Fireball spawned with fallback word: '", fireball_word, "' (easy difficulty - fallback)")
+		else:
+			print("Cthulhu associated_room doesn't have method")
+			# No coordination - use untracked random word
+			var fireball_word = _get_unique_word("easy")
+			fireball.set_prompt(fireball_word)
+			print("Fireball spawned with untracked word: '", fireball_word, "' (easy difficulty - untracked)")
+	else:
+		print("Cthulhu has no associated_room")
+		# No coordination - use untracked random word
+		var fireball_word = _get_unique_word("easy")
+		fireball.set_prompt(fireball_word)
+		print("Fireball spawned with untracked word: '", fireball_word, "' (easy difficulty - untracked)")
 
 func start_idle_phase():
 	"""Start the idle phase after shooting fireballs at a position"""
@@ -601,6 +636,10 @@ func start_attack2_phase():
 
 func _on_attack2_idle_timer_timeout():
 	"""Called when attack2 idle ends - start attack2 animation"""
+	# Prevent if boss is dead
+	if death_started or boss_health <= 0:
+		return
+
 	# Play attack2 animation - damage player if not completed by animation end
 	if anim:
 		anim.play("cthulhu_attack2")
@@ -1111,6 +1150,9 @@ func spawn_corner_portals():
 		# Add portal to container
 		parent_container.add_child(portal)
 		spawned_portals.append(portal)
+
+		# Play appear animation
+		portal.play_appear_animation()
 
 		print("Spawned purple portal at position ", portal_position, " (local: ", portal.position, ")")
 

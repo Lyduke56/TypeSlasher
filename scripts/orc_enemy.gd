@@ -1,4 +1,4 @@
-extends Node2D
+extends "res://Scripts/enemy_base.gd"
 
 @export var blue: Color = Color("#4682b4")
 @export var green: Color = Color("#639765")
@@ -7,7 +7,6 @@ extends Node2D
 @onready var sfx_death: AudioStreamPlayer2D = $sfx_death
 @onready var sfx_attack: AudioStreamPlayer2D = $sfx_attack
 @export var speed: float = 50.0  # Movement speed towards target
-@onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
 @onready var prompt_text = prompt.text
@@ -123,7 +122,7 @@ func play_death_animation():
 	anim.animation_finished.connect(_on_damage_animation_finished, CONNECT_ONE_SHOT)
 	anim.play("damaged")
 	$sfx_damaged.play()
-		
+
 
 	print("Enemy damage animation started")
 
@@ -138,8 +137,8 @@ func _on_damage_animation_finished():
 		anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
 		anim.play("death")
 		$sfx_death.play()
-			
-	
+
+
 		print("Enemy death animation started")
 
 func _on_death_animation_finished():
@@ -195,8 +194,8 @@ func _on_animation_finished():
 			target_node.take_damage()
 
 func _physics_process(delta: float) -> void:
-	# STOP ALL MOVEMENT if being targeted or has reached target
-	if is_being_targeted or has_reached_target:
+	# STOP ALL MOVEMENT if frozen, being targeted, or has reached target
+	if is_frozen or is_being_targeted or has_reached_target:
 		# Don't override death/damage animations
 		if anim and (anim.animation == "death" or anim.animation == "damaged"):
 			return  # Let death/damage animations play

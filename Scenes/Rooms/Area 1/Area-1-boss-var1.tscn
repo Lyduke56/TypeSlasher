@@ -1,6 +1,6 @@
 [gd_scene load_steps=125 format=4 uid="uid://fttmx3fict8g"]
 
-[ext_resource type="Script" uid="uid://dyivjxekdqaap" path="res://Scripts/Dungeons/Area_1_boss_var1/area_1_boss_var_1.gd" id="1_arqlh"]
+[ext_resource type="Script" path="res://Scripts/Dungeons/Area_1_boss_var1/area_1_boss_var_1.gd" id="1_arqlh"]
 [ext_resource type="Script" uid="uid://dcxejv140b6cc" path="res://Scripts/Dungeons/Area_1_boss_var1/dungeon_manager(A1B1).gd" id="1_p6v1s"]
 [ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="2_301vw"]
 [ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="3_301vw"]
@@ -42,8 +42,8 @@
 [ext_resource type="Texture2D" uid="uid://bbfu5byw1ys67" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_walls.png" id="35_2cec2"]
 [ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="36_yvyjx"]
 [ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="37_p4m7e"]
-[ext_resource type="AudioStream" uid="uid://dp3d4f4xkgm5" path="res://Assets/Sfx/Background/BGM - Area 1.ogg" id="40_wq55k"]
-[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="43_vsrqs"]
+[ext_resource type="AudioStream" uid="uid://cue0pyibbgi1g" path="res://Assets/Sfx/Background/BGM - Area 1.ogg" id="40_wq55k"]
+[ext_resource type="Texture2D" uid="uid://1m42j1xpugay" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="43_vsrqs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iwlyy"]
 size = Vector2(313, 342)
@@ -14638,6 +14638,7 @@ tile_set = SubResource("TileSet_u7e4d")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("40_wq55k")
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [connection signal="body_entered" from="StartingRoom/CameraArea" to="StartingRoom" method="_on_camera_area_body_entered"]

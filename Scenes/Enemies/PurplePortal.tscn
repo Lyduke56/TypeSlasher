@@ -198,7 +198,9 @@ nightborne_speed = 30.0
 position = Vector2(-0.999992, -1)
 scale = Vector2(2.51563, 2.79688)
 sprite_frames = SubResource("SpriteFrames_4fvjr")
-animation = &"disappear"
+animation = &"appear"
+frame = 7
+frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
 

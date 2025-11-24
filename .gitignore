@@ -12,3 +12,4 @@ bin/
 # System files (just in case)
 .DS_Store
 Thumbs.db
+todo.md

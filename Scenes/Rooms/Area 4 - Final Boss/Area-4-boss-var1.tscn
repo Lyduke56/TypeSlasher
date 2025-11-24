@@ -1,4 +1,4 @@
-[gd_scene load_steps=154 format=4 uid="uid://capcce7s5ld0m"]
+[gd_scene load_steps=154 format=4 uid="uid://donmmb8qjyof3"]
 
 [ext_resource type="Script" uid="uid://bpawtedpgeuym" path="res://Scripts/Area4/dungeon_manager(A4B1).gd" id="1_dvw62"]
 [ext_resource type="AudioStream" uid="uid://ds7qkli7x1yk6" path="res://Assets/Sfx/Background/BGM - Area 4 .mp3" id="2_dbmmj"]
@@ -18850,10 +18850,11 @@ script = ExtResource("1_dvw62")
 stream = ExtResource("2_dbmmj")
 volume_db = 5.0
 autoplay = true
+bus = &"Music"
 
 [node name="BossRoom" type="Node2D" parent="."]
 z_index = 2
-position = Vector2(1, -1183)
+position = Vector2(0, -1184)
 script = ExtResource("3_fafrt")
 enemy_waves = Array[ExtResource("4_ycwxe")]([SubResource("Resource_cyctb")])
 

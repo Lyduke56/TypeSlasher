@@ -1,12 +1,13 @@
-[gd_scene load_steps=45 format=3 uid="uid://xcriddmqeofd"]
+[gd_scene load_steps=59 format=3 uid="uid://xcriddmqeofd"]
 
 [ext_resource type="Script" uid="uid://c55ljwejvu72u" path="res://Scripts/Enemies/basic_skeleton.gd" id="1_gd8pk"]
 [ext_resource type="Texture2D" uid="uid://djaif4ofcg86t" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton.png" id="1_j7i8a"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_inopb"]
 [ext_resource type="Texture2D" uid="uid://bpm2vg434y8at" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton-Hurt.png" id="3_srawy"]
-[ext_resource type="AudioStream" uid="uid://5eklwkhjsxml" path="res://Assets/Sfx/Enemies/Generic/hurt-2.wav" id="5_ut5wb"]
-[ext_resource type="AudioStream" uid="uid://c8wrfg15bxulb" path="res://Assets/Sfx/Enemies/Skeleton/skeleton-death-1.wav" id="6_jjerx"]
-[ext_resource type="AudioStream" uid="uid://dwchahjq5nkny" path="res://Assets/Sfx/Enemies/Skeleton/skeleton-attack-1.wav" id="7_7dwoc"]
+[ext_resource type="Texture2D" uid="uid://dpi8ru4kyjtmv" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="4_jjerx"]
+[ext_resource type="AudioStream" uid="uid://b7tced0d7xeth" path="res://Assets/Sfx/Enemies/Generic/hurt-2.wav" id="5_ut5wb"]
+[ext_resource type="AudioStream" uid="uid://bvee8m43jklnu" path="res://Assets/Sfx/Enemies/Skeleton/skeleton-death-1.wav" id="6_jjerx"]
+[ext_resource type="AudioStream" uid="uid://b2hdqropiko32" path="res://Assets/Sfx/Enemies/Skeleton/skeleton-attack-1.wav" id="7_7dwoc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wgvsg"]
 atlas = ExtResource("1_j7i8a")
@@ -286,6 +287,103 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dwoc"]
+atlas = ExtResource("4_jjerx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hrqe"]
+atlas = ExtResource("4_jjerx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqaop"]
+atlas = ExtResource("4_jjerx")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4hgt"]
+atlas = ExtResource("4_jjerx")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co8jt"]
+atlas = ExtResource("4_jjerx")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcp7b"]
+atlas = ExtResource("4_jjerx")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg5lk"]
+atlas = ExtResource("4_jjerx")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ftja"]
+atlas = ExtResource("4_jjerx")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mycxb"]
+atlas = ExtResource("4_jjerx")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2teb"]
+atlas = ExtResource("4_jjerx")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_068wb"]
+atlas = ExtResource("4_jjerx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcmec"]
+atlas = ExtResource("4_jjerx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ojwtu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dwoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hrqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqaop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4hgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_co8jt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcp7b")
+}],
+"loop": true,
+"name": &"freeze",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mg5lk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ftja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mycxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2teb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_068wb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcmec")
+}],
+"loop": true,
+"name": &"unfreeze",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ey31"]
 radius = 7.0
 
@@ -297,7 +395,15 @@ script = ExtResource("1_gd8pk")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_77k81")
-animation = &"skeleton_run"
+animation = &"skeleton_idle"
+frame_progress = 0.879068
+
+[node name="FreezeVines" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(3.33333, -15)
+scale = Vector2(0.517376, 0.923002)
+sprite_frames = SubResource("SpriteFrames_ojwtu")
+animation = &"unfreeze"
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3
@@ -318,9 +424,12 @@ shape = SubResource("CircleShape2D_2ey31")
 
 [node name="sfx_damaged" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_ut5wb")
+bus = &"SFx"
 
 [node name="sfx_death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_jjerx")
+bus = &"SFx"
 
 [node name="sfx_attack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_7dwoc")
+bus = &"SFx"

@@ -355,7 +355,19 @@ func _complete_word():
 	input_buffer.clear()
 
 	# Handle different entity types after completion
-	if completed_entity.has_method("play_heal_animation"):
+	if completed_entity.has_method("play_disappear_animation"):
+		# Portal completion - do NOT dash to portal, just play disappear animation
+		print("Portal completed! Playing disappear animation.")
+		completed_entity.play_disappear_animation()
+		# Only trigger activation for progression portals in PortalContainer
+		if current_room and current_room.has_method("_on_portal_activated") and completed_entity.get_parent().name == "PortalContainer":
+			current_room._on_portal_activated()
+		# Reset processing flag immediately for portals
+		is_processing_completion = false
+		# Clear any inputs that got buffered during completion
+		input_buffer.clear()
+		return
+	elif completed_entity.has_method("play_heal_animation"):
 		# Goddess statue completion - do NOT dash to statue, just play heal animation
 		# Check if the statue hasn't been used yet to prevent multiple usages
 		if completed_entity.has_method("get") and completed_entity.get("has_been_used") != true:

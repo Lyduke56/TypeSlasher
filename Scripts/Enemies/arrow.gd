@@ -156,7 +156,7 @@ func _on_animation_finished():
 	# Arrow only has idle animation, so just ensure it stays idle when not targeted
 	if anim and not is_being_targeted:
 		anim.play("arrow_idle")
-		
+
 func _physics_process(delta: float) -> void:
 	# Stop movement if being targeted (being typed)
 	if is_being_targeted:

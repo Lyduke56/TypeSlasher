@@ -122,8 +122,7 @@ func play_disappear_animation():
 
 	animated_sprite.play("disappear")
 	await animated_sprite.animation_finished
-	portal_selected.emit(portal_index)  # Portal selected for navigation
-	portal_activated.emit()  # Emit activation signal before disappearing
+	portal_selected.emit(portal_index)  # Portal completed/destroyed
 	queue_free()
 
 # Portal handled by typing completion now - kept for safety

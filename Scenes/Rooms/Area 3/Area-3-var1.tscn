@@ -28,19 +28,19 @@
 [ext_resource type="Texture2D" uid="uid://bmlb2dwygk47l" path="res://Assets/Map Tiles/Tileset/Dungeon/walls_floor.png" id="23_ju4yi"]
 [ext_resource type="Texture2D" uid="uid://casqns6bsbloo" path="res://Assets/Map Tiles/Tileset/Dungeon/Water_coasts_animation.png" id="24_cejgb"]
 [ext_resource type="Texture2D" uid="uid://dqasttlqfpeuh" path="res://Assets/Map Tiles/Tileset/Dungeon/water_details_animation.png" id="25_carfs"]
-[ext_resource type="Texture2D" uid="uid://cgn25u7abs02d" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_ba4wy"]
-[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="27_lhtlk"]
-[ext_resource type="Texture2D" uid="uid://c8fbufax2v2vo" path="res://Assets/Map Tiles/Tileset/Dungeon/mainlevbuild.png" id="28_51eck"]
+[ext_resource type="Texture2D" uid="uid://7en0wv0bguo3" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_ba4wy"]
+[ext_resource type="Texture2D" uid="uid://1m42j1xpugay" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="27_lhtlk"]
+[ext_resource type="Texture2D" uid="uid://bbg3sxcrfmldc" path="res://Assets/Map Tiles/Tileset/Dungeon/mainlevbuild.png" id="28_51eck"]
 [ext_resource type="Texture2D" uid="uid://ch0cutbtie3ps" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_coasts_animation.png" id="28_axrql"]
 [ext_resource type="Texture2D" uid="uid://dhjqbiubpoqe7" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_floor.png" id="29_ttx3b"]
 [ext_resource type="Texture2D" uid="uid://bbfu5byw1ys67" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_walls.png" id="30_b24sx"]
 [ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="31_l2l7t"]
 [ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="32_j0wxa"]
-[ext_resource type="Texture2D" uid="uid://b600ebtolewct" path="res://Assets/Map Tiles/mainlevbuild.png" id="34_fvq7x"]
+[ext_resource type="Texture2D" uid="uid://b0a7mo0e4as7s" path="res://Assets/Map Tiles/mainlevbuild.png" id="34_fvq7x"]
 [ext_resource type="Script" uid="uid://gi3ma2tv7svj" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_a___medium.gd" id="35_hf61p"]
 [ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="36_g6ctt"]
 [ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="37_vnah1"]
-[ext_resource type="AudioStream" uid="uid://cfwir5a82o0ne" path="res://Assets/Sfx/Background/BGM - Area 3.ogg" id="41_w117t"]
+[ext_resource type="AudioStream" uid="uid://6hxgctyqjrrn" path="res://Assets/Sfx/Background/BGM - Area 3.ogg" id="41_w117t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w117t"]
 size = Vector2(298, 331)
@@ -18613,6 +18613,7 @@ tile_set = SubResource("TileSet_6wyqo")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("41_w117t")
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [connection signal="body_entered" from="StartingRoom/CameraArea" to="StartingRoom" method="_on_camera_area_body_entered"]

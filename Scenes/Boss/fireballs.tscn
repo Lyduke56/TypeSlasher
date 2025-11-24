@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dwm5g2r1af5fo"]
 
 [ext_resource type="Script" uid="uid://bxmvhi4epx1oq" path="res://Scripts/Boss/fireball.gd" id="1_okd1d"]
-[ext_resource type="Texture2D" uid="uid://cin61pik802dn" path="res://Assets/Sprites/Boss/FB000-ezgif.com-gif-to-sprite-converter.png" id="2_okd1d"]
+[ext_resource type="Texture2D" uid="uid://c1kd2hjqvayif" path="res://Assets/Sprites/Boss/FB000-ezgif.com-gif-to-sprite-converter.png" id="2_okd1d"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_shnke"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_64c46"]
@@ -59,6 +59,7 @@ radius = 6.71855
 z_index = 4
 scale = Vector2(1.2, 1.2)
 script = ExtResource("1_okd1d")
+speed = 10.0
 lifetime = 100.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

@@ -45,6 +45,8 @@ func _on_buff_slot_clicked(event: InputEvent):
 				buff_type = "Shield"
 			elif chosen_buff == 2:
 				buff_type = "Sword"
+			elif chosen_buff == 3:
+				buff_type = "Pause Enemy"
 
 			print("Buff slot ", buff_index + 1, " clicked! Selected buff: ", buff_type, " (index: ", chosen_buff, ")")
 
