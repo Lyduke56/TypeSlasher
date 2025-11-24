@@ -118,9 +118,6 @@ func load_dungeon(dungeon_path: String) -> void:
 
 		# Ensure player is positioned in the new dungeon's starting room center
 		call_deferred("_position_player_in_new_dungeon")
-
-		# Set AudioStreamPlayers to continue playing during pause
-		call_deferred("_set_audio_players_to_continue_during_pause")
 	else:
 		print("Failed to load dungeon: " + dungeon_path)
 
@@ -276,6 +273,8 @@ func _pause_game() -> void:
 	if pause_ui:
 		pause_ui.visible = true
 		pause_ui.grab_focus()
+	# Configure AudioStreamPlayers to continue during pause
+	_set_audio_players_to_continue_during_pause()
 	# Inform WPM tracker
 	Global.wpm_on_pause()
 
@@ -283,6 +282,8 @@ func _resume_game() -> void:
 	get_tree().paused = false
 	if pause_ui:
 		pause_ui.visible = false
+	# Reset AudioStreamPlayers to normal processing mode
+	_reset_audio_players_to_normal()
 	# Inform WPM tracker
 	Global.wpm_on_resume()
 
@@ -303,6 +304,24 @@ func _recursively_set_audio_players_to_continue_during_pause(node: Node) -> void
 	# Recursively check all children
 	for child in node.get_children():
 		_recursively_set_audio_players_to_continue_during_pause(child)
+
+func _reset_audio_players_to_normal() -> void:
+	"""Reset all AudioStreamPlayers back to normal processing mode"""
+	if not current_dungeon:
+		return
+
+	# Recursively search for and reset AudioStreamPlayers
+	_recursively_reset_audio_players_to_normal(current_dungeon)
+
+func _recursively_reset_audio_players_to_normal(node: Node) -> void:
+	"""Recursively search for and reset AudioStreamPlayers to normal mode"""
+	if node is AudioStreamPlayer or node is AudioStreamPlayer2D:
+		node.process_mode = Node.ProcessMode.PROCESS_MODE_INHERIT
+		print("Reset AudioStreamPlayer '", node.name, "' to normal processing mode")
+
+	# Recursively check all children
+	for child in node.get_children():
+		_recursively_reset_audio_players_to_normal(child)
 
 func _set_node_tree_process_mode(node: Node, mode: Node.ProcessMode) -> void:
 	# Recursively set process mode for a subtree so input works while paused
