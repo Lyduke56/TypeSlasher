@@ -70,6 +70,9 @@ var room_size: Vector2 = Vector2.ZERO
 
 @export var points_for_kill = 2500
 
+# Room reference for word coordination
+var associated_room: Node2D = null
+
 # Signals
 signal targetable_phase_ended  # Emitted when targetable phase ends (timer or damage)
 
@@ -448,9 +451,24 @@ func shoot_fireball():
 
 func _setup_fireball_prompt(fireball: Node2D):
 	"""Setup prompt for fireball"""
-	var fireball_word = _get_unique_word("easy")
-	fireball.set_prompt(fireball_word)
-	print("Fireball spawned with word: '", fireball_word, "'")
+	if associated_room and associated_room.has_method("_get_unique_word_for_category"):
+		# Use room's tracked word selection - room handles cleanup
+		var fireball_word = associated_room._get_unique_word_for_category("easy")
+		if fireball_word != "":
+			# Track projectile for room cleanup - room handles the rest
+			get_parent().get_parent().assign_word_to_enemy(fireball, fireball_word)
+			fireball.set_prompt(fireball_word)
+		else:
+			# Room blocked spawning - no safe words available
+			print("No safe projectile words available - using fallback system")
+			fireball_word = _get_unique_word("easy")
+			fireball.set_prompt(fireball_word)
+			print("Fireball spawned with fallback word: '", fireball_word, "' (easy difficulty - fallback)")
+	else:
+		# No coordination - use untracked random word
+		var fireball_word = _get_unique_word("easy")
+		fireball.set_prompt(fireball_word)
+		print("Fireball spawned with untracked word: '", fireball_word, "' (easy difficulty - untracked)")
 
 func start_idle_phase():
 	"""Start the idle phase after shooting fireballs at a position"""

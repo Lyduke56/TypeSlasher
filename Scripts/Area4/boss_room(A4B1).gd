@@ -19,6 +19,11 @@ signal room_cleared
 var TargetScene = preload("res://scenes/target.tscn")
 var MinotaurScene = preload("res://Scenes/Boss/Minotaur.tscn")
 var current_category = "medium"  # Can be: easy, medium, hard, typo, sentence, casing
+
+# Word and letter tracking
+var used_words = []  # Track all words used in this room (no reuse)
+var alive_enemies = {}  # enemy_instance -> word (for cleanup)
+var active_letters = {}  # first_letter -> enemy_instance (tracks living enemies using each letter)
 var enemies_spawned = 0  # How many we've actually spawned
 var max_enemies_to_spawn = 0  # How many we plan to spawn
 var enemies_remaining = 0  # How many are still alive
@@ -62,6 +67,11 @@ func start_room():
 	print("Room " + name + " started")
 	barrier_on.visible = true
 	barrier_off.visible = false
+
+	# Reset word and letter tracking for new room
+	used_words.clear()
+	alive_enemies.clear()
+	active_letters.clear()
 
 	# Handle camera positioning when entering the room
 	_handle_camera_on_room_enter()
@@ -272,11 +282,15 @@ func _spawn_enemy_at_position(spawn_position: Vector2, enemy_scene: PackedScene)
 	# Check if this is a boss enemy - if so, try to use specific boss spawn point
 	var is_boss_enemy = false
 	var is_demon_boss = false
+	var is_cthulhu_boss = false
 	if enemy_scene:
 		var temp_instance = enemy_scene.instantiate()
 		is_boss_enemy = temp_instance.get("max_boss_health") != null
 		# Check if this is specifically the Demon boss
 		is_demon_boss = temp_instance.get("max_boss_health") != null and temp_instance.has_method("start_boss_pattern")
+		# Check if this is the Cthulhu boss by resource path
+		var scene_path = enemy_scene.resource_path
+		is_cthulhu_boss = scene_path.contains("Cthulu") or scene_path.contains("Boss")
 		temp_instance.queue_free()
 
 	var final_spawn_position = spawn_position
@@ -352,25 +366,125 @@ func _spawn_enemy_at_position(spawn_position: Vector2, enemy_scene: PackedScene)
 	# Set enemy target (target position)
 	enemy_instance.set_target_position(target_position)
 
+	# Assign word to enemy for tracking (for bosses and self-controlled enemies)
+	if is_boss_enemy:
+		# For boss enemies, we track their word assignment if they have one
+		assign_word_to_enemy(enemy_instance, selected_word)
+
+	# Special handling for Cthulhu boss - set room reference for projectile coordination
+	if is_cthulhu_boss:
+		enemy_instance.set("associated_room", self)
+		print("Cthulhu boss detected - setting associated_room for projectile coordination")
+
 	# Connect enemy death signal to check for room completion
 	enemy_instance.tree_exited.connect(_on_enemy_died)
 
 func _get_unique_word() -> String:
-	"""Get a unique word for the enemy"""
+	"""Get a unique word and letter for the enemy"""
 	if not WordDatabase:
 		print("WordDatabase not loaded!")
 		return "enemy"
 
-	var available_words = WordDatabase.get_category_words(current_category)
-	if available_words.is_empty():
-		print("No words available in category: " + current_category)
+	var foundation_words = WordDatabase.get_category_words(current_category)
+	if foundation_words.is_empty():
 		return "enemy"
 
-	# Pick random word
-	return available_words[randi() % available_words.size()]
+	# First, get words that are unused and have unused first letters
+	var available_words = []
+	for word in foundation_words:
+		if word.length() == 0:
+			continue
+
+		var first_letter = word.substr(0, 1).to_upper()
+
+		# Must not be used word AND (letter unused OR letter used by dead enemy)
+		if not used_words.has(word) and not active_letters.has(first_letter):
+			available_words.append(word)
+
+	# If no perfect matches, allow letter reuse (better than blocking spawn)
+	if available_words.is_empty():
+		available_words = []
+		for word in foundation_words:
+			if word.length() == 0 or used_words.has(word):
+				continue
+			# Allow any word that hasn't been used (even with shared first letters)
+			available_words.append(word)
+
+	if available_words.is_empty():
+		return "enemy"  # Complete fallback
+
+	var selected_word = available_words[randi() % available_words.size()]
+	return selected_word
+
+func _get_unique_word_for_category(category: String) -> String:
+	"""Get a unique word and letter for the enemy from a specific category"""
+	if not WordDatabase:
+		print("WordDatabase not loaded!")
+		return "enemy"
+
+	var foundation_words = WordDatabase.get_category_words(category)
+	if foundation_words.is_empty():
+		print("Category not available: ", category)
+		return "enemy"
+
+	# STEP 1: Get ALL words that haven't been used in this room (word uniqueness is priority)
+	var unused_words = []
+	for word in foundation_words:
+		if word.length() == 0 or used_words.has(word):
+			continue
+		unused_words.append(word)
+
+	# STEP 2: Strict letter uniqueness for projectiles (they compete less for focus)
+	if unused_words.size() > 0:
+		# ONLY select words with completely unused first letters
+		var available_words = []
+		for word in unused_words:
+			var first_letter = word.substr(0, 1).to_upper()
+			if not active_letters.has(first_letter):
+				available_words.append(word)  # Must have unique first letter
+
+		# If we have words with unique letters, use them
+		if available_words.size() > 0:
+			var selected_word = available_words[randi() % available_words.size()]
+			print("Fireball spawned with tracked word: '", selected_word, "' (", category, " difficulty)")
+
+			# Track projectile for proper cleanup
+			used_words.append(selected_word)  # Prevent same word reuse
+			# Letter will be tracked when projectile spawns below
+
+			return selected_word
+		else:
+			# No unused words with unique letters available - block spawning
+			print("No projectile words available without letter conflicts - will use fallback system")
+			return ""  # Signal to use fallback (prevents spawning with conflicts)
+	else:
+		# No unused words left in category - signal failure to allow fallback
+		print("No unused words left in ", category, " category - will use fallback system")
+		return ""  # Signal to use fallback (untracked but different from enemy)
+
+func assign_word_to_enemy(enemy_instance: Node2D, word: String):
+	"""Track word assignment and letter usage"""
+	used_words.append(word)
+	alive_enemies[enemy_instance] = word
+
+	var first_letter = word.substr(0, 1).to_upper()
+	active_letters[first_letter] = enemy_instance
 
 func _on_enemy_died():
-	"""Called when an enemy dies - check if room is ready to be cleared"""
+	"""Called when an enemy dies - clean up word tracking and check if room is ready to be cleared"""
+
+	# Clean up word tracking for this enemy
+	for enemy in alive_enemies.keys():
+		if not is_instance_valid(enemy):
+			var dead_word = alive_enemies[enemy]
+			var first_letter = dead_word.substr(0, 1).to_upper()
+
+			# Remove from tracking dictionaries
+			alive_enemies.erase(enemy)
+			if active_letters.has(first_letter) and active_letters[first_letter] == enemy:
+				active_letters.erase(first_letter)
+			break  # Only clean up one enemy per death call
+
 	enemies_remaining -= 1
 
 	# Check if room is ready to clear:
@@ -511,9 +625,9 @@ func _spawn_demon_boss():
 		is_spawning_enemies = false
 		return
 
-	# Create Demon boss instance
-	var DemonScene = preload("res://Scenes/Boss/Demon.tscn")
-	var boss_instance = DemonScene.instantiate()
+	# Create Cthulhu boss instance
+	var CthulhuScene = preload("res://Scenes/Boss/Cthulu.tscn")
+	var boss_instance = CthulhuScene.instantiate()
 	boss_instance.z_index = 3
 
 	# Spawn at Top node position
@@ -533,6 +647,9 @@ func _spawn_demon_boss():
 
 	# Demon boss gets words through its own targeting phases - no initial word needed
 	boss_instance.set_prompt("")
+
+	# Set room reference for projectile word coordination
+	boss_instance.associated_room = self
 
 	# Set boss target position
 	boss_instance.set_target_position(target_position)
