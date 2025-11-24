@@ -1,9 +1,8 @@
-[gd_scene load_steps=73 format=3 uid="uid://d1rhn5n4v0ppc"]
+[gd_scene load_steps=65 format=3 uid="uid://d1rhn5n4v0ppc"]
 
 [ext_resource type="Script" uid="uid://d2yuxrpjgdnyq" path="res://Scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cytjwetlg8otd" path="res://Assets/Sprites/Enemies/Characters(100x100)/Knight/Knight/Knight.png" id="2_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dyjjg2vprkvur" path="res://Assets/Sprites/Other Scenes/spawnbeam-sheet.png" id="3_6t5aa"]
-[ext_resource type="Texture2D" uid="uid://qmkm5lyb7o2w" path="res://Assets/Sprites/Other Scenes/shield-barrier-Sheet.png" id="3_vgqql"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
 atlas = ExtResource("2_cvnsp")
@@ -360,61 +359,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c8b32"]
-atlas = ExtResource("3_vgqql")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nj1g2"]
-atlas = ExtResource("3_vgqql")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_usbl8"]
-atlas = ExtResource("3_vgqql")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dtg1u"]
-atlas = ExtResource("3_vgqql")
-region = Rect2(0, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nuaet"]
-atlas = ExtResource("3_vgqql")
-region = Rect2(64, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bqbau"]
-atlas = ExtResource("3_vgqql")
-region = Rect2(128, 64, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_f5f5t"]
-animations = [{
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c8b32")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nj1g2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_usbl8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dtg1u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nuaet")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bqbau")
-}],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_5x828"]
 atlas = ExtResource("3_6t5aa")
 region = Rect2(0, 0, 64, 176)
@@ -523,13 +467,6 @@ sprite_frames = SubResource("SpriteFrames_5x828")
 animation = &"attack_1"
 frame = 6
 frame_progress = 1.0
-
-[node name="ShieldSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -12.2137)
-scale = Vector2(1, 1)
-sprite_frames = SubResource("SpriteFrames_f5f5t")
-animation = &"new_animation"
-frame_progress = 0.232612
 
 [node name="Overlay" type="AnimatedSprite2D" parent="."]
 position = Vector2(-6.10687, -85.4962)
