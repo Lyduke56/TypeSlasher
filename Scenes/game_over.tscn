@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://davq3fhjf5sv7"]
 
-[ext_resource type="Script" uid="uid://p6chgi83pfav" path="res://Scripts/game_over.gd" id="1_8fo1c"]
+[ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_8fo1c"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="1_ojehl"]
-[ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_ek8ke"]
+[ext_resource type="FontFile" uid="uid://5bsb58qe25gk" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_ek8ke"]
 
 [sub_resource type="Animation" id="Animation_8fo1c"]
 resource_name = "Fade_in"

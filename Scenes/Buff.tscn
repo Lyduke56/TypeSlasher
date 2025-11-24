@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bahxot8tqiqpq"]
+[gd_scene load_steps=4 format=3 uid="uid://bya6eqmmhgavv"]
 
 [ext_resource type="Script" uid="uid://bhwu4u2mifk8y" path="res://Scripts/Buff.gd" id="1_vwd27"]
 [ext_resource type="Texture2D" uid="uid://dlvbmx5066uev" path="res://Assets/Sprites/Tiny Swords (Free Pack)/Decorations/Rocks/Rock1.png" id="2_k30u3"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=158 format=4 uid="uid://b65qmexe2g5nb"]
 
 [ext_resource type="Script" uid="uid://cif7fxews2ssv" path="res://Scripts/Dungeons/dungeon_manager(A1V5).gd" id="1_dlq62"]
-[ext_resource type="Script" uid="uid://cjpow3sepwo1v" path="res://Scripts/Dungeons/area_1_var_5.gd" id="1_empcu"]
+[ext_resource type="Script" path="res://Scripts/Dungeons/area_1_var_5.gd" id="1_empcu"]
 [ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://Assets/Map Tiles/Tileset/Dungeon/decor.png" id="2_0yvjv"]
 [ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="3_0w2q1"]
 [ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_frf7q"]

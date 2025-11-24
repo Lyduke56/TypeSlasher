@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dimjdi1unntal"]
 
-[ext_resource type="Script" uid="uid://m3rrboq13283" path="res://Scripts/prompt_display.gd" id="1_8q2l4"]
-[ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="1_x4j6a"]
+[ext_resource type="Script" path="res://Scripts/prompt_display.gd" id="1_8q2l4"]
+[ext_resource type="FontFile" uid="uid://5bsb58qe25gk" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="1_x4j6a"]
 
 [node name="PromptDisplay" type="CanvasLayer"]
 script = ExtResource("1_8q2l4")
