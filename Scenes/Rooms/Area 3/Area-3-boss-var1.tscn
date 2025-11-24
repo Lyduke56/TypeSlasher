@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=4 uid="uid://dg1ggv0p4qg61"]
+[gd_scene load_steps=134 format=4 uid="uid://dg1ggv0p4qg61"]
 
 [ext_resource type="Script" uid="uid://tjby8o2u6rgv" path="res://Scripts/Area3/dungeon_manager(A3B1).gd" id="1_kau1o"]
 [ext_resource type="Script" uid="uid://b5q4gh30t4pfo" path="res://Scripts/Area3/area_3_boss_var_1.gd" id="1_qdm2w"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="7_v2so2"]
 [ext_resource type="Texture2D" uid="uid://dcv7vre6w0q8" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsA5.png" id="8_e5w70"]
 [ext_resource type="PackedScene" uid="uid://uw280smh4xbt" path="res://Scenes/Enemies/basic_orc_rider.tscn" id="9_kkki6"]
-[ext_resource type="PackedScene" uid="uid://c1b2kana4a24y" path="res://Scenes/Boss/Demon.tscn" id="9_qdm2w"]
 [ext_resource type="Texture2D" uid="uid://bkotaa0wf2s22" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsSandA5.png" id="9_v2so2"]
 [ext_resource type="PackedScene" uid="uid://o7y4fhdlmdju" path="res://Scenes/Enemies/basic_werebear.tscn" id="10_am6ty"]
 [ext_resource type="Texture2D" uid="uid://c6aenh02h86va" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FurnitureB.png" id="10_qdm2w"]
@@ -32,22 +31,22 @@
 [ext_resource type="Texture2D" uid="uid://bmlb2dwygk47l" path="res://Assets/Map Tiles/Tileset/Dungeon/walls_floor.png" id="23_lskle"]
 [ext_resource type="Texture2D" uid="uid://casqns6bsbloo" path="res://Assets/Map Tiles/Tileset/Dungeon/Water_coasts_animation.png" id="24_gt3nu"]
 [ext_resource type="Texture2D" uid="uid://dqasttlqfpeuh" path="res://Assets/Map Tiles/Tileset/Dungeon/water_details_animation.png" id="25_6r0dv"]
-[ext_resource type="Texture2D" uid="uid://7en0wv0bguo3" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_mivlf"]
-[ext_resource type="Texture2D" uid="uid://1m42j1xpugay" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="27_bs8ry"]
-[ext_resource type="Texture2D" uid="uid://bbg3sxcrfmldc" path="res://Assets/Map Tiles/Tileset/Dungeon/mainlevbuild.png" id="28_hac4c"]
+[ext_resource type="Texture2D" uid="uid://cgn25u7abs02d" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_mivlf"]
+[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="27_bs8ry"]
+[ext_resource type="Texture2D" uid="uid://c8fbufax2v2vo" path="res://Assets/Map Tiles/Tileset/Dungeon/mainlevbuild.png" id="28_hac4c"]
 [ext_resource type="Texture2D" uid="uid://ch0cutbtie3ps" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_coasts_animation.png" id="29_4mf23"]
 [ext_resource type="Texture2D" uid="uid://dhjqbiubpoqe7" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_floor.png" id="30_ar0l5"]
 [ext_resource type="Texture2D" uid="uid://bbfu5byw1ys67" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_walls.png" id="31_p8u75"]
 [ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="32_ldg6m"]
 [ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="33_widfx"]
 [ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="34_kl167"]
-[ext_resource type="Texture2D" uid="uid://b0a7mo0e4as7s" path="res://Assets/Map Tiles/mainlevbuild.png" id="34_qgo6a"]
+[ext_resource type="Texture2D" uid="uid://b600ebtolewct" path="res://Assets/Map Tiles/mainlevbuild.png" id="34_qgo6a"]
 [ext_resource type="Script" uid="uid://gi3ma2tv7svj" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_a___medium.gd" id="35_ohwbk"]
 [ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="36_f5flv"]
 [ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="37_qrbvl"]
 [ext_resource type="PackedScene" uid="uid://1autrsiutlos" path="res://Scenes/RoomSpawns/boss_room_spawn.tscn" id="39_7n6os"]
 [ext_resource type="Script" uid="uid://dupdl2bqtnva" path="res://Scripts/Dungeons/Area_1_boss_var1/Rooms/healing_room.gd" id="40_7n6os"]
-[ext_resource type="AudioStream" uid="uid://6hxgctyqjrrn" path="res://Assets/Sfx/Background/BGM - Area 3.ogg" id="46_n2bpw"]
+[ext_resource type="AudioStream" uid="uid://cfwir5a82o0ne" path="res://Assets/Sfx/Background/BGM - Area 3.ogg" id="46_n2bpw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxv3x"]
 size = Vector2(317, 342)
@@ -84,14 +83,6 @@ metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrbvl"]
 size = Vector2(491, 513)
-
-[sub_resource type="Resource" id="Resource_v2so2"]
-script = ExtResource("7_v2so2")
-enemy_scene = ExtResource("9_qdm2w")
-count = 1
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kau1o"]
 size = Vector2(669, 714)
@@ -18545,7 +18536,6 @@ position = Vector2(0, 1)
 z_index = 2
 position = Vector2(0, -1903)
 script = ExtResource("6_kau1o")
-enemy_waves = Array[ExtResource("7_v2so2")]([SubResource("Resource_v2so2")])
 
 [node name="CameraArea" type="Area2D" parent="BossRoom"]
 

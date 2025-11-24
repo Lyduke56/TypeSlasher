@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://davq3fhjf5sv7"]
+[gd_scene load_steps=7 format=3 uid="uid://cpbmv7o8d7gbj"]
 
-[ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_8fo1c"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="1_ojehl"]
-[ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_ek8ke"]
+[ext_resource type="Script" uid="uid://bn17ip8bb72n8" path="res://Scripts/you_win.gd" id="1_yq0dy"]
+[ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_t4fbi"]
+[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_na2qd"]
 
 [sub_resource type="Animation" id="Animation_8fo1c"]
 resource_name = "Fade_in"
@@ -64,8 +64,8 @@ _data = {
 &"RESET": SubResource("Animation_ek8ke")
 }
 
-[node name="GameOver" type="CanvasLayer"]
-script = ExtResource("1_8fo1c")
+[node name="YouWin" type="CanvasLayer"]
+script = ExtResource("1_yq0dy")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -81,30 +81,62 @@ offset_top = 86.0
 offset_right = 2653.0
 offset_bottom = 693.0
 scale = Vector2(0.295, 0.295)
-theme_override_fonts/font = ExtResource("2_ek8ke")
+theme_override_fonts/font = ExtResource("2_t4fbi")
 theme_override_font_sizes/font_size = 445
-text = "Game Over"
+text = "You Win!"
+horizontal_alignment = 1
+
+[node name="Score" type="RichTextLabel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -378.0
+offset_right = 5074.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.1, 0.1)
+theme_override_fonts/normal_font = ExtResource("2_t4fbi")
+theme_override_font_sizes/normal_font_size = 228
+text = "Score
+"
+horizontal_alignment = 1
+
+[node name="Time" type="RichTextLabel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -253.0
+offset_top = -319.0
+offset_right = 5077.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.1, 0.1)
+theme_override_fonts/normal_font = ExtResource("2_t4fbi")
+theme_override_font_sizes/normal_font_size = 228
+text = "Time
+"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 383.0
-offset_top = 300.0
-offset_right = 1818.61
-offset_bottom = 932.0
-scale = Vector2(0.285, 0.285)
+offset_left = 484.0
+offset_top = 421.0
+offset_right = 1797.0
+offset_bottom = 709.0
+scale = Vector2(0.17, 0.17)
 theme_override_constants/separation = 56
 
-[node name="Restart" type="Button" parent="VBoxContainer"]
+[node name="Menu" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_ojehl")
+theme_override_fonts/font = ExtResource("3_na2qd")
 theme_override_font_sizes/font_size = 280
-text = "Restart"
-
-[node name="Quit" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_ojehl")
-theme_override_font_sizes/font_size = 280
-text = "Quit"
+text = "Menu"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -120,5 +152,4 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="VBoxContainer/Menu" to="." method="_on_menu_pressed"]

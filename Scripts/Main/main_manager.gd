@@ -11,12 +11,19 @@ var current_dungeon: Node2D = null
 var pause_ui: Control
 
 func boss_dungeon_cleared():
-	"""Called when boss dungeon is completed - go to buff selection"""
-	print("Boss dungeon cleared! Going to buff selection...")
+	"""Called when boss dungeon is completed - go to buff selection or win screen"""
+	print("Boss dungeon cleared!")
 	# Set flag that we're coming from boss completion
 	Global.after_boss_completion = true
-	# Go to buff selection
-	get_tree().change_scene_to_file("res://Scenes/BuffSelection.tscn")
+	# Check if this is the final boss (Area 4)
+	if DungeonProgress.current_area == 4:
+		# Game completed, go to win screen
+		print("Final boss defeated! Game completed.")
+		get_tree().change_scene_to_file("res://Scenes/You_win.tscn")
+	else:
+		# Go to buff selection
+		print("Going to buff selection...")
+		get_tree().change_scene_to_file("res://Scenes/BuffSelection.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -54,8 +61,13 @@ func _ready() -> void:
 			print("Returning from buff selection after boss completion - advancing to next area")
 			# Advance to next area and reset dungeon progress
 			DungeonProgress.advance_to_next_area()
-			# Load first dungeon of next area
-			load_random_dungeon()
+			# Check if this is Area 4 (final boss)
+			if DungeonProgress.current_area == 4:
+				# Load final boss dungeon directly
+				load_dungeon("res://Scenes/Rooms/Area 4 - Final Boss/Area-4-boss.tscn")
+			else:
+				# Load first dungeon of next area
+				load_random_dungeon()
 		else:
 			# After buff selection - continue with dungeon progression using DungeonProgress autoload
 			load_random_dungeon()
