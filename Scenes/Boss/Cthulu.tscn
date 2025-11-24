@@ -552,3 +552,4 @@ metadata/_edit_use_anchors_ = true
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_persl")
 autoplay = true
+bus = &"SFx"

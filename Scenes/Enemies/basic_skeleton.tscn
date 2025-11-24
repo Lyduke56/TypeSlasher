@@ -424,9 +424,12 @@ shape = SubResource("CircleShape2D_2ey31")
 
 [node name="sfx_damaged" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_ut5wb")
+bus = &"SFx"
 
 [node name="sfx_death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_jjerx")
+bus = &"SFx"
 
 [node name="sfx_attack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_7dwoc")
+bus = &"SFx"

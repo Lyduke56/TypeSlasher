@@ -18613,6 +18613,7 @@ tile_set = SubResource("TileSet_6wyqo")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("41_w117t")
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [connection signal="body_entered" from="StartingRoom/CameraArea" to="StartingRoom" method="_on_camera_area_body_entered"]

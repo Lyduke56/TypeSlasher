@@ -60,3 +60,4 @@ shape = SubResource("CircleShape2D_2ey31")
 
 [node name="sfx_hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_k1jd8")
+bus = &"SFx"
