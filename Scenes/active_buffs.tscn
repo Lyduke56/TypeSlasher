@@ -28,27 +28,27 @@ grow_horizontal = 2
 grow_vertical = 2
 region_rect = Rect2(4.84373, 7.00018, 89.0605, 87.9039)
 
-[node name="GridContainer" type="GridContainer" parent="NinePatchRect"]
+[node name="BuffContainer" type="HBoxContainer" parent="NinePatchRect"]
 layout_direction = 2
 layout_mode = 0
 offset_left = 585.765
 offset_top = 452.471
 offset_right = 1125.76
 offset_bottom = 552.471
-theme_override_constants/h_separation = 10
-columns = 5
+theme_override_constants/separation = 10
+alignment = 2
 
-[node name="BuffSlot" parent="NinePatchRect/GridContainer" instance=ExtResource("1_ba2rv")]
+[node name="BuffSlot5" parent="NinePatchRect/BuffContainer" instance=ExtResource("1_ba2rv")]
 layout_mode = 2
 
-[node name="BuffSlot2" parent="NinePatchRect/GridContainer" instance=ExtResource("1_ba2rv")]
+[node name="BuffSlot4" parent="NinePatchRect/BuffContainer" instance=ExtResource("1_ba2rv")]
 layout_mode = 2
 
-[node name="BuffSlot3" parent="NinePatchRect/GridContainer" instance=ExtResource("1_ba2rv")]
+[node name="BuffSlot3" parent="NinePatchRect/BuffContainer" instance=ExtResource("1_ba2rv")]
 layout_mode = 2
 
-[node name="BuffSlot4" parent="NinePatchRect/GridContainer" instance=ExtResource("1_ba2rv")]
+[node name="BuffSlot2" parent="NinePatchRect/BuffContainer" instance=ExtResource("1_ba2rv")]
 layout_mode = 2
 
-[node name="BuffSlot5" parent="NinePatchRect/GridContainer" instance=ExtResource("1_ba2rv")]
+[node name="BuffSlot" parent="NinePatchRect/BuffContainer" instance=ExtResource("1_ba2rv")]
 layout_mode = 2

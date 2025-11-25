@@ -13,28 +13,13 @@ func setup_buff_slot_references():
 	"""Get references to all BuffSlot children in order (right to left)"""
 	print("ActiveBuffs: Setting up buff slot references")
 	buff_slots = []
-	var grid_container = get_node_or_null("NinePatchRect/GridContainer")
+	var buff_container = get_node_or_null("NinePatchRect/BuffContainer")
 
-	print("ActiveBuffs: Grid container found: ", grid_container != null)
+	print("ActiveBuffs: Buff container found: ", buff_container != null)
 
-	if grid_container:
-		var buff_slot_5 = grid_container.get_node_or_null("BuffSlot5")
-		var buff_slot_4 = grid_container.get_node_or_null("BuffSlot4")
-		var buff_slot_3 = grid_container.get_node_or_null("BuffSlot3")
-		var buff_slot_2 = grid_container.get_node_or_null("BuffSlot2")
-		var buff_slot = grid_container.get_node_or_null("BuffSlot")
-
-		print("ActiveBuffs: BuffSlot5 found: ", buff_slot_5 != null)
-		print("ActiveBuffs: BuffSlot4 found: ", buff_slot_4 != null)
-		print("ActiveBuffs: BuffSlot3 found: ", buff_slot_3 != null)
-		print("ActiveBuffs: BuffSlot2 found: ", buff_slot_2 != null)
-		print("ActiveBuffs: BuffSlot found: ", buff_slot != null)
-
-		if buff_slot_5: buff_slots.append(buff_slot_5)
-		if buff_slot_4: buff_slots.append(buff_slot_4)
-		if buff_slot_3: buff_slots.append(buff_slot_3)
-		if buff_slot_2: buff_slots.append(buff_slot_2)
-		if buff_slot: buff_slots.append(buff_slot)
+	if buff_container:
+		buff_slots = buff_container.get_children()
+		buff_slots.reverse()  # Reverse so buff_slots[0] is the right-most slot
 
 	print("ActiveBuffs: Found ", buff_slots.size(), " buff slots")
 

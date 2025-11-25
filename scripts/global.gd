@@ -129,12 +129,31 @@ func _handle_game_over():
 	"""Handle game over with a slight delay to show the last heart disappearing"""
 	end_game_timer()
 	await get_tree().create_timer(0.5).timeout
-	get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
+
+	# --- RESET BUFFS START ---
+	# Reset all buff stacks so they don't carry over to the next game
+	shield_buff_stacks = 0
+	is_shield_ready = false
+	if shield_timer: shield_timer.stop()
+
+	sword_buff_stacks = 0
+	sword_heal_chance = 0
+
+	freeze_buff_stacks = 0
+	freeze_activation_chance = 0
+	if freeze_timer: freeze_timer.stop()
+
+	buff_stacks_changed.emit()
+	# --- RESET BUFFS END ---
+
 	player_max_health = 3  # Default max health, increases permanently
 	player_current_health = 3  # Current health, resets to max when entering dungeon
+
 	# Reset dungeon progress for future gameplay
 	DungeonProgress.reset_progress()
 	DungeonProgress.current_area = 1
+
+	get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 
 func heal_damage(amount: int = 1):
 	"""Increase player health and emit signal for UI updates"""
