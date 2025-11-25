@@ -1,90 +1,60 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4f31rhma7yhi"]
+[gd_scene load_steps=5 format=3 uid="uid://c4f31rhma7yhi"]
 
-[ext_resource type="Script" uid="uid://b2vgdopi1goid" path="res://Scripts/active_buffs.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://c3045pt6uw4at" path="res://Assets/Sprites/GUI/Buff_HealthPotion.png" id="2_health"]
-[ext_resource type="Texture2D" uid="uid://ciaqr3fonmypn" path="res://Assets/Sprites/GUI/Buff_Shield.png" id="3_shield"]
-[ext_resource type="Texture2D" uid="uid://k0fw6qq53bu3" path="res://Assets/Sprites/GUI/Buff_sword.png" id="4_sword"]
-[ext_resource type="Texture2D" uid="uid://d4c1j65kvqffj" path="res://Assets/Sprites/GUI/Buff_Vines.png" id="5_504qt"]
+[ext_resource type="PackedScene" uid="uid://xfeyheej88hr" path="res://ActiveBuffSlot.tscn" id="1_ba2rv"]
+[ext_resource type="Script" uid="uid://cshn3tyu5wt1r" path="res://Scripts/active_buffs.gd" id="3_ba2rv"]
+
+[sub_resource type="Gradient" id="Gradient_ba2rv"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dro4a"]
+gradient = SubResource("Gradient_ba2rv")
 
 [node name="ActiveBuffs" type="Control"]
 layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -134.0
-offset_top = -48.0
-offset_right = 56.0
-offset_bottom = 2.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(0.68, 0.68)
-script = ExtResource("1_script")
-
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -97.0
-offset_top = -67.0
-offset_right = 22.0
-offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.68, 0.68)
+script = ExtResource("3_ba2rv")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.82355
+offset_top = 73.0588
+offset_right = 90.1765
+offset_bottom = 173.059
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_dro4a")
+region_rect = Rect2(4.84373, 7.00018, 89.0605, 87.9039)
+
+[node name="GridContainer" type="GridContainer" parent="NinePatchRect"]
+layout_direction = 2
+layout_mode = 0
+offset_left = 585.765
+offset_top = 452.471
+offset_right = 1125.76
+offset_bottom = 552.471
 theme_override_constants/h_separation = 10
-columns = 4
+columns = 5
 
-[node name="HealthBuff" type="VBoxContainer" parent="GridContainer"]
+[node name="BuffSlot" parent="NinePatchRect/GridContainer" instance=ExtResource("1_ba2rv")]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="GridContainer/HealthBuff"]
-layout_mode = 2
-texture = ExtResource("2_health")
-stretch_mode = 5
-
-[node name="StackLabel" type="Label" parent="GridContainer/HealthBuff"]
-layout_mode = 2
-text = "1"
-horizontal_alignment = 1
-
-[node name="ShieldBuff" type="VBoxContainer" parent="GridContainer"]
+[node name="BuffSlot2" parent="NinePatchRect/GridContainer" instance=ExtResource("1_ba2rv")]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="GridContainer/ShieldBuff"]
-layout_mode = 2
-texture = ExtResource("3_shield")
-stretch_mode = 5
-
-[node name="StackLabel" type="Label" parent="GridContainer/ShieldBuff"]
-layout_mode = 2
-text = "1"
-horizontal_alignment = 1
-
-[node name="SwordBuff" type="VBoxContainer" parent="GridContainer"]
+[node name="BuffSlot3" parent="NinePatchRect/GridContainer" instance=ExtResource("1_ba2rv")]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="GridContainer/SwordBuff"]
-layout_mode = 2
-texture = ExtResource("4_sword")
-stretch_mode = 5
-
-[node name="StackLabel" type="Label" parent="GridContainer/SwordBuff"]
-layout_mode = 2
-text = "1"
-horizontal_alignment = 1
-
-[node name="VineBuff" type="VBoxContainer" parent="GridContainer"]
+[node name="BuffSlot4" parent="NinePatchRect/GridContainer" instance=ExtResource("1_ba2rv")]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="GridContainer/VineBuff"]
+[node name="BuffSlot5" parent="NinePatchRect/GridContainer" instance=ExtResource("1_ba2rv")]
 layout_mode = 2
-texture = ExtResource("5_504qt")
-expand_mode = 1
-stretch_mode = 2
-
-[node name="StackLabel" type="Label" parent="GridContainer/VineBuff"]
-layout_mode = 2
-text = "1"
-horizontal_alignment = 1
