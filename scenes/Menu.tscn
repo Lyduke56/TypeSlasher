@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cnvh2feiwpswh"]
+[gd_scene load_steps=25 format=3 uid="uid://cnvh2feiwpswh"]
 
 [ext_resource type="Script" uid="uid://brobbfekike3n" path="res://Scripts/menu.gd" id="1_xdvgc"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_upctu"]
 [ext_resource type="Texture2D" uid="uid://bog7t5alywxqn" path="res://Assets/Background/Menu_background.png" id="3_11y2r"]
-[ext_resource type="AudioStream" uid="uid://ccjc76n0terne" path="res://Assets/Sfx/Background/BGM - Title Theme.ogg" id="4_s2c3o"]
+[ext_resource type="AudioStream" uid="uid://d34pg0u8qc7w2" path="res://Assets/Sfx/Background/BGM - Title Theme.ogg" id="4_s2c3o"]
+[ext_resource type="Texture2D" uid="uid://c2cdq8vo63sge" path="res://Assets/Sprites/GUI/title-Sheet.png" id="5_idohh"]
+[ext_resource type="Texture2D" uid="uid://c4of7be17puk" path="res://Assets/Background/TypeSlasher-Sheet.png" id="6_wfhf6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_11y2r"]
 
@@ -13,12 +15,12 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b6cxs"]
 
-[sub_resource type="Gradient" id="Gradient_11y2r"]
-offsets = PackedFloat32Array(0, 0.754967)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+[sub_resource type="Gradient" id="Gradient_3jcrr"]
+offsets = PackedFloat32Array(0, 0.719653, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.0807835, 0.0807833, 0.0807834, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_o0tnf"]
-gradient = SubResource("Gradient_11y2r")
+gradient = SubResource("Gradient_3jcrr")
 width = 195
 
 [sub_resource type="Animation" id="Animation_11y2r"]
@@ -96,6 +98,70 @@ _data = {
 &"RESET": SubResource("Animation_o0tnf")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_aobxe"]
+atlas = ExtResource("6_wfhf6")
+region = Rect2(0, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ab40c"]
+atlas = ExtResource("6_wfhf6")
+region = Rect2(300, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjh0l"]
+atlas = ExtResource("6_wfhf6")
+region = Rect2(600, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qki4b"]
+atlas = ExtResource("6_wfhf6")
+region = Rect2(0, 300, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byewe"]
+atlas = ExtResource("6_wfhf6")
+region = Rect2(300, 300, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8aa6"]
+atlas = ExtResource("6_wfhf6")
+region = Rect2(600, 300, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0ao6"]
+atlas = ExtResource("6_wfhf6")
+region = Rect2(0, 600, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsmso"]
+atlas = ExtResource("6_wfhf6")
+region = Rect2(300, 600, 300, 300)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t8p2w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aobxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ab40c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjh0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qki4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_byewe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8aa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x0ao6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsmso")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 2
@@ -111,10 +177,11 @@ script = ExtResource("1_xdvgc")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 z_index = 1
 layout_mode = 0
-offset_left = 14.0
-offset_top = 29.0
-offset_right = 104.0
-offset_bottom = 105.0
+offset_left = 161.0
+offset_top = -150.0
+offset_right = 251.0
+offset_bottom = -74.0
+scale = Vector2(2.6, 2.6)
 
 [node name="Start_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -149,6 +216,7 @@ text = "Quit"
 alignment = 0
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 z_index = -1
 layout_mode = 0
 offset_left = -17.0
@@ -183,6 +251,31 @@ color = Color(0, 0, 0, 1)
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_s2c3o")
 autoplay = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = -19.0
+offset_top = -477.0
+offset_right = 1133.0
+offset_bottom = -322.0
+
+[node name="TypeSlasher" type="Sprite2D" parent="CenterContainer"]
+position = Vector2(565, 81)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_idohh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(668, -140)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_t8p2w")
+autoplay = "default"
+frame_progress = 0.576275
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(600, 66)
+color = Color(1, 0.682353, 0.470588, 1)
+energy = 0.05
+max_distance = 0.0
 
 [connection signal="pressed" from="VBoxContainer/Start_button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Option_button" to="." method="_on_option_button_pressed"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=66 format=3 uid="uid://bollxssfl4hqv"]
 
 [ext_resource type="Script" uid="uid://c6n1ebdbiat77" path="res://Scripts/Boss/minotaur.gd" id="1_yaltd"]
-[ext_resource type="Texture2D" uid="uid://ms0sqs0mioo5" path="res://Assets/Sprites/Boss/Minotaur - Sprite Sheet.png" id="2_yaltd"]
+[ext_resource type="Texture2D" uid="uid://binkydk0faqkc" path="res://Assets/Sprites/Boss/Minotaur - Sprite Sheet.png" id="2_yaltd"]
 [ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://Assets/Themes/Outline.tres" id="3_n1wwt"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="4_n7prq"]
 
