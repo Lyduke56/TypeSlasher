@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://ct4hgdk2e8v47"]
+[gd_scene load_steps=16 format=3 uid="uid://ct4hgdk2e8v47"]
 
-[ext_resource type="Texture2D" uid="uid://cpdry547l3818" path="res://Assets/Sprites/GUI/border 1.png" id="1_2rnfa"]
 [ext_resource type="Theme" uid="uid://dx6raqafay30m" path="res://Assets/Themes/normal_button.tres" id="2_adret"]
+[ext_resource type="Texture2D" uid="uid://buadcox4b10pa" path="res://Assets/Sprites/GUI/pause-Sheet.png" id="2_jcnnf"]
 [ext_resource type="Texture2D" uid="uid://dkaiqkhlad2x" path="res://Assets/Sprites/GUI/silver_panel.png" id="3_adret"]
+[ext_resource type="Texture2D" uid="uid://cf65m5gtxkejp" path="res://Assets/Sprites/GUI/ui-sheet.png" id="4_jntt5"]
 [ext_resource type="PackedScene" uid="uid://f8uv6ymbn0ia" path="res://Scenes/slot.tscn" id="4_vlwpb"]
 [ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://Assets/Sprites/GUI/wood_panel.png" id="5_csd48"]
 [ext_resource type="Script" uid="uid://cwimcn47767jb" path="res://Scripts/ui.gd" id="6_2k9qv"]
@@ -31,27 +32,26 @@ grow_vertical = 2
 script = ExtResource("6_2k9qv")
 
 [node name="Menu" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -174.0
-offset_top = -148.0
-offset_right = 175.0
-offset_bottom = 146.0
+offset_left = -175.0
+offset_top = -149.0
+offset_right = 174.0
+offset_bottom = 145.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.885, 0.885)
-texture = ExtResource("1_2rnfa")
-region_rect = Rect2(-3.2001, -2.88215, 123.629, 65.0007)
+texture = ExtResource("2_jcnnf")
+region_rect = Rect2(13, 13, 294, 262)
 patch_margin_left = 17
 patch_margin_top = 15
 patch_margin_right = 15
 patch_margin_bottom = 13
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 layout_mode = 1
@@ -60,15 +60,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -112.5
-offset_top = -93.0
-offset_right = 551.5
-offset_bottom = 457.0
+offset_left = -110.5
+offset_top = -112.0
+offset_right = 553.5
+offset_bottom = 573.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.33, 0.33)
 theme = ExtResource("2_adret")
-theme_override_constants/separation = 30
+theme_override_constants/separation = 75
 
 [node name="Continue" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
@@ -92,7 +92,6 @@ theme_override_font_sizes/font_size = 106
 text = "QUIT"
 
 [node name="Information" type="NinePatchRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -106,8 +105,8 @@ offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.38, 1.38)
-texture = ExtResource("3_adret")
-region_rect = Rect2(2.87454, 0, 45.1255, 48)
+texture = ExtResource("4_jntt5")
+region_rect = Rect2(13, 14, 294, 262)
 patch_margin_top = 2
 patch_margin_right = 3
 patch_margin_bottom = 3
@@ -117,10 +116,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 38.0
-offset_top = -127.5
-offset_right = 289.0
-offset_bottom = 121.5
+offset_left = 48.5507
+offset_top = -102.775
+offset_right = 252.551
+offset_bottom = 103.225
 grow_vertical = 2
 columns = 4
 
@@ -181,20 +180,20 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -311.0
-offset_top = -143.0
-offset_right = -41.0
-offset_bottom = 135.0
+offset_left = -315.754
+offset_top = -137.848
+offset_right = -45.7535
+offset_bottom = 140.152
 grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("5_csd48")
 
 [node name="Title" type="Label" parent="Information/Description"]
 layout_mode = 0
-offset_left = 14.087
-offset_top = 14.5725
-offset_right = 1551.09
-offset_bottom = 388.572
+offset_left = 17.0
+offset_top = 19.0
+offset_right = 1554.0
+offset_bottom = 326.0
 scale = Vector2(0.09, 0.09)
 theme_override_fonts/font = ExtResource("9_r2bq1")
 theme_override_font_sizes/font_size = 306
@@ -203,9 +202,9 @@ text = "Title"
 [node name="Description" type="RichTextLabel" parent="Information/Description"]
 layout_mode = 0
 offset_left = 18.0
-offset_top = 196.0
-offset_right = 2166.0
-offset_bottom = 776.0
+offset_top = 188.0
+offset_right = 2140.0
+offset_bottom = 899.0
 scale = Vector2(0.11, 0.11)
 theme_override_fonts/normal_font = ExtResource("9_r2bq1")
 theme_override_font_sizes/normal_font_size = 166
@@ -218,10 +217,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -111.5
-offset_top = -69.0
-offset_right = 115.5
-offset_bottom = 48.0
+offset_left = -70.5073
+offset_top = -83.2029
+offset_right = 79.4926
+offset_bottom = 45.7971
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -231,19 +230,22 @@ scale = Vector2(9.559, 9.845)
 
 [node name="Close" type="Button" parent="Information"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -31.0
-offset_top = 1.0
-offset_right = -7.92999
-offset_bottom = 25.0
+anchors_preset = -1
+anchor_left = 0.121
+anchor_top = 0.081
+anchor_right = 0.173
+anchor_bottom = 0.165
+offset_left = -17.8837
+offset_top = 5.05561
+offset_right = -24.6097
+offset_bottom = -1.77239
 grow_horizontal = 0
-scale = Vector2(1.285, 1.285)
+scale = Vector2(1.8, 1.8)
 icon = ExtResource("7_6yr7l")
 flat = true
 
 [node name="Settings" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -256,27 +258,32 @@ offset_right = 250.0
 offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_adret")
+texture = ExtResource("4_jntt5")
 patch_margin_top = 2
 patch_margin_right = 3
 patch_margin_bottom = 3
+axis_stretch_vertical = 2
 
 [node name="Close" type="Button" parent="Settings"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -56.0
-offset_bottom = 56.0
+anchors_preset = -1
+anchor_left = 0.8
+anchor_top = 0.137
+anchor_right = 0.883
+anchor_bottom = 0.281
+offset_top = -0.100002
+offset_right = -18.5
+offset_bottom = -19.3
 grow_horizontal = 0
-icon = ExtResource("5_csd48")
+scale = Vector2(1.8, 1.8)
+icon = ExtResource("7_6yr7l")
 
 [node name="MusicControl" type="HSlider" parent="Settings"]
 layout_mode = 0
-offset_left = 52.0
-offset_top = 111.0
-offset_right = 441.0
-offset_bottom = 141.0
+offset_left = 203.0
+offset_top = 129.0
+offset_right = 428.0
+offset_bottom = 159.0
 theme_override_styles/slider = SubResource("StyleBoxLine_r2bq1")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_4e7uv")
 max_value = 1.0
@@ -287,10 +294,10 @@ audio_bus_name = "Music"
 
 [node name="MasterControl" type="HSlider" parent="Settings"]
 layout_mode = 0
-offset_left = 52.0
-offset_top = 73.0
-offset_right = 441.0
-offset_bottom = 103.0
+offset_left = 204.0
+offset_top = 91.0
+offset_right = 428.0
+offset_bottom = 121.0
 theme_override_styles/slider = SubResource("StyleBoxLine_r2bq1")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_4e7uv")
 max_value = 1.0
@@ -301,10 +308,10 @@ audio_bus_name = "Master"
 
 [node name="SFxControl" type="HSlider" parent="Settings"]
 layout_mode = 0
-offset_left = 52.0
-offset_top = 147.0
-offset_right = 441.0
-offset_bottom = 177.0
+offset_left = 202.0
+offset_top = 165.0
+offset_right = 428.0
+offset_bottom = 195.0
 theme_override_styles/slider = SubResource("StyleBoxLine_r2bq1")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_4e7uv")
 max_value = 1.0
@@ -315,10 +322,10 @@ audio_bus_name = "SFx"
 
 [node name="FullscreenControl" type="CheckButton" parent="Settings"]
 layout_mode = 0
-offset_left = 47.0
-offset_top = 235.0
-offset_right = 205.0
-offset_bottom = 281.0
+offset_left = 73.0
+offset_top = 209.0
+offset_right = 231.0
+offset_bottom = 255.0
 text = "Full Screen"
 script = ExtResource("12_jcnnf")
 
