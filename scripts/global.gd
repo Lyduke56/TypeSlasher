@@ -81,9 +81,18 @@ func initialize_shield_timer():
 		shield_timer.autostart = false
 
 func initialize_shield():
-	"""Initialize shield state - start recharged"""
-	is_shield_ready = true
-	shield_status_changed.emit(true)
+	"""Initialize shield state - always start false, only start timer if we have buffs"""
+	# Always start with shield down
+	is_shield_ready = false
+	shield_status_changed.emit(false)
+
+	# Only start the recharge timer if we actually have the buff
+	if shield_buff_stacks > 0:
+		if shield_timer: shield_timer.start()
+		print("Shield initialized: Starting cooldown timer.")
+	else:
+		if shield_timer: shield_timer.stop()
+		print("Shield initialized: No buffs active.")
 
 func _on_shield_timer_timeout():
 	"""When shield recharges, set ready and emit signal"""
