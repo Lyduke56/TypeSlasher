@@ -125,10 +125,10 @@ text = "Time
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 484.0
-offset_top = 421.0
-offset_right = 1797.0
-offset_bottom = 709.0
+offset_left = 389.0
+offset_top = 398.0
+offset_right = 2834.0
+offset_bottom = 1030.0
 scale = Vector2(0.17, 0.17)
 theme_override_constants/separation = 56
 
@@ -137,6 +137,12 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_na2qd")
 theme_override_font_sizes/font_size = 280
 text = "Menu"
+
+[node name="Save_Score" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_na2qd")
+theme_override_font_sizes/font_size = 280
+text = "Submit Score"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -153,3 +159,4 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="VBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Save_Score" to="." method="_on_menu_pressed"]

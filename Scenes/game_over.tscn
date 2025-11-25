@@ -73,7 +73,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.999935, 0.41322, 0.376307, 0.631373)
+color = Color(0.32591, 0, 0.018586, 0.658824)
 
 [node name="Label" type="Label" parent="."]
 offset_left = 238.0
@@ -157,13 +157,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = 320.0
-offset_top = 569.0
-offset_right = 855.0
-offset_bottom = 633.0
-color = Color(0.254902, 0.254902, 0.254902, 0.631373)
 
 [connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
