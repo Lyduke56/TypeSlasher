@@ -1,7 +1,8 @@
-[gd_scene load_steps=74 format=3 uid="uid://bof6xf0r1y3ka"]
+[gd_scene load_steps=88 format=3 uid="uid://bof6xf0r1y3ka"]
 
-[ext_resource type="Script" uid="uid://drk1sc3c6d4go" path="res://Scripts/Boss/NightBorne.gd" id="1_edkgq"]
+[ext_resource type="Script" path="res://Scripts/Boss/NightBorne.gd" id="1_edkgq"]
 [ext_resource type="Texture2D" uid="uid://yfamjs2cedgf" path="res://Assets/Sprites/Enemies/Characters(100x100)/Sword/NightBorne.png" id="2_efolf"]
+[ext_resource type="Texture2D" uid="uid://dpi8ru4kyjtmv" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="3_efolf"]
 [ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://Assets/Themes/Outline.tres" id="3_pcpn2"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="4_1afxa"]
 
@@ -507,6 +508,103 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dwoc"]
+atlas = ExtResource("3_efolf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hrqe"]
+atlas = ExtResource("3_efolf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqaop"]
+atlas = ExtResource("3_efolf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4hgt"]
+atlas = ExtResource("3_efolf")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co8jt"]
+atlas = ExtResource("3_efolf")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcp7b"]
+atlas = ExtResource("3_efolf")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg5lk"]
+atlas = ExtResource("3_efolf")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ftja"]
+atlas = ExtResource("3_efolf")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mycxb"]
+atlas = ExtResource("3_efolf")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2teb"]
+atlas = ExtResource("3_efolf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_068wb"]
+atlas = ExtResource("3_efolf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcmec"]
+atlas = ExtResource("3_efolf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pcpn2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dwoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hrqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqaop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4hgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_co8jt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcp7b")
+}],
+"loop": true,
+"name": &"freeze",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mg5lk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ftja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mycxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2teb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_068wb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcmec")
+}],
+"loop": true,
+"name": &"unfreeze",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_v8qg3"]
 radius = 4.0
 
@@ -519,9 +617,14 @@ speed = 15.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -22)
 sprite_frames = SubResource("SpriteFrames_c1uly")
-animation = &"Hack"
-frame = 11
-frame_progress = 1.0
+animation = &"idle "
+
+[node name="FreezeVines" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(3.33333, -15)
+scale = Vector2(0.517376, 0.923002)
+sprite_frames = SubResource("SpriteFrames_pcpn2")
+animation = &"unfreeze"
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3

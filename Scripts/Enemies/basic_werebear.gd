@@ -108,6 +108,20 @@ func set_targeted_state(targeted: bool):
 
 func play_death_animation():
 	"""Play damage animation followed by death animation"""
+
+	# --- FIX: Manually unfreeze so death animations can play ---
+	if get("is_frozen"): # Use get() to be safe if variable is missing, or access directly if extends enemy_base
+		set("is_frozen", false)
+		var vines = get("freeze_vines")
+		if vines:
+			vines.visible = false
+
+		# Restore original frames so specific animations (death) exist
+		var orig_frames = get("original_sprite_frames")
+		if orig_frames and anim.sprite_frames != orig_frames:
+			anim.sprite_frames = orig_frames
+	# -----------------------------------------------------------
+
 	if not anim:
 		queue_free()  # Fallback if no animation
 		return

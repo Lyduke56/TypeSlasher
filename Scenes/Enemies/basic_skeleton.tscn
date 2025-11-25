@@ -403,7 +403,7 @@ visible = false
 position = Vector2(3.33333, -15)
 scale = Vector2(0.517376, 0.923002)
 sprite_frames = SubResource("SpriteFrames_ojwtu")
-animation = &"unfreeze"
+animation = &"freeze"
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3
