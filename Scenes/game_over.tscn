@@ -92,15 +92,17 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -260.0
-offset_top = -379.0
-offset_right = 5070.0
-offset_bottom = -19.0
+offset_left = -443.0
+offset_top = -387.0
+offset_right = 4887.0
+offset_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.165, 0.165)
 theme_override_fonts/normal_font = ExtResource("2_ek8ke")
 theme_override_font_sizes/normal_font_size = 228
+text = "Score
+"
 horizontal_alignment = 1
 
 [node name="Time" type="RichTextLabel" parent="."]
@@ -109,15 +111,17 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -263.0
-offset_top = -324.0
-offset_right = 5067.0
-offset_bottom = 36.0
+offset_left = -440.0
+offset_top = -328.0
+offset_right = 4890.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.165, 0.165)
 theme_override_fonts/normal_font = ExtResource("2_ek8ke")
 theme_override_font_sizes/normal_font_size = 228
+text = "Time
+"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -153,6 +157,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 320.0
+offset_top = 569.0
+offset_right = 855.0
+offset_bottom = 633.0
+color = Color(0.254902, 0.254902, 0.254902, 0.631373)
 
 [connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

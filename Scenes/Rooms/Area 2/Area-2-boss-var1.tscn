@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=4 uid="uid://cum31vs8vh8f0"]
+[gd_scene load_steps=130 format=4 uid="uid://cum31vs8vh8f0"]
 
 [ext_resource type="Script" uid="uid://bxg5j83xcck8a" path="res://Scripts/Area2/Area_2_boss_var_1/area_2_boss_var_1.gd" id="1_3owjx"]
 [ext_resource type="Script" uid="uid://c24wvvrucoba" path="res://Scripts/Area2/Area_2_boss_var_1/dungeon_manager(A2B1).gd" id="2_ptan2"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ds85cxxblat1n" path="res://Scenes/Enemies/basic_skeleton_archer.tscn" id="8_e1as4"]
 [ext_resource type="Script" uid="uid://dupdl2bqtnva" path="res://Scripts/Dungeons/Area_1_boss_var1/Rooms/healing_room.gd" id="9_5saxb"]
 [ext_resource type="Script" uid="uid://8psmg1e6527k" path="res://Scripts/Area2/Area_2_boss_var_1/boss_room(A2B1).gd" id="10_g560o"]
+[ext_resource type="PackedScene" uid="uid://ggfjnh3kxjeh" path="res://Scenes/Boss/Tentaclussy.tscn" id="11_ptan2"]
 [ext_resource type="PackedScene" uid="uid://1autrsiutlos" path="res://Scenes/RoomSpawns/boss_room_spawn.tscn" id="12_roua8"]
 [ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://Assets/Map Tiles/Tileset/Dungeon/decor.png" id="13_p3od4"]
 [ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="14_2w4ov"]
@@ -35,15 +36,15 @@
 [ext_resource type="Texture2D" uid="uid://bmlb2dwygk47l" path="res://Assets/Map Tiles/Tileset/Dungeon/walls_floor.png" id="34_710r7"]
 [ext_resource type="Texture2D" uid="uid://casqns6bsbloo" path="res://Assets/Map Tiles/Tileset/Dungeon/Water_coasts_animation.png" id="35_yy0j4"]
 [ext_resource type="Texture2D" uid="uid://dqasttlqfpeuh" path="res://Assets/Map Tiles/Tileset/Dungeon/water_details_animation.png" id="36_6cb0c"]
-[ext_resource type="Texture2D" uid="uid://2l50whv7dosh" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="37_kjijw"]
-[ext_resource type="Texture2D" uid="uid://dyhobrtd8dx37" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="38_axkh8"]
+[ext_resource type="Texture2D" uid="uid://cgn25u7abs02d" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="37_kjijw"]
+[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="38_axkh8"]
 [ext_resource type="Texture2D" uid="uid://ch0cutbtie3ps" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_coasts_animation.png" id="39_wcst4"]
 [ext_resource type="Texture2D" uid="uid://dhjqbiubpoqe7" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_floor.png" id="40_k7gua"]
 [ext_resource type="Texture2D" uid="uid://bbfu5byw1ys67" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_walls.png" id="41_xqenj"]
 [ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="42_33dv3"]
 [ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="43_wftic"]
-[ext_resource type="AudioStream" uid="uid://jnk1knx5jnd" path="res://Assets/Sfx/Background/BGM - Area 2.ogg" id="44_3owjx"]
-[ext_resource type="Texture2D" uid="uid://cxgnvq8exo56k" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Sprites.png" id="44_a5cd3"]
+[ext_resource type="AudioStream" uid="uid://cw1kh4mq0047p" path="res://Assets/Sfx/Background/BGM - Area 2.ogg" id="44_3owjx"]
+[ext_resource type="Texture2D" uid="uid://dwgqx23vqf7r5" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Sprites.png" id="44_a5cd3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qgj6"]
 size = Vector2(303, 324)
@@ -70,6 +71,14 @@ size = Vector2(494, 515)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twlsj"]
 size = Vector2(301, 320)
+
+[sub_resource type="Resource" id="Resource_ietmg"]
+script = ExtResource("7_o1fjt")
+enemy_scene = ExtResource("11_ptan2")
+count = 1
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7p5h"]
 size = Vector2(787, 807.5)
@@ -15576,6 +15585,7 @@ position = Vector2(0, -1)
 z_index = 2
 position = Vector2(0, 1904)
 script = ExtResource("10_g560o")
+enemy_waves = Array[ExtResource("7_o1fjt")]([SubResource("Resource_ietmg")])
 
 [node name="CameraArea" type="Area2D" parent="BossRoom"]
 position = Vector2(0, -135)

@@ -1,10 +1,10 @@
 extends CanvasLayer
 
 @onready var word_label: RichTextLabel = $Word
-
 var blue: Color = Color("#4682b4")
 var green: Color = Color("#639765")
 var red: Color = Color("#a65455")
+var yellow: Color = Color("#f8eecc")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,7 +22,7 @@ func update_prompt_display(full_text: String, current_index: int) -> void:
 
 	# Typed part (green)
 	if current_index > 0:
-		typed_part = "[color=#" + green.to_html(false) + "]" + full_text.substr(0, current_index) + "[/color]"
+		typed_part = "[color=#" + yellow.to_html(false) + "]" + full_text.substr(0, current_index) + "[/color]"
 
 	# Next character (blue)
 	if current_index >= 0 and current_index < full_text.length():
