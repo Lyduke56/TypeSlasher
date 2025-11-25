@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://davq3fhjf5sv7"]
 
-[ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_8fo1c"]
+[ext_resource type="Script" uid="uid://p6chgi83pfav" path="res://Scripts/game_over.gd" id="1_8fo1c"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="1_ojehl"]
 [ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_ek8ke"]
 
@@ -86,12 +86,46 @@ theme_override_font_sizes/font_size = 445
 text = "Game Over"
 horizontal_alignment = 1
 
+[node name="Score" type="RichTextLabel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -379.0
+offset_right = 5070.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.1, 0.1)
+theme_override_fonts/normal_font = ExtResource("2_ek8ke")
+theme_override_font_sizes/normal_font_size = 228
+horizontal_alignment = 1
+
+[node name="Time" type="RichTextLabel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -263.0
+offset_top = -324.0
+offset_right = 5067.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.1, 0.1)
+theme_override_fonts/normal_font = ExtResource("2_ek8ke")
+theme_override_font_sizes/normal_font_size = 228
+horizontal_alignment = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 383.0
-offset_top = 300.0
-offset_right = 1818.61
-offset_bottom = 932.0
-scale = Vector2(0.285, 0.285)
+offset_left = 430.0
+offset_top = 390.0
+offset_right = 1865.61
+offset_bottom = 1022.0
+scale = Vector2(0.215, 0.215)
 theme_override_constants/separation = 56
 
 [node name="Restart" type="Button" parent="VBoxContainer"]

@@ -19,6 +19,21 @@ func boss_dungeon_cleared():
 	if DungeonProgress.current_area == 4:
 		# Game completed, go to win screen
 		print("Final boss defeated! Game completed.")
+		Global.end_game_timer()
+		Global.update_best_time(Global.game_total_time)
+		# Reset health and all buffs to default state
+		Global.player_max_health = 3
+		Global.player_current_health = 3
+		Global.shield_buff_stacks = 0
+		Global.shield_damage_reduction_chance = 0
+		Global.sword_buff_stacks = 0
+		Global.sword_heal_chance = 0
+		Global.freeze_buff_stacks = 0
+		Global.freeze_activation_chance = 0
+		Global.buff_stacks_changed.emit()
+		# Reset dungeon progress for future gameplay
+		DungeonProgress.reset_progress()
+		DungeonProgress.current_area = 1
 		get_tree().change_scene_to_file("res://Scenes/You_win.tscn")
 	else:
 		# Go to buff selection
@@ -75,6 +90,9 @@ func _ready() -> void:
 		# Update heart container in Main scene after health buff application
 		call_deferred("_update_main_heart_container")
 	else:
+		# Start the game timer when gameplay begins
+		Global.start_game_timer()
+
 		# Load debug dungeon if specified, otherwise load random initial dungeon
 		if debug_dungeon_path != "":
 			load_dungeon(debug_dungeon_path)

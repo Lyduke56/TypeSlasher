@@ -560,5 +560,4 @@ func _set_node_tree_process_mode(node: Node, mode: Node.ProcessMode) -> void:
 func update_score():
 	"""Update score tracking (called when correct characters are typed)"""
 	Global.previous_score = Global.current_score
-	if Global.current_score > Global.high_score:
-		Global.high_score = Global.current_score
+	Global.update_high_score(Global.current_score)

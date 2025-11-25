@@ -3,6 +3,10 @@ extends Node
 var high_score = 0
 var current_score: int
 var previous_score: int
+const HIGH_SCORE_SAVE_PATH = "user://high_score.save"
+
+var best_time: float = 999999.0  # Best completion time in seconds (large initial value)
+const BEST_TIME_SAVE_PATH = "user://best_time.save"
 
 # Flag to track if we're coming back from buff selection
 var after_buff_selection: bool = false
@@ -35,6 +39,8 @@ var freeze_timer: Timer
 
 func _ready():
 	"""Initialize global systems"""
+	load_high_score()
+	load_best_time()
 	initialize_freeze_timer()
 
 func initialize_freeze_timer():
@@ -102,10 +108,14 @@ func take_damage(amount: int = 1):
 
 func _handle_game_over():
 	"""Handle game over with a slight delay to show the last heart disappearing"""
+	end_game_timer()
 	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 	player_max_health = 3  # Default max health, increases permanently
 	player_current_health = 3  # Current health, resets to max when entering dungeon
+	# Reset dungeon progress for future gameplay
+	DungeonProgress.reset_progress()
+	DungeonProgress.current_area = 1
 
 func heal_damage(amount: int = 1):
 	"""Increase player health and emit signal for UI updates"""
@@ -205,3 +215,89 @@ func _find_enemy_nodes(node: Node, enemies: Array):
 
 	for child in node.get_children():
 		_find_enemy_nodes(child, enemies)
+
+# --- High Score Persistence ---
+func load_high_score():
+	"""Load the high score from disk"""
+	if FileAccess.file_exists(HIGH_SCORE_SAVE_PATH):
+		var file = FileAccess.open(HIGH_SCORE_SAVE_PATH, FileAccess.READ)
+		if file:
+			var saved_score = file.get_var()
+			if typeof(saved_score) == TYPE_INT:
+				high_score = saved_score
+			file.close()
+			print("Loaded high score: ", high_score)
+		else:
+			print("Error loading high score file")
+
+func save_high_score():
+	"""Save the current high score to disk"""
+	var file = FileAccess.open(HIGH_SCORE_SAVE_PATH, FileAccess.WRITE)
+	if file:
+		file.store_var(high_score)
+		file.close()
+		print("Saved high score: ", high_score)
+	else:
+		print("Error saving high score file")
+
+func update_high_score(new_score: int):
+	"""Update high score if new score is higher, and save to disk"""
+	if new_score > high_score:
+		high_score = new_score
+		save_high_score()
+		print("New high score achieved: ", high_score)
+
+# --- Game Timer Tracking ---
+var game_start_time: float = 0.0
+var game_total_time: float = 0.0
+
+func start_game_timer():
+	"""Start the game timer when gameplay begins"""
+	game_start_time = Time.get_unix_time_from_system()
+
+func end_game_timer():
+	"""End the game timer and calculate total time"""
+	if game_start_time > 0.0:
+		game_total_time = Time.get_unix_time_from_system() - game_start_time
+
+func get_formatted_time() -> String:
+	"""Return formatted time as MM:SS"""
+	var minutes = int(game_total_time / 60)
+	var seconds = int(game_total_time) % 60
+	return "%02d:%02d" % [minutes, seconds]
+
+func load_best_time():
+	"""Load the best time from disk"""
+	if FileAccess.file_exists(BEST_TIME_SAVE_PATH):
+		var file = FileAccess.open(BEST_TIME_SAVE_PATH, FileAccess.READ)
+		if file:
+			var saved_time = file.get_var()
+			if typeof(saved_time) == TYPE_FLOAT:
+				best_time = saved_time
+			file.close()
+			print("Loaded best time: ", get_formatted_best_time())
+		else:
+			print("Error loading best time file")
+
+func save_best_time():
+	"""Save the current best time to disk"""
+	var file = FileAccess.open(BEST_TIME_SAVE_PATH, FileAccess.WRITE)
+	if file:
+		file.store_var(best_time)
+		file.close()
+		print("Saved best time: ", get_formatted_best_time())
+	else:
+		print("Error saving best time file")
+
+func update_best_time(new_time: float):
+	"""Update best time if new time is better, and save to disk"""
+	if new_time < best_time:
+		best_time = new_time
+		save_best_time()
+		print("New best time achieved: ", get_formatted_best_time())
+
+func get_formatted_best_time() -> String:
+	"""Return formatted best time as MM:SS"""
+	var minutes = int(best_time / 60)
+	var seconds = int(best_time) % 60
+	return "%02d:%02d" % [minutes, seconds]
