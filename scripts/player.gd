@@ -257,39 +257,11 @@ func _finish_return() -> void:
 	# Return to idle animation
 	anim.play("idle")
 
-# Health system (matches target.gd health)
-var health: int = 3
-
 func take_damage():
-	"""Take damage and update heart container"""
-	# Check for Shield buff damage reduction
-	var damage_blocked = false
-
-	if Global.shield_damage_reduction_chance > 0:
-		var chance = randf() * 100  # Generate random number 0-100
-		if chance < Global.shield_damage_reduction_chance:
-			damage_blocked = true
-			print("Shield buff activated! Damage completely blocked (", Global.shield_damage_reduction_chance, "% chance)")
-
-	if not damage_blocked:
-		health -= 1
-		print("Player took 1 damage! Health:", health)
-
-		# Update heart container UI only if damage was taken
-		var heart_container = get_node_or_null("/root/Main/HUD/HeartContainer")
-		if heart_container:
-			heart_container.setHealth(health)
-			print("Updated heart container to show", health, "hearts")
-
-		# ALSO call target.take_damage() to maintain compatibility
-		var target = get_node_or_null("/root/Main/Target")
-		if target and target != self and target.has_method("take_damage"):
-			target.take_damage()
-
-		if health <= 0:
-			get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
-	else:
-		print("Shield prevented damage! Health unchanged:", health)
+	# Act as proxy: find the Target node and delegate damage to it
+	var target = get_node("/root/Main/Target")
+	if target and target.has_method("take_damage"):
+		target.take_damage()
 
 # Public function to check if player is in combo state
 func is_in_combo() -> bool:

@@ -1,8 +1,8 @@
 [gd_scene load_steps=34 format=3 uid="uid://28xk36nmgyyr"]
 
 [ext_resource type="Script" uid="uid://br0gn5w4fyli0" path="res://Scripts/target.gd" id="1_ls7vh"]
-[ext_resource type="Texture2D" uid="uid://bffw67cf101o8" path="res://Assets/Sprites/Other Scenes/pedestal-Sheet.png" id="2_ls7vh"]
-[ext_resource type="Texture2D" uid="uid://ch3asdiyww0sn" path="res://Assets/Sprites/Other Scenes/shield-barrier-Sheet.png" id="3_2228f"]
+[ext_resource type="Texture2D" uid="uid://dmkqa1qkqm7bp" path="res://Assets/Sprites/Other Scenes/pedestal-Sheet.png" id="2_ls7vh"]
+[ext_resource type="Texture2D" uid="uid://qmkm5lyb7o2w" path="res://Assets/Sprites/Other Scenes/shield-barrier-Sheet.png" id="3_2228f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ls7vh"]
 atlas = ExtResource("2_ls7vh")
@@ -240,6 +240,7 @@ animation = &"idle"
 frame_progress = 0.203108
 
 [node name="ShieldSprite" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(0, -6.39535)
 scale = Vector2(0.474618, 0.438763)
 sprite_frames = SubResource("SpriteFrames_ww0yb")

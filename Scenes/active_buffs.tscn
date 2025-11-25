@@ -1,12 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4f31rhma7yhi"]
+[gd_scene load_steps=3 format=3 uid="uid://c4f31rhma7yhi"]
 
 [ext_resource type="PackedScene" uid="uid://xfeyheej88hr" path="res://ActiveBuffSlot.tscn" id="1_ba2rv"]
 [ext_resource type="Script" uid="uid://cshn3tyu5wt1r" path="res://Scripts/active_buffs.gd" id="3_ba2rv"]
-
-[sub_resource type="Gradient" id="Gradient_ba2rv"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dro4a"]
-gradient = SubResource("Gradient_ba2rv")
 
 [node name="ActiveBuffs" type="Control"]
 layout_mode = 3
@@ -31,7 +26,6 @@ offset_right = 90.1765
 offset_bottom = 173.059
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_dro4a")
 region_rect = Rect2(4.84373, 7.00018, 89.0605, 87.9039)
 
 [node name="GridContainer" type="GridContainer" parent="NinePatchRect"]

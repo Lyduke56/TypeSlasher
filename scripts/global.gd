@@ -21,9 +21,11 @@ var selected_buff_type: int = -1
 # Flag to track health buff application
 var health_buff_applied: bool = false
 
-# Shield buff system (for damage reduction)
+# Shield buff system (recharging)
 var shield_buff_stacks: int = 0  # How many Shield buffs selected (tiers)
-var shield_damage_reduction_chance: int = 0  # Calculated chance (15% per stack)
+var is_shield_ready: bool = false
+var shield_cooldown_duration: float = 10.0
+var shield_timer: Timer
 
 # Sword buff system (for health restoration on kills)
 var sword_buff_stacks: int = 0  # How many Sword buffs selected (tiers)
@@ -42,6 +44,8 @@ func _ready():
 	load_high_score()
 	load_best_time()
 	initialize_freeze_timer()
+	initialize_shield_timer()
+	initialize_shield()
 
 func initialize_freeze_timer():
 	"""Set up the freeze timer"""
@@ -67,6 +71,26 @@ func _on_freeze_timer_timeout():
 		if chance < freeze_activation_chance:
 			pause_enemy_by_buff()
 
+func initialize_shield_timer():
+	"""Set up the shield cooldown timer"""
+	if not shield_timer:
+		shield_timer = Timer.new()
+		add_child(shield_timer)
+		shield_timer.wait_time = shield_cooldown_duration
+		shield_timer.timeout.connect(_on_shield_timer_timeout)
+		shield_timer.autostart = false
+
+func initialize_shield():
+	"""Initialize shield state - start recharged"""
+	is_shield_ready = true
+	shield_status_changed.emit(true)
+
+func _on_shield_timer_timeout():
+	"""When shield recharges, set ready and emit signal"""
+	is_shield_ready = true
+	shield_status_changed.emit(true)
+	print("Shield recharged! Ready to block damage.")
+
 # Player movement control
 var player_can_move: bool = false  # Only allow arrow key movement after spawn animation
 
@@ -76,35 +100,30 @@ var player_current_health: int = 3  # Current health, resets to max when enterin
 
 signal player_health_changed(new_health: int, max_health: int)
 signal buff_stacks_changed()
+signal shield_status_changed(is_ready: bool)
 
 func take_damage(amount: int = 1):
-	"""Reduce player health and emit signal for UI updates"""
-	# Check for Shield buff damage reduction
-	var actual_damage = amount
-	var shielded = false
-
-	if shield_damage_reduction_chance > 0:
-		var chance = randf() * 100  # Generate random number 0-100
-		if chance < shield_damage_reduction_chance:
-			actual_damage = 0
-			shielded = true
-			print("Shield buff activated! Damage completely blocked (", shield_damage_reduction_chance, "% chance)")
-
-	player_current_health -= actual_damage
-	if player_current_health < 0:
-		player_current_health = 0
-	player_health_changed.emit(player_current_health, player_max_health)
-
-	if shielded:
-		print("Player shielded! No damage taken! Health: ", player_current_health, "/", player_max_health)
+	"""Reduce player health, handling shield and death"""
+	# Check if shield is ready
+	if is_shield_ready:
+		# Shield blocks the entire damage
+		is_shield_ready = false
+		shield_timer.start()  # Start cooldown timer
+		shield_status_changed.emit(false)
+		print("Shield activated! Damage completely blocked. Cooldown started (10 seconds).")
 	else:
-		print("Player took ", actual_damage, " damage! Health: ", player_current_health, "/", player_max_health)
-			# Check for game over
+		# Take damage normally
+		player_current_health -= amount
+		if player_current_health < 0:
+			player_current_health = 0
+		player_health_changed.emit(player_current_health, player_max_health)
+		print("Player took ", amount, " damage! Health: ", player_current_health, "/", player_max_health)
 
-	if player_current_health <= 0:
-		print("Player died! Game Over!")
-		# Game over will be handled by a deferred call to allow the heart animation to show
-		call_deferred("_handle_game_over")
+		# Check for game over
+		if player_current_health <= 0:
+			print("Player died! Game Over!")
+			# Game over will be handled by a deferred call to allow the heart animation to show
+			call_deferred("_handle_game_over")
 
 func _handle_game_over():
 	"""Handle game over with a slight delay to show the last heart disappearing"""

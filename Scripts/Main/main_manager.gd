@@ -25,7 +25,6 @@ func boss_dungeon_cleared():
 		Global.player_max_health = 3
 		Global.player_current_health = 3
 		Global.shield_buff_stacks = 0
-		Global.shield_damage_reduction_chance = 0
 		Global.sword_buff_stacks = 0
 		Global.sword_heal_chance = 0
 		Global.freeze_buff_stacks = 0
@@ -57,9 +56,10 @@ func _ready() -> void:
 			print("Health Potion buff applied! Max health increased to: ", Global.player_max_health, " and current health increased to: ", Global.player_current_health)
 		elif Global.selected_buff_type == 1:  # Shield
 			Global.shield_buff_stacks += 1
-			Global.shield_damage_reduction_chance = Global.shield_buff_stacks * 15  # 15% per stack
+			# Optional: Reduce cooldown by 1 second per stack, minimum 5 seconds
+			Global.shield_cooldown_duration = max(5.0, 11.0 - Global.shield_buff_stacks)
 			Global.buff_stacks_changed.emit()
-			print("Shield buff applied! Now have ", Global.shield_buff_stacks, " stack(s) - ", Global.shield_damage_reduction_chance, "% damage reduction chance")
+			print("Shield buff applied! Stacks: ", Global.shield_buff_stacks, " Cooldown: ", Global.shield_cooldown_duration)
 		elif Global.selected_buff_type == 2:  # Sword
 			Global.sword_buff_stacks += 1
 			Global.sword_heal_chance = Global.sword_buff_stacks * 15  # 15% per stack

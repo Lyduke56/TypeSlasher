@@ -1,9 +1,13 @@
 extends Node2D
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var shield_sprite: AnimatedSprite2D = $ShieldSprite
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Health buffs are now applied in main_manager.gd
 	animated_sprite.play("idle")
+	shield_sprite.visible = Global.is_shield_ready  # Initialize based on current state
+	Global.shield_status_changed.connect(_on_shield_status_changed)
 	pass
 
 # Add extra health for Health Potion buff (index 0)
@@ -30,6 +34,14 @@ func take_damage(amount: int = 1):
 		# Wait for damaged animation to finish, then return to idle
 		await animated_sprite.animation_finished
 		animated_sprite.play("idle")
+
+func _on_shield_status_changed(is_ready: bool):
+	"""Update shield sprite visibility based on shield status"""
+	shield_sprite.visible = is_ready
+	if is_ready:
+		print("Shield is now ready and visible on Target.")
+	else:
+		print("Shield is on cooldown and hidden on Target.")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
