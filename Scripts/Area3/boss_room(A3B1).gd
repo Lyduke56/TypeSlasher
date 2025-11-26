@@ -121,6 +121,11 @@ func clear_room():
 	# Give camera back to player when room is cleared
 	_handle_camera_on_room_clear()
 
+	# Clean up any remaining enemy instances (fireballs, portals, etc.)
+	for child in enemy_container.get_children():
+		if is_instance_valid(child) and child != null:
+			child.queue_free()
+
 	# Spawn portal after boss room is cleared
 	_spawn_portal()
 

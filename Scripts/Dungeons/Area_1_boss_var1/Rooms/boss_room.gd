@@ -117,6 +117,11 @@ func clear_room():
 	if spawn_timer and spawn_timer.is_inside_tree():
 		spawn_timer.stop()
 
+	# Clean up any remaining enemy instances (fireballs, portals, etc.)
+	for child in enemy_container.get_children():
+		if is_instance_valid(child) and child != null:
+			child.queue_free()
+
 	# Give camera back to player when room is cleared
 	_handle_camera_on_room_clear()
 
