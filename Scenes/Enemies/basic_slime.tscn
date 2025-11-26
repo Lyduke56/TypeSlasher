@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://0xdxrtg1xuh4" path="res://Assets/Sprites/Enemies/Characters(100x100)/Slime/Slime/Slime.png" id="1_jawf3"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_1o3v8"]
 [ext_resource type="Texture2D" uid="uid://jk7pe3p101bo" path="res://Assets/Sprites/Enemies/Characters(100x100)/Slime/Slime/Slime-Hurt.png" id="3_ardnq"]
-[ext_resource type="Texture2D" uid="uid://dpi8ru4kyjtmv" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="4_e5csp"]
-[ext_resource type="AudioStream" uid="uid://ti62igbaoelt" path="res://Assets/Sfx/Enemies/Wolf/wolf_attack.wav" id="5_oy7u2"]
-[ext_resource type="AudioStream" uid="uid://deyop573tk11f" path="res://Assets/Sfx/Enemies/Slime/slime_damaged.wav" id="6_e5csp"]
-[ext_resource type="AudioStream" uid="uid://bt5hcatd28cuf" path="res://Assets/Sfx/Enemies/Slime/Slime_Death.wav" id="7_ra671"]
+[ext_resource type="Texture2D" uid="uid://bfkwhf7k1cins" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="4_e5csp"]
+[ext_resource type="AudioStream" uid="uid://csmebs4nfewhl" path="res://Assets/Sfx/Enemies/Wolf/wolf_attack.wav" id="5_oy7u2"]
+[ext_resource type="AudioStream" uid="uid://bqbwqaqdesdmu" path="res://Assets/Sfx/Enemies/Slime/slime_damaged.wav" id="6_e5csp"]
+[ext_resource type="AudioStream" uid="uid://dlw3r6jopv6b4" path="res://Assets/Sfx/Enemies/Slime/Slime_Death.wav" id="7_ra671"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7kf66"]
 atlas = ExtResource("1_jawf3")

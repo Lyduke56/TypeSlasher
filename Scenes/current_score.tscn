@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cbe7velh1ej5l"]
 
 [ext_resource type="Script" uid="uid://b5kpp21ay8abs" path="res://Scripts/current_score_label.gd" id="1_kmgkl"]
-[ext_resource type="FontFile" uid="uid://5bsb58qe25gk" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="1_upmlu"]
+[ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="1_upmlu"]
 
 [node name="CurrentScore" type="RichTextLabel"]
 offset_left = 945.0
