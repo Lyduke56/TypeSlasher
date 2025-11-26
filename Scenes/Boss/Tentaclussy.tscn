@@ -343,6 +343,7 @@ height = 54.321
 [node name="Tentaclussy" type="CharacterBody2D"]
 scale = Vector2(1.62, 1.62)
 script = ExtResource("1_qf7tl")
+word_category = "tentaclussy"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1.23457, -60.4938)

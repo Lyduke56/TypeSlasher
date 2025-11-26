@@ -92,6 +92,7 @@ theme_override_font_sizes/font_size = 106
 text = "QUIT"
 
 [node name="Information" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -245,7 +246,6 @@ icon = ExtResource("7_6yr7l")
 flat = true
 
 [node name="Settings" type="NinePatchRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

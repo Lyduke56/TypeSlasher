@@ -18,7 +18,7 @@ signal room_cleared
 @export var enemy_waves: Array[EnemyWave] = []
 var TargetScene = preload("res://scenes/target.tscn")
 var MinotaurScene = preload("res://Scenes/Boss/Minotaur.tscn")
-var current_category = "medium"  # Can be: easy, medium, hard, typo, sentence, casing
+var current_category = "cthulhu"  # Can be: easy, medium, hard, typo, sentence, casing
 
 # Word and letter tracking
 var used_words = []  # Track all words used in this room (no reuse)
