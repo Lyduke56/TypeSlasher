@@ -8,6 +8,10 @@ const HIGH_SCORE_SAVE_PATH = "user://high_score.save"
 var best_time: float = 999999.0  # Best completion time in seconds (large initial value)
 const BEST_TIME_SAVE_PATH = "user://best_time.save"
 
+# Leaderboard system
+var leaderboard_scores: Array = []
+const SCORE_FILE = "user://leaderboard.json"
+
 # Flag to track if we're coming back from buff selection
 var after_buff_selection: bool = false
 
@@ -348,3 +352,42 @@ func get_formatted_best_time() -> String:
 	var minutes = int(best_time / 60)
 	var seconds = int(best_time) % 60
 	return "%02d:%02d" % [minutes, seconds]
+
+# --- Leaderboard JSON Persistence ---
+func save_scores():
+	"""Save the leaderboard scores to JSON file"""
+	var file = FileAccess.open(SCORE_FILE, FileAccess.WRITE)
+	if file:
+		var json_text = JSON.stringify(leaderboard_scores)
+		file.store_string(json_text)
+		file.close()
+		print("Saved leaderboard scores to JSON")
+	else:
+		print("Error saving leaderboard scores")
+
+func load_scores():
+	"""Load the leaderboard scores from JSON file"""
+	if FileAccess.file_exists(SCORE_FILE):
+		var file = FileAccess.open(SCORE_FILE, FileAccess.READ)
+		if file:
+			var json_text = file.get_as_text()
+			file.close()
+			var parsed = JSON.parse_string(json_text)
+			if parsed is Array:
+				leaderboard_scores = parsed
+			else:
+				leaderboard_scores = []
+		else:
+			print("Error reading leaderboard file")
+			leaderboard_scores = []
+	else:
+		leaderboard_scores = []
+	print("Loaded leaderboard scores: ", leaderboard_scores.size())
+
+func add_score(player_name: String, time_str: String, score_val: int):
+	"""Add a new score to leaderboard, sort descending by score"""
+	load_scores()
+	leaderboard_scores.append({"name": player_name, "time": time_str, "score": score_val})
+	leaderboard_scores.sort_custom(func(a, b): return b.score > a.score)
+	save_scores()
+	print("Added new score for ", player_name, ": ", score_val)

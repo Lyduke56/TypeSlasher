@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://waaxjbc13ywj"]
 
 [ext_resource type="Script" uid="uid://m3rrboq13283" path="res://Scripts/prompt_display.gd" id="1_od2m5"]
-[ext_resource type="FontFile" uid="uid://d16w8cnvxr0cu" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_3aiti"]
+[ext_resource type="FontFile" uid="uid://5bsb58qe25gk" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_3aiti"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_3aiti"]
 [ext_resource type="Texture2D" uid="uid://b8douqlbc8tj8" path="res://Assets/Sprites/GUI/wood_checkbox_unchecked.png" id="4_i2xih"]
 [ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://Assets/Sprites/GUI/wood_panel.png" id="5_15imt"]
@@ -91,3 +91,5 @@ patch_margin_left = 15
 patch_margin_top = 15
 patch_margin_right = 15
 patch_margin_bottom = 15
+
+[connection signal="pressed" from="VBoxContainer/Submit" to="." method="_on_submit_pressed"]

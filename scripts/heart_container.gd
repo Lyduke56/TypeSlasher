@@ -42,12 +42,16 @@ func setMaxhearts(max: int):
 func setHealth(hp: int):
 	print("Setting heart container health to: ", hp, "(current max_hearts:", max_hearts, ")")
 	for i in range(max_hearts):
+		# Always keep the heart object visible so the empty background can show
+		get_child(i).visible = true
+
+		# Tell the heart object to update its own sprites (background/foreground)
 		if i < hp:
-			get_child(i).visible = true
-			print("Heart ", i, " visible: true")
+			get_child(i).update(true)  # Full heart (with red foreground)
+			print("Heart ", i, " update: true (full)")
 		else:
-			get_child(i).visible = false
-			print("Heart ", i, " visible: false")
+			get_child(i).update(false)  # Empty heart (background only)
+			print("Heart ", i, " update: false (empty)")
 
 func increaseMaxHealth(amount: int = 1):
 	"""Increase the maximum health by the specified amount"""

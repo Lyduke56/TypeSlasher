@@ -39,3 +39,19 @@ func clear_prompt_display() -> void:
 	"""Hide the prompt display when there's no active enemy"""
 	word_label.text = ""
 	visible = false
+
+func _on_submit_pressed():
+	var player_name = $LineEdit.text
+	if player_name == "":
+		player_name = "Unknown"
+
+	# Format time from seconds to MM:SS
+	var minutes = int(Global.game_total_time / 60)
+	var seconds = int(Global.game_total_time) % 60
+	var time_str = "%02d:%02d" % [minutes, seconds]
+
+	# --- CRITICAL CONNECTION ---
+	Global.add_score(player_name, time_str, Global.current_score)
+
+	# Move to Leaderboard
+	get_tree().change_scene_to_file("res://Scenes/Leaderboard.tscn")
