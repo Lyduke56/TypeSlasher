@@ -71,6 +71,31 @@ func _on_settings_pressed():
 
 func _on_quit_pressed():
 	# Go to main menu scene instead of quitting
+	get_tree().paused = false  # Unpause before changing scenes
+
+		# --- RESET BUFFS START ---
+	# Reset all buff stacks so they don't carry over to the next game
+	Global.shield_buff_stacks = 0
+	Global.is_shield_ready = false
+	if Global.shield_timer: Global.shield_timer.stop()
+
+	Global.sword_buff_stacks = 0
+	Global.sword_heal_chance = 0
+
+	Global.freeze_buff_stacks = 0
+	Global.freeze_activation_chance = 0
+	if Global.freeze_timer: Global.freeze_timer.stop()
+
+	Global.buff_stacks_changed.emit()
+	# --- RESET BUFFS END ---
+
+	Global.player_max_health = 3  # Default max health, increases permanently
+	Global.player_current_health = 3  # Current health, resets to max when entering dungeon
+
+	# Reset dungeon progress for future gameplay
+	DungeonProgress.reset_progress()
+	DungeonProgress.current_area = 1
+
 	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")
 
 func _on_info_close_pressed():

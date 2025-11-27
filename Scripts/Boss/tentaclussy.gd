@@ -479,7 +479,7 @@ func _setup_arrow_prompt(arrow: Node2D):
 
 	if associated_room and associated_room.has_method("_get_unique_word_for_category"):
 		# Use room's tracked word selection - room handles the print
-		arrow_word = associated_room._get_unique_word_for_category("easy")
+		arrow_word = associated_room._get_unique_word_for_category("fireball_tentaclussy")
 		if arrow_word == "":
 			# Room exhausted - use fallback
 			arrow_word = _get_unique_word("easy")

@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://ct4hgdk2e8v47"]
 
 [ext_resource type="Theme" uid="uid://dx6raqafay30m" path="res://Assets/Themes/normal_button.tres" id="2_adret"]
-[ext_resource type="Texture2D" uid="uid://buadcox4b10pa" path="res://Assets/Sprites/GUI/pause-Sheet.png" id="2_jcnnf"]
+[ext_resource type="Texture2D" uid="uid://borh6fgd3l80o" path="res://Assets/Sprites/GUI/pause-Sheet.png" id="2_jcnnf"]
 [ext_resource type="Texture2D" uid="uid://dkaiqkhlad2x" path="res://Assets/Sprites/GUI/silver_panel.png" id="3_adret"]
-[ext_resource type="Texture2D" uid="uid://cf65m5gtxkejp" path="res://Assets/Sprites/GUI/ui-sheet.png" id="4_jntt5"]
+[ext_resource type="Texture2D" uid="uid://dw7wh020jbpph" path="res://Assets/Sprites/GUI/ui-sheet.png" id="4_jntt5"]
 [ext_resource type="PackedScene" uid="uid://f8uv6ymbn0ia" path="res://Scenes/slot.tscn" id="4_vlwpb"]
 [ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://Assets/Sprites/GUI/wood_panel.png" id="5_csd48"]
 [ext_resource type="Script" uid="uid://cwimcn47767jb" path="res://Scripts/ui.gd" id="6_2k9qv"]
@@ -265,20 +265,22 @@ patch_margin_bottom = 3
 axis_stretch_vertical = 2
 
 [node name="Close" type="Button" parent="Settings"]
+z_index = 3
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.8
-anchor_top = 0.137
-anchor_right = 0.883
-anchor_bottom = 0.281
-offset_top = -0.100002
-offset_right = -18.5
-offset_bottom = -19.3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_top = 40.0
+offset_right = -73.0
+offset_bottom = 64.0
 grow_horizontal = 0
-scale = Vector2(1.8, 1.8)
+scale = Vector2(1.685, 1.685)
 icon = ExtResource("7_6yr7l")
+flat = true
 
 [node name="MusicControl" type="HSlider" parent="Settings"]
+visible = false
 layout_mode = 0
 offset_left = 203.0
 offset_top = 129.0
@@ -295,9 +297,9 @@ audio_bus_name = "Music"
 [node name="MasterControl" type="HSlider" parent="Settings"]
 layout_mode = 0
 offset_left = 204.0
-offset_top = 91.0
+offset_top = 115.0
 offset_right = 428.0
-offset_bottom = 121.0
+offset_bottom = 145.0
 theme_override_styles/slider = SubResource("StyleBoxLine_r2bq1")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_4e7uv")
 max_value = 1.0
@@ -307,6 +309,7 @@ script = ExtResource("11_4e7uv")
 audio_bus_name = "Master"
 
 [node name="SFxControl" type="HSlider" parent="Settings"]
+visible = false
 layout_mode = 0
 offset_left = 202.0
 offset_top = 165.0

@@ -557,7 +557,7 @@ func _setup_fireball_prompt(fireball: Node2D):
 		if associated_room.has_method("_get_unique_word_for_category"):
 			print("Cthulhu room has method, calling...")
 			# Use room's tracked word selection - room handles cleanup
-			var fireball_word = associated_room._get_unique_word_for_category("easy")
+			var fireball_word = associated_room._get_unique_word_for_category("fireball_demon")
 			if fireball_word != "":
 				print("Cthulhu got tracked word from room: ", fireball_word)
 				# Track projectile for room cleanup - room handles the rest
