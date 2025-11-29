@@ -33,7 +33,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xdhmc"]
 
-[node name="Fireball" type="Node2D"]
+[node name="Fireball2" type="Node2D"]
 z_index = 4
 scale = Vector2(1.2, 1.2)
 script = ExtResource("1_k8bsg")

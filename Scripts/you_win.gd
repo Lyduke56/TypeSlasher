@@ -18,3 +18,8 @@ func _process(delta: float) -> void:
 
 func _on_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")
+
+
+func _on_save_score_pressed() -> void:
+	var name_input_scene = load("res://Scenes/Name_Input.tscn").instantiate()
+	add_child(name_input_scene)

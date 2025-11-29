@@ -1,4 +1,4 @@
-extends Control  # Or CanvasLayer, depending on your root
+extends CanvasLayer  # Or CanvasLayer, depending on your root
 
 @onready var score_list_container = $MarginContainer/MainLayout/ScrollContainer/ScoreList
 @onready var prev_button = $MarginContainer/NavContainer/PrevButton

@@ -159,4 +159,4 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="VBoxContainer/Menu" to="." method="_on_menu_pressed"]
-[connection signal="pressed" from="VBoxContainer/Save_Score" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Save_Score" to="." method="_on_save_score_pressed"]
