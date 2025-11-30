@@ -312,9 +312,7 @@ func find_new_active_enemy(typed_character: String):
 			# Skip entities that are already being targeted
 			if entity.get("is_being_targeted") == true:
 				continue
-			# Skip frozen enemies
-			if entity.get("is_frozen") == true:
-				continue
+
 
 			var prompt = entity.get_prompt()
 			if prompt.length() > 0 and prompt.substr(0, 1).to_lower() == typed_character:
