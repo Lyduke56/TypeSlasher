@@ -44,6 +44,11 @@ func start_room():
 	room_started.emit(self)
 	print("Room " + name + " started")
 
+	# Enable portal typing after room is properly started
+	if portal_container.get_child_count() > 0:
+		var portal = portal_container.get_child(0)
+		portal.set_prompt("Warp")
+
 func clear_room():
 	is_cleared = true
 	room_cleared.emit(self)
@@ -87,7 +92,7 @@ func _spawn_portal():
 	var portal_instance = GreenPortalScene.instantiate()
 	portal_container.add_child(portal_instance)
 	portal_instance.position = Vector2.ZERO  # Position within container
-	portal_instance.set_prompt("Warp")  # Set typing prompt
+	portal_instance.set_prompt("")  # Start with no prompt to prevent early typing
 	portal_instance.play_appear_animation()  # Play appear animation
 
 	# Connect to portal activated signal

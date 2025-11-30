@@ -88,9 +88,24 @@ func setup_room_connections():
 	var starting = get_node("../StartingRoom")
 	var boss = get_node("../BossRoom")
 	var healing = get_node("../HealingRoom")
+	var room_a = get_node("../RoomA - Medium")
+	var room_b = get_node("../RoomB - Medium")
+	var room_c = get_node("../RoomC - Medium")
+	var room_d = get_node("../RoomD - Medium")
 
 	starting.set_connected_room("bottom", healing)
+	starting.set_connected_room("right", room_a)
+	starting.set_connected_room("left", room_c)
 
+	room_a.set_connected_room("left", starting)
+	room_a.set_connected_room("bottom", room_b)
+
+	room_b.set_connected_room("top", room_a)
+
+	room_c.set_connected_room("right", starting)
+	room_c.set_connected_room("bottom", room_d)
+
+	room_d.set_connected_room("top", room_c)
 
 	healing.set_connected_room("top", starting)
 	healing.set_connected_room("bottom", boss)
@@ -406,11 +421,22 @@ func _complete_word():
 
 	# Handle different entity types after completion
 	if completed_entity.has_method("play_disappear_animation"):
-		# Portal completion - do NOT dash to portal, just play disappear animation
-		print("Portal completed! Playing disappear animation.")
+		# Portal completion - dash to portal, hide player when reached, then switch to boss dungeon
+		print("Portal completed! Dashing to portal and switching to boss dungeon.")
+		# Kill any running transition tween to prevent conflicts
+		if tween and tween.is_running():
+			tween.kill()
+		var portal_position = completed_entity.global_position
+		player.dash_to_portal(portal_position, completed_entity)
+		# Wait for player to reach portal
+		await player.enemy_reached  # Reuse signal, even though it's portal
+		# Hide player
+		player.hide_during_spawn()
+		# Play disappear animation
 		completed_entity.play_disappear_animation()
-		# For portals, trigger activation immediately (no await needed)
+		# For portals, trigger activation after animation
 		if current_room and current_room.has_method("_on_portal_activated"):
+			await get_tree().create_timer(0.5).timeout  # Wait for disappear animation
 			current_room._on_portal_activated()
 		# Reset processing flag immediately for portals
 		is_processing_completion = false

@@ -302,7 +302,10 @@ func _pause_game() -> void:
 	get_tree().paused = true
 	if pause_ui:
 		pause_ui.visible = true
-		pause_ui.grab_focus()
+		# Grab focus on the Continue button specifically
+		var continue_button = pause_ui.get_node_or_null("Menu/VBoxContainer/Continue")
+		if continue_button:
+			continue_button.grab_focus()
 	# Configure AudioStreamPlayers to continue during pause
 	_set_audio_players_to_continue_during_pause()
 	# Inform WPM tracker

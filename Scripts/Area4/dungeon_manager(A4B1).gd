@@ -356,11 +356,22 @@ func _complete_word():
 
 	# Handle different entity types after completion
 	if completed_entity.has_method("play_disappear_animation"):
-		# Portal completion - do NOT dash to portal, just play disappear animation
-		print("Portal completed! Playing disappear animation.")
+		# Portal completion - dash to portal, hide player when reached, then switch to boss dungeon
+		print("Portal completed! Dashing to portal and switching to boss dungeon.")
+		# Kill any running transition tween to prevent conflicts
+		if tween and tween.is_running():
+			tween.kill()
+		var portal_position = completed_entity.global_position
+		player.dash_to_portal(portal_position, completed_entity)
+		# Wait for player to reach portal
+		await player.enemy_reached  # Reuse signal, even though it's portal
+		# Hide player
+		player.hide_during_spawn()
+		# Play disappear animation
 		completed_entity.play_disappear_animation()
-		# Only trigger activation for progression portals in PortalContainer
-		if current_room and current_room.has_method("_on_portal_activated") and completed_entity.get_parent().name == "PortalContainer":
+		# For portals, trigger activation after animation
+		if current_room and current_room.has_method("_on_portal_activated"):
+			await get_tree().create_timer(0.5).timeout  # Wait for disappear animation
 			current_room._on_portal_activated()
 		# Reset processing flag immediately for portals
 		is_processing_completion = false
@@ -533,6 +544,6 @@ func update_score():
 func _process(_delta):
 	# Process input buffer one character per frame for high WPM handling
 	# Cached: Moved update_score to only when actual progress is made
-	if not input_buffer.is_empty() and not is_processing_completion:
+	if not input_buffer.is_empty() and not is_processing_completion and not is_transitioning:
 		var key_typed = input_buffer.pop_front()
 		_process_single_character(key_typed)

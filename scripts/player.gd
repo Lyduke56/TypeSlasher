@@ -175,7 +175,14 @@ func dash_to_portal(portal_position: Vector2, portal_ref = null) -> void:
 func _finish_dash() -> void:
 	is_dashing = false
 
-	# Portals no longer require special handling here - they use signals
+	# For portals, emit reached signal
+	if target_portal != null:
+		var portal_reached = target_portal
+		target_portal = null  # Clear reference
+		enemy_reached.emit(portal_reached)  # Emit signal for portal reached
+		anim.play("idle")  # Return to idle
+		print("Portal reached!")
+		return
 
 	# For enemies, attack
 	is_attacking = true

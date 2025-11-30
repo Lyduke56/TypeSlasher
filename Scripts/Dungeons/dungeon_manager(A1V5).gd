@@ -76,7 +76,7 @@ func _ready() -> void:
 func _process(_delta):
 	# Process input buffer one character per frame for high WPM handling
 	# Cached: Moved update_score to only when actual progress is made
-	if not input_buffer.is_empty() and not is_processing_completion:
+	if not input_buffer.is_empty() and not is_processing_completion and not is_transitioning:
 		var key_typed = input_buffer.pop_front()
 		_process_single_character(key_typed)
 
@@ -328,6 +328,8 @@ func find_new_active_enemy(typed_character: String):
 			if entity.get("is_being_targeted") == true:
 				continue
 
+
+
 			var prompt = entity.get_prompt()
 			if prompt.length() > 0 and prompt.substr(0, 1).to_lower() == typed_character:
 				print("Found new enemy that starts with ", typed_character)
@@ -414,10 +416,20 @@ func _complete_word():
 
 	# Handle different entity types after completion
 	if completed_entity.has_method("play_disappear_animation"):
-		# Portal completion - do NOT dash to portal, just play disappear animation and notify MainManager
-		print("Portal completed! Playing disappear animation and switching to boss dungeon.")
+		# Portal completion - dash to portal, hide player when reached, then switch to boss dungeon
+		print("Portal completed! Dashing to portal and switching to boss dungeon.")
+		# Kill any running transition tween to prevent conflicts
+		if tween and tween.is_running():
+			tween.kill()
+		var portal_position = completed_entity.global_position
+		player.dash_to_portal(portal_position, completed_entity)
+		# Wait for player to reach portal
+		await player.enemy_reached  # Reuse signal, even though it's portal
+		# Hide player
+		player.hide_during_spawn()
+		# Play disappear animation
 		completed_entity.play_disappear_animation()
-		# After portal animation, notify MainManager to handle progression
+		# Notify MainManager to handle progression
 		var main_manager = get_tree().root.get_node_or_null("Main/MainManager")
 		if main_manager and main_manager.has_method("switch_to_boss_dungeon"):
 			await get_tree().create_timer(0.5).timeout  # Wait for disappear animation
