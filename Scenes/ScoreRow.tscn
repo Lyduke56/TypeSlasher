@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://gkkttjy0sgvi" path="res://Scripts/ScoreRow.gd" id="1_26qct"]
 
 [node name="HBoxContainer" type="HBoxContainer"]
-offset_right = 40.0
+offset_right = 500.0
 offset_bottom = 40.0
 script = ExtResource("1_26qct")
 
@@ -11,6 +11,7 @@ script = ExtResource("1_26qct")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/font_size = 16
 text = "Rank"
 horizontal_alignment = 1
 
@@ -18,15 +19,19 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 16
 text = "Name"
 
 [node name="Time" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
 text = "Time"
 horizontal_alignment = 1
 
 [node name="Score" type="Label" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
 text = "Score"
 horizontal_alignment = 1

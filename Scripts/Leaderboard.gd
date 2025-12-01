@@ -6,7 +6,7 @@ extends CanvasLayer
 @onready var PrevButton = $Control/BoardPanel/VBoxContainer/NavContainer/PrevButton
 @onready var NextButton = $Control/BoardPanel/VBoxContainer/NavContainer/NextButton
 # Note: CloseButton is inside TopBar in your scene, not directly in the container
-@onready var CloseButton = $Control/BoardPanel/VBoxContainer/TopBar/CloseButton
+@onready var CloseButton = $Close
 
 var score_row_scene = preload("res://Scenes/ScoreRow.tscn")
 
