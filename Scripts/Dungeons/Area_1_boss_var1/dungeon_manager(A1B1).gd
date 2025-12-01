@@ -437,10 +437,13 @@ func _complete_word():
 		player.hide_during_spawn()
 		# Play disappear animation
 		completed_entity.play_disappear_animation()
-		# For portals, trigger activation after animation
-		if current_room and current_room.has_method("_on_portal_activated"):
+		# Boss dungeon completion
+		var main_manager = get_tree().root.get_node_or_null("Main/MainManager")
+		if main_manager and main_manager.has_method("boss_dungeon_cleared"):
 			await get_tree().create_timer(0.5).timeout  # Wait for disappear animation
-			current_room._on_portal_activated()
+			main_manager.boss_dungeon_cleared()
+		else:
+			print("ERROR: Could not find MainManager or boss_dungeon_cleared method!")
 		# Reset processing flag immediately for portals
 		is_processing_completion = false
 		# Clear any inputs that got buffered during completion

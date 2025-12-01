@@ -587,19 +587,4 @@ func _spawn_portal():
 	portal_instance.set_prompt("Warp")  # Set typing prompt
 	portal_instance.play_appear_animation()  # Play appear animation
 
-	# Connect to portal activated signal
-	if not portal_instance.is_connected("portal_activated", _on_portal_activated):
-		portal_instance.connect("portal_activated", _on_portal_activated)
-
 	print("Spawned portal in boss room")
-
-func _on_portal_activated():
-	"""Called when portal is activated - trigger boss dungeon completion"""
-	print("Portal activated! Completing boss dungeon.")
-
-	# Get reference to MainManager and call boss dungeon cleared
-	var main_manager = get_tree().root.get_node_or_null("Main/MainManager")
-	if main_manager:
-		main_manager.boss_dungeon_cleared()
-	else:
-		print("ERROR: Could not find MainManager!")

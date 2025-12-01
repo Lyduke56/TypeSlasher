@@ -2,6 +2,7 @@ extends Node2D
 
 # Current loaded dungeon scene
 var current_dungeon: Node2D = null
+var is_loading_dungeon: bool = false
 
 # Debug dungeon path - set in editor for testing specific dungeons
 @export var debug_dungeon_path: String = ""
@@ -9,9 +10,15 @@ var current_dungeon: Node2D = null
 # Use the dedicated DungeonProgress autoload for persistence
 
 var pause_ui: Control
+var is_boss_clearing: bool = false
 
 func boss_dungeon_cleared():
 	"""Called when boss dungeon is completed - go to buff selection or win screen"""
+	if is_boss_clearing:
+		print("Boss already clearing, skipping duplicate call")
+		return
+
+	is_boss_clearing = true
 	print("Boss dungeon cleared!")
 	# Set flag that we're coming from boss completion
 	Global.after_boss_completion = true
@@ -127,6 +134,12 @@ func _process(delta: float) -> void:
 	pass
 
 func load_dungeon(dungeon_path: String) -> void:
+	if is_loading_dungeon:
+		print("Already loading a dungeon, skipping: " + dungeon_path)
+		return
+
+	is_loading_dungeon = true
+
 	# Clear current dungeon if exists - ensure proper cleanup
 	if current_dungeon:
 		# Force immediate cleanup to prevent visual glitches
@@ -150,6 +163,8 @@ func load_dungeon(dungeon_path: String) -> void:
 		call_deferred("_position_player_in_new_dungeon")
 	else:
 		print("Failed to load dungeon: " + dungeon_path)
+
+	is_loading_dungeon = false
 
 func _position_player_in_new_dungeon() -> void:
 	"""Position the player in the center of the new dungeon's starting room"""
@@ -217,15 +232,25 @@ func switch_to_boss_dungeon() -> void:
 	"""Called when player types 'Warp' in portal room"""
 	print("Switching to boss dungeon...")
 
-	# Mark current dungeon as cleared
+	# Mark current dungeon as cleared (in case it wasn't already)
 	if current_dungeon:
 		mark_dungeon_cleared(current_dungeon.scene_file_path)
 
-	# Check if we have cleared enough dungeons
-	dungeon_completed()
+	# Check if we have cleared enough dungeons to enter boss
+	if DungeonProgress.dungeons_cleared >= DungeonProgress.dungeons_required:
+		print("Warping to boss dungeon...")
+		DungeonTransition.transition()
+		await DungeonTransition.on_transition_finished
+		var boss_path = "res://Scenes/Rooms/Area " + str(DungeonProgress.current_area) + "/Area-" + str(DungeonProgress.current_area) + "-boss-var1.tscn"
+		load_dungeon(boss_path)
+	else:
+		print("Not enough dungeons cleared to warp to boss yet!")
 
 func dungeon_completed():
 	"""Called when a dungeon is completed - tracks progress and decides next dungeon"""
+	# Mark the current dungeon as cleared
+	if current_dungeon:
+		DungeonProgress.mark_dungeon_cleared(current_dungeon.scene_file_path)
 	DungeonProgress.dungeons_cleared += 1
 	print("Dungeon completed! Total cleared: ", DungeonProgress.dungeons_cleared, "/", DungeonProgress.dungeons_required)
 
@@ -242,9 +267,13 @@ func dungeon_completed():
 		# Directly enter boss dungeon after meeting requirements (no buff before boss)
 		print("All dungeons cleared! Entering boss dungeon...")
 		var boss_path = "res://Scenes/Rooms/Area " + str(DungeonProgress.current_area) + "/Area-" + str(DungeonProgress.current_area) + "-boss-var1.tscn"
+		DungeonTransition.transition()
+		await DungeonTransition.on_transition_finished
 		load_dungeon(boss_path)
 	elif DungeonProgress.dungeons_cleared < DungeonProgress.dungeons_required:
 		# Load another random dungeon (between checkpoints)
+		DungeonTransition.transition()
+		await DungeonTransition.on_transition_finished
 		load_random_dungeon()
 
 func load_random_dungeon():

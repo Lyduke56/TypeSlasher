@@ -3,11 +3,10 @@
 [ext_resource type="Script" uid="uid://brobbfekike3n" path="res://Scripts/menu.gd" id="1_xdvgc"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_upctu"]
 [ext_resource type="Texture2D" uid="uid://bog7t5alywxqn" path="res://Assets/Background/Menu_background.png" id="3_11y2r"]
+[ext_resource type="StyleBox" uid="uid://b74vc0fkg6ny1" path="res://Assets/Themes/Menu_button.tres" id="3_wfhf6"]
 [ext_resource type="AudioStream" uid="uid://ccjc76n0terne" path="res://Assets/Sfx/Background/BGM - Title Theme.ogg" id="4_s2c3o"]
 [ext_resource type="Texture2D" uid="uid://b7i43mjsya84r" path="res://Assets/Sprites/GUI/title-Sheet.png" id="5_idohh"]
 [ext_resource type="Texture2D" uid="uid://dx1gqkcsf873m" path="res://Assets/Background/TypeSlasher-Sheet.png" id="6_wfhf6"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_11y2r"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o0tnf"]
 
@@ -179,7 +178,7 @@ z_index = 1
 layout_mode = 0
 offset_left = 161.0
 offset_top = -150.0
-offset_right = 251.0
+offset_right = 260.0
 offset_bottom = -74.0
 scale = Vector2(2.6, 2.6)
 
@@ -187,7 +186,7 @@ scale = Vector2(2.6, 2.6)
 layout_mode = 2
 focus_neighbor_top = NodePath("../Close_button")
 theme_override_fonts/font = ExtResource("2_upctu")
-theme_override_styles/normal = SubResource("StyleBoxTexture_11y2r")
+theme_override_styles/normal = ExtResource("3_wfhf6")
 text = "Start"
 alignment = 0
 
