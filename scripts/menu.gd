@@ -38,7 +38,9 @@ func _on_close_button_pressed() -> void:
 
 
 func _on_score_button_pressed() -> void:
-	pass # Replace with function body.
+	var leaderboard_scene = preload("res://Scenes/Leaderboard.tscn")
+	var leaderboard_instance = leaderboard_scene.instantiate()
+	get_tree().root.add_child(leaderboard_instance)
 
 func start_game():
 	get_tree().change_scene_to_file("res://Scenes/Main.tscn")
