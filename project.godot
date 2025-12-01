@@ -25,6 +25,7 @@ run/stretch/mode="viewport"
 
 Global="*res://Scripts/global.gd"
 DungeonProgress="*res://Scripts/dungeon_progress.gd"
+Popups="*res://Scenes/Popups.tscn"
 
 [display]
 

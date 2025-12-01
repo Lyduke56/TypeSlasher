@@ -3,6 +3,8 @@ extends Control
 # Main active buffs scene controller - manages visibility of BuffSlot children
 var buff_slots: Array = []
 
+
+
 func _ready():
 	print("ActiveBuffs: _ready() called")
 	await get_tree().process_frame

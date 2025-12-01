@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://xfeyheej88hr"]
+[gd_scene load_steps=4 format=3 uid="uid://xfeyheej88hr"]
 
+[ext_resource type="Script" uid="uid://bqwuha4jgc4lo" path="res://Scripts/slotpopup.gd" id="1_7wwim"]
 [ext_resource type="Texture2D" uid="uid://b1xtv7buiv3j5" path="res://Assets/Sprites/GUI/buffslot-Sheet.png" id="1_jr81v"]
 [ext_resource type="Texture2D" uid="uid://k0fw6qq53bu3" path="res://Assets/Sprites/GUI/Buff_sword.png" id="2_vre3s"]
 
 [node name="Slot" type="PanelContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_7wwim")
 
 [node name="BG" type="TextureRect" parent="."]
 layout_mode = 2
@@ -14,3 +16,6 @@ texture = ExtResource("1_jr81v")
 [node name="ICON" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("2_vre3s")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
