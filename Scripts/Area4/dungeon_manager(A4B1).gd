@@ -356,8 +356,8 @@ func _complete_word():
 
 	# Handle different entity types after completion
 	if completed_entity.has_method("play_disappear_animation"):
-		# Portal completion - dash to portal, hide player when reached, then switch to boss dungeon
-		print("Portal completed! Dashing to portal and switching to boss dungeon.")
+		# Portal completion - dash to portal, hide player when reached
+		print("Portal completed! Dashing to portal.")
 		# Kill any running transition tween to prevent conflicts
 		if tween and tween.is_running():
 			tween.kill()
@@ -369,10 +369,17 @@ func _complete_word():
 		player.hide_during_spawn()
 		# Play disappear animation
 		completed_entity.play_disappear_animation()
-		# For portals, trigger activation after animation
-		if current_room and current_room.has_method("_on_portal_activated"):
-			await get_tree().create_timer(0.5).timeout  # Wait for disappear animation
-			current_room._on_portal_activated()
+		# Check if this is the main portal (in portal_container)
+		if current_room and current_room.has_node("PortalContainer"):
+			var portal_container = current_room.get_node("PortalContainer")
+			if completed_entity.get_parent() == portal_container:
+				# Main portal - complete dungeon
+				if current_room.has_method("_on_portal_activated"):
+					await get_tree().create_timer(0.5).timeout  # Wait for disappear animation
+					current_room._on_portal_activated()
+			else:
+				# Enemy portal - just disappear, no dungeon completion
+				print("Enemy portal completed - just disappearing")
 		# Reset processing flag immediately for portals
 		is_processing_completion = false
 		# Clear any inputs that got buffered during completion
