@@ -106,6 +106,7 @@ func set_targeted_state(targeted: bool):
 
 func play_death_animation():
 	"""Play damage animation followed by death animation"""
+	is_dying = true
 
 	# --- FIX: Manually unfreeze so death animations can play ---
 	if is_frozen:
@@ -205,6 +206,8 @@ func _on_animation_finished():
 			target_node.take_damage()
 
 func _physics_process(delta: float) -> void:
+	if is_dying:
+		return
 	# STOP ALL MOVEMENT if frozen, being targeted, or has reached target
 	if is_frozen or is_being_targeted or has_reached_target:
 		# Don't override death/damage animations

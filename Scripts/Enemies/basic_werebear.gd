@@ -5,6 +5,8 @@ extends Node2D
 @export var red: Color = Color("#a65455")
 
 @export var speed: float = 50.0  # Movement speed towards target
+
+var is_dying: bool = false
 @onready var anim = $AnimatedSprite2D
 @onready var word: RichTextLabel = $Word
 @onready var prompt = $Word
@@ -108,6 +110,7 @@ func set_targeted_state(targeted: bool):
 
 func play_death_animation():
 	"""Play damage animation followed by death animation"""
+	is_dying = true
 
 	# --- FIX: Manually unfreeze so death animations can play ---
 	if get("is_frozen"): # Use get() to be safe if variable is missing, or access directly if extends enemy_base
@@ -207,6 +210,8 @@ func _on_animation_finished():
 			target_node.take_damage()  # Second damage
 
 func _physics_process(delta: float) -> void:
+	if is_dying:
+		return
 	# STOP ALL MOVEMENT if being targeted or has reached target
 	if is_being_targeted or has_reached_target:
 		# Don't override death/damage animations

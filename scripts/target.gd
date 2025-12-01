@@ -18,7 +18,7 @@ func apply_health_buff():
 	Global.player_health_changed.emit(Global.player_current_health, Global.player_max_health)
 	print("Health Potion buff applied! Max health increased to: ", Global.player_max_health, " and current health increased to: ", Global.player_current_health)
 
-func take_damage(amount: int = 1):
+func take_damage(amount: int = 0): #EDITED FOR NOWWW GOD MODE!
 	"""Take damage through global health system"""
 	animated_sprite.play("damaged")
 	Global.take_damage(amount)

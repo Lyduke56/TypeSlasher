@@ -5,6 +5,8 @@ extends Node2D
 
 var original_sprite_frames: SpriteFrames  # Store original frames
 var is_frozen: bool = false
+var is_dying: bool = false
+var current_health: int = 1
 
 func _ready() -> void:
 	# Store original sprite_frames in ready, after [auto]
@@ -17,12 +19,27 @@ func _store_original_frames():
 	if freeze_vines:
 		freeze_vines.visible = false
 
+func take_damage(amount: int = 1):
+	current_health -= amount
+	if current_health <= 0:
+		is_dying = true
+		set_physics_process(false)
+
+		# [FIX 1] Actually trigger the death logic!
+		# We check if the child script (e.g., Skeleton) has the 'play_death_animation' function.
+		if has_method("play_death_animation"):
+			call("play_death_animation")
+		else:
+			# Fallback if no specific death animation exists
+			queue_free()
+
 func _physics_process(delta: float) -> void:
-	if is_frozen:
-		return  # Don't move during freeze
+	if is_dying or is_frozen:
+		return  # Don't move during freeze or death
 
 func pause_enemy(duration: float) -> void:
-	if is_frozen or not anim:
+	# [Check 1] Don't freeze if already dying
+	if is_dying or is_frozen or not anim:
 		return
 
 	is_frozen = true
@@ -35,8 +52,6 @@ func pause_enemy(duration: float) -> void:
 	if freeze_vines:
 		freeze_vines.visible = true
 		freeze_vines.play("freeze")
-		# Optionally switch to idle animation
-		# anim.play("idle ")  # Leave for override
 	else:
 		# Fallback to sprite_frames swap
 		anim.sprite_frames = preload("res://Scenes/freeze.tres")
@@ -44,6 +59,11 @@ func pause_enemy(duration: float) -> void:
 
 	# Wait for duration
 	await get_tree().create_timer(duration).timeout
+
+	# [FIX 2] CRITICAL: Check if we died while waiting!
+	# If we died during the wait, STOP HERE. Do not restore the old animation.
+	if is_dying:
+		return
 
 	# Hide freeze vines or restore sprite_frames
 	if freeze_vines:
