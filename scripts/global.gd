@@ -26,9 +26,16 @@ var selected_buff_type: int = -1
 var health_buff_applied: bool = false
 
 # Shield buff system (recharging)
-var shield_buff_stacks: int = 0  # How many Shield buffs selected (tiers)
+var shield_buff_stacks: int = 0:  # How many Shield buffs selected (tiers)
+	set(value):
+		shield_buff_stacks = value
+		calculate_shield_cooldown()
+		shield_timer.wait_time = shield_current_cooldown
+		if shield_buff_stacks > 0 and not is_shield_ready and shield_timer.is_stopped():
+			shield_timer.start()
 var is_shield_ready: bool = false
 var shield_cooldown_duration: float = 10.0
+var shield_current_cooldown: float = 10.0
 var shield_timer: Timer
 
 # Sword buff system (for health restoration on kills)
@@ -84,18 +91,29 @@ func initialize_shield_timer():
 		shield_timer.timeout.connect(_on_shield_timer_timeout)
 		shield_timer.autostart = false
 
+func calculate_shield_cooldown():
+	"""Calculate current shield cooldown based on stacks - base 10s, 20% reduction per additional stack"""
+	shield_current_cooldown = shield_cooldown_duration
+	for _i in range(1, shield_buff_stacks):
+		shield_current_cooldown *= 0.8
+	shield_current_cooldown = max(shield_current_cooldown, 1.0)
+
 func initialize_shield():
-	"""Initialize shield state - always start false, only start timer if we have buffs"""
+	"""Initialize shield state - always start false, and start timer if we have buffs with calculated cooldown"""
 	# Always start with shield down
 	is_shield_ready = false
 	shield_status_changed.emit(false)
 
-	# Only start the recharge timer if we actually have the buff
+	calculate_shield_cooldown()
+	shield_timer.wait_time = shield_current_cooldown
+
 	if shield_buff_stacks > 0:
-		if shield_timer: shield_timer.start()
+		if shield_timer.is_stopped():
+			shield_timer.start()
 		print("Shield initialized: Starting cooldown timer.")
 	else:
-		if shield_timer: shield_timer.stop()
+		if not shield_timer.is_stopped():
+			shield_timer.stop()
 		print("Shield initialized: No buffs active.")
 
 func _on_shield_timer_timeout():

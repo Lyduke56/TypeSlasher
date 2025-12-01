@@ -7,7 +7,7 @@ func _ready() -> void:
 	# Health buffs are now applied in main_manager.gd
 	animated_sprite.play("idle")
 	shield_sprite.visible = Global.is_shield_ready  # Initialize based on current state
-	Global.shield_status_changed.connect(_on_shield_status_changed)
+	Global.shield_status_changed.connect(_on_global_shield_status_changed)
 	pass
 
 # Add extra health for Health Potion buff (index 0)
@@ -35,13 +35,14 @@ func take_damage(amount: int = 1):
 		await animated_sprite.animation_finished
 		animated_sprite.play("idle")
 
-func _on_shield_status_changed(is_ready: bool):
-	"""Update shield sprite visibility based on shield status"""
+func _on_global_shield_status_changed(is_ready: bool):
 	shield_sprite.visible = is_ready
 	if is_ready:
-		print("Shield is now ready and visible on Target.")
+		print("Target: Shield activated visually.")
+		shield_sprite.play("shield_active")
 	else:
-		print("Shield is on cooldown and hidden on Target.")
+		print("Target: Shield deactivated visually.")
+		shield_sprite.stop()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
