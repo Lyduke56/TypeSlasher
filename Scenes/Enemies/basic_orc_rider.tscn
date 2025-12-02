@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://57dqiigp4jmr" path="res://Scripts/Enemies/basic_orc_rider.gd" id="1_85cng"]
 [ext_resource type="Texture2D" uid="uid://dpm2lg7oeu3fj" path="res://Assets/Sprites/Enemies/Characters(100x100)/Orc rider/Orc rider/Orc rider.png" id="1_hcct1"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_85cng"]
-[ext_resource type="AudioStream" uid="uid://bvs0fmpkc8ymp" path="res://Assets/Sfx/Enemies/Orc/orc_damaged.wav" id="4_mpxxs"]
-[ext_resource type="AudioStream" uid="uid://b7tced0d7xeth" path="res://Assets/Sfx/Enemies/Generic/hurt-2.wav" id="5_xlmg7"]
-[ext_resource type="AudioStream" uid="uid://dee52j6spc2o3" path="res://Assets/Sfx/Enemies/Orc/orc_attack.wav" id="6_n0b64"]
+[ext_resource type="AudioStream" uid="uid://cd65fmxf26fcl" path="res://Assets/Sfx/Enemies/Orc/orc_damaged.wav" id="4_mpxxs"]
+[ext_resource type="AudioStream" uid="uid://5eklwkhjsxml" path="res://Assets/Sfx/Enemies/Generic/hurt-2.wav" id="5_xlmg7"]
+[ext_resource type="AudioStream" uid="uid://b33mrxcl5qhfx" path="res://Assets/Sfx/Enemies/Orc/orc_attack.wav" id="6_n0b64"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wop4o"]
 atlas = ExtResource("1_hcct1")
@@ -341,7 +341,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2omoa")
 }],
-"loop": false,
+"loop": true,
 "name": &"orc_rider_run",
 "speed": 5.0
 }]
@@ -356,7 +356,7 @@ script = ExtResource("1_85cng")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_7m25p")
-animation = &"orc_rider_death"
+animation = &"orc_rider_run"
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 15

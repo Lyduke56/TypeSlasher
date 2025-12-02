@@ -39,8 +39,8 @@
 [ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="34_eq5ku"]
 [ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="34_ht05q"]
 [ext_resource type="Script" uid="uid://bf6yqy35jf53w" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_b___small.gd" id="34_ww425"]
-[ext_resource type="PackedScene" uid="uid://ds85cxxblat1n" path="res://Scenes/Enemies/basic_skeleton_archer.tscn" id="35_8yevf"]
 [ext_resource type="PackedScene" uid="uid://b50h76ql65ea1" path="res://Scenes/RoomSpawns/small_room_spawn.tscn" id="35_g4blg"]
+[ext_resource type="PackedScene" uid="uid://uw280smh4xbt" path="res://Scenes/Enemies/basic_orc_rider.tscn" id="36_31ala"]
 [ext_resource type="AudioStream" uid="uid://dp3d4f4xkgm5" path="res://Assets/Sfx/Background/BGM - Area 1.ogg" id="42_31ala"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2icd"]
@@ -20446,7 +20446,7 @@ size = Vector2(313, 342)
 
 [sub_resource type="Resource" id="Resource_ht05q"]
 script = ExtResource("34_ht05q")
-enemy_scene = ExtResource("35_8yevf")
+enemy_scene = ExtResource("36_31ala")
 count = 2
 spawn_delay = 1.5
 wave_delay = 0.0

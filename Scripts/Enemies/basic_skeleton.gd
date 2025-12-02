@@ -109,6 +109,9 @@ func set_targeted_state(targeted: bool):
 		modulate = Color.GRAY  # Darken the enemy
 	else:
 		modulate = Color.WHITE  # Reset color
+	# Update word modulate to match
+	if has_node("Word"):
+		get_node("Word").modulate = modulate
 
 func play_death_animation():
 	"""Play damage animation followed by death animation"""

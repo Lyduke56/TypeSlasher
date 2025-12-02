@@ -28,6 +28,10 @@ func take_damage(amount: int = 1):
 		is_frozen = false
 		if freeze_vines:
 			freeze_vines.visible = false
+		else:
+			anim.modulate = Color.WHITE
+			if anim.is_paused():
+				anim.play()
 
 		# 3. STOP PHYSICS
 		set_physics_process(false)
@@ -58,13 +62,24 @@ func pause_enemy(duration: float) -> void:
 
 	var current_animation = anim.animation
 	var current_flip = anim.flip_h
+	var was_playing = anim.is_playing()
 
 	if freeze_vines:
 		freeze_vines.visible = true
 		freeze_vines.play("freeze")
 	else:
-		anim.sprite_frames = preload("res://Scenes/freeze.tres")
-		anim.play("freeze")
+		# Use modulate effect instead of changing sprite
+		anim.modulate = Color.CYAN
+		anim.pause()
+		# Keep word visible
+		if has_node("Word"):
+			get_node("Word").modulate = Color.WHITE
+
+	# Stop hacking if applicable
+	if has_method("get") and get("hack_timer") != null:
+		var ht = get("hack_timer")
+		if ht is Timer and ht.is_inside_tree():
+			ht.stop()
 
 	# Wait for the freeze duration
 	await get_tree().create_timer(duration).timeout
@@ -77,9 +92,19 @@ func pause_enemy(duration: float) -> void:
 	if freeze_vines:
 		freeze_vines.visible = false
 	else:
-		if original_sprite_frames:
-			anim.sprite_frames = original_sprite_frames
+		# Restore modulate and animation
+		anim.modulate = Color.WHITE
+		if was_playing:
 			anim.play(current_animation)
-			anim.flip_h = current_flip
+		anim.flip_h = current_flip
+		# Restore word modulate to match current state
+		if has_node("Word"):
+			get_node("Word").modulate = self.modulate
+
+	# Resume hacking if applicable
+	if has_method("get") and get("hack_timer") != null and has_method("get") and get("has_reached_target") == true:
+		var ht = get("hack_timer")
+		if ht is Timer and ht.is_inside_tree():
+			ht.start()
 
 	is_frozen = false

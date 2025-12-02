@@ -53,6 +53,11 @@ func _ready() -> void:
 		anim.animation_finished.connect(_on_animation_finished)
 	pass  # Word will be set by the game manager via set_prompt()
 
+func pause_enemy(duration: float) -> void:
+	super.pause_enemy(duration)
+	if is_frozen and anim:
+		anim.play("orc_rider_idle")
+
 func _process(delta: float) -> void:
 	pass
 
@@ -121,6 +126,8 @@ func set_targeted_state(targeted: bool):
 		modulate = Color.GRAY  # Darken the enemy
 	else:
 		modulate = Color.WHITE  # Reset color
+	# Update word modulate to match
+	word.modulate = modulate
 
 func play_death_animation():
 	"""Enemy takes damage from player - blocks first hit, then uses health system"""
@@ -195,6 +202,8 @@ func perform_death():
 	if anim.animation_finished.is_connected(_on_death_animation_finished):
 		anim.animation_finished.disconnect(_on_death_animation_finished)
 	anim.animation_finished.connect(_on_death_animation_finished)
+	# Disable looping for death animation
+	anim.sprite_frames.set_animation_loop("orc_rider_death", false)
 	anim.play("orc_rider_death")
 	$sfx_death.play()
 	print("Enemy death animation started")
@@ -310,8 +319,8 @@ func _on_animation_finished():
 		print("Enemy finished taking damage, back to idle.")
 
 func _physics_process(delta: float) -> void:
-	# STOP ALL MOVEMENT if being targeted or has reached target
-	if is_being_targeted or has_reached_target:
+	# STOP ALL MOVEMENT if frozen, being targeted, or has reached target
+	if is_frozen or is_being_targeted or has_reached_target:
 		# Don't override death/damage animations
 		if anim and (anim.animation == "orc_rider_death" or anim.animation == "orc_rider_damaged"):
 			return  # Let death/damage animations play

@@ -278,8 +278,8 @@ func pause_enemy_by_buff():
 		print("Warning: Enemy does not support pause_enemy method")
 
 func _find_enemy_nodes(node: Node, enemies: Array):
-	"""Recursively find nodes with pause_enemy method (excludes non-enemies, dying enemies, and already frozen enemies)"""
-	if node.has_method("pause_enemy") and node.get("is_dying") != true and node.get("is_frozen") != true:  # Only living, unfrozen enemies
+	"""Recursively find nodes with pause_enemy method (excludes non-enemies, dying enemies, already frozen enemies, and currently targeted enemies)"""
+	if node.has_method("pause_enemy") and node.get("is_dying") != true and node.get("is_frozen") != true and node.get("is_being_targeted") != true:  # Only living, unfrozen, untargeted enemies
 		enemies.append(node)
 
 	for child in node.get_children():
