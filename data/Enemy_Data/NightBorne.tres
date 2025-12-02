@@ -1,0 +1,89 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=14 format=3 uid="uid://dnbdkqu6yxw4t"]
+
+[ext_resource type="Script" uid="uid://d1j7ls21xq45s" path="res://Scripts/EnemyData.gd" id="1_mtfie"]
+[ext_resource type="Texture2D" uid="uid://ds5agk8vx635l" path="res://Assets/Sprites/Enemies/Characters(100x100)/Sword/NightBorne.png" id="2_nr54t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6htmh"]
+atlas = ExtResource("2_nr54t")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8vmw"]
+atlas = ExtResource("2_nr54t")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6io0"]
+atlas = ExtResource("2_nr54t")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hpx7"]
+atlas = ExtResource("2_nr54t")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkjr3"]
+atlas = ExtResource("2_nr54t")
+region = Rect2(320, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7moqj"]
+atlas = ExtResource("2_nr54t")
+region = Rect2(400, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_riond"]
+atlas = ExtResource("2_nr54t")
+region = Rect2(480, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51y4n"]
+atlas = ExtResource("2_nr54t")
+region = Rect2(560, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_daqv0"]
+atlas = ExtResource("2_nr54t")
+region = Rect2(640, 0, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lyl2m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6htmh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8vmw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6io0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hpx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkjr3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7moqj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_riond")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51y4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_daqv0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_su7b8"]
+atlas = ExtResource("2_nr54t")
+region = Rect2(12, 29, 57, 44)
+
+[resource]
+script = ExtResource("1_mtfie")
+name = "NightBorne"
+description = "A formidable nocturnal boss that charges towards the target and unleashes powerful hacking attacks every 1.5 seconds once it reaches close range, dealing heavy damage that requires precise timing to survive."
+static_sprite = SubResource("AtlasTexture_su7b8")
+sprite_frames = SubResource("SpriteFrames_lyl2m")
+animation_name = ""
+type = ""
+metadata/_custom_type_script = "uid://d1j7ls21xq45s"
