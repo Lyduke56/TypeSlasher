@@ -161,6 +161,11 @@ func set_description(data: EnemyData):
 					print("Setting animation to: ", anim_to_play)
 					animated_sprite.play()
 					print("Is playing after play(): ", animated_sprite.is_playing())
+				# Offset NightBorne sprite to the top due to off-centered loading
+				if data.name == "NightBorne":
+					animated_sprite.offset = Vector2(0, -16)  # Adjust Y offset to move sprite upward
+				else:
+					animated_sprite.offset = Vector2(0, 0)  # Reset offset for other enemies
 			else:
 				animated_sprite.stop()
 		# Only set static texture if no animated sprite and Icon is TextureRect - but ideally animated should always have sprite_frames

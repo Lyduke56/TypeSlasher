@@ -60,7 +60,7 @@ region = Rect2(41, 35.5, 31, 29)
 [resource]
 script = ExtResource("1_1toeg")
 name = " Skeleton"
-description = "A fierce green-skinned warrior who attacks with deadly precision."
+description = "A standard undead warrior that moves towards the target and attacks periodically once it reaches close range, dealing damage over time."
 static_sprite = SubResource("AtlasTexture_ait6t")
 sprite_frames = SubResource("SpriteFrames_ait6t")
 animation_name = ""

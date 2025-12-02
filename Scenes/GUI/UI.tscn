@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ct4hgdk2e8v47"]
+[gd_scene load_steps=79 format=3 uid="uid://ct4hgdk2e8v47"]
 
 [ext_resource type="Theme" uid="uid://dx6raqafay30m" path="res://Assets/Themes/normal_button.tres" id="2_adret"]
 [ext_resource type="Texture2D" uid="uid://borh6fgd3l80o" path="res://Assets/Sprites/GUI/pause-Sheet.png" id="2_jcnnf"]
@@ -10,10 +10,402 @@
 [ext_resource type="Resource" uid="uid://diuqds3i6ubm7" path="res://data/Enemy_Data/Orc.tres" id="6_imv1v"]
 [ext_resource type="Texture2D" uid="uid://b8douqlbc8tj8" path="res://Assets/Sprites/GUI/wood_checkbox_unchecked.png" id="7_6yr7l"]
 [ext_resource type="Resource" uid="uid://cobaill6vere2" path="res://data/Enemy_Data/Skeleton.tres" id="7_olp6x"]
+[ext_resource type="Script" uid="uid://d1j7ls21xq45s" path="res://Scripts/EnemyData.gd" id="8_7xq0j"]
+[ext_resource type="Texture2D" uid="uid://dgg6xcchwmtc4" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer/Skeleton Archer-Idle.png" id="9_6x3wx"]
 [ext_resource type="FontFile" uid="uid://x5y3gace2sm1" path="res://Assets/Fonts/Perfect DOS VGA 437.ttf" id="9_r2bq1"]
+[ext_resource type="Texture2D" uid="uid://vx3uq5fdituu" path="res://Assets/Sprites/Enemies/Characters(100x100)/Slime/Slime/Slime-Idle.png" id="10_5hk8p"]
 [ext_resource type="Script" uid="uid://8cl20qpfqtg0" path="res://Scenes/GUI/audio_control.gd" id="11_4e7uv"]
+[ext_resource type="Texture2D" uid="uid://kvov2abjywks" path="res://Assets/Sprites/Enemies/Characters(100x100)/Werebear/Werebear/Werebear-Idle.png" id="11_400ke"]
 [ext_resource type="Script" uid="uid://c77ulk7ceud3a" path="res://Scenes/GUI/fullscreen_control.gd" id="12_jcnnf"]
+[ext_resource type="Texture2D" uid="uid://dk0hiaudtusoj" path="res://Assets/Sprites/Enemies/Characters(100x100)/Werewolf/Werewolf/Werewolf-Idle.png" id="12_onri8"]
 [ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="13_nkekq"]
+[ext_resource type="Texture2D" uid="uid://5eb4qqf5bixe" path="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Orc/Armored Orc/Armored Orc-Idle.png" id="13_yhlim"]
+[ext_resource type="Texture2D" uid="uid://1p5yng8xjsnb" path="res://Assets/Sprites/Enemies/Characters(100x100)/Orc rider/Orc rider/Orc rider-Idle.png" id="14_rd1wc"]
+[ext_resource type="Resource" uid="uid://dnbdkqu6yxw4t" path="res://data/Enemy_Data/NightBorne.tres" id="15_onri8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hk8p"]
+atlas = ExtResource("9_6x3wx")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7svds"]
+atlas = ExtResource("9_6x3wx")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jb042"]
+atlas = ExtResource("9_6x3wx")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh2ux"]
+atlas = ExtResource("9_6x3wx")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_400ke"]
+atlas = ExtResource("9_6x3wx")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onri8"]
+atlas = ExtResource("9_6x3wx")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yhlim"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hk8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7svds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jb042")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh2ux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_400ke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onri8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x3wx"]
+atlas = ExtResource("9_6x3wx")
+region = Rect2(37, 36, 31, 29)
+
+[sub_resource type="Resource" id="Resource_6x3wx"]
+script = ExtResource("8_7xq0j")
+name = "Skeleton Archer"
+description = "A stationary ranged attacker that shoots arrows every 5 seconds. Each arrow is a separate easy-word enemy that must be typed to eliminate."
+static_sprite = SubResource("AtlasTexture_6x3wx")
+sprite_frames = SubResource("SpriteFrames_yhlim")
+animation_name = ""
+type = ""
+metadata/_custom_type_script = "uid://d1j7ls21xq45s"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhlim"]
+atlas = ExtResource("10_5hk8p")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd1wc"]
+atlas = ExtResource("10_5hk8p")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhh44"]
+atlas = ExtResource("10_5hk8p")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6s81"]
+atlas = ExtResource("10_5hk8p")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80ipn"]
+atlas = ExtResource("10_5hk8p")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jer0g"]
+atlas = ExtResource("10_5hk8p")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sy5jj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhlim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rd1wc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhh44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6s81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80ipn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jer0g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6ipk"]
+atlas = ExtResource("10_5hk8p")
+region = Rect2(31, 33, 37, 40)
+
+[sub_resource type="Resource" id="Resource_cil77"]
+script = ExtResource("8_7xq0j")
+name = "Slime"
+description = "A gelatinous creature that splits into two smaller, easier-word slimes upon death, which do not split further when defeated."
+static_sprite = SubResource("AtlasTexture_d6ipk")
+sprite_frames = SubResource("SpriteFrames_sy5jj")
+animation_name = ""
+type = ""
+metadata/_custom_type_script = "uid://d1j7ls21xq45s"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy5jj"]
+atlas = ExtResource("11_400ke")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cil77"]
+atlas = ExtResource("11_400ke")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qng6a"]
+atlas = ExtResource("11_400ke")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tw4qp"]
+atlas = ExtResource("11_400ke")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1vxt"]
+atlas = ExtResource("11_400ke")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jaa0h"]
+atlas = ExtResource("11_400ke")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6htmh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sy5jj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cil77")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qng6a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tw4qp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1vxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jaa0h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4eb72"]
+atlas = ExtResource("11_400ke")
+region = Rect2(35, 31, 32, 38)
+
+[sub_resource type="Resource" id="Resource_t8vmw"]
+script = ExtResource("8_7xq0j")
+name = "Werebear"
+description = "A fast, agile predator that charges the target and attacks continuously once in range, dealing damage over time."
+static_sprite = SubResource("AtlasTexture_4eb72")
+sprite_frames = SubResource("SpriteFrames_6htmh")
+animation_name = ""
+type = ""
+metadata/_custom_type_script = "uid://d1j7ls21xq45s"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlp6w"]
+atlas = ExtResource("12_onri8")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8n12c"]
+atlas = ExtResource("12_onri8")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdjjg"]
+atlas = ExtResource("12_onri8")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mikvx"]
+atlas = ExtResource("12_onri8")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yc8b"]
+atlas = ExtResource("12_onri8")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bserr"]
+atlas = ExtResource("12_onri8")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y6io0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mlp6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8n12c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdjjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mikvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yc8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bserr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nms35"]
+atlas = ExtResource("12_onri8")
+region = Rect2(35, 32, 37, 37)
+
+[sub_resource type="Resource" id="Resource_2hpx7"]
+script = ExtResource("8_7xq0j")
+name = "WereWolf"
+description = "A fast, agile predator that charges the target and attacks continuously once in range, dealing damage over time."
+static_sprite = SubResource("AtlasTexture_nms35")
+sprite_frames = SubResource("SpriteFrames_y6io0")
+animation_name = ""
+type = ""
+metadata/_custom_type_script = "uid://d1j7ls21xq45s"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2xjk"]
+atlas = ExtResource("13_yhlim")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf77j"]
+atlas = ExtResource("13_yhlim")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvv8s"]
+atlas = ExtResource("13_yhlim")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc8sy"]
+atlas = ExtResource("13_yhlim")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhgsc"]
+atlas = ExtResource("13_yhlim")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_be416"]
+atlas = ExtResource("13_yhlim")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qkjr3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2xjk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf77j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvv8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yc8sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhgsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_be416")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpwc2"]
+atlas = ExtResource("13_yhlim")
+region = Rect2(29, 29, 45, 42)
+
+[sub_resource type="Resource" id="Resource_7moqj"]
+script = ExtResource("8_7xq0j")
+name = "Armored Orc"
+description = "A heavily armored orc that blocks the first attack with its shield. It dies on the second successful attack."
+static_sprite = SubResource("AtlasTexture_lpwc2")
+sprite_frames = SubResource("SpriteFrames_qkjr3")
+animation_name = ""
+type = ""
+metadata/_custom_type_script = "uid://d1j7ls21xq45s"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwmqv"]
+atlas = ExtResource("14_rd1wc")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0ylk"]
+atlas = ExtResource("14_rd1wc")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cholm"]
+atlas = ExtResource("14_rd1wc")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6mff"]
+atlas = ExtResource("14_rd1wc")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxur2"]
+atlas = ExtResource("14_rd1wc")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_823dh"]
+atlas = ExtResource("14_rd1wc")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_riond"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kwmqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0ylk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cholm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6mff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxur2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_823dh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vq0b"]
+atlas = ExtResource("14_rd1wc")
+region = Rect2(27, 18, 48, 50)
+
+[sub_resource type="Resource" id="Resource_51y4n"]
+script = ExtResource("8_7xq0j")
+name = "Orc Rider"
+description = "A mounted orc with armor that blocks the first attack. It has 2 health points and uses medium-difficulty words, requiring multiple hits to defeat."
+static_sprite = SubResource("AtlasTexture_1vq0b")
+sprite_frames = SubResource("SpriteFrames_riond")
+animation_name = ""
+type = ""
+metadata/_custom_type_script = "uid://d1j7ls21xq45s"
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_r2bq1"]
 color = Color(1, 1, 1, 1)
@@ -135,24 +527,31 @@ enemy_data = ExtResource("7_olp6x")
 
 [node name="Slot3" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
 layout_mode = 2
+enemy_data = SubResource("Resource_6x3wx")
 
 [node name="Slot4" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
 layout_mode = 2
+enemy_data = SubResource("Resource_cil77")
 
 [node name="Slot5" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
 layout_mode = 2
+enemy_data = SubResource("Resource_t8vmw")
 
 [node name="Slot6" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
 layout_mode = 2
+enemy_data = SubResource("Resource_2hpx7")
 
 [node name="Slot7" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
 layout_mode = 2
+enemy_data = SubResource("Resource_7moqj")
 
 [node name="Slot8" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
 layout_mode = 2
+enemy_data = SubResource("Resource_51y4n")
 
 [node name="Slot9" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
 layout_mode = 2
+enemy_data = ExtResource("15_onri8")
 
 [node name="Slot10" parent="Information/GridContainer" instance=ExtResource("4_vlwpb")]
 layout_mode = 2
@@ -227,8 +626,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Information/Description"]
-position = Vector2(135, 113.5)
-scale = Vector2(9.559, 9.845)
+position = Vector2(139.131, 141.305)
+scale = Vector2(4.805, 4.805)
 
 [node name="Close" type="Button" parent="Information"]
 layout_mode = 1
