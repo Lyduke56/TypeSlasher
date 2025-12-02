@@ -65,6 +65,32 @@ func _ready() -> void:
 	var start_enter_marker = current_room.enter_marker if current_room.enter_marker else current_room.global_position
 	player.center_position = start_enter_marker
 
+	# Adjust camera to starting room size and position
+	var camera = get_viewport().get_camera_2d()
+	if camera:
+		var camera_area = current_room.get_node_or_null("CameraArea")
+		if camera_area:
+			var collision_shape = camera_area.get_node_or_null("CollisionShape2D")
+			if collision_shape and collision_shape.shape is RectangleShape2D:
+				var shape = collision_shape.shape as RectangleShape2D
+				var viewport_size = get_viewport().get_visible_rect().size
+				# Calculate zoom to fit the shape into the viewport
+				var zoom_x = viewport_size.x / shape.size.x
+				var zoom_y = viewport_size.y / shape.size.y
+				var zoom_level = min(zoom_x, zoom_y)  # Use min to fit entirely
+				var target_zoom = Vector2(zoom_level, zoom_level)
+				var target_pos = camera_area.global_position
+
+				# Set camera zoom and position immediately
+				camera.zoom = target_zoom
+				camera.global_position = target_pos
+
+				# Reset limits to allow zooming
+				camera.limit_left = -1000000
+				camera.limit_right = 1000000
+				camera.limit_top = -1000000
+				camera.limit_bottom = 1000000
+
 	# Connect signals from rooms
 	for room in rooms:
 		room.room_cleared.connect(_on_room_cleared)
