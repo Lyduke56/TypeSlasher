@@ -250,6 +250,7 @@ color = Color(0, 0, 0, 1)
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_s2c3o")
 autoplay = true
+bus = &"Music"
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ct4hgdk2e8v47"]
+[gd_scene load_steps=17 format=3 uid="uid://ct4hgdk2e8v47"]
 
 [ext_resource type="Theme" uid="uid://dx6raqafay30m" path="res://Assets/Themes/normal_button.tres" id="2_adret"]
 [ext_resource type="Texture2D" uid="uid://borh6fgd3l80o" path="res://Assets/Sprites/GUI/pause-Sheet.png" id="2_jcnnf"]
@@ -13,6 +13,7 @@
 [ext_resource type="FontFile" uid="uid://x5y3gace2sm1" path="res://Assets/Fonts/Perfect DOS VGA 437.ttf" id="9_r2bq1"]
 [ext_resource type="Script" uid="uid://8cl20qpfqtg0" path="res://Scenes/GUI/audio_control.gd" id="11_4e7uv"]
 [ext_resource type="Script" uid="uid://c77ulk7ceud3a" path="res://Scenes/GUI/fullscreen_control.gd" id="12_jcnnf"]
+[ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="13_nkekq"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_r2bq1"]
 color = Color(1, 1, 1, 1)
@@ -270,9 +271,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -96.0
+offset_left = -97.0
 offset_top = 40.0
-offset_right = -73.0
+offset_right = -74.0
 offset_bottom = 64.0
 grow_horizontal = 0
 scale = Vector2(1.685, 1.685)
@@ -280,12 +281,11 @@ icon = ExtResource("7_6yr7l")
 flat = true
 
 [node name="MusicControl" type="HSlider" parent="Settings"]
-visible = false
 layout_mode = 0
-offset_left = 203.0
-offset_top = 129.0
-offset_right = 428.0
-offset_bottom = 159.0
+offset_left = 163.0
+offset_top = 141.0
+offset_right = 388.0
+offset_bottom = 171.0
 theme_override_styles/slider = SubResource("StyleBoxLine_r2bq1")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_4e7uv")
 max_value = 1.0
@@ -296,10 +296,10 @@ audio_bus_name = "Music"
 
 [node name="MasterControl" type="HSlider" parent="Settings"]
 layout_mode = 0
-offset_left = 204.0
-offset_top = 115.0
-offset_right = 428.0
-offset_bottom = 145.0
+offset_left = 163.0
+offset_top = 104.0
+offset_right = 387.0
+offset_bottom = 134.0
 theme_override_styles/slider = SubResource("StyleBoxLine_r2bq1")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_4e7uv")
 max_value = 1.0
@@ -309,12 +309,11 @@ script = ExtResource("11_4e7uv")
 audio_bus_name = "Master"
 
 [node name="SFxControl" type="HSlider" parent="Settings"]
-visible = false
 layout_mode = 0
-offset_left = 202.0
-offset_top = 165.0
-offset_right = 428.0
-offset_bottom = 195.0
+offset_left = 163.0
+offset_top = 182.0
+offset_right = 389.0
+offset_bottom = 212.0
 theme_override_styles/slider = SubResource("StyleBoxLine_r2bq1")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_4e7uv")
 max_value = 1.0
@@ -324,6 +323,7 @@ script = ExtResource("11_4e7uv")
 audio_bus_name = "SFx"
 
 [node name="FullscreenControl" type="CheckButton" parent="Settings"]
+visible = false
 layout_mode = 0
 offset_left = 73.0
 offset_top = 209.0
@@ -331,6 +331,82 @@ offset_right = 231.0
 offset_bottom = 255.0
 text = "Full Screen"
 script = ExtResource("12_jcnnf")
+
+[node name="MusicLabel" type="RichTextLabel" parent="Settings"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -181.0
+offset_top = -157.0
+offset_right = 1119.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.07, 0.07)
+theme_override_fonts/normal_font = ExtResource("13_nkekq")
+theme_override_font_sizes/normal_font_size = 228
+text = "Music"
+horizontal_alignment = 1
+
+[node name="VolumeLabel" type="RichTextLabel" parent="Settings"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -255.0
+offset_right = 920.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.1, 0.1)
+theme_override_fonts/normal_font = ExtResource("13_nkekq")
+theme_override_font_sizes/normal_font_size = 228
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="MasterLabel" type="RichTextLabel" parent="Settings"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -183.0
+offset_top = -193.0
+offset_right = 1117.0
+offset_bottom = 167.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.07, 0.07)
+theme_override_fonts/normal_font = ExtResource("13_nkekq")
+theme_override_font_sizes/normal_font_size = 228
+text = "Master"
+horizontal_alignment = 1
+
+[node name="SFxLabel" type="RichTextLabel" parent="Settings"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -182.0
+offset_top = -116.0
+offset_right = 1118.0
+offset_bottom = 244.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.07, 0.07)
+theme_override_fonts/normal_font = ExtResource("13_nkekq")
+theme_override_font_sizes/normal_font_size = 228
+text = "SFX"
+horizontal_alignment = 1
 
 [node name="Buff" type="NinePatchRect" parent="."]
 visible = false
