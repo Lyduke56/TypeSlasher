@@ -10,7 +10,7 @@ const BEST_TIME_SAVE_PATH = "user://best_time.save"
 
 # Leaderboard system
 var leaderboard_scores: Array = []
-const SCORE_FILE = "user://leaderboard.json"
+const SCORE_FILE = "res://leaderboard.json"
 
 # Flag to track if we're coming back from buff selection
 var after_buff_selection: bool = false
