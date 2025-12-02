@@ -44,3 +44,20 @@ func _on_score_button_pressed() -> void:
 
 func start_game():
 	get_tree().change_scene_to_file("res://Scenes/Main.tscn")
+
+func _input(event):
+	# Press F1 to generate scores
+	if event is InputEventKey and event.pressed and event.keycode == KEY_F1:
+		print("DEBUG: Generating fake scores...")
+		var names = ["Player", "SpeedRunner", "Dev", "Tester", "Pro"]
+
+		for i in range(10):
+			var random_name = names.pick_random() + str(randi() % 99)
+			var random_score = randi_range(500, 50000)
+			var mm = randi_range(1, 15)
+			var ss = randi_range(0, 59)
+			var time_str = "%02d:%02d" % [mm, ss]
+
+			Global.add_score(random_name, time_str, random_score)
+
+		print("DEBUG: Added 10 scores!")

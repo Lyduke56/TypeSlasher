@@ -384,7 +384,7 @@ func save_scores():
 		print("Error saving leaderboard scores")
 
 func load_scores():
-	"""Load the leaderboard scores from JSON file"""
+	"""Load the leaderboard scores from JSON file and force sort them"""
 	if FileAccess.file_exists(SCORE_FILE):
 		var file = FileAccess.open(SCORE_FILE, FileAccess.READ)
 		if file:
@@ -393,6 +393,9 @@ func load_scores():
 			var parsed = JSON.parse_string(json_text)
 			if parsed is Array:
 				leaderboard_scores = parsed
+				# FIXED SORT: Highest Score First (Descending)
+				# Logic: "a" comes before "b" if "a" is larger
+				leaderboard_scores.sort_custom(func(a, b): return int(a.get("score", 0)) > int(b.get("score", 0)))
 			else:
 				leaderboard_scores = []
 		else:
@@ -405,7 +408,11 @@ func load_scores():
 func add_score(player_name: String, time_str: String, score_val: int):
 	"""Add a new score to leaderboard, sort descending by score"""
 	load_scores()
+
 	leaderboard_scores.append({"name": player_name, "time": time_str, "score": score_val})
-	leaderboard_scores.sort_custom(func(a, b): return b.score > a.score)
+
+	# FIXED SORT: Highest Score First (Descending)
+	leaderboard_scores.sort_custom(func(a, b): return int(a.get("score", 0)) > int(b.get("score", 0)))
+
 	save_scores()
 	print("Added new score for ", player_name, ": ", score_val)
