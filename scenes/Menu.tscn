@@ -4,9 +4,9 @@
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_upctu"]
 [ext_resource type="Texture2D" uid="uid://bog7t5alywxqn" path="res://Assets/Background/Menu_background.png" id="3_11y2r"]
 [ext_resource type="StyleBox" uid="uid://b74vc0fkg6ny1" path="res://Assets/Themes/Menu_button.tres" id="3_wfhf6"]
-[ext_resource type="AudioStream" uid="uid://ccjc76n0terne" path="res://Assets/Sfx/Background/BGM - Title Theme.ogg" id="4_s2c3o"]
-[ext_resource type="Texture2D" uid="uid://b7i43mjsya84r" path="res://Assets/Sprites/GUI/title-Sheet.png" id="5_idohh"]
-[ext_resource type="Texture2D" uid="uid://dx1gqkcsf873m" path="res://Assets/Background/TypeSlasher-Sheet.png" id="6_wfhf6"]
+[ext_resource type="AudioStream" uid="uid://d34pg0u8qc7w2" path="res://Assets/Sfx/Background/BGM - Title Theme.ogg" id="4_s2c3o"]
+[ext_resource type="Texture2D" uid="uid://c2cdq8vo63sge" path="res://Assets/Sprites/GUI/title-Sheet.png" id="5_idohh"]
+[ext_resource type="Texture2D" uid="uid://c4of7be17puk" path="res://Assets/Background/TypeSlasher-Sheet.png" id="6_wfhf6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o0tnf"]
 

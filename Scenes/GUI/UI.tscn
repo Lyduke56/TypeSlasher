@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://ct4hgdk2e8v47"]
+[gd_scene load_steps=16 format=3 uid="uid://ct4hgdk2e8v47"]
 
 [ext_resource type="Theme" uid="uid://dx6raqafay30m" path="res://Assets/Themes/normal_button.tres" id="2_adret"]
-[ext_resource type="Texture2D" uid="uid://borh6fgd3l80o" path="res://Assets/Sprites/GUI/pause-Sheet.png" id="2_jcnnf"]
+[ext_resource type="Texture2D" uid="uid://buadcox4b10pa" path="res://Assets/Sprites/GUI/pause-Sheet.png" id="2_jcnnf"]
 [ext_resource type="Texture2D" uid="uid://dkaiqkhlad2x" path="res://Assets/Sprites/GUI/silver_panel.png" id="3_adret"]
-[ext_resource type="Texture2D" uid="uid://dw7wh020jbpph" path="res://Assets/Sprites/GUI/ui-sheet.png" id="4_jntt5"]
 [ext_resource type="PackedScene" uid="uid://f8uv6ymbn0ia" path="res://Scenes/slot.tscn" id="4_vlwpb"]
 [ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://Assets/Sprites/GUI/wood_panel.png" id="5_csd48"]
 [ext_resource type="Script" uid="uid://cwimcn47767jb" path="res://Scripts/ui.gd" id="6_2k9qv"]
@@ -13,7 +12,7 @@
 [ext_resource type="FontFile" uid="uid://x5y3gace2sm1" path="res://Assets/Fonts/Perfect DOS VGA 437.ttf" id="9_r2bq1"]
 [ext_resource type="Script" uid="uid://8cl20qpfqtg0" path="res://Scenes/GUI/audio_control.gd" id="11_4e7uv"]
 [ext_resource type="Script" uid="uid://c77ulk7ceud3a" path="res://Scenes/GUI/fullscreen_control.gd" id="12_jcnnf"]
-[ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="13_nkekq"]
+[ext_resource type="FontFile" uid="uid://d16w8cnvxr0cu" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="13_nkekq"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_r2bq1"]
 color = Color(1, 1, 1, 1)
@@ -33,7 +32,6 @@ grow_vertical = 2
 script = ExtResource("6_2k9qv")
 
 [node name="Menu" type="NinePatchRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -48,11 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.885, 0.885)
 texture = ExtResource("2_jcnnf")
-region_rect = Rect2(13, 13, 294, 262)
-patch_margin_left = 17
-patch_margin_top = 15
-patch_margin_right = 15
-patch_margin_bottom = 13
+region_rect = Rect2(77, 173, 294, 262)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 layout_mode = 1
@@ -107,11 +101,8 @@ offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.38, 1.38)
-texture = ExtResource("4_jntt5")
-region_rect = Rect2(13, 14, 294, 262)
-patch_margin_top = 2
-patch_margin_right = 3
-patch_margin_bottom = 3
+texture = ExtResource("2_jcnnf")
+region_rect = Rect2(77, 173, 294, 262)
 
 [node name="GridContainer" type="GridContainer" parent="Information"]
 layout_mode = 1
@@ -247,6 +238,7 @@ icon = ExtResource("7_6yr7l")
 flat = true
 
 [node name="Settings" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -259,10 +251,12 @@ offset_right = 250.0
 offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_jntt5")
-patch_margin_top = 2
-patch_margin_right = 3
-patch_margin_bottom = 3
+texture = ExtResource("2_jcnnf")
+region_rect = Rect2(72, 168, 312, 272)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 13
+patch_margin_bottom = 5
 axis_stretch_vertical = 2
 
 [node name="Close" type="Button" parent="Settings"]

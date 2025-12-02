@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://waaxjbc13ywj"]
 
 [ext_resource type="Script" uid="uid://dtawgnleprcje" path="res://Scenes/name_input.gd" id="1_15imt"]
-[ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_3aiti"]
+[ext_resource type="FontFile" uid="uid://d16w8cnvxr0cu" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_3aiti"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_3aiti"]
 [ext_resource type="Texture2D" uid="uid://b8douqlbc8tj8" path="res://Assets/Sprites/GUI/wood_checkbox_unchecked.png" id="4_i2xih"]
 [ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://Assets/Sprites/GUI/wood_panel.png" id="5_15imt"]

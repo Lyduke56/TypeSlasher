@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwk042o4i346s"]
+[gd_scene load_steps=8 format=3 uid="uid://dwk042o4i346s"]
 
 [ext_resource type="Script" uid="uid://ba75h34ndnt3" path="res://Scripts/Leaderboard.gd" id="1_xvobe"]
-[ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://Assets/Sprites/GUI/wood_panel.png" id="2_qaei5"]
+[ext_resource type="Texture2D" uid="uid://buadcox4b10pa" path="res://Assets/Sprites/GUI/pause-Sheet.png" id="2_qaei5"]
 [ext_resource type="PackedScene" uid="uid://ri5txicybh2c" path="res://Scenes/ScoreRow.tscn" id="2_udga5"]
 [ext_resource type="Texture2D" uid="uid://b8douqlbc8tj8" path="res://Assets/Sprites/GUI/wood_checkbox_unchecked.png" id="3_c6wcd"]
+[ext_resource type="FontFile" uid="uid://cmvplpt36fnwy" path="res://Assets/Fonts/Gotfridus_Font_0_5/Gotfridus.otf" id="3_ldouh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c6wcd"]
 content_margin_top = 34.0
@@ -29,18 +30,15 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -847.0
-offset_top = -255.0
-offset_right = -736.0
-offset_bottom = -150.0
+offset_left = -881.0
+offset_top = -303.0
+offset_right = -755.0
+offset_bottom = -179.0
 grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(4.835, 4.835)
 texture = ExtResource("2_qaei5")
-patch_margin_left = 15
-patch_margin_top = 15
-patch_margin_right = 15
-patch_margin_bottom = 15
+region_rect = Rect2(77, 173, 294, 262)
 
 [node name="CenterContainer" type="CenterContainer" parent="Control"]
 layout_mode = 1
@@ -83,6 +81,8 @@ alignment = 1
 
 [node name="Label" type="Label" parent="Control/BoardPanel/VBoxContainer/TopBar"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ldouh")
+theme_override_font_sizes/font_size = 42
 text = "Leaderboard"
 
 [node name="MainLayout" type="HBoxContainer" parent="Control/BoardPanel/VBoxContainer"]
