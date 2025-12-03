@@ -1,13 +1,13 @@
 [gd_scene load_steps=91 format=3 uid="uid://bof6xf0r1y3ka"]
 
 [ext_resource type="Script" uid="uid://drk1sc3c6d4go" path="res://Scripts/Boss/NightBorne.gd" id="1_edkgq"]
-[ext_resource type="Texture2D" uid="uid://dn7sqddicdewu" path="res://Assets/Sprites/Enemies/Characters(100x100)/Sword/NightBorne.png" id="2_efolf"]
-[ext_resource type="Texture2D" uid="uid://cuob3s2do8d1n" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="3_efolf"]
+[ext_resource type="Texture2D" uid="uid://ds5agk8vx635l" path="res://Assets/Sprites/Enemies/Characters(100x100)/Sword/NightBorne.png" id="2_efolf"]
+[ext_resource type="Texture2D" uid="uid://bfkwhf7k1cins" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="3_efolf"]
 [ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://Assets/Themes/Outline.tres" id="3_pcpn2"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="4_1afxa"]
-[ext_resource type="AudioStream" uid="uid://cqefvgjh3ac3n" path="res://Assets/Sfx/Enemies/Nightborne/nightborne_attack1.wav" id="6_dxgry"]
-[ext_resource type="AudioStream" uid="uid://dxhli4rfbkrup" path="res://Assets/Sfx/Enemies/Generic/generic_hit2.wav" id="7_uj0a6"]
-[ext_resource type="AudioStream" uid="uid://ckscyurxtu2qo" path="res://Assets/Sfx/Enemies/Generic/generic_death1.wav" id="8_56lk6"]
+[ext_resource type="AudioStream" uid="uid://bjc3lpheomoth" path="res://Assets/Sfx/Enemies/Nightborne/nightborne_attack1.wav" id="6_dxgry"]
+[ext_resource type="AudioStream" uid="uid://b77ebws08gtvu" path="res://Assets/Sfx/Enemies/Generic/generic_hit2.wav" id="7_uj0a6"]
+[ext_resource type="AudioStream" uid="uid://2grpggw5vybc" path="res://Assets/Sfx/Enemies/Generic/generic_death1.wav" id="8_56lk6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dxgry"]
 atlas = ExtResource("2_efolf")
