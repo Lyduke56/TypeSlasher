@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=4 uid="uid://dnkkwg7l5vg5i"]
+[gd_scene load_steps=129 format=4 uid="uid://dnkkwg7l5vg5i"]
 
 [ext_resource type="Script" uid="uid://rs71wv4pie2i" path="res://Scripts/Area2/Area_2_var_5/dungeon_manager(A2V5).gd" id="1_2ddpm"]
 [ext_resource type="Script" uid="uid://dljmx3brq43n7" path="res://Scripts/Area2/Area_2_var_5/area_2_var_5.gd" id="1_15kd2"]
@@ -10,11 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="4_qrqga"]
 [ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="4_skn3m"]
 [ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="5_2ddpm"]
+[ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="5_r5po8"]
 [ext_resource type="Texture2D" uid="uid://bxbciwx4rffsj" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_Autotiles.png" id="5_vm2jg"]
+[ext_resource type="PackedScene" uid="uid://ds85cxxblat1n" path="res://Scenes/Enemies/basic_skeleton_archer.tscn" id="6_820a4"]
 [ext_resource type="Texture2D" uid="uid://b1nifvoxgl61n" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_DecorationsC.png" id="6_cscj0"]
+[ext_resource type="PackedScene" uid="uid://bil2sj0ots4r2" path="res://Scenes/Enemies/basic_wolf.tscn" id="7_6no2o"]
 [ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="7_15kd2"]
 [ext_resource type="Texture2D" uid="uid://04bfptemmdc7" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsA2.png" id="7_skn3m"]
 [ext_resource type="Texture2D" uid="uid://dcv7vre6w0q8" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsA5.png" id="8_2ddpm"]
+[ext_resource type="PackedScene" uid="uid://b1j215u74lsl3" path="res://Scenes/Enemies/basic_slime.tscn" id="8_fsa3q"]
 [ext_resource type="Texture2D" uid="uid://bkotaa0wf2s22" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsSandA5.png" id="9_15kd2"]
 [ext_resource type="Texture2D" uid="uid://c6aenh02h86va" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FurnitureB.png" id="10_u6s2g"]
 [ext_resource type="Texture2D" uid="uid://c3ytj82ayrhso" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_SandDecorationsC.png" id="11_xeya6"]
@@ -44,6 +48,30 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrqga"]
 size = Vector2(302, 325)
+
+[sub_resource type="Resource" id="Resource_22s2g"]
+script = ExtResource("5_r5po8")
+enemy_scene = ExtResource("6_820a4")
+count = 5
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
+
+[sub_resource type="Resource" id="Resource_8aavi"]
+script = ExtResource("5_r5po8")
+enemy_scene = ExtResource("7_6no2o")
+count = 5
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
+
+[sub_resource type="Resource" id="Resource_6vema"]
+script = ExtResource("5_r5po8")
+enemy_scene = ExtResource("8_fsa3q")
+count = 5
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15kd2"]
 size = Vector2(491, 513)
@@ -15346,6 +15374,7 @@ z_index = 2
 [node name="RoomA - Medium" type="Node2D" parent="."]
 position = Vector2(865, -1)
 script = ExtResource("3_cscj0")
+enemy_waves = Array[ExtResource("5_r5po8")]([SubResource("Resource_22s2g"), SubResource("Resource_8aavi"), SubResource("Resource_6vema")])
 
 [node name="CameraArea" type="Area2D" parent="RoomA - Medium"]
 visibility_layer = 3
@@ -15384,6 +15413,7 @@ position = Vector2(0, 1)
 [node name="RoomB - Medium" type="Node2D" parent="."]
 position = Vector2(0, 861)
 script = ExtResource("3_cscj0")
+enemy_waves = Array[ExtResource("5_r5po8")]([SubResource("Resource_6vema"), SubResource("Resource_22s2g"), SubResource("Resource_8aavi")])
 
 [node name="CameraArea" type="Area2D" parent="RoomB - Medium"]
 visibility_layer = 3
