@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=4 uid="uid://fttmx3fict8g"]
+[gd_scene load_steps=125 format=4 uid="uid://fttmx3fict8g"]
 
 [ext_resource type="Script" uid="uid://dyivjxekdqaap" path="res://Scripts/Dungeons/Area_1_boss_var1/area_1_boss_var_1.gd" id="1_arqlh"]
 [ext_resource type="Script" uid="uid://dcxejv140b6cc" path="res://Scripts/Dungeons/Area_1_boss_var1/dungeon_manager(A1B1).gd" id="1_p6v1s"]
@@ -11,8 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://1autrsiutlos" path="res://Scenes/RoomSpawns/boss_room_spawn.tscn" id="7_vsrqs"]
 [ext_resource type="Script" uid="uid://dupdl2bqtnva" path="res://Scripts/Dungeons/Area_1_boss_var1/Rooms/healing_room.gd" id="8_p6v1s"]
 [ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://Assets/Map Tiles/Tileset/Dungeon/decor.png" id="9_arqlh"]
+[ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="9_cb2hg"]
+[ext_resource type="PackedScene" uid="uid://xcriddmqeofd" path="res://Scenes/Enemies/basic_skeleton.tscn" id="10_arqlh"]
 [ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="10_oaawp"]
 [ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="11_1rn4k"]
+[ext_resource type="PackedScene" uid="uid://bollxssfl4hqv" path="res://Scenes/Boss/Minotaur.tscn" id="11_oaawp"]
 [ext_resource type="Texture2D" uid="uid://bxbciwx4rffsj" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_Autotiles.png" id="12_3rwao"]
 [ext_resource type="Texture2D" uid="uid://b1nifvoxgl61n" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_DecorationsC.png" id="13_ka6ql"]
 [ext_resource type="Texture2D" uid="uid://04bfptemmdc7" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsA2.png" id="14_4axy7"]
@@ -50,6 +53,22 @@ size = Vector2(507, 534)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c475x"]
 size = Vector2(505, 527)
+
+[sub_resource type="Resource" id="Resource_1rn4k"]
+script = ExtResource("9_cb2hg")
+enemy_scene = ExtResource("10_arqlh")
+count = 6
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
+
+[sub_resource type="Resource" id="Resource_3rwao"]
+script = ExtResource("9_cb2hg")
+enemy_scene = ExtResource("11_oaawp")
+count = 1
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qaakt"]
 size = Vector2(793, 827)
@@ -14530,6 +14549,7 @@ position = Vector2(2, 6)
 z_index = 2
 position = Vector2(0, -1983)
 script = ExtResource("6_yibwt")
+enemy_waves = Array[ExtResource("9_cb2hg")]([SubResource("Resource_1rn4k"), SubResource("Resource_3rwao")])
 
 [node name="CameraArea" type="Area2D" parent="BossRoom"]
 

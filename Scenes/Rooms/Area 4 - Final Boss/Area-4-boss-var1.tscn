@@ -19035,7 +19035,7 @@ position = Vector2(0, 176)
 
 [node name="HealingContainer" type="Node2D" parent="HealingRoom"]
 z_index = 5
-position = Vector2(1, -99)
+position = Vector2(-88, -3)
 
 [node name="TargetContainer" type="Node2D" parent="HealingRoom"]
 z_index = 2
