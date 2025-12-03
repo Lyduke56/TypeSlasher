@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BuffData" load_steps=3 format=3 uid="uid://b2kjt6to5qf22"]
+
+[ext_resource type="Script" uid="uid://bvruukh375m8k" path="res://Scripts/buff_data.gd" id="1_py4gd"]
+[ext_resource type="Texture2D" uid="uid://k0fw6qq53bu3" path="res://Assets/Sprites/GUI/Buff_sword.png" id="1_rmuqn"]
+
+[resource]
+script = ExtResource("1_py4gd")
+buff_name = "Vampiric Blade"
+description = "15% chance to heal 1 HP on enemy kill per stack."
+icon = ExtResource("1_rmuqn")
+type = 1
+metadata/_custom_type_script = "uid://bvruukh375m8k"

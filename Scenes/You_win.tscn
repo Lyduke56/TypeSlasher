@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cpbmv7o8d7gbj"]
 
 [ext_resource type="Script" uid="uid://bn17ip8bb72n8" path="res://Scripts/you_win.gd" id="1_yq0dy"]
-[ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_t4fbi"]
+[ext_resource type="FontFile" uid="uid://5bsb58qe25gk" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_t4fbi"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_na2qd"]
 
 [sub_resource type="Animation" id="Animation_8fo1c"]

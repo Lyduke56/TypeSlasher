@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://pr6qlg630k6" path="res://Scripts/Enemies/basic_werebear.gd" id="1_whet2"]
 [ext_resource type="Texture2D" uid="uid://3mtrk7r85cgj" path="res://Assets/Sprites/Enemies/Characters(100x100)/Werebear/Werebear/Werebear.png" id="2_ymo17"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_4tc14"]
-[ext_resource type="Texture2D" uid="uid://cuob3s2do8d1n" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="3_r1ajn"]
-[ext_resource type="AudioStream" uid="uid://d0gr6fmklratj" path="res://Assets/Sfx/Enemies/Generic/generic_attack5.wav" id="5_r1ajn"]
-[ext_resource type="AudioStream" uid="uid://bwo47b5jdt27r" path="res://Assets/Sfx/Enemies/Generic/generic_hit3.wav" id="6_5na6o"]
-[ext_resource type="AudioStream" uid="uid://ckscyurxtu2qo" path="res://Assets/Sfx/Enemies/Generic/generic_death1.wav" id="7_j8vmb"]
+[ext_resource type="Texture2D" uid="uid://dpi8ru4kyjtmv" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="3_r1ajn"]
+[ext_resource type="AudioStream" uid="uid://cur4iok2v21mb" path="res://Assets/Sfx/Enemies/Generic/generic_attack5.wav" id="5_r1ajn"]
+[ext_resource type="AudioStream" uid="uid://dc16tdqg0oghw" path="res://Assets/Sfx/Enemies/Generic/generic_hit3.wav" id="6_5na6o"]
+[ext_resource type="AudioStream" uid="uid://bmubhxndinglb" path="res://Assets/Sfx/Enemies/Generic/generic_death1.wav" id="7_j8vmb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7g4xc"]
 atlas = ExtResource("2_ymo17")

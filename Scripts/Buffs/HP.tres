@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BuffData" load_steps=3 format=3 uid="uid://pvau0xaojoow"]
+
+[ext_resource type="Script" uid="uid://bvruukh375m8k" path="res://Scripts/buff_data.gd" id="1_hkwns"]
+[ext_resource type="Texture2D" uid="uid://c3045pt6uw4at" path="res://Assets/Sprites/GUI/Buff_HealthPotion.png" id="1_rg3dc"]
+
+[resource]
+script = ExtResource("1_hkwns")
+buff_name = "Health Potion"
+description = "Increases Max Health by 1 point."
+icon = ExtResource("1_rg3dc")
+type = 3
+metadata/_custom_type_script = "uid://bvruukh375m8k"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BuffData" load_steps=3 format=3 uid="uid://bgi6phf44gu5g"]
+
+[ext_resource type="Texture2D" uid="uid://ciaqr3fonmypn" path="res://Assets/Sprites/GUI/Buff_Shield.png" id="1_8tiej"]
+[ext_resource type="Script" uid="uid://bvruukh375m8k" path="res://Scripts/buff_data.gd" id="1_iacj0"]
+
+[resource]
+script = ExtResource("1_iacj0")
+buff_name = "Shield"
+description = "Blocks 1 instance of damage. Recharges every 10s. Stacks reduce cooldown."
+icon = ExtResource("1_8tiej")
+type = 0
+metadata/_custom_type_script = "uid://bvruukh375m8k"

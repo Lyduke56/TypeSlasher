@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4f31rhma7yhi"]
+[gd_scene load_steps=7 format=3 uid="uid://c4f31rhma7yhi"]
 
 [ext_resource type="PackedScene" uid="uid://xfeyheej88hr" path="res://ActiveBuffSlot.tscn" id="1_ba2rv"]
+[ext_resource type="Resource" uid="uid://bgi6phf44gu5g" path="res://Scripts/Buffs/Shield.tres" id="2_3gooi"]
+[ext_resource type="Resource" uid="uid://b2kjt6to5qf22" path="res://Scripts/Buffs/Sword.tres" id="3_504qt"]
 [ext_resource type="Script" uid="uid://cshn3tyu5wt1r" path="res://Scripts/active_buffs.gd" id="3_ba2rv"]
+[ext_resource type="Resource" uid="uid://bs60s37la4ar1" path="res://Scripts/Buffs/Freeze.tres" id="4_hyfp4"]
+[ext_resource type="Resource" uid="uid://pvau0xaojoow" path="res://Scripts/Buffs/HP.tres" id="5_0w13h"]
 
 [node name="ActiveBuffs" type="Control"]
 layout_mode = 3
@@ -12,6 +16,10 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.68, 0.68)
 script = ExtResource("3_ba2rv")
+shield_data = ExtResource("2_3gooi")
+sword_data = ExtResource("3_504qt")
+freeze_data = ExtResource("4_hyfp4")
+health_data = ExtResource("5_0w13h")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
