@@ -1,13 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwk042o4i346s"]
+[gd_scene load_steps=8 format=3 uid="uid://dwk042o4i346s"]
 
 [ext_resource type="Script" uid="uid://ba75h34ndnt3" path="res://Scripts/Leaderboard.gd" id="1_xvobe"]
-[ext_resource type="Texture2D" uid="uid://buadcox4b10pa" path="res://Assets/Sprites/GUI/pause-Sheet.png" id="2_qaei5"]
+[ext_resource type="Texture2D" uid="uid://borh6fgd3l80o" path="res://Assets/Sprites/GUI/pause-Sheet.png" id="2_qaei5"]
 [ext_resource type="PackedScene" uid="uid://ri5txicybh2c" path="res://Scenes/ScoreRow.tscn" id="2_udga5"]
 [ext_resource type="Texture2D" uid="uid://b8douqlbc8tj8" path="res://Assets/Sprites/GUI/wood_checkbox_unchecked.png" id="3_c6wcd"]
-[ext_resource type="FontFile" uid="uid://cmvplpt36fnwy" path="res://Assets/Fonts/Gotfridus_Font_0_5/Gotfridus.otf" id="3_ldouh"]
-[ext_resource type="FontFile" uid="uid://d16w8cnvxr0cu" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="4_67k4m"]
-[ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="6_ep5dy"]
-[ext_resource type="FontFile" uid="uid://x5y3gace2sm1" path="res://Assets/Fonts/Perfect DOS VGA 437.ttf" id="7_2pq2m"]
+[ext_resource type="FontFile" uid="uid://byceakxtotglo" path="res://Assets/Fonts/Gotfridus_Font_0_5/Gotfridus.otf" id="3_ldouh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c6wcd"]
 content_margin_top = 34.0
@@ -96,8 +93,6 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
-theme_override_fonts/font = ExtResource("4_67k4m")
-theme_override_font_sizes/font_size = 20
 text = "Rank"
 horizontal_alignment = 1
 
@@ -105,23 +100,17 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
-theme_override_fonts/font = ExtResource("4_67k4m")
-theme_override_font_sizes/font_size = 20
 text = "Name"
 
 [node name="Time" type="Label" parent="Control/BoardPanel/VBoxContainer/MainLayout"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("4_67k4m")
-theme_override_font_sizes/font_size = 20
 text = "Time"
 horizontal_alignment = 1
 
 [node name="Score" type="Label" parent="Control/BoardPanel/VBoxContainer/MainLayout"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("4_67k4m")
-theme_override_font_sizes/font_size = 20
 text = "Score"
 horizontal_alignment = 1
 
@@ -172,19 +161,16 @@ size_flags_vertical = 10
 
 [node name="PrevButton" type="Button" parent="Control/BoardPanel/VBoxContainer/NavContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6_ep5dy")
 text = "< Prev"
 
 [node name="PageLabel" type="Label" parent="Control/BoardPanel/VBoxContainer/NavContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
-theme_override_fonts/font = ExtResource("3_ldouh")
 text = "1"
 horizontal_alignment = 1
 
 [node name="NextButton" type="Button" parent="Control/BoardPanel/VBoxContainer/NavContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_2pq2m")
 text = "Next >"
 
 [node name="Close" type="Button" parent="."]

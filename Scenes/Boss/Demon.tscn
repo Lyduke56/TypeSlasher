@@ -1,7 +1,7 @@
 [gd_scene load_steps=80 format=3 uid="uid://c1b2kana4a24y"]
 
 [ext_resource type="Script" uid="uid://cyjjsxjwyjxjr" path="res://Scripts/Boss/demon.gd" id="1_xmelb"]
-[ext_resource type="Texture2D" uid="uid://xdxt77s1lnk" path="res://Assets/Sprites/Boss/demon_slime_FREE_v1.0_288x160_spritesheet.png" id="2_xmelb"]
+[ext_resource type="Texture2D" uid="uid://cn70gk1wbxwth" path="res://Assets/Sprites/Boss/demon_slime_FREE_v1.0_288x160_spritesheet.png" id="2_xmelb"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_333gq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v8tix"]

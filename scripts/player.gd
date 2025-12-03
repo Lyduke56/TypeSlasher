@@ -43,7 +43,7 @@ func _ready() -> void:
 
 	# Setup combo timer
 	add_child(combo_timer)
-	combo_timer.wait_time = 3.0
+	combo_timer.wait_time = 2.0
 	combo_timer.one_shot = true
 	combo_timer.timeout.connect(_on_combo_timeout)
 

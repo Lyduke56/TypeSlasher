@@ -213,6 +213,7 @@ var wpm_start_time_seconds: float = 0.0
 var wpm_paused_total_seconds: float = 0.0
 var wpm_pause_started_at_seconds: float = 0.0
 var wpm_correct_characters: int = 0
+var wpm_in_combat: bool = false
 
 func wpm_reset():
 	wpm_session_started = false
@@ -240,6 +241,15 @@ func wpm_on_resume():
 		var now_s = Time.get_ticks_msec() / 1000.0
 		wpm_paused_total_seconds += max(0.0, now_s - wpm_pause_started_at_seconds)
 		wpm_pause_started_at_seconds = 0.0
+
+func set_wpm_combat_state(in_combat: bool):
+	"""Set whether WPM should be actively tracking (only during combat)"""
+	if in_combat != wpm_in_combat:
+		wpm_in_combat = in_combat
+		if in_combat:
+			wpm_on_resume()
+		else:
+			wpm_on_pause()
 
 func wpm_note_correct_characters(num_chars: int = 1):
 	# Record correctly typed characters
