@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=4 uid="uid://0eanmha74ewd"]
+[gd_scene load_steps=132 format=4 uid="uid://0eanmha74ewd"]
 
 [ext_resource type="Script" uid="uid://df11we6uako3s" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/starting_room.gd" id="1_vnah1"]
 [ext_resource type="Script" uid="uid://bxl731qf3lcjw" path="res://Scripts/Area3/Area-3-var1/area_3_var_1.gd" id="1_w117t"]
@@ -9,9 +9,12 @@
 [ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="5_2pyfm"]
 [ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="5_ivgwt"]
 [ext_resource type="Texture2D" uid="uid://bxbciwx4rffsj" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_Autotiles.png" id="5_m0k6q"]
+[ext_resource type="PackedScene" uid="uid://xcriddmqeofd" path="res://Scenes/Enemies/basic_skeleton.tscn" id="6_k1i0l"]
 [ext_resource type="Texture2D" uid="uid://b1nifvoxgl61n" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_DecorationsC.png" id="6_r5yq6"]
 [ext_resource type="Texture2D" uid="uid://04bfptemmdc7" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsA2.png" id="7_jujoh"]
+[ext_resource type="PackedScene" uid="uid://ds85cxxblat1n" path="res://Scenes/Enemies/basic_skeleton_archer.tscn" id="7_lgfkb"]
 [ext_resource type="Texture2D" uid="uid://dcv7vre6w0q8" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsA5.png" id="8_5sxo7"]
+[ext_resource type="PackedScene" uid="uid://c6p584r4mg0sn" path="res://Scenes/Enemies/basic_armored_orc.tscn" id="8_v17g3"]
 [ext_resource type="Texture2D" uid="uid://bkotaa0wf2s22" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsSandA5.png" id="9_u32u0"]
 [ext_resource type="Texture2D" uid="uid://c6aenh02h86va" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FurnitureB.png" id="10_q8yrx"]
 [ext_resource type="Texture2D" uid="uid://c3ytj82ayrhso" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_SandDecorationsC.png" id="11_jga55"]
@@ -45,6 +48,30 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w117t"]
 size = Vector2(298, 331)
+
+[sub_resource type="Resource" id="Resource_qxrpr"]
+script = ExtResource("5_ivgwt")
+enemy_scene = ExtResource("6_k1i0l")
+count = 5
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
+
+[sub_resource type="Resource" id="Resource_2s2o8"]
+script = ExtResource("5_ivgwt")
+enemy_scene = ExtResource("7_lgfkb")
+count = 5
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
+
+[sub_resource type="Resource" id="Resource_s10xh"]
+script = ExtResource("5_ivgwt")
+enemy_scene = ExtResource("8_v17g3")
+count = 5
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hf61p"]
 size = Vector2(509, 549)
@@ -18371,7 +18398,7 @@ z_index = 2
 [node name="RoomA - Medium" type="Node2D" parent="."]
 position = Vector2(866, 0)
 script = ExtResource("35_hf61p")
-enemy_waves = Array[ExtResource("5_ivgwt")]([null, null, null])
+enemy_waves = Array[ExtResource("5_ivgwt")]([SubResource("Resource_qxrpr"), SubResource("Resource_2s2o8"), SubResource("Resource_s10xh")])
 
 [node name="CameraArea" type="Area2D" parent="RoomA - Medium"]
 visibility_layer = 3
@@ -18422,6 +18449,7 @@ position = Vector2(0, 1)
 [node name="RoomB - Medium" type="Node2D" parent="."]
 position = Vector2(0, -866)
 script = ExtResource("35_hf61p")
+enemy_waves = Array[ExtResource("5_ivgwt")]([SubResource("Resource_s10xh"), SubResource("Resource_2s2o8"), SubResource("Resource_qxrpr")])
 
 [node name="CameraArea" type="Area2D" parent="RoomB - Medium"]
 visibility_layer = 3
@@ -18469,6 +18497,7 @@ position = Vector2(0, 1)
 [node name="RoomC - Medium" type="Node2D" parent="."]
 position = Vector2(-867, 0)
 script = ExtResource("35_hf61p")
+enemy_waves = Array[ExtResource("5_ivgwt")]([SubResource("Resource_2s2o8"), SubResource("Resource_s10xh"), SubResource("Resource_qxrpr")])
 
 [node name="CameraArea" type="Area2D" parent="RoomC - Medium"]
 visibility_layer = 3
@@ -18504,6 +18533,7 @@ position = Vector2(0, 1)
 [node name="RoomD - Medium" type="Node2D" parent="."]
 position = Vector2(0, 867)
 script = ExtResource("35_hf61p")
+enemy_waves = Array[ExtResource("5_ivgwt")]([SubResource("Resource_2s2o8"), SubResource("Resource_s10xh"), SubResource("Resource_qxrpr")])
 
 [node name="CameraArea" type="Area2D" parent="RoomD - Medium"]
 visibility_layer = 3
