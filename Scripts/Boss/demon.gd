@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var green: Color = Color("#639765")
 @export var red: Color = Color("#a65455")
 
-@export var boss_health: int = 5  # Boss health, requires 5 hits to defeat
+@export var boss_health: int = 1  # Boss health, requires 5 hits to defeat
 @export var word_category: String = "medium"  # Category for boss words
 @export var targetable_word_category: String = "sentence"  # Category for words during targetable phase after knockback
 @onready var anim = $AnimatedSprite2D
@@ -14,7 +14,7 @@ extends CharacterBody2D
 @onready var heart_container = $"Node2D/HeartContainer"
 
 # Boss health system
-var max_boss_health: int = 5
+var max_boss_health: int = 1
 var death_started: bool = false
 
 # Movement pattern system - Top, Right, Bottom, Left cycle
