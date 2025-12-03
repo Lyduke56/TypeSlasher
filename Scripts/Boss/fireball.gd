@@ -43,6 +43,11 @@ func _ready() -> void:
 	# Connect animation finished signal
 	if anim:
 		anim.animation_finished.connect(_on_animation_finished)
+		anim.play("fireball_idle")
+
+	# Play sound once when spawned
+	if sfx_fireball:
+		sfx_fireball.play()
 
 	# Calculate direction to target
 	if has_target:
@@ -55,8 +60,6 @@ func _ready() -> void:
 	pass  # Word will be set by the game manager via set_prompt()
 
 func _process(delta: float) -> void:
-	anim.play("fireball_idle")
-	$sfx_fireball.play()
 	pass
 
 # --- Set word from spawner ---

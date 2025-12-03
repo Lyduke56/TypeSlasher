@@ -38,14 +38,14 @@
 [ext_resource type="Texture2D" uid="uid://casqns6bsbloo" path="res://Assets/Map Tiles/Tileset/Dungeon/Water_coasts_animation.png" id="24_68fd7"]
 [ext_resource type="Texture2D" uid="uid://dqasttlqfpeuh" path="res://Assets/Map Tiles/Tileset/Dungeon/water_details_animation.png" id="25_fb06g"]
 [ext_resource type="Texture2D" uid="uid://ch0cutbtie3ps" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_coasts_animation.png" id="26_wmkgo"]
-[ext_resource type="Texture2D" uid="uid://7en0wv0bguo3" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_xpgen"]
+[ext_resource type="Texture2D" uid="uid://cgn25u7abs02d" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Tileset.png" id="26_xpgen"]
 [ext_resource type="Texture2D" uid="uid://dhjqbiubpoqe7" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_floor.png" id="27_dlod6"]
-[ext_resource type="Texture2D" uid="uid://1m42j1xpugay" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="27_sdyyt"]
+[ext_resource type="Texture2D" uid="uid://m76nvg8k0s33" path="res://Assets/Map Tiles/Tileset/Dungeon/barrier-Sheet.png" id="27_sdyyt"]
 [ext_resource type="Texture2D" uid="uid://bbfu5byw1ys67" path="res://Assets/Map Tiles/Tileset/Dungeon/decorative_cracks_walls.png" id="28_la64u"]
 [ext_resource type="Texture2D" uid="uid://di2y2k5i0ywqe" path="res://Assets/Map Tiles/Tileset/Dungeon/doors_lever_chest_animation.png" id="29_rusyf"]
 [ext_resource type="Texture2D" uid="uid://cl5lwsc2oy106" path="res://Assets/Map Tiles/Tileset/Dungeon/DungeonDecorations.png" id="30_it7f7"]
-[ext_resource type="Texture2D" uid="uid://bdi5xsyqlu60" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Sprites.png" id="43_07lnw"]
-[ext_resource type="AudioStream" uid="uid://jbi57lnmupae" path="res://Assets/Sfx/Background/BGM - Area 2.ogg" id="44_6yr58"]
+[ext_resource type="Texture2D" uid="uid://dwgqx23vqf7r5" path="res://Assets/Map Tiles/Tileset/Dungeon/Damp Dungeon Sprites.png" id="43_07lnw"]
+[ext_resource type="AudioStream" uid="uid://cw1kh4mq0047p" path="res://Assets/Sfx/Background/BGM - Area 2.ogg" id="44_6yr58"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6vgn"]
 size = Vector2(298, 324)
@@ -14715,7 +14715,7 @@ tile_map_data = PackedByteArray("AAD2/0QAAwABAAIAAAD3/0QAAwABAAIAAAD4/0QAAwABAAI
 tile_set = SubResource("TileSet_t6087")
 
 [node name="Props" type="TileMapLayer" parent="Node"]
-z_index = 10
+z_index = 2
 tile_map_data = PackedByteArray("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")
 tile_set = SubResource("TileSet_t6087")
 
