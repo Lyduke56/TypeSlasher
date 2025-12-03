@@ -15,6 +15,7 @@ var active_enemy = null
 var current_letter_index: int = -1
 var is_processing_completion: bool = false
 var input_buffer: Array[String] = []
+var kill_queue: Array = []  # Queue of enemies waiting to be killed
 
 # Signal for prompt update
 signal prompt_updated(full_text: String, current_index: int)
@@ -258,6 +259,7 @@ func transition_to_room(direction: String):
 		input_buffer.clear()
 		active_enemy = null
 		current_letter_index = -1
+		kill_queue.clear()  # Clear kill queue on room transition
 		Global.set_wpm_combat_state(false)  # Stop WPM during transitions
 		prompt_cleared.emit()
 
@@ -440,15 +442,30 @@ func _complete_word():
 		else:
 			print("Goddess statue already used - not triggering again.")
 	else:
-		# Regular enemy completion - dash to and attack
-		print("Enemy completed! Player dashing to enemy.")
-		player.dash_to_enemy(entity_position, completed_entity)
+		# Regular enemy completion - add to kill queue
+		print("Enemy completed! Adding to kill queue.")
+		kill_queue.append(completed_entity)
+		if kill_queue.size() == 1:  # Start killing if queue was empty
+			_start_next_kill()
 
 	# Reset processing flag after a small delay to ensure actions start
 	#await get_tree().create_timer(0.1).timeout
 	is_processing_completion = false
 	# Clear any inputs that got buffered during completion
 	input_buffer.clear()
+
+func _start_next_kill():
+	"""Start killing the next enemy in the queue"""
+	if kill_queue.is_empty():
+		return
+
+	var enemy = kill_queue[0]
+	if is_instance_valid(enemy):
+		var entity_position = enemy.global_position
+		player.dash_to_enemy(entity_position, enemy)
+	else:
+		kill_queue.pop_front()
+		_start_next_kill()
 
 func _on_enemy_reached(enemy):
 	"""Called when player physically reaches an enemy - now just for slash animation"""
@@ -467,6 +484,10 @@ func _on_player_slash_completed(enemy):
 			enemy.take_damage(player.global_position)
 		elif enemy.has_method("play_death_animation"):
 			enemy.play_death_animation()
+
+	# Remove from queue and start next
+	kill_queue.pop_front()
+	_start_next_kill()
 
 	# Note: Room clearing is already handled in the room scripts via enemy death signals
 
