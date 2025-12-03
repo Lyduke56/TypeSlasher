@@ -11,6 +11,7 @@ extends Node2D
 @onready var prompt = $Word
 @onready var prompt_text = prompt.text
 @onready var area: Area2D = $Area2D
+@onready var sfx_fireball: AudioStreamPlayer2D = $sfx_fireball
 
 # Target tracking
 var target_position: Vector2
@@ -55,6 +56,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	anim.play("fireball_idle")
+	$sfx_fireball.play()
 	pass
 
 # --- Set word from spawner ---

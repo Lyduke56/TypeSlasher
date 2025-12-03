@@ -350,7 +350,6 @@ position = Vector2(-1.23457, -60.4938)
 scale = Vector2(1.435, 1.435)
 sprite_frames = SubResource("SpriteFrames_ly8ii")
 animation = &"tentaclussy_targettable"
-frame_progress = 0.352497
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3
@@ -375,3 +374,11 @@ offset_right = 189.633
 offset_bottom = -202.278
 alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="sfx_attack" type="AudioStreamPlayer2D" parent="."]
+
+[node name="sfx_hit" type="AudioStreamPlayer2D" parent="."]
+
+[node name="sfx_targettable" type="AudioStreamPlayer2D" parent="."]
+
+[node name="sfx_death" type="AudioStreamPlayer2D" parent="."]

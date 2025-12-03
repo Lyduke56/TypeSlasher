@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://c6p584r4mg0sn"]
+[gd_scene load_steps=71 format=3 uid="uid://c6p584r4mg0sn"]
 
 [ext_resource type="Texture2D" uid="uid://5eb4qqf5bixe" path="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Orc/Armored Orc/Armored Orc-Idle.png" id="1_kfuax"]
 [ext_resource type="Script" uid="uid://ck0q6xi8gt3a8" path="res://Scripts/Enemies/basic_armored_orc.gd" id="1_uoeue"]
@@ -9,7 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://cqjiyr6ojx51t" path="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Orc/Armored Orc/Armored Orc-Walk.png" id="6_cu5h5"]
 [ext_resource type="Texture2D" uid="uid://vmbxefchquja" path="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Orc/Armored Orc/Armored Orc-Death.png" id="7_6sov1"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="8_hxqbx"]
-[ext_resource type="Texture2D" uid="uid://dpi8ru4kyjtmv" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="9_ugmw8"]
+[ext_resource type="Texture2D" uid="uid://cuob3s2do8d1n" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="9_ugmw8"]
+[ext_resource type="AudioStream" uid="uid://ckscyurxtu2qo" path="res://Assets/Sfx/Enemies/Generic/generic_death1.wav" id="11_cu5h5"]
+[ext_resource type="AudioStream" uid="uid://dh1hbuaa7v2wl" path="res://Assets/Sfx/Enemies/Generic/generic_hit1.wav" id="12_6sov1"]
+[ext_resource type="AudioStream" uid="uid://soven722fehd" path="res://Assets/Sfx/Enemies/Generic/generic_attack4.wav" id="13_hxqbx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vanjw"]
 atlas = ExtResource("2_uoeue")
@@ -475,3 +478,12 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(2, -7)
 shape = SubResource("CircleShape2D_2ey31")
+
+[node name="sfx_death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_cu5h5")
+
+[node name="sfx_damaged" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_6sov1")
+
+[node name="sfx_attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_hxqbx")

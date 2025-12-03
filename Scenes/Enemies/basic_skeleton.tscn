@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://djaif4ofcg86t" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton.png" id="1_j7i8a"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_inopb"]
 [ext_resource type="Texture2D" uid="uid://bpm2vg434y8at" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton/Skeleton/Skeleton-Hurt.png" id="3_srawy"]
-[ext_resource type="Texture2D" uid="uid://dpi8ru4kyjtmv" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="4_jjerx"]
-[ext_resource type="AudioStream" uid="uid://b7tced0d7xeth" path="res://Assets/Sfx/Enemies/Generic/hurt-2.wav" id="5_ut5wb"]
-[ext_resource type="AudioStream" uid="uid://bvee8m43jklnu" path="res://Assets/Sfx/Enemies/Skeleton/skeleton-death-1.wav" id="6_jjerx"]
-[ext_resource type="AudioStream" uid="uid://b2hdqropiko32" path="res://Assets/Sfx/Enemies/Skeleton/skeleton-attack-1.wav" id="7_7dwoc"]
+[ext_resource type="Texture2D" uid="uid://cuob3s2do8d1n" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="4_jjerx"]
+[ext_resource type="AudioStream" uid="uid://dxhli4rfbkrup" path="res://Assets/Sfx/Enemies/Generic/generic_hit2.wav" id="6_7dwoc"]
+[ext_resource type="AudioStream" uid="uid://d01ftv24gjyva" path="res://Assets/Sfx/Enemies/Skeleton/skeleton-death-1.wav" id="6_jjerx"]
+[ext_resource type="AudioStream" uid="uid://oo4ekndcdsqg" path="res://Assets/Sfx/Enemies/Generic/generic_attack1.wav" id="8_2hrqe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wgvsg"]
 atlas = ExtResource("1_j7i8a")
@@ -423,7 +423,7 @@ position = Vector2(2, -7)
 shape = SubResource("CircleShape2D_2ey31")
 
 [node name="sfx_damaged" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_ut5wb")
+stream = ExtResource("6_7dwoc")
 bus = &"SFx"
 
 [node name="sfx_death" type="AudioStreamPlayer2D" parent="."]
@@ -431,5 +431,5 @@ stream = ExtResource("6_jjerx")
 bus = &"SFx"
 
 [node name="sfx_attack" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_7dwoc")
+stream = ExtResource("8_2hrqe")
 bus = &"SFx"

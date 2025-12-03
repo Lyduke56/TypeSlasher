@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwm5g2r1af5fo"]
+[gd_scene load_steps=12 format=3 uid="uid://dwm5g2r1af5fo"]
 
 [ext_resource type="Script" uid="uid://bxmvhi4epx1oq" path="res://Scripts/Boss/fireball.gd" id="1_okd1d"]
-[ext_resource type="Texture2D" uid="uid://c1kd2hjqvayif" path="res://Assets/Sprites/Boss/FB000-ezgif.com-gif-to-sprite-converter.png" id="2_okd1d"]
+[ext_resource type="Texture2D" uid="uid://nbb4mcaljlfb" path="res://Assets/Sprites/Boss/FB000-ezgif.com-gif-to-sprite-converter.png" id="2_okd1d"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_shnke"]
+[ext_resource type="AudioStream" uid="uid://pdmbc1cf76iq" path="res://Assets/Sfx/Enemies/Tentaclussy/tentaclussy_fireball.wav" id="4_64c46"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_64c46"]
 atlas = ExtResource("2_okd1d")
@@ -86,3 +87,6 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(5.80083, -23.2573)
 shape = SubResource("CircleShape2D_ek4i2")
+
+[node name="sfx_fireball" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_64c46")

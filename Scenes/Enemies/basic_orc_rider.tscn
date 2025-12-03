@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://57dqiigp4jmr" path="res://Scripts/Enemies/basic_orc_rider.gd" id="1_85cng"]
 [ext_resource type="Texture2D" uid="uid://dpm2lg7oeu3fj" path="res://Assets/Sprites/Enemies/Characters(100x100)/Orc rider/Orc rider/Orc rider.png" id="1_hcct1"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_85cng"]
-[ext_resource type="AudioStream" uid="uid://cd65fmxf26fcl" path="res://Assets/Sfx/Enemies/Orc/orc_damaged.wav" id="4_mpxxs"]
-[ext_resource type="AudioStream" uid="uid://5eklwkhjsxml" path="res://Assets/Sfx/Enemies/Generic/hurt-2.wav" id="5_xlmg7"]
-[ext_resource type="AudioStream" uid="uid://b33mrxcl5qhfx" path="res://Assets/Sfx/Enemies/Orc/orc_attack.wav" id="6_n0b64"]
+[ext_resource type="AudioStream" uid="uid://bwo47b5jdt27r" path="res://Assets/Sfx/Enemies/Generic/generic_hit3.wav" id="4_mpxxs"]
+[ext_resource type="AudioStream" uid="uid://byy6ego8yqqtr" path="res://Assets/Sfx/Enemies/Generic/generic_death.wav" id="5_n0b64"]
+[ext_resource type="AudioStream" uid="uid://soven722fehd" path="res://Assets/Sfx/Enemies/Generic/generic_attack4.wav" id="6_n0b64"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wop4o"]
 atlas = ExtResource("1_hcct1")
@@ -391,7 +391,7 @@ stream = ExtResource("4_mpxxs")
 bus = &"SFx"
 
 [node name="sfx_death" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_xlmg7")
+stream = ExtResource("5_n0b64")
 bus = &"SFx"
 
 [node name="sfx_attack" type="AudioStreamPlayer2D" parent="."]
