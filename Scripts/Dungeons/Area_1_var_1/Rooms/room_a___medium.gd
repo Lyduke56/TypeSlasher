@@ -96,11 +96,13 @@ func start_room():
 		is_ready_to_clear = true
 		return
 
+	Global.set_wpm_combat_state(true)  # Start WPM tracking for combat rooms
 	# Spawn enemies and target
 	_spawn_room_enemies()
 
 func clear_room():
 	is_cleared = true
+	Global.set_wpm_combat_state(false)  # Stop WPM tracking when room clears
 	barrier_on.visible = false
 	barrier_off.visible = true
 

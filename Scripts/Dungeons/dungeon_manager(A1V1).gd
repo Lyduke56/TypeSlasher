@@ -254,6 +254,7 @@ func transition_to_room(direction: String):
 		input_buffer.clear()
 		active_enemy = null
 		current_letter_index = -1
+		Global.set_wpm_combat_state(false)  # Stop WPM during transitions
 		prompt_cleared.emit()  # Clear prompt on room transition
 
 			# Switch to new room (no camera management needed - handled by room start)
