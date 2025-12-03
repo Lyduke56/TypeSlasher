@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://diiun1snohy83" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer/Skeleton Archer.png" id="1_xq2fd"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_kvtgg"]
 [ext_resource type="Texture2D" uid="uid://7h65yprg7ef2" path="res://Assets/Sprites/Enemies/Characters(100x100)/Skeleton Archer/Skeleton Archer/Skeleton Archer-Hurt.png" id="3_cpbnd"]
-[ext_resource type="AudioStream" uid="uid://bfh46hbncf74y" path="res://Assets/Sfx/Enemies/Skeleton/Bow Attack 2.wav" id="5_vsl7u"]
-[ext_resource type="AudioStream" uid="uid://c8wrfg15bxulb" path="res://Assets/Sfx/Enemies/Skeleton/skeleton-death-1.wav" id="6_km8pw"]
-[ext_resource type="AudioStream" uid="uid://b77ebws08gtvu" path="res://Assets/Sfx/Enemies/Generic/generic_hit2.wav" id="7_km8pw"]
+[ext_resource type="AudioStream" uid="uid://2r5b6f5iv0hv" path="res://Assets/Sfx/Enemies/Skeleton/Bow Attack 2.wav" id="5_vsl7u"]
+[ext_resource type="AudioStream" uid="uid://d01ftv24gjyva" path="res://Assets/Sfx/Enemies/Skeleton/skeleton-death-1.wav" id="6_km8pw"]
+[ext_resource type="AudioStream" uid="uid://dxhli4rfbkrup" path="res://Assets/Sfx/Enemies/Generic/generic_hit2.wav" id="7_km8pw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2xdt"]
 atlas = ExtResource("1_xq2fd")

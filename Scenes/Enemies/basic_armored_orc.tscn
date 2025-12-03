@@ -9,10 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://cqjiyr6ojx51t" path="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Orc/Armored Orc/Armored Orc-Walk.png" id="6_cu5h5"]
 [ext_resource type="Texture2D" uid="uid://vmbxefchquja" path="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Orc/Armored Orc/Armored Orc-Death.png" id="7_6sov1"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="8_hxqbx"]
-[ext_resource type="Texture2D" uid="uid://bfkwhf7k1cins" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="9_ugmw8"]
-[ext_resource type="AudioStream" uid="uid://2grpggw5vybc" path="res://Assets/Sfx/Enemies/Generic/generic_death1.wav" id="11_cu5h5"]
-[ext_resource type="AudioStream" uid="uid://b6v8quk7j8kea" path="res://Assets/Sfx/Enemies/Generic/generic_hit1.wav" id="12_6sov1"]
-[ext_resource type="AudioStream" uid="uid://dag4b621vc601" path="res://Assets/Sfx/Enemies/Generic/generic_attack4.wav" id="13_hxqbx"]
+[ext_resource type="Texture2D" uid="uid://cuob3s2do8d1n" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="9_ugmw8"]
+[ext_resource type="AudioStream" uid="uid://ckscyurxtu2qo" path="res://Assets/Sfx/Enemies/Generic/generic_death1.wav" id="11_cu5h5"]
+[ext_resource type="AudioStream" uid="uid://dh1hbuaa7v2wl" path="res://Assets/Sfx/Enemies/Generic/generic_hit1.wav" id="12_6sov1"]
+[ext_resource type="AudioStream" uid="uid://soven722fehd" path="res://Assets/Sfx/Enemies/Generic/generic_attack4.wav" id="13_hxqbx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vanjw"]
 atlas = ExtResource("2_uoeue")
@@ -449,7 +449,6 @@ radius = 7.0
 [node name="Armored Orc" type="Node2D"]
 z_index = 4
 script = ExtResource("1_uoeue")
-points_for_kill = 150
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)

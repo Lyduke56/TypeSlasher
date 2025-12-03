@@ -565,7 +565,6 @@ word_category = "demon"
 targetable_word_category = "demon"
 move_speed = 180.0
 max_fireballs = 2
-points_for_kill = 1000
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-7, -60)

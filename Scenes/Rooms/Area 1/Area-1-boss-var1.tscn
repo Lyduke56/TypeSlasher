@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=4 uid="uid://fttmx3fict8g"]
+[gd_scene load_steps=120 format=4 uid="uid://fttmx3fict8g"]
 
 [ext_resource type="Script" uid="uid://dyivjxekdqaap" path="res://Scripts/Dungeons/Area_1_boss_var1/area_1_boss_var_1.gd" id="1_arqlh"]
 [ext_resource type="Script" uid="uid://dcxejv140b6cc" path="res://Scripts/Dungeons/Area_1_boss_var1/dungeon_manager(A1B1).gd" id="1_p6v1s"]
@@ -7,20 +7,14 @@
 [ext_resource type="Script" uid="uid://gi3ma2tv7svj" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_a___medium.gd" id="3_yxq16"]
 [ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="4_wq55k"]
 [ext_resource type="Script" uid="uid://cdrdygid30spt" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_c___medium.gd" id="5_gxbce"]
-[ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="6_1rn4k"]
 [ext_resource type="Script" uid="uid://chwam0507js3n" path="res://Scripts/Dungeons/Area_1_boss_var1/Rooms/boss_room.gd" id="6_yibwt"]
-[ext_resource type="PackedScene" uid="uid://ivgoec3n72vd" path="res://Scenes/Enemies/Orc_enemy.tscn" id="7_3rwao"]
 [ext_resource type="PackedScene" uid="uid://1autrsiutlos" path="res://Scenes/RoomSpawns/boss_room_spawn.tscn" id="7_vsrqs"]
-[ext_resource type="PackedScene" uid="uid://bil2sj0ots4r2" path="res://Scenes/Enemies/basic_wolf.tscn" id="8_ka6ql"]
 [ext_resource type="Script" uid="uid://dupdl2bqtnva" path="res://Scripts/Dungeons/Area_1_boss_var1/Rooms/healing_room.gd" id="8_p6v1s"]
-[ext_resource type="PackedScene" uid="uid://xcriddmqeofd" path="res://Scenes/Enemies/basic_skeleton.tscn" id="9_4axy7"]
 [ext_resource type="Texture2D" uid="uid://c4j2xwdkbprr8" path="res://Assets/Map Tiles/Tileset/Dungeon/decor.png" id="9_arqlh"]
 [ext_resource type="Texture2D" uid="uid://dn3va4s46jmer" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon tileset.png" id="10_oaawp"]
 [ext_resource type="Texture2D" uid="uid://c1sbut0jvh4cy" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_24x24.png" id="11_1rn4k"]
 [ext_resource type="Texture2D" uid="uid://bxbciwx4rffsj" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_Autotiles.png" id="12_3rwao"]
-[ext_resource type="PackedScene" uid="uid://bollxssfl4hqv" path="res://Scenes/Boss/Minotaur.tscn" id="13_iwlyy"]
 [ext_resource type="Texture2D" uid="uid://b1nifvoxgl61n" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_DecorationsC.png" id="13_ka6ql"]
-[ext_resource type="PackedScene" uid="uid://ds85cxxblat1n" path="res://Scenes/Enemies/basic_skeleton_archer.tscn" id="14_04awi"]
 [ext_resource type="Texture2D" uid="uid://04bfptemmdc7" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsA2.png" id="14_4axy7"]
 [ext_resource type="Texture2D" uid="uid://dcv7vre6w0q8" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsA5.png" id="15_iwlyy"]
 [ext_resource type="Texture2D" uid="uid://bkotaa0wf2s22" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsSandA5.png" id="16_04awi"]
@@ -51,171 +45,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iwlyy"]
 size = Vector2(313, 342)
 
-[sub_resource type="Resource" id="Resource_ikjq3"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("7_3rwao")
-count = 4
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_c475x"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("8_ka6ql")
-count = 4
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_sfwb4"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("9_4axy7")
-count = 4
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_04awi"]
 size = Vector2(507, 534)
 
-[sub_resource type="Resource" id="Resource_a0roq"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("9_4axy7")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_mxjw2"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("8_ka6ql")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_pxnwk"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("7_3rwao")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_a5s17"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("7_3rwao")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_0r4pl"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("8_ka6ql")
-count = 4
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_572ul"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("9_4axy7")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c475x"]
 size = Vector2(505, 527)
-
-[sub_resource type="Resource" id="Resource_mm64k"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("9_4axy7")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_p25ge"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("7_3rwao")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_dq5xp"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("8_ka6ql")
-count = 4
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_i0uh4"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("8_ka6ql")
-count = 4
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_ps0th"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("7_3rwao")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_8lh7s"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("9_4axy7")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_7w7vi"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("9_4axy7")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_4ffnx"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("7_3rwao")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_t3yp0"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("13_iwlyy")
-count = 1
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_2cec2"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("14_04awi")
-count = 4
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_yvyjx"]
-script = ExtResource("6_1rn4k")
-enemy_scene = ExtResource("8_ka6ql")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qaakt"]
 size = Vector2(793, 827)
@@ -14506,7 +14340,6 @@ z_index = 2
 [node name="RoomA - Medium" type="Node2D" parent="."]
 position = Vector2(862, -21)
 script = ExtResource("3_yxq16")
-enemy_waves = Array[ExtResource("6_1rn4k")]([SubResource("Resource_ikjq3"), SubResource("Resource_c475x"), SubResource("Resource_sfwb4")])
 
 [node name="CameraArea" type="Area2D" parent="RoomA - Medium"]
 visibility_layer = 3
@@ -14545,7 +14378,6 @@ position = Vector2(1, 2)
 [node name="RoomB - Medium" type="Node2D" parent="."]
 position = Vector2(2, -882)
 script = ExtResource("3_yxq16")
-enemy_waves = Array[ExtResource("6_1rn4k")]([SubResource("Resource_a0roq"), SubResource("Resource_mxjw2"), SubResource("Resource_pxnwk")])
 
 [node name="CameraArea" type="Area2D" parent="RoomB - Medium"]
 visibility_layer = 3
@@ -14589,7 +14421,6 @@ z_index = 2
 [node name="RoomC - Medium" type="Node2D" parent="."]
 position = Vector2(-868, -19)
 script = ExtResource("3_yxq16")
-enemy_waves = Array[ExtResource("6_1rn4k")]([SubResource("Resource_a5s17"), SubResource("Resource_0r4pl"), SubResource("Resource_572ul")])
 
 [node name="CameraArea" type="Area2D" parent="RoomC - Medium"]
 visibility_layer = 3
@@ -14625,7 +14456,6 @@ position = Vector2(4, 3)
 [node name="RoomD - Medium" type="Node2D" parent="."]
 position = Vector2(864, -888)
 script = ExtResource("3_yxq16")
-enemy_waves = Array[ExtResource("6_1rn4k")]([SubResource("Resource_mm64k"), SubResource("Resource_p25ge"), SubResource("Resource_dq5xp")])
 
 [node name="CameraArea" type="Area2D" parent="RoomD - Medium"]
 visibility_layer = 3
@@ -14664,7 +14494,6 @@ position = Vector2(0, 7)
 [node name="RoomE - Medium" type="Node2D" parent="."]
 position = Vector2(-866, -886)
 script = ExtResource("5_gxbce")
-enemy_waves = Array[ExtResource("6_1rn4k")]([SubResource("Resource_i0uh4"), SubResource("Resource_ps0th"), SubResource("Resource_8lh7s")])
 
 [node name="CameraArea" type="Area2D" parent="RoomE - Medium"]
 visibility_layer = 3
@@ -14701,7 +14530,6 @@ position = Vector2(2, 6)
 z_index = 2
 position = Vector2(0, -1983)
 script = ExtResource("6_yibwt")
-enemy_waves = Array[ExtResource("6_1rn4k")]([SubResource("Resource_7w7vi"), SubResource("Resource_4ffnx"), SubResource("Resource_t3yp0"), SubResource("Resource_2cec2"), SubResource("Resource_yvyjx")])
 
 [node name="CameraArea" type="Area2D" parent="BossRoom"]
 
