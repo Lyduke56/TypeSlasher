@@ -1,10 +1,13 @@
-[gd_scene load_steps=88 format=3 uid="uid://bof6xf0r1y3ka"]
+[gd_scene load_steps=91 format=3 uid="uid://bof6xf0r1y3ka"]
 
-[ext_resource type="Script" path="res://Scripts/Boss/NightBorne.gd" id="1_edkgq"]
+[ext_resource type="Script" uid="uid://drk1sc3c6d4go" path="res://Scripts/Boss/NightBorne.gd" id="1_edkgq"]
 [ext_resource type="Texture2D" uid="uid://ds5agk8vx635l" path="res://Assets/Sprites/Enemies/Characters(100x100)/Sword/NightBorne.png" id="2_efolf"]
 [ext_resource type="Texture2D" uid="uid://bfkwhf7k1cins" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="3_efolf"]
 [ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://Assets/Themes/Outline.tres" id="3_pcpn2"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="4_1afxa"]
+[ext_resource type="AudioStream" uid="uid://bjc3lpheomoth" path="res://Assets/Sfx/Enemies/Nightborne/nightborne_attack1.wav" id="6_dxgry"]
+[ext_resource type="AudioStream" uid="uid://b77ebws08gtvu" path="res://Assets/Sfx/Enemies/Generic/generic_hit2.wav" id="7_uj0a6"]
+[ext_resource type="AudioStream" uid="uid://2grpggw5vybc" path="res://Assets/Sfx/Enemies/Generic/generic_death1.wav" id="8_56lk6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dxgry"]
 atlas = ExtResource("2_efolf")
@@ -618,6 +621,7 @@ speed = 15.0
 position = Vector2(-2, -22)
 sprite_frames = SubResource("SpriteFrames_c1uly")
 animation = &"idle "
+frame_progress = 0.126829
 
 [node name="FreezeVines" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -650,3 +654,12 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_v8qg3")
+
+[node name="sfx_attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_dxgry")
+
+[node name="sfx_damaged" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_uj0a6")
+
+[node name="sfx_death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_56lk6")

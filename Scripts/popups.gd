@@ -1,6 +1,9 @@
 extends Control
 
-func ItemPopup(slot: Rect2i, item):
+func ItemPopup(slot: Rect2i, item_data: BuffData):
+
+	%ItemPopup/VBoxContainer/Label.text = item_data.buff_name
+	%ItemPopup/VBoxContainer/Label2.text = item_data.description
 
 	var mouse_pos = get_viewport().get_mouse_position()
 	var correction

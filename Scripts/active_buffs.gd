@@ -1,159 +1,74 @@
 extends Control
 
-# Main active buffs scene controller - manages visibility of BuffSlot children
-var buff_slots: Array = []
+# --- Drag and drop your .tres files here in the Inspector ---
+@export var shield_data: BuffData
+@export var sword_data: BuffData
+@export var freeze_data: BuffData
+@export var health_data: BuffData
 
-
+# --- References ---
+@onready var buff_container = $NinePatchRect/BuffContainer
 
 func _ready():
-	print("ActiveBuffs: _ready() called")
+	# Wait for Global to be ready, just in case
+
+
+
+
+
 	await get_tree().process_frame
-	setup_buff_slot_references()
-	update_buff_visibility()
 
-func setup_buff_slot_references():
-	"""Get references to all BuffSlot children in order (right to left)"""
-	print("ActiveBuffs: Setting up buff slot references")
-	buff_slots = []
-	var buff_container = get_node_or_null("NinePatchRect/BuffContainer")
-
-	print("ActiveBuffs: Buff container found: ", buff_container != null)
-
-	if buff_container:
-		buff_slots = buff_container.get_children()
-		buff_slots.reverse()  # Reverse so buff_slots[0] is the right-most slot
-
-	print("ActiveBuffs: Found ", buff_slots.size(), " buff slots")
-
-func update_buff_visibility():
-	"""Update visibility of buff slots based on active buffs from global.gd"""
-	print("ActiveBuffs: Updating buff visibility")
-
-	# Check Global availability
-	print("ActiveBuffs: Global exists: ", Global != null)
 	if Global:
-		print("ActiveBuffs: Shield stacks: ", Global.shield_buff_stacks)
-		print("ActiveBuffs: Sword stacks: ", Global.sword_buff_stacks)
-		print("ActiveBuffs: Freeze stacks: ", Global.freeze_buff_stacks)
-		print("ActiveBuffs: Max health: ", Global.player_max_health)
+		# Connect to your existing signal
+		Global.buff_stacks_changed.connect(update_active_buffs)
 
-	var active_buffs = get_active_buffs()
-	print("ActiveBuffs: Active buffs: ", active_buffs.size())
+	# Initial draw
+	update_active_buffs()
 
-	# Hide all slots initially
-	for slot in buff_slots:
-		if slot:
-			slot.visible = false
-
-	# Show slots for active buffs (right to left)
-	for i in range(min(active_buffs.size(), buff_slots.size())):
-		var slot = buff_slots[i]
-		var buff_info = active_buffs[i]
-		if slot:
-			slot.visible = true
-			print("ActiveBuffs: Setting slot ", i, " visible with stacks: ", buff_info.stacks)
-			update_buff_slot_content(slot, buff_info.stacks, buff_info.icon)
-		else:
-			print("ActiveBuffs: Slot ", i, " is null!")
-
-	# Hide entire scene if no buffs are active
-	var any_buff_visible = false
-	for slot in buff_slots:
-		if slot and slot.visible:
-			any_buff_visible = true
-			break
-
-	visible = any_buff_visible
-	print("ActiveBuffs: Scene visible: ", visible)
-
-func get_active_buffs() -> Array:
-	"""Get list of active buffs from global.gd"""
-	var active_buffs = []
-
-	# Health buff - show if max health > 3 (since 3 is default)
-	var health_stacks = max(0, Global.player_max_health - 3)
-	if health_stacks > 0:
-		active_buffs.append({
-			"stacks": health_stacks,
-			"icon": preload("res://Assets/Sprites/GUI/Buff_HealthPotion.png")
-		})
-
-	# Shield buff
-	if Global.shield_buff_stacks > 0:
-		active_buffs.append({
-			"stacks": Global.shield_buff_stacks,
-			"icon": preload("res://Assets/Sprites/GUI/Buff_Shield.png")
-		})
-
-	# Sword buff
-	if Global.sword_buff_stacks > 0:
-		active_buffs.append({
-			"stacks": Global.sword_buff_stacks,
-			"icon": preload("res://Assets/Sprites/GUI/Buff_sword.png")
-		})
-
-	# Freeze/Vine buff
-	if Global.freeze_buff_stacks > 0:
-		active_buffs.append({
-			"stacks": Global.freeze_buff_stacks,
-			"icon": preload("res://Assets/Sprites/GUI/Buff_Vines.png")
-		})
-
-	return active_buffs
-
-func update_buff_slot_content(slot: Control, stacks: int, icon: Texture2D):
-	"""Update the content of a buff slot (icon and stack count)"""
-	if not slot:
+func update_active_buffs():
+	if not buff_container:
 		return
 
-	print("ActiveBuffs: Updating slot content, stacks: ", stacks)
-	print("ActiveBuffs: Icon texture exists: ", icon != null)
+	# 1. Get all slots and hide them initially
+	var slots = buff_container.get_children()
+	for slot in slots:
+		slot.visible = false
 
-	# Update ICON texture (Z index 2 in ActiveBuffSlot) - this is the key fix!
-	var icon_node = slot.get_node_or_null("ICON")
-	print("ActiveBuffs: ICON node found: ", icon_node != null)
+	# 2. Reverse the array so we fill from Right-to-Left (preserving your original style)
+	slots.reverse()
 
-	if icon_node and icon_node is TextureRect:
-		icon_node.texture = icon
-		print("ActiveBuffs: Set icon texture")
-	else:
-		print("ActiveBuffs: ICON node is not a TextureRect or not found")
+	# 3. Create a list of what NEEDS to be shown based on Global
+	# We store [BuffData, Amount] pairs
+	var buffs_to_show: Array = []
 
-	# Update stack count - look for Label
-	var stack_label = slot.get_node_or_null("StackLabel")
-	if not stack_label:
-		stack_label = slot.get_node_or_null("Stack Counter")
-		if not stack_label:
-			# Create stack label if it doesn't exist
-			stack_label = Label.new()
-			stack_label.name = "StackLabel"
-			slot.add_child(stack_label)
-			print("ActiveBuffs: Created new StackLabel")
+	# Logic adapted from your original script:
 
-	if stack_label and stack_label is Label:
-		stack_label.text = str(stacks)
-		print("ActiveBuffs: Set stack text to: ", str(stacks))
-	else:
-		print("ActiveBuffs: Stack label not found or not a Label!")
+	# Health (Only if > 3)
+	var health_stacks = max(0, Global.player_max_health - 3)
+	if health_stacks > 0:
+		buffs_to_show.append([health_data, health_stacks])
 
-# Called when the scene becomes active
-func _enter_tree():
-	print("ActiveBuffs: _enter_tree called")
-	if Global and Global.has_signal("buff_stacks_changed"):
-		print("ActiveBuffs: Connecting to buff_stacks_changed signal")
-		Global.buff_stacks_changed.connect(_on_globals_buff_stacks_changed)
+	# Shield
+	if Global.shield_buff_stacks > 0:
+		buffs_to_show.append([shield_data, Global.shield_buff_stacks])
 
-func _exit_tree():
-	if Global and Global.has_signal("buff_stacks_changed"):
-		Global.buff_stacks_changed.disconnect(_on_globals_buff_stacks_changed)
+	# Sword
+	if Global.sword_buff_stacks > 0:
+		buffs_to_show.append([sword_data, Global.sword_buff_stacks])
 
-func _on_globals_buff_stacks_changed():
-	"""Called when buff stacks change in global"""
-	print("ActiveBuffs: Global buff stacks changed - refreshing visibility")
-	update_buff_visibility()
+	# Freeze
+	if Global.freeze_buff_stacks > 0:
+		buffs_to_show.append([freeze_data, Global.freeze_buff_stacks])
 
-# Manual refresh method (can be called externally)
-func refresh():
-	"""Manually refresh the buff display"""
-	print("ActiveBuffs: Manual refresh called")
-	update_buff_visibility()
+	# 4. Assign data to slots
+	# We loop through the buffs we need to show and assign them to available slots
+	for i in range(min(buffs_to_show.size(), slots.size())):
+		var slot = slots[i]
+		var data = buffs_to_show[i][0] # The .tres resource
+		var amount = buffs_to_show[i][1] # The stack count
+
+		# Call the function on the SLOT script to handle the visuals
+		slot.setup_slot(data, amount)
+
+	# 5. Visibility check for the whole container
+	visible = buffs_to_show.size() > 0

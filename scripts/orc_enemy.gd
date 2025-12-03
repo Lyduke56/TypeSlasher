@@ -25,7 +25,7 @@ var hack_timer: Timer
 # Reference to target node for taking damage
 var target_node: Node2D
 
-var points_for_kill = 100
+var points_for_kill = 75
 
 func _ready() -> void:
 	# Connect collision signal

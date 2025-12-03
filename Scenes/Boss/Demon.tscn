@@ -565,13 +565,14 @@ word_category = "demon"
 targetable_word_category = "demon"
 move_speed = 180.0
 max_fireballs = 2
+points_for_kill = 1000
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-7, -60)
 scale = Vector2(0.755, 0.755)
 sprite_frames = SubResource("SpriteFrames_ly8ii")
-animation = &"demon_targettable"
-frame_progress = 0.926375
+animation = &"demon_run"
+frame_progress = 0.477685
 
 [node name="Word" type="RichTextLabel" parent="."]
 z_index = 3
@@ -596,3 +597,11 @@ offset_right = 175.938
 offset_bottom = -94.6288
 alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="sfx_death" type="AudioStreamPlayer2D" parent="."]
+
+[node name="sfx_damaged" type="AudioStreamPlayer2D" parent="."]
+
+[node name="sfx_attack" type="AudioStreamPlayer2D" parent="."]
+
+[node name="sfx_fireball" type="AudioStreamPlayer2D" parent="."]

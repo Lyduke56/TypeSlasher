@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BuffData" load_steps=3 format=3 uid="uid://bs60s37la4ar1"]
+
+[ext_resource type="Texture2D" uid="uid://d4c1j65kvqffj" path="res://Assets/Sprites/GUI/Buff_Vines.png" id="1_7wons"]
+[ext_resource type="Script" uid="uid://bvruukh375m8k" path="res://Scripts/buff_data.gd" id="1_auhiy"]
+
+[resource]
+script = ExtResource("1_auhiy")
+buff_name = "Cryo Field"
+description = "Periodically pauses a random enemy. Stacks increase frequency."
+icon = ExtResource("1_7wons")
+type = 2
+metadata/_custom_type_script = "uid://bvruukh375m8k"

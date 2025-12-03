@@ -10,6 +10,9 @@ extends Node2D
 @onready var prompt = $Word
 var prompt_text: String = ""
 @onready var area: Area2D = $Area2D
+@onready var sfx_attack: AudioStreamPlayer2D = $sfx_attack
+@onready var sfx_damaged: AudioStreamPlayer2D = $sfx_damaged
+@onready var sfx_death: AudioStreamPlayer2D = $sfx_death
 
 # Target tracking
 var target_position: Vector2
@@ -24,7 +27,7 @@ var hack_timer: Timer
 # Reference to target node for taking damage
 var target_node: Node2D
 
-var points_for_kill = 100
+var points_for_kill = 50
 
 func _ready() -> void:
 	# Connect collision signal
@@ -129,7 +132,7 @@ func play_death_animation():
 	# Connect the signal and play damage animation first
 	anim.animation_finished.connect(_on_damage_animation_finished, CONNECT_ONE_SHOT)
 	anim.play("damaged")
-
+	$sfx_damaged.play()
 	print("Enemy damage animation started")
 
 func _on_damage_animation_finished():
@@ -142,7 +145,7 @@ func _on_damage_animation_finished():
 		# Connect the signal and play death animation
 		anim.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
 		anim.play("death")
-
+		$sfx_damaged.play()
 		print("Enemy death animation started")
 
 func _on_death_animation_finished():
@@ -181,6 +184,7 @@ func _on_hack_timer_timeout():
 		# Temporarily disable looping for hack animation so it plays once
 		anim.sprite_frames.set_animation_loop("Hack", false)
 		anim.play("Hack")
+		$sfx_attack.play()
 		print("Enemy hacking the target!")
 
 func _on_animation_finished():
