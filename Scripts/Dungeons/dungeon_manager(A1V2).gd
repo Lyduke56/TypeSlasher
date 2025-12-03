@@ -337,6 +337,10 @@ func find_new_active_enemy(typed_character: String):
 	if is_processing_completion:
 		return
 
+	# Don't start new enemy while player is dashing or attacking
+	if player.is_dashing or player.is_attacking:
+		return
+
 	# Check the current room's enemy container for targetable enemies
 	if current_room and current_room.has_node("EnemyContainer"):
 		var enemy_container = current_room.get_node("EnemyContainer")
