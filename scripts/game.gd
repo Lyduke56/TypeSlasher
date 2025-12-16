@@ -1,6 +1,4 @@
 extends Node2D
-
-
 @onready var buff_container = $BuffContainer
 @onready var enemy_container = $EnemyContainer
 @onready var target_container = $TargetContainer
@@ -87,23 +85,6 @@ func _ready() -> void:
 	# Connect player signal to handle enemy destruction
 	player.enemy_reached.connect(_on_enemy_reached)
 	player.slash_completed.connect(_on_player_slash_completed)
-	apply_ng_plus_scaling()
-
-func apply_ng_plus_scaling():
-	var cycle = DungeonProgress.ng_plus_cycle
-
-	if cycle > 0:
-		print("Applying NG+ Scaling: Level ", cycle)
-
-		max_enemies = 5 + (cycle * 2)
-
-		var new_wait_time = 3.0 * (pow(0.85, cycle))
-		spawn_timer.wait_time = max(0.5, new_wait_time)
-
-		if current_category == "easy" or current_category == "medium":
-			current_category = "hard"
-
-		spawn_radius = 600.0 + (cycle * 50.0)
 
 func _process(_delta):
 	# Process input buffer one character per frame for high WPM handling
