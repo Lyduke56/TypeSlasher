@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://gi3ma2tv7svj" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_a___medium.gd" id="4_15lsb"]
 [ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="5_wswjs"]
 [ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="6_5df77"]
-[ext_resource type="PackedScene" uid="uid://xcriddmqeofd" path="res://Scenes/Enemies/basic_skeleton.tscn" id="6_ietmg"]
+[ext_resource type="PackedScene" uid="uid://bil2sj0ots4r2" path="res://Scenes/Enemies/basic_wolf.tscn" id="6_15lsb"]
 [ext_resource type="PackedScene" uid="uid://b1j215u74lsl3" path="res://Scenes/Enemies/basic_slime.tscn" id="7_15lsb"]
 [ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="7_o1fjt"]
 [ext_resource type="PackedScene" uid="uid://ds85cxxblat1n" path="res://Scenes/Enemies/basic_skeleton_archer.tscn" id="8_e1as4"]
@@ -51,18 +51,26 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qgj6"]
 size = Vector2(303, 324)
 
-[sub_resource type="Resource" id="Resource_wswjs"]
+[sub_resource type="Resource" id="Resource_8aavi"]
 script = ExtResource("7_o1fjt")
-enemy_scene = ExtResource("6_ietmg")
+enemy_scene = ExtResource("6_15lsb")
 count = 5
-spawn_delay = 1.0
+spawn_delay = 1.5
 wave_delay = 0.0
 metadata/_custom_type_script = "uid://oupik81g26s2"
 
-[sub_resource type="Resource" id="Resource_5df77"]
+[sub_resource type="Resource" id="Resource_22s2g"]
+script = ExtResource("7_o1fjt")
+enemy_scene = ExtResource("8_e1as4")
+count = 5
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
+
+[sub_resource type="Resource" id="Resource_6vema"]
 script = ExtResource("7_o1fjt")
 enemy_scene = ExtResource("7_15lsb")
-count = 2
+count = 5
 spawn_delay = 1.5
 wave_delay = 0.0
 metadata/_custom_type_script = "uid://oupik81g26s2"
@@ -72,14 +80,6 @@ size = Vector2(491, 513)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e3gty"]
 size = Vector2(491, 516)
-
-[sub_resource type="Resource" id="Resource_ht05q"]
-script = ExtResource("7_o1fjt")
-enemy_scene = ExtResource("8_e1as4")
-count = 2
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r8bkx"]
 size = Vector2(491, 517)
@@ -15391,7 +15391,7 @@ z_index = 2
 [node name="RoomA - Medium" type="Node2D" parent="."]
 position = Vector2(865, 0)
 script = ExtResource("4_15lsb")
-enemy_waves = Array[ExtResource("7_o1fjt")]([SubResource("Resource_wswjs"), SubResource("Resource_5df77")])
+enemy_waves = Array[ExtResource("7_o1fjt")]([SubResource("Resource_8aavi"), SubResource("Resource_22s2g"), SubResource("Resource_6vema")])
 
 [node name="CameraArea" type="Area2D" parent="RoomA - Medium"]
 visibility_layer = 3
@@ -15442,6 +15442,7 @@ position = Vector2(0, 1)
 [node name="RoomB - Medium" type="Node2D" parent="."]
 position = Vector2(865, 959)
 script = ExtResource("4_15lsb")
+enemy_waves = Array[ExtResource("7_o1fjt")]([SubResource("Resource_8aavi"), SubResource("Resource_22s2g"), SubResource("Resource_6vema")])
 
 [node name="CameraArea" type="Area2D" parent="RoomB - Medium"]
 visibility_layer = 3
@@ -15489,7 +15490,7 @@ position = Vector2(0, 1)
 [node name="RoomC - Medium" type="Node2D" parent="."]
 position = Vector2(-864, 0)
 script = ExtResource("4_15lsb")
-enemy_waves = Array[ExtResource("7_o1fjt")]([SubResource("Resource_ht05q")])
+enemy_waves = Array[ExtResource("7_o1fjt")]([SubResource("Resource_8aavi"), SubResource("Resource_22s2g"), SubResource("Resource_6vema")])
 
 [node name="CameraArea" type="Area2D" parent="RoomC - Medium"]
 visibility_layer = 3
@@ -15528,6 +15529,7 @@ position = Vector2(0, 1)
 [node name="RoomD - Medium" type="Node2D" parent="."]
 position = Vector2(-864, 958)
 script = ExtResource("4_15lsb")
+enemy_waves = Array[ExtResource("7_o1fjt")]([SubResource("Resource_8aavi"), SubResource("Resource_22s2g"), SubResource("Resource_6vema")])
 
 [node name="CameraArea" type="Area2D" parent="RoomD - Medium"]
 visibility_layer = 3
