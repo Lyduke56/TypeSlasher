@@ -2,17 +2,19 @@
 
 [ext_resource type="Script" uid="uid://brobbfekike3n" path="res://Scripts/menu.gd" id="1_xdvgc"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="2_upctu"]
-[ext_resource type="Texture2D" uid="uid://bog7t5alywxqn" path="res://Assets/Background/Menu_background.png" id="3_11y2r"]
 [ext_resource type="StyleBox" uid="uid://b74vc0fkg6ny1" path="res://Assets/Themes/Menu_button.tres" id="3_wfhf6"]
-[ext_resource type="AudioStream" uid="uid://ccjc76n0terne" path="res://Assets/Sfx/Background/BGM - Title Theme.ogg" id="4_s2c3o"]
-[ext_resource type="Texture2D" uid="uid://b7i43mjsya84r" path="res://Assets/Sprites/GUI/title-Sheet.png" id="5_idohh"]
-[ext_resource type="Texture2D" uid="uid://dx1gqkcsf873m" path="res://Assets/Background/TypeSlasher-Sheet.png" id="6_wfhf6"]
+[ext_resource type="AudioStream" uid="uid://d0g2chno3uc8t" path="res://Assets/Sfx/Background/BGM - Title Theme.ogg" id="4_s2c3o"]
+[ext_resource type="Texture2D" uid="uid://dvxdxg2pskimj" path="res://Assets/Sprites/GUI/title-Sheet.png" id="5_idohh"]
+[ext_resource type="Texture2D" uid="uid://dtwaqk5e10ojx" path="res://Assets/Background/TypeSlasher-Sheet.png" id="6_wfhf6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o0tnf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jmdev"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b6cxs"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_idohh"]
+load_path = "res://.godot/imported/Menu_background.png-98b8d87de34b4ffb068479e5b1e4103d.ctex"
 
 [sub_resource type="Gradient" id="Gradient_3jcrr"]
 offsets = PackedFloat32Array(0, 0.719653, 1)
@@ -222,7 +224,7 @@ offset_left = -17.0
 offset_top = -516.0
 offset_right = 1131.0
 offset_bottom = 129.0
-texture = ExtResource("3_11y2r")
+texture = SubResource("CompressedTexture2D_idohh")
 expand_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
