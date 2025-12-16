@@ -5,12 +5,18 @@ extends CanvasLayer
 @onready var time_label = $Time
 @onready var save_score_button = $VBoxContainer/Save_Score
 @onready var menu_button = $VBoxContainer/Menu
+@onready var ng_button = $VBoxContainer/NG
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	score_label.text = "Score: " + str(Global.current_score)
 	time_label.text = "Play Time: " + Global.get_formatted_time()
 	animation_player.play("Fade_in")
+
+	if ng_button:
+		ng_button.pressed.connect(_on_ng_pressed)
+		var next_cycle = DungeonProgress.ng_plus_cycle + 1
+		ng_button.text = "Begin Journey " + str(next_cycle)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,3 +44,8 @@ func _on_score_submitted() -> void:
 func _on_name_input_closed() -> void:
 	menu_button.disabled = false
 	save_score_button.disabled = false
+
+
+func _on_ng_pressed() -> void:
+	DungeonProgress.start_ng_plus()
+	get_tree().change_scene_to_file("res://Scenes/Main.tscn")

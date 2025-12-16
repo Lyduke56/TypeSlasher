@@ -99,11 +99,11 @@ func start_room():
 
 	# Spawn enemies and target
 	_spawn_room_enemies()
-	Global.set_wpm_combat_state(true)  
+	Global.set_wpm_combat_state(true)
 
 func clear_room():
 	is_cleared = true
-	Global.set_wpm_combat_state(false)  
+	Global.set_wpm_combat_state(false)
 	barrier_on.visible = false
 	barrier_off.visible = true
 

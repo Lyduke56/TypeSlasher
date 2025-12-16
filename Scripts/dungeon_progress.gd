@@ -5,6 +5,13 @@ var dungeons_required: int = 4  # Number of dungeons needed to unlock boss
 var dungeons_cleared: int = 0
 var cleared_dungeons: Array = []  # List of cleared dungeon indices
 var current_area: int = 1  # Current area (1, 2, etc.)
+var ng_plus_cycle: int = 0 # 0 = Base Game, 1 = NG+1, etc.
+
+func start_ng_plus():
+	ng_plus_cycle += 1
+	current_area = 1
+	reset_progress() # Existing function you already have
+	print("ASCENDED: Starting New Game +", ng_plus_cycle)
 
 # Persistence methods
 func reset_progress():
