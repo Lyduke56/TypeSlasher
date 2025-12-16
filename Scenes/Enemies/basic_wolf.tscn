@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dk0hiaudtusoj" path="res://Assets/Sprites/Enemies/Characters(100x100)/Werewolf/Werewolf/Werewolf-Idle.png" id="6_hw50h"]
 [ext_resource type="Texture2D" uid="uid://ugm5efhhibgl" path="res://Assets/Sprites/Enemies/Characters(100x100)/Werewolf/Werewolf/Werewolf-Walk.png" id="7_y804f"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="8_0fl1m"]
-[ext_resource type="AudioStream" uid="uid://csmebs4nfewhl" path="res://Assets/Sfx/Enemies/Wolf/wolf_attack.wav" id="9_lxams"]
-[ext_resource type="AudioStream" uid="uid://5eklwkhjsxml" path="res://Assets/Sfx/Enemies/Generic/hurt-2.wav" id="10_spmfo"]
-[ext_resource type="AudioStream" uid="uid://c4aw8355cda03" path="res://Assets/Sfx/Enemies/Generic/hurt-1.wav" id="11_hw50h"]
+[ext_resource type="AudioStream" path="res://Assets/Sfx/Enemies/Generic/generic_attack1.wav" id="9_lxams"]
+[ext_resource type="AudioStream" path="res://Assets/Sfx/Enemies/Generic/generic_hit2.wav" id="10_spmfo"]
+[ext_resource type="AudioStream" path="res://Assets/Sfx/Enemies/Generic/generic_hit1.wav" id="11_hw50h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7m25p"]
 atlas = ExtResource("2_4x58u")

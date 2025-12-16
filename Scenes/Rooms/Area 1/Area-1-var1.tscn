@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://c7op5dwl7s8g7"]
+[gd_scene load_steps=39 format=4 uid="uid://c7op5dwl7s8g7"]
 
 [ext_resource type="Script" uid="uid://cvhdl8355whhu" path="res://Scripts/Dungeons/Area_1_var_1/area_1_var_1.gd" id="1_dwvem"]
 [ext_resource type="Script" uid="uid://bc0pa4v2utvx0" path="res://Scripts/Dungeons/dungeon_manager(A1V1).gd" id="2_wa0in"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="6_ibyc6"]
 [ext_resource type="Script" uid="uid://bf6yqy35jf53w" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_b___small.gd" id="6_tonbw"]
 [ext_resource type="PackedScene" uid="uid://ivgoec3n72vd" path="res://Scenes/Enemies/Orc_enemy.tscn" id="7_303ub"]
-[ext_resource type="PackedScene" uid="uid://b1j215u74lsl3" path="res://Scenes/Enemies/basic_slime.tscn" id="7_315x1"]
 [ext_resource type="PackedScene" uid="uid://b50h76ql65ea1" path="res://Scenes/RoomSpawns/small_room_spawn.tscn" id="7_gkmiv"]
 [ext_resource type="Script" uid="uid://cdrdygid30spt" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_c___medium.gd" id="8_dulka"]
 [ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="9_303ub"]
@@ -25,7 +24,7 @@ size = Vector2(315, 348)
 
 [sub_resource type="Resource" id="Resource_303ub"]
 script = ExtResource("6_ibyc6")
-enemy_scene = ExtResource("7_315x1")
+enemy_scene = ExtResource("7_303ub")
 count = 5
 spawn_delay = 1.5
 wave_delay = 0.0
@@ -33,16 +32,16 @@ metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="Resource" id="Resource_q8npm"]
 script = ExtResource("6_ibyc6")
-enemy_scene = ExtResource("7_315x1")
-count = 7
+enemy_scene = ExtResource("12_tonbw")
+count = 5
 spawn_delay = 1.5
 wave_delay = 0.0
 metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="Resource" id="Resource_xhvfl"]
 script = ExtResource("6_ibyc6")
-enemy_scene = ExtResource("7_315x1")
-count = 4
+enemy_scene = ExtResource("13_gkmiv")
+count = 5
 spawn_delay = 1.5
 wave_delay = 0.0
 metadata/_custom_type_script = "uid://oupik81g26s2"
@@ -68,30 +67,6 @@ metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f1pun"]
 size = Vector2(413, 424)
-
-[sub_resource type="Resource" id="Resource_c0y1h"]
-script = ExtResource("6_ibyc6")
-enemy_scene = ExtResource("7_303ub")
-count = 7
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_ag1da"]
-script = ExtResource("6_ibyc6")
-enemy_scene = ExtResource("13_gkmiv")
-count = 5
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
-
-[sub_resource type="Resource" id="Resource_mx0fe"]
-script = ExtResource("6_ibyc6")
-enemy_scene = ExtResource("12_tonbw")
-count = 2
-spawn_delay = 1.5
-wave_delay = 0.0
-metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52s0k"]
 size = Vector2(505, 527)
@@ -1124,7 +1099,7 @@ position = Vector2(-1.96695e-06, -1.99994)
 [node name="RoomC - Medium" type="Node2D" parent="."]
 position = Vector2(-898, 796)
 script = ExtResource("8_dulka")
-enemy_waves = Array[ExtResource("6_ibyc6")]([SubResource("Resource_c0y1h"), SubResource("Resource_ag1da"), SubResource("Resource_mx0fe")])
+enemy_waves = Array[ExtResource("6_ibyc6")]([SubResource("Resource_303ub"), SubResource("Resource_q8npm"), SubResource("Resource_xhvfl")])
 
 [node name="CameraArea" type="Area2D" parent="RoomC - Medium"]
 visibility_layer = 3

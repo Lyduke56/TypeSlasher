@@ -1,4 +1,4 @@
-[gd_scene load_steps=154 format=4 uid="uid://cpb4hw3qon5h3"]
+[gd_scene load_steps=160 format=4 uid="uid://cpb4hw3qon5h3"]
 
 [ext_resource type="Script" uid="uid://btmfyf3lo2a1" path="res://Scripts/Dungeons/Area_1_var_2/area_1_var_2.gd" id="1_an758"]
 [ext_resource type="Script" uid="uid://caxhstev6ur4j" path="res://Scripts/Dungeons/dungeon_manager(A1V2).gd" id="1_g4blg"]
@@ -40,7 +40,9 @@
 [ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="34_ht05q"]
 [ext_resource type="Script" uid="uid://bf6yqy35jf53w" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/room_b___small.gd" id="34_ww425"]
 [ext_resource type="PackedScene" uid="uid://b50h76ql65ea1" path="res://Scenes/RoomSpawns/small_room_spawn.tscn" id="35_g4blg"]
-[ext_resource type="PackedScene" uid="uid://uw280smh4xbt" path="res://Scenes/Enemies/basic_orc_rider.tscn" id="36_31ala"]
+[ext_resource type="PackedScene" uid="uid://ivgoec3n72vd" path="res://Scenes/Enemies/Orc_enemy.tscn" id="36_8gut0"]
+[ext_resource type="PackedScene" uid="uid://bil2sj0ots4r2" path="res://Scenes/Enemies/basic_wolf.tscn" id="37_diko4"]
+[ext_resource type="PackedScene" uid="uid://xcriddmqeofd" path="res://Scenes/Enemies/basic_skeleton.tscn" id="38_8bqq0"]
 [ext_resource type="AudioStream" uid="uid://dp3d4f4xkgm5" path="res://Assets/Sfx/Background/BGM - Area 1.ogg" id="42_31ala"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2icd"]
@@ -20444,10 +20446,26 @@ sources/0 = SubResource("TileSetAtlasSource_ht05q")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_deyvx"]
 size = Vector2(313, 342)
 
-[sub_resource type="Resource" id="Resource_ht05q"]
+[sub_resource type="Resource" id="Resource_303ub"]
 script = ExtResource("34_ht05q")
-enemy_scene = ExtResource("36_31ala")
-count = 2
+enemy_scene = ExtResource("36_8gut0")
+count = 5
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
+
+[sub_resource type="Resource" id="Resource_q8npm"]
+script = ExtResource("34_ht05q")
+enemy_scene = ExtResource("37_diko4")
+count = 5
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
+
+[sub_resource type="Resource" id="Resource_xhvfl"]
+script = ExtResource("34_ht05q")
+enemy_scene = ExtResource("38_8bqq0")
+count = 5
 spawn_delay = 1.5
 wave_delay = 0.0
 metadata/_custom_type_script = "uid://oupik81g26s2"
@@ -20460,6 +20478,22 @@ size = Vector2(507, 534)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqdet"]
 size = Vector2(507, 534)
+
+[sub_resource type="Resource" id="Resource_dulka"]
+script = ExtResource("34_ht05q")
+enemy_scene = ExtResource("36_8gut0")
+count = 4
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
+
+[sub_resource type="Resource" id="Resource_315x1"]
+script = ExtResource("34_ht05q")
+enemy_scene = ExtResource("38_8bqq0")
+count = 4
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxufh"]
 size = Vector2(413, 424)
@@ -20542,7 +20576,7 @@ z_index = 2
 [node name="RoomA - Medium" type="Node2D" parent="."]
 position = Vector2(862, -20)
 script = ExtResource("31_vxfi7")
-enemy_waves = Array[ExtResource("34_ht05q")]([SubResource("Resource_ht05q")])
+enemy_waves = Array[ExtResource("34_ht05q")]([SubResource("Resource_303ub"), SubResource("Resource_q8npm"), SubResource("Resource_xhvfl")])
 
 [node name="CameraArea" type="Area2D" parent="RoomA - Medium"]
 visibility_layer = 3
@@ -20581,6 +20615,7 @@ position = Vector2(0, 1)
 [node name="RoomB - Medium" type="Node2D" parent="."]
 position = Vector2(862, 936)
 script = ExtResource("31_vxfi7")
+enemy_waves = Array[ExtResource("34_ht05q")]([SubResource("Resource_303ub"), SubResource("Resource_q8npm"), SubResource("Resource_xhvfl")])
 
 [node name="CameraArea" type="Area2D" parent="RoomB - Medium"]
 visibility_layer = 3
@@ -20616,6 +20651,7 @@ position = Vector2(0, 1)
 [node name="RoomC - Medium" type="Node2D" parent="."]
 position = Vector2(-864, -18)
 script = ExtResource("31_vxfi7")
+enemy_waves = Array[ExtResource("34_ht05q")]([SubResource("Resource_303ub"), SubResource("Resource_q8npm"), SubResource("Resource_xhvfl")])
 
 [node name="CameraArea" type="Area2D" parent="RoomC - Medium"]
 visibility_layer = 3
@@ -20654,6 +20690,7 @@ position = Vector2(0, 1)
 [node name="RoomD - Small" type="Node2D" parent="."]
 position = Vector2(1, 804)
 script = ExtResource("34_ww425")
+enemy_waves = Array[ExtResource("34_ht05q")]([SubResource("Resource_dulka"), SubResource("Resource_315x1")])
 
 [node name="CameraArea" type="Area2D" parent="RoomD - Small"]
 visibility_layer = 3
@@ -20689,6 +20726,7 @@ position = Vector2(-1.96695e-06, -1.99994)
 [node name="RoomE - Medium" type="Node2D" parent="."]
 position = Vector2(1, -882)
 script = ExtResource("31_vxfi7")
+enemy_waves = Array[ExtResource("34_ht05q")]([SubResource("Resource_303ub"), SubResource("Resource_q8npm"), SubResource("Resource_xhvfl")])
 
 [node name="CameraArea" type="Area2D" parent="RoomE - Medium"]
 visibility_layer = 3
