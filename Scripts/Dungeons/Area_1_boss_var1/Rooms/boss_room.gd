@@ -69,6 +69,13 @@ func start_room():
 	barrier_on.visible = true
 	barrier_off.visible = false
 
+	# Adjust for NG+ if enabled
+	if Global.ng_plus_enabled and not current_category.ends_with("_ng+"):
+		var ng_plus_category = current_category + "_ng+"
+		if WordDatabase.get_category_words(ng_plus_category).size() > 0:
+			current_category = ng_plus_category
+			print("NG+ enabled, using category: ", current_category)
+
 	# Reset word and letter tracking for new room
 	used_words.clear()
 	alive_enemies.clear()

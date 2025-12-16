@@ -11,6 +11,12 @@ func _ready() -> void:
 	score_label.text = "Score: " + str(Global.current_score)
 	time_label.text = "Play Time: " + Global.get_formatted_time()
 	animation_player.play("Fade_in")
+	
+	# Unlock NG+ after winning the game
+	if not Global.ng_plus_unlocked:
+		Global.ng_plus_unlocked = true
+		Global.save_ng_plus()
+		print("NG+ unlocked!")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

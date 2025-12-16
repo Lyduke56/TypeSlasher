@@ -11,6 +11,10 @@ const BEST_TIME_SAVE_PATH = "user://best_time.save"
 var leaderboard_scores: Array = []
 const SCORE_FILE = "res://leaderboard.json"
 
+var ng_plus_unlocked: bool = false
+var ng_plus_enabled: bool = false  # Always start disabled
+const NG_PLUS_SAVE_PATH = "user://ng_plus.save"
+
 var after_buff_selection: bool = false
 
 var after_boss_completion: bool = false
@@ -45,6 +49,7 @@ var freeze_timer: Timer
 func _ready():
 	load_high_score()
 	load_best_time()
+	load_ng_plus()
 	initialize_freeze_timer()
 	initialize_shield_timer()
 	initialize_shield()
@@ -327,6 +332,29 @@ func get_formatted_best_time() -> String:
 	var minutes = int(best_time / 60)
 	var seconds = int(best_time) % 60
 	return "%02d:%02d" % [minutes, seconds]
+
+func load_ng_plus():
+	if FileAccess.file_exists(NG_PLUS_SAVE_PATH):
+		var file = FileAccess.open(NG_PLUS_SAVE_PATH, FileAccess.READ)
+		if file:
+			var saved_data = file.get_var()
+			if typeof(saved_data) == TYPE_DICTIONARY:
+				ng_plus_unlocked = saved_data.get("unlocked", false)
+				ng_plus_enabled = saved_data.get("enabled", false) and ng_plus_unlocked  # Ensure enabled only if unlocked
+			file.close()
+			print("Loaded NG+ state: unlocked=", ng_plus_unlocked, ", enabled=", ng_plus_enabled)
+		else:
+			print("Error loading NG+ file")
+
+func save_ng_plus():
+	var file = FileAccess.open(NG_PLUS_SAVE_PATH, FileAccess.WRITE)
+	if file:
+		var data = {"unlocked": ng_plus_unlocked, "enabled": ng_plus_enabled}
+		file.store_var(data)
+		file.close()
+		print("Saved NG+ state: unlocked=", ng_plus_unlocked, ", enabled=", ng_plus_enabled)
+	else:
+		print("Error saving NG+ file")
 
 func save_scores():
 	var file = FileAccess.open(SCORE_FILE, FileAccess.WRITE)

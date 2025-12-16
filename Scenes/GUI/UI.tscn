@@ -1,7 +1,7 @@
 [gd_scene load_steps=78 format=3 uid="uid://ct4hgdk2e8v47"]
 
 [ext_resource type="Theme" uid="uid://dx6raqafay30m" path="res://Assets/Themes/normal_button.tres" id="2_adret"]
-[ext_resource type="Texture2D" uid="uid://t383ogahntf7" path="res://Assets/Sprites/GUI/pause-Sheet.png" id="2_jcnnf"]
+[ext_resource type="Texture2D" uid="uid://borh6fgd3l80o" path="res://Assets/Sprites/GUI/pause-Sheet.png" id="2_jcnnf"]
 [ext_resource type="Texture2D" uid="uid://dkaiqkhlad2x" path="res://Assets/Sprites/GUI/silver_panel.png" id="3_adret"]
 [ext_resource type="PackedScene" uid="uid://f8uv6ymbn0ia" path="res://Scenes/slot.tscn" id="4_vlwpb"]
 [ext_resource type="Texture2D" uid="uid://baruc4ma8usgu" path="res://Assets/Sprites/GUI/wood_panel.png" id="5_csd48"]
@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://kvov2abjywks" path="res://Assets/Sprites/Enemies/Characters(100x100)/Werebear/Werebear/Werebear-Idle.png" id="11_400ke"]
 [ext_resource type="Script" uid="uid://c77ulk7ceud3a" path="res://Scenes/GUI/fullscreen_control.gd" id="12_jcnnf"]
 [ext_resource type="Texture2D" uid="uid://dk0hiaudtusoj" path="res://Assets/Sprites/Enemies/Characters(100x100)/Werewolf/Werewolf/Werewolf-Idle.png" id="12_onri8"]
-[ext_resource type="FontFile" uid="uid://5bsb58qe25gk" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="13_nkekq"]
+[ext_resource type="FontFile" uid="uid://d4b8ulo7ld6u1" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="13_nkekq"]
 [ext_resource type="Texture2D" uid="uid://5eb4qqf5bixe" path="res://Assets/Sprites/Enemies/Characters(100x100)/Armored Orc/Armored Orc/Armored Orc-Idle.png" id="13_yhlim"]
 [ext_resource type="Texture2D" uid="uid://1p5yng8xjsnb" path="res://Assets/Sprites/Enemies/Characters(100x100)/Orc rider/Orc rider/Orc rider-Idle.png" id="14_rd1wc"]
 [ext_resource type="Resource" uid="uid://dnbdkqu6yxw4t" path="res://data/Enemy_Data/NightBorne.tres" id="15_onri8"]
@@ -637,7 +637,6 @@ icon = ExtResource("7_6yr7l")
 flat = true
 
 [node name="Settings" type="NinePatchRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -657,6 +656,14 @@ patch_margin_top = 5
 patch_margin_right = 13
 patch_margin_bottom = 5
 axis_stretch_vertical = 2
+
+[node name="NG+Button" type="CheckButton" parent="Settings"]
+z_index = 4
+layout_mode = 0
+offset_left = 350.0
+offset_top = 238.0
+offset_right = 394.0
+offset_bottom = 262.0
 
 [node name="Close" type="Button" parent="Settings"]
 z_index = 3
@@ -799,6 +806,25 @@ scale = Vector2(0.07, 0.07)
 theme_override_fonts/normal_font = ExtResource("13_nkekq")
 theme_override_font_sizes/normal_font_size = 228
 text = "SFX"
+horizontal_alignment = 1
+
+[node name="NG+Label" type="RichTextLabel" parent="Settings"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 116.0
+offset_top = -61.0
+offset_right = 1416.0
+offset_bottom = 299.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.07, 0.07)
+theme_override_fonts/normal_font = ExtResource("13_nkekq")
+theme_override_font_sizes/normal_font_size = 228
+text = "NG+"
 horizontal_alignment = 1
 
 [node name="Buff" type="NinePatchRect" parent="."]

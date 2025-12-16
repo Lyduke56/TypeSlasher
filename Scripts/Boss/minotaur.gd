@@ -344,7 +344,13 @@ func _on_animation_finished():
 func _refresh_word():
 	# Pull a fresh word and update the prompt
 	if typeof(WordDatabase) != TYPE_NIL:
-		var new_word = WordDatabase.get_random_word(word_category)
+		var category_to_use = word_category
+		# Adjust for NG+ if enabled
+		if Global.ng_plus_enabled and not category_to_use.ends_with("_ng+"):
+			var ng_plus_category = category_to_use + "_ng+"
+			if WordDatabase.get_category_words(ng_plus_category).size() > 0:
+				category_to_use = ng_plus_category
+		var new_word = WordDatabase.get_random_word(category_to_use)
 		if new_word != "":
 			set_prompt(new_word)
 

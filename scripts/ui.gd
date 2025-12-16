@@ -36,6 +36,11 @@ func _ready():
 	if settings_close_button:
 		settings_close_button.pressed.connect(_on_settings_close_pressed)
 
+	# Connect NG+ button
+	var ng_plus_button = get_node_or_null("Settings/NG+Button")
+	if ng_plus_button:
+		ng_plus_button.toggled.connect(_on_ng_plus_toggled)
+
 	# Connect slots in information panel
 	var grid_container = get_node_or_null("Information/GridContainer")
 	if grid_container:
@@ -68,6 +73,12 @@ func _on_settings_pressed():
 	if main_menu and settings_panel:
 		main_menu.visible = false
 		settings_panel.visible = true
+		
+		# Update NG+ button state
+		var ng_plus_button = get_node_or_null("Settings/NG+Button")
+		if ng_plus_button:
+			ng_plus_button.button_pressed = Global.ng_plus_enabled
+			ng_plus_button.disabled = not Global.ng_plus_unlocked
 
 func _on_quit_pressed():
 	# Go to main menu scene instead of quitting
@@ -175,3 +186,10 @@ func set_description(data: EnemyData):
 	var desc_node = desc_panel.get_node("Description")
 	if desc_node:
 		desc_node.text = data.description
+
+func _on_ng_plus_toggled(toggled_on: bool):
+	if not Global.ng_plus_unlocked:
+		return  # Safety check - don't allow toggling if not unlocked
+	Global.ng_plus_enabled = toggled_on
+	Global.save_ng_plus()
+	print("NG+ enabled: ", toggled_on)

@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://m8m0o7d21tya" path="res://Scripts/orc_enemy.gd" id="1_k4htw"]
 [ext_resource type="Texture2D" uid="uid://dh1uc0yyct2li" path="res://Assets/Sprites/Placeholders/placeholder_orc.png" id="2_y22j2"]
-[ext_resource type="Texture2D" uid="uid://cuob3s2do8d1n" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="3_dgdvf"]
+[ext_resource type="Texture2D" uid="uid://bfkwhf7k1cins" path="res://Assets/Sprites/Other Scenes/vines-Sheet.png" id="3_dgdvf"]
 [ext_resource type="Theme" uid="uid://bbapja11vqmtr" path="res://Assets/Themes/Outline.tres" id="3_qi5uw"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="4_txv81"]
-[ext_resource type="AudioStream" uid="uid://dh1hbuaa7v2wl" path="res://Assets/Sfx/Enemies/Generic/generic_hit1.wav" id="6_dgdvf"]
-[ext_resource type="AudioStream" uid="uid://ckscyurxtu2qo" path="res://Assets/Sfx/Enemies/Generic/generic_death1.wav" id="7_p156o"]
-[ext_resource type="AudioStream" uid="uid://soven722fehd" path="res://Assets/Sfx/Enemies/Generic/generic_attack4.wav" id="8_ah0d1"]
+[ext_resource type="AudioStream" uid="uid://b6v8quk7j8kea" path="res://Assets/Sfx/Enemies/Generic/generic_hit1.wav" id="6_dgdvf"]
+[ext_resource type="AudioStream" uid="uid://2grpggw5vybc" path="res://Assets/Sfx/Enemies/Generic/generic_death1.wav" id="7_p156o"]
+[ext_resource type="AudioStream" uid="uid://dag4b621vc601" path="res://Assets/Sfx/Enemies/Generic/generic_attack4.wav" id="8_ah0d1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_prrqk"]
 atlas = ExtResource("2_y22j2")

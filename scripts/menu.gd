@@ -26,6 +26,13 @@ func _on_option_button_pressed() -> void:
 	ui_instance.information.visible = false
 	ui_instance.settings.visible = true
 	ui_instance.buff.visible = false
+
+	# Update NG+ button state based on unlock status
+	var ng_plus_button = ui_instance.get_node("Settings/NG+Button")
+	if ng_plus_button:
+		ng_plus_button.button_pressed = Global.ng_plus_enabled
+		ng_plus_button.disabled = not Global.ng_plus_unlocked
+
 	# Disconnect existing close handler and connect to remove the canvas
 	var close_button = ui_instance.get_node("Settings/Close")
 	if close_button.pressed.is_connected(ui_instance._on_settings_close_pressed):

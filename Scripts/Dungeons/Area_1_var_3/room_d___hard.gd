@@ -309,6 +309,13 @@ func _spawn_enemy_at_position(spawn_position: Vector2, enemy_scene: PackedScene)
 		category_to_use = enemy_instance.get("word_category")
 		print("Self-controlled enemy detected, using category: ", category_to_use)
 
+	# Adjust for NG+ if enabled
+	if Global.ng_plus_enabled and not category_to_use.ends_with("_ng+"):
+		var ng_plus_category = category_to_use + "_ng+"
+		if WordDatabase.get_category_words(ng_plus_category).size() > 0:
+			category_to_use = ng_plus_category
+			print("NG+ enabled, using category: ", category_to_use)
+
 	# Get a word for the enemy using the appropriate category
 	var selected_word = _get_unique_word_for_category(category_to_use)
 	if selected_word == "":
