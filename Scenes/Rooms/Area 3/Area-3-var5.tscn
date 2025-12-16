@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=4 uid="uid://c8ch8nfki0kdd"]
+[gd_scene load_steps=134 format=4 uid="uid://c8ch8nfki0kdd"]
 
 [ext_resource type="Script" uid="uid://cjkwmftutyxrt" path="res://Scripts/Area3/Area-3-var5/area_3_var_5.gd" id="1_ld2wd"]
 [ext_resource type="Script" uid="uid://sfkmlheq4m46" path="res://Scripts/Area3/Area-3-var5/dungeonmanager(A3V5).gd" id="2_ld2wd"]
@@ -10,11 +10,15 @@
 [ext_resource type="PackedScene" uid="uid://cs374206a7dyt" path="res://Scenes/RoomSpawns/medium_room_spawn.tscn" id="4_x2d2p"]
 [ext_resource type="Texture2D" uid="uid://bxbciwx4rffsj" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_Autotiles.png" id="5_ao8jv"]
 [ext_resource type="PackedScene" uid="uid://blo2csfxsl57m" path="res://Scenes/center_platform.tscn" id="5_noloq"]
+[ext_resource type="Script" uid="uid://oupik81g26s2" path="res://Scripts/Main/EnemyWave/EnemyWave.gd" id="5_smeoj"]
 [ext_resource type="Texture2D" uid="uid://b1nifvoxgl61n" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_DecorationsC.png" id="6_45iiu"]
+[ext_resource type="PackedScene" uid="uid://c6p584r4mg0sn" path="res://Scenes/Enemies/basic_armored_orc.tscn" id="6_oug6p"]
 [ext_resource type="Script" uid="uid://bp8t1vp2gp4ri" path="res://Scripts/Dungeons/Area_1_var_1/Rooms/portal_room.gd" id="6_smeoj"]
+[ext_resource type="PackedScene" uid="uid://xcriddmqeofd" path="res://Scenes/Enemies/basic_skeleton.tscn" id="7_5p68n"]
 [ext_resource type="Script" uid="uid://dupdl2bqtnva" path="res://Scripts/Dungeons/Area_1_boss_var1/Rooms/healing_room.gd" id="7_oug6p"]
 [ext_resource type="Texture2D" uid="uid://04bfptemmdc7" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsA2.png" id="7_v31ru"]
 [ext_resource type="Texture2D" uid="uid://dcv7vre6w0q8" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsA5.png" id="8_ld2wd"]
+[ext_resource type="PackedScene" uid="uid://ds85cxxblat1n" path="res://Scenes/Enemies/basic_skeleton_archer.tscn" id="8_xe8uh"]
 [ext_resource type="Texture2D" uid="uid://bkotaa0wf2s22" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FloorsWallsSandA5.png" id="9_mya76"]
 [ext_resource type="Texture2D" uid="uid://c6aenh02h86va" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_FurnitureB.png" id="10_jltfs"]
 [ext_resource type="Texture2D" uid="uid://c3ytj82ayrhso" path="res://Assets/Map Tiles/Tileset/Dungeon/Dungeon_SandDecorationsC.png" id="11_x2d2p"]
@@ -45,6 +49,30 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5p68n"]
 size = Vector2(298, 331)
+
+[sub_resource type="Resource" id="Resource_s10xh"]
+script = ExtResource("5_smeoj")
+enemy_scene = ExtResource("6_oug6p")
+count = 5
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
+
+[sub_resource type="Resource" id="Resource_qxrpr"]
+script = ExtResource("5_smeoj")
+enemy_scene = ExtResource("7_5p68n")
+count = 5
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
+
+[sub_resource type="Resource" id="Resource_2s2o8"]
+script = ExtResource("5_smeoj")
+enemy_scene = ExtResource("8_xe8uh")
+count = 5
+spawn_delay = 1.5
+wave_delay = 0.0
+metadata/_custom_type_script = "uid://oupik81g26s2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xe8uh"]
 size = Vector2(509, 549)
@@ -18374,6 +18402,7 @@ z_index = 2
 [node name="RoomA - Medium" type="Node2D" parent="."]
 position = Vector2(866, 0)
 script = ExtResource("3_jltfs")
+enemy_waves = Array[ExtResource("5_smeoj")]([SubResource("Resource_s10xh"), SubResource("Resource_qxrpr"), SubResource("Resource_2s2o8")])
 
 [node name="CameraArea" type="Area2D" parent="RoomA - Medium"]
 visibility_layer = 3
@@ -18424,6 +18453,7 @@ position = Vector2(0, 1)
 [node name="RoomB - Medium" type="Node2D" parent="."]
 position = Vector2(0, -866)
 script = ExtResource("3_jltfs")
+enemy_waves = Array[ExtResource("5_smeoj")]([SubResource("Resource_2s2o8"), SubResource("Resource_qxrpr"), SubResource("Resource_s10xh")])
 
 [node name="CameraArea" type="Area2D" parent="RoomB - Medium"]
 visibility_layer = 3
@@ -18471,6 +18501,7 @@ position = Vector2(0, 1)
 [node name="RoomC - Medium" type="Node2D" parent="."]
 position = Vector2(-867, 0)
 script = ExtResource("3_jltfs")
+enemy_waves = Array[ExtResource("5_smeoj")]([SubResource("Resource_2s2o8"), SubResource("Resource_qxrpr"), SubResource("Resource_s10xh")])
 
 [node name="CameraArea" type="Area2D" parent="RoomC - Medium"]
 visibility_layer = 3
@@ -18509,6 +18540,7 @@ position = Vector2(0, 1)
 [node name="RoomD - Medium" type="Node2D" parent="."]
 position = Vector2(0, 867)
 script = ExtResource("3_jltfs")
+enemy_waves = Array[ExtResource("5_smeoj")]([SubResource("Resource_2s2o8"), SubResource("Resource_qxrpr"), SubResource("Resource_s10xh")])
 
 [node name="CameraArea" type="Area2D" parent="RoomD - Medium"]
 visibility_layer = 3

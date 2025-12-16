@@ -483,6 +483,9 @@ func _on_enemy_died():
 	if enemies_remaining <= 0 and not is_spawning_enemies:
 		is_ready_to_clear = true
 		print("Room ready to clear: All enemies defeated!")
+		# For boss rooms, clear immediately when all enemies defeated
+		if room_type == RoomType.BOSS and not is_cleared:
+			clear_room()
 	else:
 		print("Room not yet ready to clear: enemies_remaining=", enemies_remaining, " is_spawning=", is_spawning_enemies)
 

@@ -17,7 +17,8 @@ var prompt_text: String = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	area_2d.body_entered.connect(_on_body_entered)
+	if area_2d:
+		area_2d.body_entered.connect(_on_body_entered)
 	var location_names = ["Top", "Left", "Right"]
 	prompt_text = location_names[portal_index]
 	set_prompt(prompt_text)  # Display location name
@@ -25,7 +26,8 @@ func _ready() -> void:
 # --- Typing interface functions (similar to enemies) ---
 func set_prompt(new_word: String) -> void:
 	prompt_text = new_word
-	label.parse_bbcode(new_word)  # start with plain text
+	if label:
+		label.parse_bbcode(new_word)  # start with plain text
 
 func get_prompt() -> String:
 	return prompt_text
@@ -63,7 +65,8 @@ func set_next_character(next_character_index: int):
 		remaining_part = full_text.substr(next_character_index + 1)
 
 	# apply to label
-	label.parse_bbcode(typed_part + next_char_part + remaining_part)
+	if label:
+		label.parse_bbcode(typed_part + next_char_part + remaining_part)
 
 func get_bbcode_color_tag(color: Color) -> String:
 	return "[color=#" + color.to_html(false) + "]"
@@ -80,13 +83,15 @@ func set_targeted_state(targeted: bool):
 		modulate = Color.WHITE  # Reset color
 
 func play_appear_animation():
-	animated_sprite.play("appear")
-	await animated_sprite.animation_finished
-	animated_sprite.play("idle")
+	if animated_sprite:
+		animated_sprite.play("appear")
+		await animated_sprite.animation_finished
+		animated_sprite.play("idle")
 
 func play_disappear_animation():
-	animated_sprite.play("disappear")
-	await animated_sprite.animation_finished
+	if animated_sprite:
+		animated_sprite.play("disappear")
+		await animated_sprite.animation_finished
 	portal_selected.emit(portal_index)  # Portal selected for navigation
 	portal_activated.emit()  # Emit activation signal before disappearing
 	queue_free()

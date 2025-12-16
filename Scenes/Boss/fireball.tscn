@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://beqf8jdvbt7yp"]
 
 [ext_resource type="Script" uid="uid://bxmvhi4epx1oq" path="res://Scripts/Boss/fireball.gd" id="1_k8bsg"]
-[ext_resource type="Texture2D" uid="uid://dond0a683qxxy" path="res://Assets/Sprites/Boss/minion-45x66.png" id="2_k8bsg"]
+[ext_resource type="Texture2D" uid="uid://djmxf3vasm65x" path="res://Assets/Sprites/Boss/minion-45x66.png" id="2_k8bsg"]
 [ext_resource type="FontFile" uid="uid://bmijv3qthw6as" path="res://Assets/Fonts/Perfect DOS VGA 437 Win.ttf" id="3_2tlxu"]
-[ext_resource type="AudioStream" uid="uid://cqfluhk7x03md" path="res://Assets/Sfx/Enemies/Cthulhu/cthulhu_fireball.wav" id="4_177v4"]
+[ext_resource type="AudioStream" uid="uid://b6q3sy7ptr3wg" path="res://Assets/Sfx/Enemies/Cthulhu/cthulhu_fireball.wav" id="4_177v4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_177v4"]
 atlas = ExtResource("2_k8bsg")

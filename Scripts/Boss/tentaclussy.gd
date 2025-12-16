@@ -204,6 +204,10 @@ func play_death_animation():
 
 	death_started = true
 
+	# Stop targetable timer to prevent resuming movement after death
+	if targetable_timer and targetable_timer.is_inside_tree():
+		targetable_timer.stop()
+
 	# Ensure we only listen once for death end
 	if anim.animation_finished.is_connected(_on_death_animation_finished):
 		anim.animation_finished.disconnect(_on_death_animation_finished)
