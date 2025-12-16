@@ -1,5 +1,5 @@
 extends HBoxContainer
-@onready var HeartGuiClass = preload("res://scenes/GUI/HeartGUI.tscn")
+@onready var HeartGuiClass = preload("res://Scenes/GUI/HeartGUI.tscn")
 
 var max_hearts: int = 0
 

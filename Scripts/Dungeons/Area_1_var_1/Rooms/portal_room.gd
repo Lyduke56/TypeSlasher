@@ -16,7 +16,7 @@ signal room_cleared
 
 @onready var camera_area: Area2D = $CameraArea
 @onready var portal_container: Node2D = $PortalContainer
-var GreenPortalScene = preload("res://scenes/GreenPortal.tscn")
+var GreenPortalScene = preload("res://Scenes/GreenPortal.tscn")
 
 func _ready() -> void:
 	# Find markers

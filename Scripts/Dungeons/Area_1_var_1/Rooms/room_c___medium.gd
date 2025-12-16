@@ -16,7 +16,7 @@ signal room_cleared
 
 # Enemy spawning
 @export var enemy_waves: Array[EnemyWave] = []
-var TargetScene = preload("res://scenes/target.tscn")
+var TargetScene = preload("res://Scenes/target.tscn")
 var current_category = "medium"  # Can be: easy, medium, hard, typo, sentence, casing
 var enemies_spawned = 0  # How many we've actually spawned
 

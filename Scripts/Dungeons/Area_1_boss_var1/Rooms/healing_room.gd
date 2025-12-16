@@ -21,7 +21,7 @@ signal room_cleared
 @onready var barrier_off: TileMapLayer = get_node_or_null("Node/Barrier_Off")
 
 # Goddess statue system
-var GoddessStatueScene = preload("res://scenes/godess_statue.tscn")
+var GoddessStatueScene = preload("res://Scenes/godess_statue.tscn")
 var goddess_instance = null
 var has_been_used: bool = false
 

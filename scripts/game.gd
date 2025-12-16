@@ -12,10 +12,10 @@ extends Node2D
 var active_enemy = null
 var current_letter_index: int = -1
 var EnemyScene = preload("res://Scripts/Enemies/basic_skeleton.gd")
-var BuffScene = preload("res://scenes/Buff.tscn")
-var TargetScene = preload("res://scenes/target.tscn")
-var PortalScene = preload("res://scenes/GreenPortal.tscn")
-var BuffSelectionScene = preload("res://scenes/BuffSelection.tscn")
+var BuffScene = preload("res://Scenes/Buff.tscn")
+var TargetScene = preload("res://Scenes/target.tscn")
+var PortalScene = preload("res://Scenes/GreenPortal.tscn")
+var BuffSelectionScene = preload("res://Scenes/BuffSelection.tscn")
 var _toggle := false
 var pause_ui: Control
 var buff_selection_ui: Control

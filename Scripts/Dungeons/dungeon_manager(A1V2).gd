@@ -6,7 +6,7 @@ var player: CharacterBody2D
 var is_transitioning: bool = false
 var block_all_input: bool = false  # Block all input during transitions
 
-@onready var direction_label: RichTextLabel = $"/root/Main/Hud/Direction"
+@onready var direction_label: RichTextLabel = $"/root/Main/Direction"
 
 var tween: Tween
 
