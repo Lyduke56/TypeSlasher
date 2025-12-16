@@ -1,5 +1,7 @@
 extends Control
 
+const EnemyData = preload("res://Scripts/EnemyData.gd")
+
 signal request_resume_game
 @onready var menu: NinePatchRect = $Menu
 @onready var information: NinePatchRect = $Information

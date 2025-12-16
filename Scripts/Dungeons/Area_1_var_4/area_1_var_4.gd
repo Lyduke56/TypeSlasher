@@ -1,5 +1,6 @@
 extends Node2D
 
+const WordDatabase = preload("res://Scripts/words.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -1,5 +1,7 @@
 extends PanelContainer
 
+const EnemyData = preload("res://Scripts/EnemyData.gd")
+
 @export var enemy_data: EnemyData
 
 signal slot_selected(enemy_data: EnemyData)

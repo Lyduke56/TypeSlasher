@@ -5,6 +5,16 @@ extends Control
 func _ready() -> void:
 	$VBoxContainer/Start_button.grab_focus()
 
+	# Connect buttons if not already connected
+	if not $VBoxContainer/Start_button.pressed.is_connected(_on_start_button_pressed):
+		$VBoxContainer/Start_button.pressed.connect(_on_start_button_pressed)
+	if not $VBoxContainer/Option_button.pressed.is_connected(_on_option_button_pressed):
+		$VBoxContainer/Option_button.pressed.connect(_on_option_button_pressed)
+	if not $VBoxContainer/Close_button.pressed.is_connected(_on_close_button_pressed):
+		$VBoxContainer/Close_button.pressed.connect(_on_close_button_pressed)
+	if not $VBoxContainer/Score_button.pressed.is_connected(_on_score_button_pressed):
+		$VBoxContainer/Score_button.pressed.connect(_on_score_button_pressed)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -22,10 +32,10 @@ func _on_option_button_pressed() -> void:
 	canvas.name = "SettingsCanvas"
 	get_tree().root.add_child(canvas)
 	canvas.add_child(ui_instance)
-	ui_instance.menu.visible = false
-	ui_instance.information.visible = false
-	ui_instance.settings.visible = true
-	ui_instance.buff.visible = false
+	ui_instance.get_node("Menu").visible = false
+	ui_instance.get_node("Information").visible = false
+	ui_instance.get_node("Settings").visible = true
+	ui_instance.get_node("Buff").visible = false
 
 	# Update NG+ button state based on unlock status
 	var ng_plus_button = ui_instance.get_node("Settings/NG+Button")

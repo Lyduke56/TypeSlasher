@@ -33,10 +33,6 @@ DungeonTransition="*res://Scenes/Dungeon_transition.tscn"
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/gdmaim/plugin.cfg")
-
 [rendering]
 
 textures/canvas_textures/default_texture_filter=3

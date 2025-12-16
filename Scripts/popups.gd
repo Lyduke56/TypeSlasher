@@ -1,5 +1,7 @@
 extends Control
 
+const BuffData = preload("res://Scripts/buff_data.gd")
+
 func ItemPopup(slot: Rect2i, item_data: BuffData):
 
 	%ItemPopup/VBoxContainer/Label.text = item_data.buff_name
