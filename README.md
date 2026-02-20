@@ -33,4 +33,5 @@ Asset Statement: There is no AI-generated content in this project, as we do not 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Feedback & Inquiries:
 We'd love to hear from you! If you have feedback, find bugs, or need to contact us regarding assets, please reach out at: typeslasheralpha@gmail.com
+
 Note: We actually have plans to remake this project entirely from scratch using everything we've learned! 
